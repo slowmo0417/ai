@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>경기도 김포시 모범음식점 현황 분석 — 다변량 EDA 보고서</title>
+
+  <!-- 웹폰트(선택): 인터넷 연결 환경에서만 적용 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Food theme (warm & tasty) */
+      --bg:#fff7ed;          /* warm cream */
+      --bg2:#fffbf5;         /* lighter cream */
+      --panel: rgba(255,255,255,.86);
+      --panel2: rgba(255,255,255,.94);
+      --stroke: rgba(15,23,42,.10);
+      --text: rgba(15,23,42,.92);     /* slate-900 */
+      --muted: rgba(15,23,42,.72);
+      --muted2: rgba(15,23,42,.56);
+      --accent:#16a34a;      /* herb green */
+      --accent2:#ea580c;     /* chili orange */
+      --warn:#f59e0b;        /* honey */
+      --danger:#dc2626;      /* tomato red */
+      --radius:18px;
+      --radius2:24px;
+      --shadow: 0 18px 60px rgba(2,6,23,.10);
+      --shadow2: 0 10px 30px rgba(2,6,23,.08);
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html, body{
+      margin:0;
+      font-family:"Noto Sans KR", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(234,88,12,.14), transparent 58%),
+        radial-gradient(820px 520px at 90% 10%, rgba(22,163,74,.12), transparent 62%),
+        radial-gradient(820px 520px at 40% 110%, rgba(245,158,11,.12), transparent 65%),
+        linear-gradient(180deg, var(--bg2), var(--bg));
+      overflow-x:hidden;
+    }
+
+    /* 상단 고정 탭 */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(255,251,245,.78);
+      border-bottom: 1px solid rgba(15,23,42,.10);
+    }
+    .topbar-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+
+    .brand{ display:flex; align-items:center; gap:10px; min-width:0; }
+    .logo{
+      width:36px; height:36px;
+      border-radius:12px;
+      background: linear-gradient(135deg, rgba(234,88,12,.95), rgba(22,163,74,.90));
+      box-shadow: 0 10px 26px rgba(2,6,23,.12);
+      position:relative;
+      flex:0 0 auto;
+    }
+    .logo:after{ content:""; position:absolute; inset:1px; border-radius:11px; border:1px solid rgba(255,255,255,.22); }
+
+    .brand-text{ display:flex; flex-direction:column; min-width:0; }
+    .brand-text strong{ font-size:14px; letter-spacing:-0.2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .brand-text span{ font-size:12px; color:var(--muted2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+    .tabs{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+    .tab{
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(234,88,12,.08);
+      border:1px solid rgba(15,23,42,.10);
+      color: var(--muted);
+      font-size:12px;
+      transition: .15s ease;
+      user-select:none;
+    }
+    .tab:hover{ background: rgba(22,163,74,.10); color: var(--text); }
+
+    /* 본문 레이아웃 */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px 18px 88px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 980px){
+      .wrap{ grid-template-columns: 1fr; }
+      .tabs{ justify-content:flex-start; }
+    }
+
+    .panel{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow2);
+    }
+
+    /* 사이드 목차 */
+    .toc{ position: sticky; top: 76px; padding: 14px; height: fit-content; }
+    @media (max-width: 980px){ .toc{ position: static; } }
+
+    .toc h3{ margin: 6px 6px 10px; font-size:14px; }
+    .toc a{
+      display:block;
+      padding: 10px 10px;
+      margin: 6px;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.72);
+      color: var(--muted);
+      font-size: 13px;
+      transition: .15s ease;
+    }
+    .toc a:hover{ background: rgba(22,163,74,.10); color: var(--text); }
+
+    /* 헤더 히어로 */
+    .hero{ padding: 18px; }
+    .hero-inner{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(15,23,42,.10);
+      background:
+        radial-gradient(800px 260px at 15% 0%, rgba(234,88,12,.14), transparent 62%),
+        radial-gradient(700px 260px at 85% 10%, rgba(22,163,74,.12), transparent 64%),
+        linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+      padding: 18px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(22,163,74,.10);
+      border: 1px solid rgba(22,163,74,.22);
+      color: rgba(15,23,42,.88);
+      font-size: 12px;
+    }
+    .hero h1{ margin: 12px 0 8px; font-size: 24px; letter-spacing: -0.6px; }
+    .hero p{ margin: 0; color: var(--muted); line-height: 1.6; }
+
+    .kpis{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px; }
+    @media (max-width: 720px){ .kpis{ grid-template-columns: repeat(2, 1fr); } }
+    .kpi{
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .kpi b{ display:block; font-size: 16px; }
+    .kpi span{ font-size: 12px; color: var(--muted2); }
+
+    /* 섹션 */
+    .content{ padding: 0 18px 18px; }
+    .section{ padding: 16px; margin-top: 14px; }
+    .section h2{ margin: 0 0 10px; font-size: 18px; letter-spacing: -.4px; }
+    .section h3{ margin: 14px 0 8px; font-size: 15px; color: rgba(15,23,42,.90); }
+    .section p, .section li{ color: var(--muted); line-height: 1.75; }
+    .section ul{ margin: 8px 0 0 18px; }
+
+    .callout{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(234,88,12,.08);
+      border: 1px solid rgba(234,88,12,.20);
+      color: rgba(15,23,42,.90);
+    }
+    .callout b{ color: rgba(15,23,42,.95); }
+
+    .fig{
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.70);
+      border: 1px dashed rgba(15,23,42,.18);
+    }
+    .fig img{
+      width: 100%;
+      height: auto;
+      display:block;
+      border-radius: 14px;
+      border: 1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.9);
+    }
+    .fig .cap{ margin: 8px 0 0; font-size: 12px; color: var(--muted2); line-height: 1.6; }
+
+    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 900px){ .grid2{ grid-template-columns: 1fr; } }
+
+    /* 푸터 */
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px;
+      color: var(--muted2);
+      font-size: 12px;
+      border-top: 1px solid rgba(15,23,42,.10);
+      background: rgba(255,255,255,.55);
+    }
+
+    /* 인쇄 */
+    @media print{
+      .topbar, .toc{ display:none; }
+      body{ background: #fff; color:#111; }
+      .panel{ box-shadow:none; border:1px solid #ddd; background:#fff; }
+      .wrap{ grid-template-columns: 1fr; padding: 0; }
+      .hero-inner{ background:#fff; }
+      .section p, .section li{ color:#222; }
+      .callout{ border:1px solid #ddd; background:#f7f7f7; color:#111; }
+      .fig{ border:1px dashed #bbb; background:#fff; }
+      footer{ color:#444; background:#fff; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 탭(고정) -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand-text">
+          <strong>김포시 모범음식점 다변량 EDA 보고서</strong>
+          <span>데이터 기준일자: 2025-02-13 · 시각화 캡션 포함</span>
+        </div>
+      </div>
+
+      <nav class="tabs" aria-label="상단 탭">
+        <a class="tab" href="#ch1">개요</a>
+        <a class="tab" href="#ch2">데이터</a>
+        <a class="tab" href="#ch3">음식유형</a>
+        <a class="tab" href="#ch4">지역×유형</a>
+        <a class="tab" href="#ch5">유형×메뉴</a>
+        <a class="tab" href="#ch6">시사점</a>
+        <a class="tab" href="#ch7">결론</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- 좌측 목차 -->
+    <aside class="panel toc" aria-label="목차">
+      <h3>목차</h3>
+      <a href="#ch1">Chapter 1. 분석 개요</a>
+      <a href="#ch2">Chapter 2. 데이터 및 변수 설명</a>
+      <a href="#ch3">Chapter 3. 음식유형별 분포 분석</a>
+      <a href="#ch4">Chapter 4. 지역 × 음식유형 분석(히트맵)</a>
+      <a href="#ch5">Chapter 5. 음식유형 × 주된음식 분석</a>
+      <a href="#ch6">Chapter 6. 종합 분석 및 시사점</a>
+      <a href="#ch7">Chapter 7. 결론</a>
+
+      <div class="callout" style="margin:12px 6px 6px;">
+        <b>요약</b><br/>
+        음식유형·지역·메뉴 간 관계를 시각화로 검증하여<br/>
+        모범음식점 선정 구조의 특징을 도출했다.
+      </div>
+    </aside>
+
+    <!-- 본문 -->
+    <section>
+      <!-- 히어로 -->
+      <div class="hero">
+        <div class="hero-inner panel">
+          <div class="badge">📊 Multivariate EDA · 공공데이터 기반</div>
+          <h1>경기도 김포시 모범음식점 현황 분석</h1>
+          <p>
+            본 웹페이지는 <b>김포시 모범음식점 현황(2025-02-13 기준)</b> 데이터를 바탕으로
+            음식유형, 주된음식, 지역 정보 간의 관계를 파악하기 위한 다변량 EDA 결과를
+            보고서 형식으로 정리한 것이다.
+          </p>
+
+          <div class="kpis" role="list">
+            <div class="kpi" role="listitem"><b>16</b><span>업소(행)</span></div>
+            <div class="kpi" role="listitem"><b>8</b><span>변수(열)</span></div>
+            <div class="kpi" role="listitem"><b>0</b><span>결측치</span></div>
+            <div class="kpi" role="listitem"><b>스냅샷</b><span>단일 기준일자</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <!-- Chapter 1 -->
+        <article id="ch1" class="panel section">
+          <h2>Chapter 1. 분석 개요</h2>
+          <p>
+            본 보고서는 <b>경기도 김포시 모범음식점 현황 데이터(2025.02.13 기준)</b>를 활용하여
+            음식유형, 주된음식, 지역 정보 간의 관계를 파악하기 위한 <b>다변량 탐색적 자료분석(EDA)</b>을 수행하였다.
+          </p>
+          <p>
+            본 분석은 시각화 기법을 병행하여 변수 간 분포와 패턴을 직관적으로 파악하고,
+            김포시 모범음식점 선정의 특성과 구조적 특징을 도출하는 데 목적이 있다.
+          </p>
+        </article>
+
+        <!-- Chapter 2 -->
+        <article id="ch2" class="panel section">
+          <h2>Chapter 2. 데이터 및 분석 변수 설명</h2>
+          <p>
+            분석에 사용된 데이터는 총 <b>16개 업소</b>를 대상으로 하며, 주요 변수는 다음과 같다.
+          </p>
+          <ul>
+            <li><b>음식유형</b> (한식, 양식, 경양식 등)</li>
+            <li><b>주된음식</b></li>
+            <li><b>소재지도로명주소</b>(지역 정보)</li>
+            <li><b>업소명</b></li>
+          </ul>
+          <p>
+            본 데이터는 결측치 및 중복값이 존재하지 않아 분석 적합성이 높은 상태이며,
+            행정 공개 데이터로서 신뢰 가능한 품질을 유지하고 있다.
+          </p>
+        </article>
+
+        <!-- Chapter 3 -->
+        <article id="ch3" class="panel section">
+          <h2>Chapter 3. 음식유형별 분포 분석</h2>
+          <p>
+            음식유형별 업소 수를 시각화한 결과, <b>한식 업소의 비중이 가장 높게</b> 나타났다.
+            이는 김포시 모범음식점이 전통성과 대중성을 중시하는 방향으로 선정되고 있음을 시사한다.
+          </p>
+          <p>
+            양식 및 경양식 업소는 상대적으로 소수에 그쳤으며,
+            이는 모범음식점 제도가 최신 트렌드보다는 <b>지역 대표성과 안정적인 외식 수요</b>를 중심으로 운영되고 있음을 보여준다.
+          </p>
+
+          <div class="fig">
+            <b>Figure 1. 음식유형별 모범음식점 분포</b>
+            <img src="./gimpo_eda_viz/fig1.png" />
+            <p class="cap">
+              음식유형별 업소 수 분포를 나타낸 그래프이다.
+              <b>한식이 가장 높은 비중</b>을 차지하며, 기타 유형은 소수로 분포한다.
+              (표본: 16개 업소)
+            </p>
+          </div>
+
+          <div class="callout">
+            <b>핵심 인사이트</b><br/>
+            “모범음식점”은 유행보다 <b>지역성·대중성·안정성</b>에 기반한 선정 구조를 가진다.
+          </div>
+        </article>
+
+        <!-- 다변량 요약(시각화 포함) -->
+        <article class="panel section">
+          <h2>다변량 시각화 EDA 요약</h2>
+          <p>
+            본 절에서는 음식유형, 지역, 주된음식 간의 관계를 동시에 고려한 <b>다변량 시각화 EDA 결과</b>를 정리한다.
+            본 보고서에서는 특히 <b>지역×유형(히트맵)</b>, <b>유형×메뉴(교차 분포)</b>,
+            <b>지역×메뉴(스택 막대)</b>의 세 가지 관점에서 패턴을 확인했다.
+          </p>
+          <ul>
+            <li><b>지역 × 음식유형</b>: 읍·면 지역에서 한식 중심 경향, 동 지역에서 유형 다양성이 상대적으로 관찰됨</li>
+            <li><b>지역 × 주된음식</b>: 동일 지역 내에서도 메뉴 중복이 제한적이며, ‘대표 업소’ 성격이 강함</li>
+            <li><b>음식유형 × 주된음식</b>: 음식유형별 대표 메뉴가 명확히 구분되어 분류 기준의 일관성이 확인됨</li>
+          </ul>
+          <p>
+            이러한 결과는 모범음식점 선정이 단일 기준이 아닌, <b>지역 특성·메뉴 다양성·유형 균형</b>을 종합적으로 고려한 구조임을 시사한다.
+          </p>
+        </article>
+
+        <!-- Chapter 4 -->
+        <article id="ch4" class="panel section">
+          <h2>Chapter 4. 지역 × 음식유형 다변량 분석(히트맵)</h2>
+          <p>
+            지역(행정동)과 음식유형 간의 관계를 <b>히트맵</b>으로 분석한 결과,
+            전반적으로 <b>한식이 다수 지역에 분포</b>하며, 비한식 유형은 특정 행정동에 산발적으로 나타나는 패턴이 관찰되었다.
+          </p>
+
+          <div class="grid2">
+            <div class="panel" style="padding:12px; border-radius:16px;">
+              <h3 style="margin-top:0;">관찰 요약</h3>
+              <ul>
+                <li><b>한식</b>: 대부분의 행정동에서 확인(기본 분포)</li>
+                <li><b>비한식(양식/일식/중국식/뷔페/경양식)</b>: 특정 행정동에 점 형태로 분포</li>
+              </ul>
+            </div>
+            <div class="panel" style="padding:12px; border-radius:16px;">
+              <h3 style="margin-top:0;">해석</h3>
+              <p style="margin:0;">
+                히트맵에서 ‘진한 셀’은 특정 행정동에서 해당 유형의 업소 수가 상대적으로 높음을 의미한다.
+                본 데이터에서는 <b>월곶면·고촌읍·양촌읍</b>에서 한식 비중이 두드러지며,
+                비한식 유형은 특정 생활권 중심 동 지역에서 제한적으로 확인된다.
+              </p>
+            </div>
+          </div>
+
+          <div class="fig">
+            <b>Figure 2. 지역(행정동) × 음식유형 히트맵</b>
+           <img src="./gimpo_eda_viz/fig2.png" />
+            <p class="cap">
+              행정동(세로)과 음식유형(가로) 교차 분포를 히트맵으로 표현하였다.
+              값이 커질수록 색이 진하게 나타나며, 본 표본에서는 <b>한식이 광범위하게 분포</b>하고,
+              비한식 유형은 <b>특정 행정동에 산발적으로 존재</b>한다.
+            </p>
+          </div>
+
+          <div class="callout">
+            <b>해석 포인트</b><br/>
+            히트맵은 “어느 지역이 더 많다”보다 <b>분포의 형태(집중 vs 분산)</b>를 보는 데 유리하다.
+          </div>
+        </article>
+
+        <!-- Chapter 5 -->
+        <article id="ch5" class="panel section">
+          <h2>Chapter 5. 음식유형 × 주된음식 분석</h2>
+          <p>
+            음식유형과 주된음식의 관계를 교차분포로 확인한 결과,
+            각 음식유형은 <b>고유한 대표 메뉴</b>와 강한 연관성을 보였다.
+            또한 음식유형 간 메뉴 중복이 거의 발생하지 않아, 분류 기준이 일관되게 적용된 것으로 해석된다.
+          </p>
+
+          <div class="fig">
+            <b>Figure 3. 주된음식 × 음식유형 관계(Top 10)</b>
+            <img src="./gimpo_eda_viz/fig3.png" />
+            <p class="cap">
+              주된음식(Top 10)을 기준으로 음식유형과의 관계를 시각화하였다.
+              <b>주된음식과 음식유형 매핑이 명확</b>하며, 유형 간 메뉴 중복이 거의 없어 분류 일관성이 높다.
+            </p>
+          </div>
+
+          <div class="callout">
+            <b>실무적 함의</b><br/>
+            분류 일관성이 높아, 향후 확장 데이터(추가 연도/추가 지역)가 들어와도
+            <b>전처리 부담이 낮은 편</b>이다.
+          </div>
+        </article>
+
+        <!-- Chapter 6 -->
+        <article id="ch6" class="panel section">
+          <h2>Chapter 6. 종합 분석 및 시사점</h2>
+          <p>
+            다변량 EDA 결과를 종합하면, 김포시 모범음식점 데이터는 다음과 같은 특징을 지닌다.
+          </p>
+          <ol style="margin: 8px 0 0 18px; color: var(--muted); line-height: 1.75;">
+            <li>음식유형과 주된음식 간의 논리적 일관성이 매우 높음</li>
+            <li>지역(행정동)별로 특정 메뉴가 과도하게 중복되지 않음</li>
+            <li>한식이 광범위하게 분포하며, 비한식 유형은 산발적으로 존재</li>
+          </ol>
+
+          <p>
+            아래 Figure 4는 <b>지역별 주된음식 분포</b>를 스택 막대로 보여준다.
+            지역 내 메뉴가 단일 유형에만 집중되기보다는, ‘대표 업소’가 분산 배치된 형태로 나타난다.
+          </p>
+
+          <div class="fig">
+            <b>Figure 4. 행정동 × 주된음식 분포(메뉴 다양성 관점)</b>
+            <img src="./gimpo_eda_viz/fig4.png" />
+            <p class="cap">
+              행정동별 주된음식 분포를 스택 막대로 표현하였다.
+              표본 수가 적어 일반화에는 제한이 있으나, 특정 지역에 동일 메뉴가 과도하게 몰리지 않는 경향이 확인된다.
+            </p>
+          </div>
+
+          <div class="callout">
+            <b>정책적 해석</b><br/>
+            모범음식점은 “많이 뽑는 것”이 아니라, <b>지역 기능에 맞게 균형 있게 배치</b>되는 구조로 볼 수 있다.
+          </div>
+        </article>
+
+        <!-- Chapter 7 -->
+        <article id="ch7" class="panel section">
+          <h2>Chapter 7. 결론</h2>
+          <p>
+            본 분석을 통해 김포시 모범음식점은
+            <b>지역 특성과 음식 정체성을 동시에 반영</b>한 구조적 특성을 지니고 있음을 확인하였다.
+          </p>
+          <p>
+            향후 해당 데이터를 기반으로 관광 콘텐츠 개발, 외식 산업 정책 수립, 지역 상권 분석 등
+            다양한 확장 분석이 가능할 것으로 판단된다.
+          </p>
+          <div class="callout">
+            <b>추가 제안</b><br/>
+            연도별/월별 데이터(추가 기준일자)가 확보되면, 현재의 “스냅샷 분석”을 넘어
+            <b>변화 추이(시계열) 기반 정책 평가</b>까지 확장할 수 있다.
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+      <span>© 분석 문서: 김포시 모범음식점 현황(2025-02-13 기준) — 다변량 EDA</span>
+      <span>HTML/CSS 단일 파일 · 인쇄(PDF) 모드 지원</span>
+    </div>
+  </footer>
+
+  <script>
+    // 탭/목차 클릭 시 부드러운 스크롤
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if(!el) return;
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', id);
+      });
+    });
+
+    // (옵션) 새로고침/탭 전환 후에도 스크롤 위치 유지
+    // - 필요 없으면 삭제해도 됩니다.
+    const KEY = 'gimpo_eda_scrollY';
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem(KEY, String(window.scrollY || 0));
+    });
+    window.addEventListener('load', () => {
+      const y = Number(sessionStorage.getItem(KEY) || '0');
+      if(!Number.isNaN(y) && y > 0) window.scrollTo(0, y);
+    });
+  </script>
+
+  <!--
+    ✅ 중요: 아래 4개의 토큰을 실제 Base64 데이터로 치환해야 합니다.
+    - {{FIG1_BASE64}} 음식유형 분포
+    - {{FIG2_BASE64}} 행정동×음식유형 히트맵
+    - {{FIG3_BASE64}} 주된음식×음식유형(Top10)
+    - {{FIG4_BASE64}} 행정동×주된음식 분포
+
+    제가 생성한 그림(Base64)로 바로 치환된 “완성본”이 필요하면,
+    “완성본으로 치환해서 다시 줘”라고 말해주세요. (여기선 코드가 너무 길어져서 토큰 처리해둠)
+  -->
+</body>
+</html>
