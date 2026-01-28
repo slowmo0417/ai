@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>삼성전자 주가 데이터 분석 보고서</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111827;
+      --muted:#6b7280;
+      --border:#e5e7eb;
+      --card:#ffffff;
+      --shadow: 0 10px 25px rgba(0,0,0,.06);
+      --accent:#2563eb;
+      --accent-2:#0ea5e9;
+      --radius:16px;
+      --max: 1040px;
+    }
+
+    *{ box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", "NanumGothic", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height:1.65;
+    }
+
+    /* Header */
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:saturate(160%) blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .topbar{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+      min-width: 220px;
+    }
+    .brand h1{
+      margin:0;
+      font-size:16px;
+      font-weight:800;
+      letter-spacing:-.2px;
+    }
+    .brand p{
+      margin:0;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    nav a{
+      text-decoration:none;
+      color:var(--text);
+      font-size:13px;
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:999px;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    nav a:hover{
+      background:#f3f4f6;
+      border-color:#f3f4f6;
+    }
+    nav a.active{
+      background:rgba(37,99,235,.10);
+      border-color:rgba(37,99,235,.18);
+      color:var(--accent);
+      font-weight:700;
+    }
+
+    /* Layout */
+    main{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:22px 16px 48px;
+      display:grid;
+      grid-template-columns: 280px 1fr;
+      gap:18px;
+    }
+
+    @media (max-width: 980px){
+      main{ grid-template-columns: 1fr; }
+      .toc{ position:relative !important; top:auto !important; }
+      nav{ justify-content:flex-start; }
+      .brand{ min-width:auto; }
+    }
+
+    .toc{
+      position:sticky;
+      top:74px;
+      align-self:start;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:14px;
+    }
+
+    .toc h2{
+      margin:0 0 8px;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:-.2px;
+    }
+
+    .toc a{
+      display:block;
+      padding:8px 10px;
+      border-radius:10px;
+      text-decoration:none;
+      color:var(--text);
+      font-size:13px;
+      border:1px solid transparent;
+      transition:.15s ease;
+    }
+    .toc a:hover{ background:#f9fafb; border-color:#f3f4f6; }
+    .toc a small{ color:var(--muted); font-weight:600; }
+
+    .content{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .hero{
+      border:1px solid var(--border);
+      border-radius:calc(var(--radius) + 6px);
+      box-shadow:var(--shadow);
+      padding:18px;
+      background:linear-gradient(180deg, rgba(14,165,233,.10), rgba(37,99,235,.06) 50%, rgba(255,255,255,1) 100%);
+    }
+    .hero .title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .hero h2{
+      margin:0;
+      font-size:22px;
+      font-weight:900;
+      letter-spacing:-.4px;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border:1px solid rgba(17,24,39,.08);
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+    }
+
+    section{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+    }
+
+    section h3{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:900;
+      letter-spacing:-.3px;
+    }
+
+    section h4{
+      margin:18px 0 8px;
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:-.2px;
+    }
+
+    p{ margin: 10px 0; }
+    .muted{ color:var(--muted); }
+
+    .hr{
+      height:1px;
+      background:var(--border);
+      margin:14px 0;
+    }
+
+    ul{ margin:8px 0 0 20px; }
+
+    .callout{
+      border:1px solid rgba(37,99,235,.18);
+      background:rgba(37,99,235,.06);
+      border-radius:14px;
+      padding:12px 14px;
+      margin-top:10px;
+    }
+    .callout strong{ color:var(--accent); }
+
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    @media (max-width: 720px){
+      .kpi{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    .kpi .box{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+    .kpi .label{ font-size:12px; color:var(--muted); margin-bottom:6px; font-weight:700; }
+    .kpi .value{ font-size:18px; font-weight:900; letter-spacing:-.2px; }
+
+    footer{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:16px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    /* Anchor offset for sticky header */
+    .anchor{ scroll-margin-top: 92px; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <h1>삼성전자 주가 데이터 분석 보고서</h1>
+        <p>EDA · 전처리 결과 요약 (예측 내용 제외)</p>
+      </div>
+      <nav aria-label="상단 탭">
+        <a href="#ch1" class="tab">Chapter 1</a>
+        <a href="#ch2" class="tab">Chapter 2</a>
+        <a href="#ch3" class="tab">Chapter 3</a>
+        <a href="#ch4" class="tab">Chapter 4</a>
+        <a href="#ch5" class="tab">Chapter 5</a>
+        <a href="#conclusion" class="tab">결론</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <aside class="toc" aria-label="목차">
+      <h2>목차</h2>
+      <a href="#ch1">Chapter 1 <small>분석 목적 및 배경</small></a>
+      <a href="#ch2">Chapter 2 <small>활용 데이터</small></a>
+      <a href="#ch3">Chapter 3 <small>전처리 및 분석 절차</small></a>
+      <a href="#ch4">Chapter 4 <small>EDA 결과</small></a>
+      <a href="#ch5">Chapter 5 <small>요약 및 한계</small></a>
+      <a href="#conclusion">결론</a>
+      <div class="hr"></div>
+      <p class="muted" style="margin:0; font-size:12px;">Tip: 상단 탭 또는 목차로 이동할 수 있어요.</p>
+    </aside>
+
+    <div class="content">
+      <div class="hero">
+        <div class="title">
+          <h2>탐색적 데이터 분석(EDA) 결과 보고서</h2>
+          <div class="meta">
+            <span class="pill">대상: 삼성전자 일별 주가 데이터</span>
+            <span class="pill">범위: 243개 거래일</span>
+            <span class="pill">구성: 가격·변화량·거래·시가총액</span>
+          </div>
+        </div>
+
+        <div class="kpi" aria-label="핵심 수치">
+          <div class="box">
+            <div class="label">관측치</div>
+            <div class="value">243 행</div>
+          </div>
+          <div class="box">
+            <div class="label">주요 컬럼</div>
+            <div class="value">11 개</div>
+          </div>
+          <div class="box">
+            <div class="label">종가 범위</div>
+            <div class="value">51,000 ~ 111,100</div>
+          </div>
+          <div class="box">
+            <div class="label">등락률 변동성</div>
+            <div class="value">표준편차 ≈ 2.1%</div>
+          </div>
+        </div>
+      </div>
+
+      <section id="ch1" class="anchor">
+        <h3>Chapter 1. 분석 목적 및 배경</h3>
+        <p>
+          본 분석은 삼성전자 주가 데이터를 활용하여 주가의 분포 특성, 변수 간 관계, 변동성 요인을 탐색하고 향후 모델링 및 예측을 위한 데이터 이해를 목적으로 수행되었다.
+          금융 시계열 데이터는 단순 평균이나 단변량 분석만으로는 설명하기 어려운 구조적 패턴이 존재하므로, 일변량·다변량 탐색적 데이터 분석(EDA)을 통해 데이터의 전반적인 특성과 한계를 파악하였다.
+        </p>
+      </section>
+
+      <section id="ch2" class="anchor">
+        <h3>Chapter 2. 활용 데이터</h3>
+        <h4>2-1. 데이터 개요</h4>
+        <ul>
+          <li>데이터 대상: 삼성전자 주가 데이터</li>
+          <li>관측 단위: 일별 거래 데이터</li>
+          <li>관측치 수: 243행</li>
+          <li>주요 컬럼: 일자, 시가, 고가, 저가, 종가, 대비, 등락률, 거래량, 거래대금, 시가총액, 상장주식수</li>
+        </ul>
+
+        <h4>2-2. 데이터 특징</h4>
+        <p>
+          본 데이터는 시계열 형태의 금융 데이터로, 가격 관련 변수와 거래 관련 변수가 함께 포함되어 있다.
+          주가 수준과 변동성, 거래 활성도를 동시에 분석할 수 있는 구조를 가지고 있다.
+        </p>
+      </section>
+
+      <section id="ch3" class="anchor">
+        <h3>Chapter 3. 데이터 전처리 및 분석 절차</h3>
+
+        <h4>3-1. 분석 절차</h4>
+        <ol style="margin:8px 0 0 20px;">
+          <li>데이터 구조 및 타입 확인</li>
+          <li>결측치 탐지</li>
+          <li>이상치 탐지(IQR 기준)</li>
+          <li>일변량 시각화 분석</li>
+          <li>다변량 시각화 및 상관관계 분석</li>
+        </ol>
+
+        <h4>3-2. 결측치 탐지</h4>
+        <p>
+          모든 수치형 및 범주형 컬럼에 대해 결측치를 확인한 결과, 본 데이터셋에는 결측치가 존재하지 않았다.
+          따라서 결측치 보정이나 제거 과정은 수행하지 않았다.
+        </p>
+
+        <div class="callout">
+          <strong>결측치 결론:</strong> 전 컬럼 결측치 0건 → 결측치 처리 불필요
+        </div>
+      </section>
+
+      <section id="ch4" class="anchor">
+        <h3>Chapter 4. 탐색적 데이터 분석 결과</h3>
+
+        <h4>4-1. 종가 시계열 해석</h4>
+        <p>
+          종가 시계열을 시간 순으로 분석한 결과, 본 데이터는 총 <strong>243개 거래일</strong>로 구성된 일별 시계열 데이터이며,
+          분석 기간 동안 종가는 <strong>최저 약 51,000원</strong>에서 <strong>최고 약 111,100원</strong>까지 변동하였다.
+          이는 분석 기간 전체에 걸쳐 <strong>약 2.18배 수준의 가격 범위</strong>가 형성되었음을 의미한다.
+        </p>
+        <p>
+          초기 구간에서는 종가가 <strong>5만~6만 원대</strong>를 중심으로 비교적 좁은 범위에서 등락을 반복하며 횡보 양상을 보였으나,
+          이후 시점부터 종가의 평균 수준이 <strong>7만 원대</strong>, <strong>9만 원대</strong>로 단계적으로 상승하며 중·장기 상승 추세가 관찰된다.
+          이러한 구간별 분포 변화는 단일 정규분포가 아닌 <strong>다봉 분포(multimodal distribution)</strong> 형태로도 확인되었다.
+        </p>
+        <p>
+          변동성 측면에서 일간 등락률의 표준편차는 약 <strong>2.1%</strong> 수준이며, 특정 구간에서는 <strong>±5% 이상의 급등·급락일</strong>도 관찰되었다.
+          특히 종가가 고점 영역으로 이동한 이후에는 일중 고가–저가 차이가 확대되는 경향이 나타나, 가격 상승과 함께 변동성 또한 증가하는
+          <strong>이분산성(heteroscedasticity)</strong> 특성이 확인되었다.
+        </p>
+
+        <h4>4-2. 일변량 분석 결과</h4>
+        <p>
+          가격 변수(시가, 고가, 저가, 종가)는 다봉 분포 형태를 보이며 이는 서로 다른 시장 국면이 데이터에 혼재되어 있음을 시사한다.
+          등락률과 대비는 0을 중심으로 분포하나 극단값이 존재하여 금융 데이터 특유의 fat-tail 특성을 확인할 수 있었다.
+          거래량과 거래대금은 강한 우측 왜도를 보이며 일부 이벤트성 거래일에 값이 집중되는 경향을 나타냈다.
+        </p>
+
+        <h4>4-3. 이상치 분석</h4>
+        <p>
+          IQR 기준으로 탐지된 이상치는 주로 가격 상단 구간과 거래량·거래대금의 극단값에서 나타났다.
+          해당 값들은 오류라기보다는 실제 시장 상황(급등·급락, 이벤트성 거래)을 반영한 값으로 판단되며,
+          제거보다는 로그 변환이나 파생변수 생성을 통한 활용이 적절하다.
+          단, 상장주식수 컬럼은 값의 변동이 거의 없어 분석 정보량이 낮아 향후 모델링에서 제외하는 것이 타당하다.
+        </p>
+
+        <h4>4-4. 다변량 시각화 및 상관관계 분석</h4>
+        <p>
+          가격 관련 변수들(시가, 고가, 저가, 종가, 시가총액)은 서로 매우 높은 상관관계를 보여 동일한 정보를 중복적으로 포함하고 있음을 확인하였다.
+          대비와 등락률 또한 거의 완전한 상관관계를 나타내어 하나의 변화량 지표만 선택해도 충분한 정보 전달이 가능하다.
+          반면, 거래량은 가격 수준과의 직접적인 상관은 낮아 독립적인 설명 변수로 활용 가치가 있는 것으로 나타났다.
+        </p>
+
+        <div class="callout">
+          <strong>핵심 시사점:</strong> 가격 변수 간 중복성(다중공선성) ↑ → 대표 변수 1개 선택 또는 변동폭(고가−저가) 등 파생변수 권장
+        </div>
+      </section>
+
+      <section id="ch5" class="anchor">
+        <h3>Chapter 5. 분석 결과 요약 및 한계</h3>
+
+        <h4>5-1. 분석 결과 요약</h4>
+        <p>
+          본 분석을 통해 삼성전자 주가 데이터는 가격 변수 간 중복성이 매우 높고, 변화량 및 거래 관련 변수들이 추가적인 정보를 제공함을 확인하였다.
+          따라서 향후 분석이나 모델링에서는 대표 가격 변수와 함께 변동성, 거래량 기반 파생변수를 중심으로 구성하는 것이 효과적일 것으로 판단된다.
+        </p>
+
+        <h4>5-2. 분석의 한계</h4>
+        <p>
+          본 분석은 단일 종목의 과거 주가 데이터만을 활용하였으며, 거시경제 변수, 기업 실적, 정책 및 뉴스와 같은 외생 요인은 포함하지 못하였다.
+          또한 시계열 특성을 고려한 정교한 모델링 이전 단계의 탐색적 분석에 초점을 맞추었기 때문에, 결과 해석에는 이러한 한계가 존재한다.
+        </p>
+      </section>
+
+      <section id="conclusion" class="anchor">
+        <h3>결론</h3>
+        <p>
+          본 보고서는 삼성전자 주가 데이터에 대한 체계적인 탐색적 데이터 분석을 통해 데이터의 구조적 특성과 변수 간 관계를 정리하였다.
+          종가 시계열의 추세·변동성 특성, 결측치 부재, 이상치의 시장적 의미, 그리고 상관관계 기반의 변수 중복성을 확인함으로써,
+          이후 예측 모델링 및 투자 의사결정 분석을 위한 기초 자료로 활용할 수 있는 기반을 마련하였다.
+        </p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div>※ 본 웹페이지는 업로드된 보고서 내용을 HTML/CSS로 재구성한 결과물이며, 예측 결과는 포함하지 않습니다.</div>
+  </footer>
+
+  <script>
+    // 상단 탭: 스크롤 위치에 따라 활성 표시
+    const tabs = Array.from(document.querySelectorAll('nav a.tab'));
+    const sections = tabs.map(a => document.querySelector(a.getAttribute('href')));
+
+    const setActive = (id) => {
+      tabs.forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#${id}`));
+    };
+
+    const obs = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter(e => e.isIntersecting)
+        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible?.target?.id) setActive(visible.target.id);
+    }, { rootMargin: "-25% 0px -65% 0px", threshold: [0.1, 0.2, 0.3, 0.4] });
+
+    sections.forEach(s => s && obs.observe(s));
+  </script>
+</body>
+</html>
