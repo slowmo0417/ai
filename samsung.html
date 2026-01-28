@@ -261,7 +261,7 @@
     <div class="topbar">
       <div class="brand">
         <h1>삼성전자 주가 데이터 분석 보고서</h1>
-        <p>EDA · 전처리 결과 요약 (예측 내용 제외)</p>
+        <p>EDA · 전처리 · 예측 결과 요약</p>
       </div>
       <nav aria-label="상단 탭">
         <a href="#ch1" class="tab">Chapter 1</a>
@@ -269,6 +269,7 @@
         <a href="#ch3" class="tab">Chapter 3</a>
         <a href="#ch4" class="tab">Chapter 4</a>
         <a href="#ch5" class="tab">Chapter 5</a>
+        <a href="#forecast" class="tab">예측</a>
         <a href="#conclusion" class="tab">결론</a>
       </nav>
     </div>
@@ -282,6 +283,7 @@
       <a href="#ch3">Chapter 3 <small>전처리 및 분석 절차</small></a>
       <a href="#ch4">Chapter 4 <small>EDA 결과</small></a>
       <a href="#ch5">Chapter 5 <small>요약 및 한계</small></a>
+      <a href="#forecast">예측</a>
       <a href="#conclusion">결론</a>
       <div class="hr"></div>
       <p class="muted" style="margin:0; font-size:12px;">Tip: 상단 탭 또는 목차로 이동할 수 있어요.</p>
@@ -427,6 +429,40 @@
           본 분석은 단일 종목의 과거 주가 데이터만을 활용하였으며, 거시경제 변수, 기업 실적, 정책 및 뉴스와 같은 외생 요인은 포함하지 못하였다.
           또한 시계열 특성을 고려한 정교한 모델링 이전 단계의 탐색적 분석에 초점을 맞추었기 때문에, 결과 해석에는 이러한 한계가 존재한다.
         </p>
+      </section>
+
+      <section id="forecast" class="anchor">
+        <h3>Chapter 6. 종가 예측 결과</h3>
+
+        <h4>6-1. 예측 개요</h4>
+        <p>
+          본 예측은 삼성전자 종가의 과거 시계열 패턴을 기반으로 한 시계열 회귀 모델(Ridge 기반 지연변수 모델)을 활용하여 수행되었다.
+          모델은 과거 종가의 단기·중기 지연값을 입력 변수로 사용하였으며, 외생 변수(거시경제 지표, 뉴스, 실적 등)는 포함하지 않았다.
+          따라서 본 예측 결과는 <strong>과거 가격 흐름이 유지된다는 가정 하의 참고 시나리오</strong>로 해석하는 것이 적절하다.
+        </p>
+
+        <h4>6-2. 예측 결과 요약</h4>
+        <ul>
+          <li>예측 대상 일자: <strong>2026년 1월 27일</strong></li>
+          <li>예측 종가: <strong>약 125,389원</strong></li>
+          <li>예측 기준 시점 이후 거리: <strong>영업일 기준 약 32일</strong></li>
+          <li>최근 구간 백테스트 평균 절대오차(MAE): <strong>약 2,554원</strong></li>
+        </ul>
+
+        <h4>6-3. 예측 구간 해석</h4>
+        <p>
+          예측 시점이 데이터 마지막 관측일로부터 비교적 멀리 떨어져 있기 때문에 불확실성 또한 누적된다.
+          이를 고려하여 단순 오차 전파 방식으로 산출한 예측구간은 다음과 같다.
+        </p>
+        <ul>
+          <li>80% 예측구간: <strong>약 104,568원 ~ 146,210원</strong></li>
+          <li>95% 예측구간: <strong>약 93,506원 ~ 157,272원</strong></li>
+        </ul>
+
+        <div class="callout">
+          <strong>해석:</strong> 모델은 2026년 1월 말 기준 완만한 상승 흐름을 시사하지만, 예측구간이 넓어 단일 값보다는
+          <em>방향성과 범위 중심의 참고 지표</em>로 활용하는 것이 바람직하다.
+        </div>
       </section>
 
       <section id="conclusion" class="anchor">
