@@ -210,6 +210,14 @@
         </div>
     </div>
 
+    <!-- 시작 오버레이 -->
+    <div id="start-overlay" class="overlay active">
+        <h2>TETRIS</h2>
+        <div class="menu-buttons">
+            <button class="primary-btn" onclick="startGame()">게임 시작</button>
+        </div>
+    </div>
+
     <!-- 일시정지 오버레이 -->
     <div id="pause-overlay" class="overlay">
         <h2>일시정지</h2>
@@ -269,6 +277,7 @@
     let lines = 0;
     let isPaused = false;
     let isGameOver = false;
+    let isStarted = false;
 
     const player = {
         pos: {x: 0, y: 0},
@@ -300,6 +309,7 @@
     }
 
     function drawMatrix(matrix, offset, ctx = context, ghost = false) {
+        if (!matrix) return;
         matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
@@ -333,6 +343,7 @@
     }
 
     function drawGhost() {
+        if (!player.matrix) return;
         const ghostPos = { x: player.pos.x, y: player.pos.y };
         while (!collide(arena, { ...player, pos: { x: ghostPos.x, y: ghostPos.y + 1 } })) {
             ghostPos.y++;
@@ -345,6 +356,7 @@
         nextContext.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
         
         const matrix = player.next;
+        if (!matrix) return;
         const xOffset = (nextCanvas.width / BLOCK_SIZE - matrix[0].length) / 2;
         const yOffset = (nextCanvas.height / BLOCK_SIZE - matrix.length) / 2;
         drawMatrix(matrix, {x: xOffset, y: yOffset}, nextContext);
@@ -483,6 +495,14 @@
         document.getElementById('gameover-overlay').classList.add('active');
     }
 
+    function startGame() {
+        isStarted = true;
+        document.getElementById('start-overlay').classList.remove('active');
+        playerReset();
+        updateScore();
+        update();
+    }
+
     function resetGame() {
         arena.forEach(row => row.fill(0));
         player.score = 0;
@@ -499,7 +519,7 @@
     }
 
     function togglePause() {
-        if (isGameOver) return;
+        if (!isStarted || isGameOver) return;
         isPaused = !isPaused;
         const overlay = document.getElementById('pause-overlay');
         if (isPaused) {
@@ -521,7 +541,7 @@
     let lastTime = 0;
 
     function update(time = 0) {
-        if (isPaused || isGameOver) return;
+        if (!isStarted || isPaused || isGameOver) return;
 
         const deltaTime = time - lastTime;
         lastTime = time;
@@ -537,7 +557,7 @@
 
     // 키보드 이벤트
     document.addEventListener('keydown', event => {
-        if (isGameOver) return;
+        if (!isStarted || isGameOver) return;
 
         if (event.keyCode === 27) { // ESC
             togglePause();
@@ -560,9 +580,11 @@
     });
 
     window.onload = () => {
-        playerReset();
-        updateScore();
-        update();
+        // 초기 캔버스 렌더링 (배경만)
+        context.fillStyle = '#020617';
+        context.fillRect(0, 0, canvas.width, canvas.height);
+        nextContext.fillStyle = '#1e293b';
+        nextContext.fillRect(0, 0, nextCanvas.width, nextCanvas.height);
     };
 
 </script>
