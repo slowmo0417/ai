@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>진달래 꽃</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      background: linear-gradient(180deg, #fff8fb 0%, #fffdf7 100%);
+      color: #2b1f24;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 860px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #f1d8e2;
+      border-radius: 28px;
+      padding: 56px 40px;
+      box-shadow: 0 18px 40px rgba(91, 49, 67, 0.08);
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 44px;
+    }
+
+    .title {
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #333;
+    }
+
+    .subtitle {
+      margin: 14px 0 0;
+      font-size: 1.1rem;
+      color: #6b5360;
+      font-weight: 500;
+      text-align: right;
+    }
+
+    .poem {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .verse {
+      background: #fffafb;
+      border: 1px solid #f4dfe7;
+      border-radius: 22px;
+      padding: 28px 24px;
+      min-height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .verse p {
+      margin: 0;
+      font-size: 1.35rem;
+      line-height: 2;
+      white-space: pre-line;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        padding: 40px 22px;
+      }
+
+      .verse p {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="header">
+      <h1 class="title">진달래 꽃</h1>
+      <h2 class="subtitle">지은이: 김소월</h2>
+    </header>
+
+    <section class="poem">
+      <article class="verse">
+        <p>나보기가
+역겨워
+가실 때에는</p>
+      </article>
+
+      <article class="verse">
+        <p>말 없이
+고이
+보내 드리오리다</p>
+      </article>
+
+      <article class="verse">
+        <p>영변에
+약산
+진달래 꽃</p>
+      </article>
+
+      <article class="verse">
+        <p>진달래
+진달래 꽃
+피웠네</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
