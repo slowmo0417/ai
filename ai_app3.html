@@ -27,26 +27,29 @@
             margin-bottom: 50px;
         }
 
-        /* 왼쪽 상단 제목 */
-        .title {
+        /* 왼쪽 상단 제목 (h3 태그 사용) */
+        h3.title {
             position: absolute;
             top: 0;
             left: 0;
             font-size: 20px;
             font-weight: bold; /* 볼드체 적용 */
+            margin: 0; /* h3 태그의 기본 여백 제거 */
         }
 
-        /* 오른쪽 상단 작가 이름 (제목보다 살짝 아래 배치) */
-        .author {
+        /* 오른쪽 상단 작가 이름 (p 태그 사용) */
+        p.author {
             position: absolute;
             top: 50px;
             right: 0;
             font-size: 16px;
+            margin: 0; /* p 태그의 기본 여백 제거 */
         }
 
-        /* 각 문단 공통 여백 */
-        .stanza {
-            margin-bottom: 70px;
+        /* 각 문단 공통 여백 (p 태그 사용) */
+        p.stanza {
+            margin: 0; /* p 태그의 기본 상하 여백 제거 */
+            margin-bottom: 70px; /* 기존에 설정한 하단 여백만 적용 */
             font-size: 16px;
         }
 
@@ -71,32 +74,34 @@
     <div class="container">
         <!-- 상단 헤더 영역 -->
         <div class="header">
-            <div class="title">그렇게 사랑합니다.</div>
-            <div class="author">-한용운-</div>
+            <!-- 제목 태그(h3) 적용 -->
+            <h3 class="title">그렇게 사랑합니다.</h3>
+            <!-- 문단 태그(p) 적용 -->
+            <p class="author">-한용운-</p>
         </div>
 
-        <!-- 1연 -->
-        <div class="stanza stanza-1">
+        <!-- 1연 (문단 태그 p 적용) -->
+        <p class="stanza stanza-1">
             사랑한다는 사람앞에서는<br>
             사랑 한다는말을 안합니다.<br>
             안하는것이아니라<br>
             못하는것이 사랑의 진실입니다.
-        </div>
+        </p>
 
-        <!-- 2연 -->
-        <div class="stanza stanza-2">
+        <!-- 2연 (문단 태그 p 적용) -->
+        <p class="stanza stanza-2">
             잊어버려야 하겠다는 말은<br>
             잊을수 없다는말입니다.<br>
             정말 잊고싶을 때는 말이 없습니다.
-        </div>
+        </p>
 
-        <!-- 3연 -->
-        <div class="stanza stanza-3">
+        <!-- 3연 (문단 태그 p 적용) -->
+        <p class="stanza stanza-3">
             헤어질때 돌아보지 않는것은<br>
             너무 헤어지기 싫기때문입니다.<br>
             그것은 헤어지는것이 아니라<br>
             같이 있다는 말입니다.
-        </div>
+        </p>
     </div>
 
 </body>
