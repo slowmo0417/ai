@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>홈페이지 인사말</title>
+    <style>
+      /* 기본 페이지 설정: 폰트, 가운데 정렬, 상단 여백 */
+      body {
+        font-family: "Malgun Gothic", "맑은 고딕", sans-serif;
+        text-align: center;
+        margin-top: 60px;
+        color: #333;
+        font-size: 15px;
+      }
+
+      /* 상단 녹색 제목 스타일 */
+      h1 {
+        color: green;
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 30px;
+      }
+
+      /* 일반 텍스트 단락 스타일: 줄간격 설정 */
+      p {
+        line-height: 1.8;
+        margin-bottom: 25px;
+      }
+
+      /* 이메일 주소 스타일: 빨간색, 기울임꼴 */
+      .email {
+        color: red;
+        font-style: italic;
+        text-decoration: underline; /* 링크 형태를 위해 밑줄 추가 */
+      }
+
+      /* 날짜 텍스트 스타일 */
+      .date {
+        margin-bottom: 30px;
+      }
+
+      /* 파란색 구분선 스타일 */
+      hr.blue-line {
+        border: none;
+        height: 5px; /* 선의 두께 */
+        background-color: blue;
+        width: 350px; /* 선의 길이 */
+        margin: 0 auto; /* 가운데 정렬 */
+        margin-bottom: 30px;
+      }
+
+      /* 하단 녹색 제목 스타일 */
+      h2 {
+        color: green;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 30px; /* 하단 선과의 간격을 위해 추가 */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 상단 인사말 -->
+    <h1>김건아의 홈페이지에 오신 것을 환영합니다.</h1>
+
+    <!-- 첫 번째 텍스트 묶음 -->
+    <p>
+      멋진 홈페이지가 되도록 노력하겠습니다.<br />
+      부디 저의 홈페이지에서 좋은 시간 가지시기 바라며<br />
+      가실 때에 따뜻한 글한마디 남겨주시면 감사하겠습니다.
+    </p>
+
+    <!-- 두 번째 텍스트 묶음 (이메일 포함) -->
+    <p>
+      그리고 제 홈페이지에 궁금한 점이 있으시면<br />
+      <!-- 이메일 부분은 실제 링크가 될 수 있도록 <a> 태그 사용 -->
+      <a href="mailto:kka041206@naver.com" class="email">kka041206@naver.com</a
+      >으로<br />
+      메일 보내주시기 바랍니다.
+    </p>
+
+    <!-- 날짜 -->
+    <p class="date">2026년 3월 23일</p>
+
+    <!-- 파란색 구분선 -->
+    <hr class="blue-line" />
+
+    <!-- 하단 맺음말 -->
+    <h2>KD아카데미 강의실에서</h2>
+
+    <!-- 하단 파란색 구분선 추가 -->
+    <hr class="blue-line" />
+  </body>
+</html>

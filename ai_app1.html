@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>절대반지는?</title>
+    <style>
+      /* 기본 페이지 설정: 전체 가운데 정렬 및 폰트 지정 */
+      body {
+        text-align: center;
+        font-family: "Malgun Gothic", "Dotum", sans-serif;
+        margin: 0;
+        padding: 50px 0;
+        background-color: #ffffff;
+      }
+
+      /* 메인 제목 스타일 (빨간색) */
+      h1 {
+        color: #d30000;
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 35px;
+      }
+
+      /* 각 문장들의 기본 여백 설정 */
+      p {
+        margin: 8px 0;
+        font-size: 16px;
+      }
+
+      /* 텍스트 색상 클래스 정의 */
+      .color-orange {
+        color: #d06d3b; /* 주황/갈색 톤 */
+      }
+      .color-blue {
+        color: #5e5eb0; /* 보라/파란색 톤 */
+      }
+      .color-yellow {
+        color: #baba45; /* 노란/올리브 톤 */
+      }
+
+      /* 하단 출처 텍스트 스타일 (초록색, 기울임꼴) */
+      .color-green-footer {
+        color: #1e8f1e;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 15px;
+      }
+
+      /* 문장 길이에 맞게 영역을 감싸는 컨테이너 */
+      .sentence-box {
+        width: fit-content; /* 텍스트 길이에 박스 너비를 맞춤 */
+        margin: 0 auto; /* 박스를 화면 가운데 정렬 */
+      }
+
+      .sentence-box hr {
+        border: 0;
+        border-top: 1px solid #cccccc;
+        margin: 5px 0 15px 0; /* 텍스트와 선 간격 설정 */
+        width: 100%; /* 컨테이너(문장) 길이에 100% 맞춤 */
+      }
+
+      /* 화면 전체를 채우는 하단 수평선 */
+      hr.full-hr {
+        border: 0;
+        border-top: 1px solid #cccccc;
+        width: 100%;
+        margin: 30px 0 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 제목 -->
+    <h1>절대반지는?</h1>
+
+    <!-- 각 문장마다 길이에 맞는 수평선 적용 -->
+    <div class="sentence-box">
+      <p class="color-orange">반지 세 개는 하늘 아래 요정왕들을 위한 것,</p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-blue">
+        일곱 개는 돌의 전당에 있는 난쟁이 군주들을 위한 것,
+      </p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-yellow">아홉 개는 죽은 운명의 인간을 위한 것,</p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-orange">하나는 암흑의 왕좌에 앉은 암흑 제왕을 위한 것,</p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-blue">그곳은 망령들이 지배하는 모르도르의 땅,</p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-yellow">
+        그 모든 반지를 다스릴 반지하나, 그 모든 반지를 찾기 위한 절대반지,
+      </p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-orange">
+        그 모든 반지를 암흑 속에 가두기 위한 반지는 절대반지뿐,
+      </p>
+      <hr />
+    </div>
+
+    <div class="sentence-box">
+      <p class="color-blue">바로 망령들이 누워 있는 모르도르의 땅에</p>
+    </div>
+
+    <!-- 전체 너비 수평선 -->
+    <hr class="full-hr" />
+
+    <!-- 꼬리말 -->
+    <p class="color-green-footer">반지의 제왕 중에서...</p>
+  </body>
+</html>
