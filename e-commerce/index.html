@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLACKUP 스타일 메인 화면</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #fff;
+        color: #111;
+        min-width: 1440px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: 100%;
+        background: #fff;
+      }
+
+      .top-header {
+        height: 94px;
+        background: #fff;
+        color: #111;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+      }
+
+      .top-header .left,
+      .top-header .right {
+        position: absolute;
+        top: 28px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .top-header .left {
+        left: 18px;
+      }
+
+      .top-header .right {
+        right: 18px;
+      }
+
+      .logo {
+        font-size: 54px;
+        font-weight: 900;
+        letter-spacing: -0.08em;
+        transform: scaleY(0.78);
+        line-height: 1;
+      }
+
+      .gnb {
+        height: 41px;
+        background: #000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 56px;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .hero {
+        width: 100%;
+        height: 725px;
+        position: relative;
+        overflow: hidden;
+        background: #f3f3f3;
+      }
+
+      .image-slot {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+        border: none;
+      }
+
+      .image-slot.contain img {
+        object-fit: contain;
+      }
+
+      .side-scroll {
+        position: absolute;
+        right: 12px;
+        bottom: 18px;
+        width: 41px;
+        z-index: 5;
+      }
+
+      .side-scroll .btn {
+        width: 41px;
+        height: 41px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(24, 24, 24, 0.92);
+        color: #fff;
+        border: 1px solid #5c5c5c;
+        font-size: 20px;
+      }
+
+      .content {
+        background: #fff;
+        padding: 62px 0 0;
+      }
+
+      .section {
+        width: 1180px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        font-size: 28px;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        margin-bottom: 24px;
+      }
+
+      .featured-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 384px);
+        gap: 14px;
+        justify-content: center;
+        margin-bottom: 132px;
+      }
+
+      .feature-item {
+        width: 384px;
+      }
+
+      .feature-thumb {
+        width: 384px;
+        height: 506px;
+        background: #efefef;
+        overflow: hidden;
+        border: none;
+      }
+
+      .feature-meta {
+        padding-top: 8px;
+      }
+
+      .feature-name {
+        font-size: 15px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 3px;
+      }
+
+      .feature-desc {
+        font-size: 8px;
+        color: #666;
+        letter-spacing: -0.02em;
+      }
+
+      .lookbook-head {
+        text-align: center;
+        margin-bottom: 38px;
+      }
+
+      .lookbook-title {
+        font-size: 29px;
+        font-weight: 900;
+        letter-spacing: -0.04em;
+        line-height: 1.1;
+        margin-bottom: 7px;
+      }
+
+      .lookbook-subtitle {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+
+      .product-item {
+        width: 284px;
+      }
+
+      .product-thumb {
+        width: 284px;
+        height: 428px;
+        background: #efefef;
+        position: relative;
+        overflow: hidden;
+        border: none;
+      }
+
+      .product-label {
+        display: none;
+      }
+
+      .product-meta {
+        padding-top: 7px;
+      }
+
+      .product-name-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 3px;
+      }
+
+      .product-name {
+        font-size: 8px;
+        color: #444;
+        letter-spacing: -0.03em;
+        line-height: 1.35;
+      }
+
+      .product-icon {
+        font-size: 9px;
+        color: #777;
+        line-height: 1;
+        flex: 0 0 auto;
+        padding-top: 1px;
+      }
+
+      .product-price {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .btn-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 18px 0 66px;
+      }
+
+      .more-btn {
+        width: 308px;
+        height: 38px;
+        background: #000;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .footer {
+        background: linear-gradient(180deg, #222 0%, #1c1c1c 100%);
+        color: #bfbfbf;
+        padding: 64px 112px 76px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 226px;
+      }
+
+      .footer-left {
+        max-width: 760px;
+      }
+
+      .footer-nav {
+        display: flex;
+        gap: 82px;
+        font-size: 13px;
+        font-weight: 700;
+        color: #ededed;
+        margin-bottom: 28px;
+      }
+
+      .footer-info {
+        font-size: 8px;
+        line-height: 1.9;
+        color: #9d9d9d;
+      }
+
+      .footer-right {
+        text-align: right;
+        font-size: 8px;
+        line-height: 1.9;
+        color: #9d9d9d;
+        padding-top: 8px;
+      }
+
+      .footer-right .copyright {
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top-header">
+        <div class="left"><a href="#">SHOP</a></div>
+        <div class="logo">BLACKUP</div>
+        <div class="right">
+          <a href="#">SEARCH</a>
+          <a href="#">ACCOUNT</a>
+          <a href="#">BAG : 0</a>
+        </div>
+      </header>
+
+      <nav class="gnb">
+        <a href="#">25HS LOOKBOOK</a>
+        <a href="#">실시간 인기상품</a>
+        <a href="#">신상품</a>
+        <a href="#">B-BASIC &amp; B-DENIM</a>
+        <a href="#">트렌드 키워드</a>
+      </nav>
+
+      <section class="hero image-slot">
+        <img src="./images/main.png" alt="메인 비주얼" />
+        <div class="side-scroll">
+          <div class="btn">˄</div>
+          <div class="btn">˅</div>
+        </div>
+      </section>
+
+      <main class="content">
+        <section class="section">
+          <h2 class="section-title">ONLY BLACKUP</h2>
+
+          <div class="featured-grid">
+            <article class="feature-item">
+              <div class="feature-thumb image-slot">
+                <img src="./images/basic.png" alt="B-BASIC &amp; B-DENIM" />
+              </div>
+              <div class="feature-meta">
+                <div class="feature-name">B-BASIC &amp; B-DENIM</div>
+                <div class="feature-desc">2025 HOT SUMMER 신상품 컬렉션</div>
+              </div>
+            </article>
+
+            <article class="feature-item">
+              <div class="feature-thumb image-slot">
+                <img src="./images/img.png" alt="BLACKUP PROJECT" />
+              </div>
+              <div class="feature-meta">
+                <div class="feature-name">BLACKUP PROJECT</div>
+                <div class="feature-desc">블랙업 자체제작</div>
+              </div>
+            </article>
+
+            <article class="feature-item">
+              <div
+                class="feature-thumb image-slot contain"
+                style="background: #000"
+              >
+                <img src="./images/img-1.png" alt="TODAY DELIVERY" />
+              </div>
+              <div class="feature-meta">
+                <div class="feature-name">TODAY DELIVERY</div>
+                <div class="feature-desc">오늘도착 + 무료교환</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="lookbook-head">
+            <h2 class="lookbook-title">2025 HS LOOKBOOK</h2>
+            <p class="lookbook-subtitle">핫썸머 신상품 발매</p>
+          </div>
+
+          <div class="product-grid">
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-2.png" alt="상품 이미지 1" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-3.png" alt="상품 이미지 2" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-4.png" alt="상품 이미지 3" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-5.png" alt="상품 이미지 4" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-6.png" alt="상품 이미지 5" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-7.png" alt="상품 이미지 6" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-8.png" alt="상품 이미지 7" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+
+            <article class="product-item">
+              <div class="product-thumb image-slot">
+                <div class="product-label">BLACKUP<br />PROJECT</div>
+                <img src="./images/img-9.png" alt="상품 이미지 8" />
+              </div>
+              <div class="product-meta">
+                <div class="product-name-row">
+                  <div class="product-name">
+                    [MADE] 카인 보트 넥 슬리브 반팔티
+                  </div>
+                  <div class="product-icon">♡</div>
+                </div>
+                <div class="product-price">29,000원</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="btn-wrap">
+            <a href="#" class="more-btn">25HS 룩북 전체 상품 보러가기</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-left">
+          <div class="footer-nav">
+            <a href="#">AGREEMENT</a>
+            <a href="#">GUIDE</a>
+            <a href="#">PRIVACYPOLICY</a>
+            <a href="#">CONTACTUS</a>
+            <a href="#">SHOPPINGGUIDE</a>
+            <a href="#">CUSTOMERCARE</a>
+          </div>
+          <div class="footer-info">
+            TEL : 1670-5668 (10-19)<br />
+            E-MAIL : CONTACT@BLACKUP.KR<br />
+            BUSINESS LICENSE : 419-81-00887 [CHECK]<br />
+            E-COMMERCE PERMIT : 2017-SEOUL MAPO-2273<br />
+            ADDRESS : 04052 5F 17, JANDARI-RO, MAPO-GU, SEOUL, REPUBLIC OF KOREA
+          </div>
+        </div>
+
+        <div class="footer-right">
+          COMPANY : BPY CORP.<br />
+          OWNER : CHOI YUNHAE
+          <div class="copyright">© BLACKUP 2025</div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
