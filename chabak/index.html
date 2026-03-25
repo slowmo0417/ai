@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>CHABAK Splash</title>
+    <style>
+      /* 기본 여백 제거 및 박스 모델 설정 */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* 메인 컬러 설정 (이미지에서 추출한 유사한 파란색) */
+      :root {
+        --main-blue: #546ea8;
+      }
+
+      body {
+        /* 전체 화면을 채우고 내용물을 중앙에 배치 */
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        overflow: hidden; /* 스크롤 방지 */
+        transition: opacity 0.5s ease-out; /* 페이드 아웃 효과를 위한 트랜지션 */
+      }
+
+      .splash-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 부드럽게 나타나는 애니메이션 */
+        animation: fadeIn 1.2s ease-out forwards;
+      }
+
+      .logo-svg {
+        width: 220px;
+        height: auto;
+        margin-bottom: 8px; /* 로고와 텍스트 사이 간격 */
+      }
+
+      .brand-text {
+        color: var(--main-blue);
+        font-size: 38px;
+        font-weight: 700;
+        letter-spacing: 2px; /* 글자 간격 조정 */
+      }
+
+      /* 페이드 인 애니메이션 키프레임 */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="splash-content" id="splashScreen">
+      <svg
+        class="logo-svg"
+        viewBox="0 0 240 120"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path d="M 125 90 L 165 35 L 210 90 Z" fill="#546EA8" />
+        <path
+          d="M 165 35 L 185 90"
+          stroke="#ffffff"
+          stroke-width="2.5"
+          fill="none"
+        />
+
+        <path
+          d="M 165 20 Q 165 15 160 15 Q 165 15 165 10 Q 165 15 170 15 Q 165 15 165 20 Z"
+          fill="#546EA8"
+        />
+
+        <path
+          d="M 50 65 L 60 40 Q 65 35 75 35 L 105 35 Q 115 35 120 45 L 125 65 Z"
+          fill="#546EA8"
+        />
+        <rect x="35" y="60" width="105" height="25" rx="6" fill="#546EA8" />
+
+        <path d="M 62 42 L 80 42 L 80 60 L 53 60 Z" fill="#ffffff" />
+        <path d="M 85 42 L 105 42 L 115 60 L 85 60 Z" fill="#ffffff" />
+
+        <path
+          d="M 135 70 L 142 70 Q 145 70 145 75 L 145 80 Q 145 85 140 85 L 135 85 Z"
+          fill="#ffffff"
+        />
+
+        <circle cx="60" cy="85" r="10" fill="#ffffff" />
+        <circle cx="60" cy="85" r="4.5" fill="#546EA8" />
+        <circle cx="115" cy="85" r="10" fill="#ffffff" />
+        <circle cx="115" cy="85" r="4.5" fill="#546EA8" />
+
+        <path
+          d="M 20 95 L 215 95"
+          stroke="#546EA8"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <h1 class="brand-text">CHABAK</h1>
+    </div>
+
+    <script>
+      setTimeout(function () {
+        window.location.href = "./work1.html";
+      }, 3000);
+    </script>
+  </body>
+</html>

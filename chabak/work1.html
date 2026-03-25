@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>차박 위치 검색 온보딩</title>
+    <!-- Google Fonts: Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --primary-dark: #374768; /* 제목 진한 파란색 */
+        --primary-light: #8b9bbb; /* 부제목 옅은 파란색 */
+        --button-color: #556daf; /* 시작하기 버튼 및 활성 점 색상 */
+        --dot-inactive: #d8d8d8; /* 비활성 점 색상 */
+        --bg-curve: #f1f4fa; /* 일러스트 배경 곡선 색상 */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Noto Sans KR", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background-color: #e5e7eb; /* 데스크탑 배경색 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      /* 모바일 프레임 컨테이너 */
+      .app-container {
+        width: 100%;
+        max-width: 400px; /* 모바일 최대 너비 */
+        height: 100vh;
+        max-height: 850px;
+        background-color: #ffffff;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 텍스트 영역 */
+      .header-section {
+        padding: 70px 24px 20px 24px;
+        z-index: 10;
+      }
+
+      .header-section h1 {
+        color: var(--primary-dark);
+        font-size: 24px;
+        font-weight: 400;
+        line-height: 1.4;
+        letter-spacing: -0.5px;
+      }
+
+      .header-section h1 strong {
+        font-weight: 700;
+      }
+
+      .header-section p {
+        color: var(--primary-light);
+        font-size: 15px;
+        line-height: 1.5;
+        margin-top: 16px;
+        font-weight: 400;
+      }
+
+      /* 일러스트 영역 */
+      .illustration-section {
+        flex: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      /* 곡선 배경 */
+      .bg-curve {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 70%;
+        background-color: var(--bg-curve);
+        clip-path: ellipse(120% 100% at 80% 100%);
+        z-index: 1;
+      }
+
+      /* 일러스트 SVG 래퍼 */
+      .svg-wrapper {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        padding: 0 20px;
+        transform: translateY(20px);
+      }
+
+      /* 하단 컨트롤 영역 */
+      .bottom-section {
+        padding: 0 24px 40px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+      }
+
+      /* 페이지네이션 점 */
+      .pagination {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--dot-inactive);
+        transition: background-color 0.3s ease;
+        cursor: pointer;
+      }
+
+      .dot.active {
+        background-color: var(--button-color);
+      }
+
+      /* 시작하기 버튼 */
+      .start-btn {
+        width: 100%;
+        height: 56px;
+        background-color: var(--button-color);
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          transform 0.1s ease,
+          background-color 0.2s ease;
+      }
+
+      .start-btn:active {
+        transform: scale(0.98);
+        background-color: #485c96;
+      }
+
+      /* 커스텀 토스트 메시지 */
+      .toast-message {
+        position: absolute;
+        bottom: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(55, 71, 104, 0.9);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        white-space: nowrap;
+        z-index: 100;
+      }
+
+      .toast-message.show {
+        opacity: 1;
+      }
+
+      /* 반응형: 실제 모바일 기기일 때 */
+      @media (max-width: 400px) {
+        .app-container {
+          height: 100dvh;
+          max-height: none;
+          box-shadow: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- 텍스트 영역 -->
+      <div class="header-section">
+        <h1>
+          <strong>차박,</strong><br /><strong>어디로</strong> 떠나야 할지
+          모르겠나요?
+        </h1>
+        <p>
+          지도기반 위치 앱 및 키워드 검색으로<br />내가 원하는 장소를 한번에!
+        </p>
+      </div>
+
+      <!-- 일러스트 영역 -->
+      <div class="illustration-section">
+        <div class="bg-curve"></div>
+
+        <div class="svg-wrapper">
+          <!-- 곰, 지도, 노트북을 표현한 SVG 일러스트 -->
+          <svg viewBox="0 0 350 250" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- 스마트폰 빛 번짐 효과 -->
+              <radialGradient id="phoneGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.8" />
+                <stop offset="100%" stop-color="#FEF08A" stop-opacity="0" />
+              </radialGradient>
+            </defs>
+
+            <!-- 바닥 종이 지도 -->
+            <g transform="translate(40, 160)">
+              <path
+                d="M 0,30 Q 30,10 60,30 T 120,30 L 110,50 Q 80,30 50,50 T -10,50 Z"
+                fill="#E8E4D5"
+              />
+              <path
+                d="M 5,35 Q 30,15 60,35 T 115,35 L 105,45 Q 80,25 50,45 T -5,45 Z"
+                fill="#F4F1E1"
+              />
+              <path
+                d="M 20,25 Q 40,30 50,40"
+                stroke="#BDB191"
+                stroke-width="2"
+                fill="none"
+                stroke-dasharray="3,3"
+              />
+              <circle cx="50" cy="40" r="4" fill="#EAB308" />
+              <circle cx="50" cy="40" r="2" fill="#fff" />
+            </g>
+
+            <!-- 노트북 -->
+            <g transform="translate(220, 140)">
+              <!-- 화면 뒷면/본체 -->
+              <rect x="0" y="20" width="70" height="40" rx="3" fill="#4B6584" />
+              <!-- 스크린 -->
+              <rect x="3" y="23" width="64" height="34" rx="2" fill="#D1D5DB" />
+              <!-- 스크린 속 지도 이미지 (단순화) -->
+              <rect x="5" y="25" width="60" height="30" fill="#93C5FD" />
+              <path
+                d="M 5,40 Q 20,30 35,45 T 65,35 L 65,55 L 5,55 Z"
+                fill="#60A5FA"
+              />
+              <circle cx="50" cy="33" r="5" fill="#FCD34D" />
+              <circle cx="50" cy="33" r="3" fill="#FFF" />
+              <!-- 키보드 판 -->
+              <polygon points="-10,65 80,65 70,60 0,60" fill="#A4B0BE" />
+              <polygon points="-10,65 80,65 80,70 -10,70" fill="#747D8C" />
+            </g>
+
+            <!-- 곰돌이 캐릭터 -->
+            <g transform="translate(130, 90)">
+              <!-- 몸통 -->
+              <ellipse cx="25" cy="80" rx="45" ry="65" fill="#4A8CBA" />
+
+              <!-- 오른쪽 다리 -->
+              <ellipse
+                cx="65"
+                cy="120"
+                rx="25"
+                ry="15"
+                fill="#1C3F60"
+                transform="rotate(20, 65, 120)"
+              />
+
+              <!-- 폰 잡고 있는 왼팔 -->
+              <path d="M 0,50 Q -20,80 15,90 L 30,80 Z" fill="#4A8CBA" />
+
+              <!-- 스마트폰 빛 효과 -->
+              <circle cx="45" cy="65" r="45" fill="url(#phoneGlow)" />
+
+              <!-- 스마트폰 -->
+              <rect
+                x="35"
+                y="55"
+                width="18"
+                height="30"
+                rx="2"
+                fill="#1E293B"
+                transform="rotate(15, 35, 55)"
+              />
+
+              <!-- 오른팔 (폰 터치) -->
+              <path d="M 60,60 Q 60,80 45,75 L 50,65 Z" fill="#4A8CBA" />
+
+              <!-- 머리 -->
+              <circle cx="30" cy="15" r="28" fill="#4A8CBA" />
+
+              <!-- 귀 -->
+              <circle cx="8" cy="-5" r="10" fill="#4A8CBA" />
+              <circle cx="52" cy="-5" r="10" fill="#4A8CBA" />
+
+              <!-- 주둥이 -->
+              <ellipse cx="38" cy="20" rx="14" ry="11" fill="#D0E3F0" />
+              <ellipse cx="40" cy="15" rx="5" ry="3" fill="#1E293B" />
+              <!-- 코 -->
+              <path
+                d="M 40,18 Q 40,24 35,25 M 40,18 Q 40,24 45,25"
+                stroke="#1E293B"
+                stroke-width="1.5"
+                fill="none"
+              />
+              <!-- 입 -->
+
+              <!-- 눈 -->
+              <circle cx="28" cy="10" r="2" fill="#1E293B" />
+              <circle cx="42" cy="10" r="2" fill="#1E293B" />
+
+              <!-- 탐험가 모자 (노란색) -->
+              <g transform="translate(5, -18)">
+                <!-- 챙 -->
+                <path
+                  d="M -15,15 Q 25,5 65,15"
+                  stroke="#1E293B"
+                  stroke-width="3"
+                  fill="none"
+                />
+                <!-- 모자 윗부분 -->
+                <path
+                  d="M 0,10 C 10,-10 40,-10 50,10 Z"
+                  fill="#FCD34D"
+                  stroke="#1E293B"
+                  stroke-width="2"
+                />
+                <!-- 모자 줄무늬 -->
+                <line
+                  x1="25"
+                  y1="-5"
+                  x2="25"
+                  y2="8"
+                  stroke="#1E293B"
+                  stroke-width="2"
+                />
+                <line
+                  x1="10"
+                  y1="2"
+                  x2="15"
+                  y2="9"
+                  stroke="#1E293B"
+                  stroke-width="2"
+                />
+                <line
+                  x1="40"
+                  y1="2"
+                  x2="35"
+                  y2="9"
+                  stroke="#1E293B"
+                  stroke-width="2"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 하단 영역 -->
+      <div class="bottom-section">
+        <div class="pagination">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="start-btn" id="startBtn">시작하기</button>
+      </div>
+
+      <!-- 알림 메시지 (alert 대신 사용) -->
+      <div class="toast-message" id="toastMsg">차박 여행을 시작합니다!</div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const dots = document.querySelectorAll(".dot");
+        const startBtn = document.getElementById("startBtn");
+        const toastMsg = document.getElementById("toastMsg");
+        let toastTimeout;
+
+        // 페이지네이션 점 클릭 이벤트 (시각적 피드백)
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            // 모든 점 비활성화
+            dots.forEach((d) => d.classList.remove("active"));
+            // 클릭한 점 활성화
+            dot.classList.add("active");
+          });
+        });
+
+        // 시작하기 버튼 클릭 이벤트
+        startBtn.addEventListener("click", () => {
+          // 토스트 메시지 표시
+          toastMsg.classList.add("show");
+
+          // 기존 타이머 클리어
+          if (toastTimeout) {
+            clearTimeout(toastTimeout);
+          }
+
+          // 2.5초 후 토스트 숨김
+          toastTimeout = setTimeout(() => {
+            toastMsg.classList.remove("show");
+          }, 2500);
+        });
+      });
+    </script>
+  </body>
+</html>
