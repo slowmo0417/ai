@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLACKUP 스타일 메인 화면</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #000;
+        color: #fff;
+        min-width: 1440px;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: 100%;
+        background: #000;
+      }
+
+      .top-header {
+        height: 110px;
+        background: #fff;
+        color: #111;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 34px;
+      }
+
+      .top-header .left,
+      .top-header .right {
+        position: absolute;
+        top: 41px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .top-header .left {
+        left: 34px;
+      }
+
+      .top-header .right {
+        right: 34px;
+      }
+
+      .logo {
+        font-size: 64px;
+        font-weight: 900;
+        letter-spacing: -0.06em;
+        transform: scaleY(0.8);
+        line-height: 1;
+      }
+
+      .gnb {
+        height: 48px;
+        background: #000;
+        color: #fff;
+        border-top: 1px solid #111;
+        border-bottom: 1px solid #111;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 54px;
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .hero {
+        width: 100%;
+        height: 760px;
+        position: relative;
+        overflow: hidden;
+        background: #f6f6f6;
+      }
+
+      .side-scroll {
+        position: absolute;
+        right: 12px;
+        bottom: 22px;
+        width: 42px;
+        z-index: 6;
+      }
+
+      .side-scroll .btn {
+        width: 42px;
+        height: 42px;
+        border: 1px solid #5e5e5e;
+        background: rgba(20, 20, 20, 0.9);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+
+      .image-slot {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .image-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .image-slot.contain img {
+        object-fit: contain;
+        background: #000;
+      }
+
+      .placeholder {
+        width: 100%;
+        height: 100%;
+        background: #f4f4f4;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: #8d8d8d;
+        font-size: 14px;
+        line-height: 1.7;
+        letter-spacing: 0.02em;
+        white-space: pre-line;
+      }
+
+      .hero .placeholder {
+        background: #f6f6f6;
+        border: none;
+        font-size: 18px;
+      }
+
+      .content {
+        background: #fff;
+        padding-top: 118px;
+        padding-bottom: 0;
+      }
+
+      .three-grid,
+      .product-grid {
+        width: 1180px;
+        margin: 0 auto;
+      }
+
+      .three-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-bottom: 262px;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 92px;
+      }
+
+      .card {
+        position: relative;
+        background: #f4f4f4;
+        overflow: hidden;
+        border: none;
+      }
+
+      .card.large {
+        width: 456px;
+        height: 700px;
+      }
+
+      .card.small {
+        width: 338px;
+        height: 506px;
+      }
+
+      .label {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 10px;
+        line-height: 1.1;
+        font-weight: 700;
+        color: #111;
+        z-index: 2;
+      }
+
+      .mini-label {
+        text-align: center;
+        font-size: 11px;
+        font-weight: 700;
+        color: #8b8b8b;
+        margin: 18px 0 88px;
+      }
+
+      .footer {
+        background: linear-gradient(180deg, #222 0%, #1b1b1b 100%);
+        color: #bfbfbf;
+        padding: 72px 100px 82px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        min-height: 260px;
+      }
+
+      .footer-nav {
+        display: flex;
+        gap: 84px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #e6e6e6;
+        margin-bottom: 44px;
+      }
+
+      .footer-left {
+        max-width: 760px;
+      }
+
+      .footer-info {
+        font-size: 10px;
+        line-height: 1.9;
+        color: #9a9a9a;
+      }
+
+      .footer-right {
+        text-align: right;
+        font-size: 10px;
+        line-height: 2;
+        color: #9a9a9a;
+        padding-top: 12px;
+      }
+
+      .footer-right .copyright {
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top-header">
+        <div class="left">
+          <a href="#">SHOP</a>
+        </div>
+        <div class="logo">BLACKUP</div>
+        <div class="right">
+          <a href="#">SEARCH</a>
+          <a href="#">ACCOUNT</a>
+          <a href="#">BAG : 0</a>
+        </div>
+      </header>
+
+      <nav class="gnb">
+        <a href="#">25HS LOOKBOOK</a>
+        <a href="#">실시간 인기상품</a>
+        <a href="#">신상품</a>
+        <a href="#">B-BASIC &amp; B-DENIM</a>
+        <a href="#">트렌드 키워드</a>
+      </nav>
+
+      <section class="hero image-slot">
+        <img src="./images/main.png" alt="main" />
+        <div class="side-scroll">
+          <div class="btn">˄</div>
+          <div class="btn">˅</div>
+        </div>
+      </section>
+
+      <main class="content">
+        <section class="three-grid">
+          <article class="card large image-slot">
+            <img src="./images/basic.png" alt="룩북 이미지 1" />
+          </article>
+
+          <article class="card large image-slot">
+            <img src="./images/img.png" alt="룩북 이미지 2" />
+          </article>
+
+          <article
+            class="card large image-slot contain"
+            style="background: #000"
+          >
+            <img src="./images/img-1.png" alt="패키지 이미지" />
+          </article>
+        </section>
+
+        <section class="product-grid">
+          <article class="card small image-slot">
+            <img src="./images/img-2.png" alt="상품 이미지 1" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-3.png" alt="상품 이미지 2" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-4.png" alt="상품 이미지 3" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-5.png" alt="상품 이미지 4" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-6.png" alt="상품 이미지 5" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-7.png" alt="상품 이미지 6" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-8.png" alt="상품 이미지 7" />
+          </article>
+
+          <article class="card small image-slot">
+            <img src="./images/img-9.png" alt="상품 이미지 8" />
+          </article>
+        </section>
+
+        <div class="mini-label">25HS 블랙 특별 상품 보러가기</div>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-left">
+          <div class="footer-nav">
+            <a href="#">AGREEMENT</a>
+            <a href="#">GUIDE</a>
+            <a href="#">PRIVACYPOLICY</a>
+            <a href="#">CONTACTUS</a>
+            <a href="#">SHOPPINGGUIDE</a>
+            <a href="#">CUSTOMERCARE</a>
+          </div>
+          <div class="footer-info">
+            TEL : 1670-5668 (10-19)<br />
+            E-MAIL : CONTACT@BLACKUP.KR<br />
+            BUSINESS LICENSE : 419-81-00887 [CHECK]<br />
+            E-COMMERCE PERMIT : 2017-SEOUL MAPO-2273<br />
+            ADDRESS : 04052 5F 17, JANDARI-RO, MAPO-GU, SEOUL, REPUBLIC OF KOREA
+          </div>
+        </div>
+
+        <div class="footer-right">
+          COMPANY : BPY CORP.<br />
+          OWNER : CHOI YUNHAE
+          <div class="copyright">© BLACKUP 2025</div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
