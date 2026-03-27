@@ -1,0 +1,2192 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KG PORTFOLIO</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-soft: #f5f8fc;
+        --card: #ffffff;
+        --card-strong: #ffffff;
+        --card-border: rgba(30, 38, 53, 0.08);
+        --glass-stroke: rgba(30, 38, 53, 0.08);
+        --glass-shadow: 0 18px 42px rgba(63, 80, 112, 0.08);
+        --text: #1e2635;
+        --text-muted: #5f6b7a;
+        --accent: #7c8cff;
+        --accent-2: #56d4ff;
+        --shadow: 0 18px 40px rgba(40, 52, 76, 0.08);
+        --radius: 24px;
+        --container: 1200px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(124, 140, 255, 0.08),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at top right,
+            rgba(86, 212, 255, 0.06),
+            transparent 24%
+          ),
+          linear-gradient(180deg, #ffffff 0%, #f8fbff 52%, #f2f6fc 100%);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .container {
+        width: min(calc(100% - 40px), var(--container));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 110px 0;
+      }
+
+      .section-header {
+        max-width: 680px;
+        margin-bottom: 42px;
+      }
+
+      .section-label {
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 8px 14px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #4f6b95;
+        border: 1px solid rgba(79, 107, 149, 0.12);
+        background: #ffffff;
+        box-shadow: 0 8px 18px rgba(95, 118, 160, 0.06);
+        border-radius: 999px;
+      }
+
+      .section-title {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+      }
+
+      .section-desc {
+        color: var(--text-muted);
+        font-size: 1rem;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.96);
+        border-bottom: 1px solid rgba(30, 38, 53, 0.08);
+        box-shadow: 0 10px 24px rgba(20, 28, 45, 0.04);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 78px;
+        gap: 20px;
+      }
+
+      .logo {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        text-transform: uppercase;
+        color: #1e2635;
+      }
+
+      .logo span {
+        color: var(--accent-2);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav a {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        transition: 0.25s ease;
+      }
+
+      .nav a:hover,
+      .nav a.active {
+        color: #1e2635;
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(124, 140, 255, 0.14);
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 14px;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 5px;
+      }
+
+      .menu-toggle span {
+        width: 18px;
+        height: 2px;
+        background: #1e2635;
+        border-radius: 999px;
+        transition: 0.25s ease;
+      }
+
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 140px 0 110px;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.82) 0%,
+            rgba(255, 255, 255, 0.62) 36%,
+            rgba(255, 255, 255, 0.22) 100%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(248, 251, 255, 0.16) 0%,
+            rgba(244, 248, 255, 0.26) 100%
+          ),
+          url("https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=1800&q=80")
+            center/cover no-repeat;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 720px);
+        align-items: center;
+        gap: 48px;
+      }
+
+      .hero-copy {
+        position: relative;
+        z-index: 1;
+        max-width: 720px;
+      }
+
+      .hero-copy h1 {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        font-size: 4rem;
+        line-height: 1.02;
+        letter-spacing: -0.05em;
+        margin-bottom: 24px;
+        color: #31435f;
+        text-shadow: 0 8px 24px rgba(255, 255, 255, 0.28);
+      }
+
+      .hero-copy h1 span {
+        display: block;
+        color: #6a86b8;
+        background: none;
+        -webkit-background-clip: initial;
+        -webkit-text-fill-color: initial;
+      }
+
+      .hero-copy p {
+        max-width: 560px;
+        color: #4f617c;
+        font-size: 1.05rem;
+        line-height: 1.8;
+        margin-bottom: 34px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 34px;
+        align-items: center;
+      }
+
+      .hero-actions .btn-primary {
+        color: #ffffff;
+        background: #243248;
+        border: 1px solid #243248;
+        box-shadow: 0 10px 22px rgba(36, 50, 72, 0.14);
+      }
+
+      .hero-actions .btn-primary:hover {
+        transform: translateY(-2px);
+        background: #1f2c40;
+        border-color: #1f2c40;
+        box-shadow: 0 14px 28px rgba(36, 50, 72, 0.18);
+      }
+
+      .hero-actions .btn-secondary {
+        color: #51657f;
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.1);
+        box-shadow: 0 8px 18px rgba(95, 118, 160, 0.05);
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        box-shadow: 0 14px 28px rgba(76, 98, 136, 0.08);
+        max-width: fit-content;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 150px;
+        padding: 14px 22px;
+        border-radius: 14px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        letter-spacing: -0.01em;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        color: #2b3a52;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.46),
+          rgba(255, 255, 255, 0.2)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.52);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.74),
+          0 12px 26px rgba(95, 118, 160, 0.08);
+      }
+
+      .btn-secondary {
+        color: #51657f;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.34),
+          rgba(255, 255, 255, 0.14)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.46);
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.68),
+          0 8px 20px rgba(95, 118, 160, 0.06);
+      }
+
+      .hero-badge strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 4px;
+        color: #1e2635;
+      }
+
+      .hero-badge span {
+        color: #667085;
+        font-size: 0.92rem;
+      }
+
+      .about-wrap {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .about-card,
+      .about-summary {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        background: #ffffff;
+      }
+
+      .about-card {
+        padding: 34px;
+      }
+
+      .about-intro {
+        font-size: clamp(1.7rem, 3vw, 2.6rem);
+        line-height: 1.25;
+        letter-spacing: -0.03em;
+        margin-bottom: 18px;
+      }
+
+      .about-text {
+        color: var(--text-muted);
+        margin-bottom: 28px;
+        max-width: 640px;
+      }
+
+      .about-points {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .about-point {
+        padding: 18px 18px;
+        border-radius: 20px;
+        background: #f8fbff;
+        border: 1px solid rgba(30, 38, 53, 0.06);
+      }
+
+      .about-point strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1rem;
+        color: var(--text);
+      }
+
+      .about-point span {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .about-summary {
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.03)
+          ),
+          linear-gradient(
+            135deg,
+            rgba(124, 140, 255, 0.12),
+            rgba(86, 212, 255, 0.08)
+          );
+      }
+
+      .about-summary-title {
+        font-size: 1.35rem;
+        margin-bottom: 10px;
+        letter-spacing: -0.02em;
+      }
+
+      .about-summary p {
+        color: var(--text-muted);
+      }
+
+      .about-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .about-metric {
+        padding: 18px 14px;
+        border-radius: 20px;
+        text-align: center;
+        background: #f8fbff;
+        border: 1px solid rgba(30, 38, 53, 0.06);
+      }
+
+      .about-metric strong {
+        display: block;
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+        color: var(--text);
+      }
+
+      .about-metric span {
+        font-size: 0.86rem;
+        color: var(--text-muted);
+      }
+
+      .skills-wrap {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .skills-intro,
+      .skills-board {
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .skills-intro {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        background: #ffffff;
+      }
+
+      .skills-intro h3 {
+        font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+        line-height: 1.22;
+        letter-spacing: -0.03em;
+      }
+
+      .skills-intro p {
+        color: var(--text-muted);
+        max-width: 460px;
+      }
+
+      .skills-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .skills-chip {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: #f8fbff;
+        border: 1px solid rgba(30, 38, 53, 0.06);
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .skills-board {
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .skill-card {
+        min-height: 210px;
+        padding: 22px 18px;
+        border-radius: 24px;
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease,
+          box-shadow 0.25s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 10px 24px rgba(95, 118, 160, 0.06);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(124, 140, 255, 0.2);
+        box-shadow: 0 14px 28px rgba(95, 118, 160, 0.1);
+      }
+
+      .skill-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .skill-no {
+        font-size: 0.8rem;
+        color: var(--accent-2);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .skill-ring {
+        position: relative;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        --progress: 0;
+        background: conic-gradient(
+          var(--accent-2) calc(var(--progress) * 1%),
+          rgba(30, 38, 53, 0.1) 0
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        transition: background 0.2s linear;
+      }
+
+      .skill-ring::before {
+        content: "";
+        position: absolute;
+        inset: 7px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+      }
+
+      .skill-value {
+        position: relative;
+        z-index: 1;
+        font-size: 0.86rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .skill-body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .skill-name {
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .skill-category {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #f8fbff;
+        color: var(--text-muted);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .skill-bar {
+        position: relative;
+        width: 100%;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(30, 38, 53, 0.1);
+        overflow: hidden;
+      }
+
+      .skill-bar-fill {
+        width: 0;
+        height: 100%;
+        border-radius: 999px;
+        background: #7c8cff;
+        transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .skill-card.reveal {
+        animation: skillCardFade 0.8s ease forwards;
+        will-change: transform, opacity;
+      }
+
+      .skill-card.reveal .skill-bar-fill {
+        width: calc(var(--value) * 1%);
+      }
+
+      @keyframes skillCardFade {
+        0% {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .skill-desc {
+        color: var(--text-muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
+      }
+
+      .skills-grid .skill-card {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      .process-wrap {
+        display: grid;
+        grid-template-columns: 0.95fr 1.05fr;
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .process-intro,
+      .process-timeline {
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+      }
+
+      .process-intro {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 22px;
+        background: #ffffff;
+      }
+
+      .process-intro h3 {
+        font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+        line-height: 1.22;
+        letter-spacing: -0.03em;
+      }
+
+      .process-intro p {
+        color: var(--text-muted);
+        max-width: 460px;
+      }
+
+      .process-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .process-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: #f8fbff;
+        border: 1px solid rgba(30, 38, 53, 0.06);
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .process-timeline {
+        padding: 24px;
+        display: grid;
+        gap: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .process-step {
+        position: relative;
+        display: grid;
+        grid-template-columns: 72px 1fr;
+        gap: 16px;
+        align-items: start;
+        padding: 18px;
+        border-radius: 24px;
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          background 0.25s ease,
+          box-shadow 0.25s ease;
+        box-shadow: 0 10px 24px rgba(95, 118, 160, 0.05);
+      }
+
+      .process-step:hover {
+        transform: translateY(-3px);
+        border-color: rgba(124, 140, 255, 0.18);
+        box-shadow: 0 14px 28px rgba(95, 118, 160, 0.08);
+      }
+
+      .process-number {
+        position: relative;
+        z-index: 1;
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.88rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #304159;
+        background: #eef4ff;
+        border: 1px solid rgba(124, 140, 255, 0.16);
+      }
+
+      .process-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .process-title {
+        font-size: 1.12rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .process-sub {
+        display: inline-flex;
+        width: fit-content;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #f8fbff;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .process-desc {
+        color: var(--text-muted);
+        font-size: 0.94rem;
+        line-height: 1.6;
+      }
+
+      .case-study {
+        padding-top: 10px;
+      }
+
+      .case-study-wrap {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .case-study-card {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        padding: 20px;
+        border-radius: 28px;
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        box-shadow: var(--shadow);
+      }
+
+      .case-study-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .case-study-no {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        color: #304159;
+        background: #eef4ff;
+        border: 1px solid rgba(124, 140, 255, 0.16);
+        flex: 0 0 auto;
+      }
+
+      .case-study-step {
+        display: inline-flex;
+        width: fit-content;
+        padding: 7px 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #f8fbff;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .case-study-visual {
+        border-radius: 22px;
+        overflow: hidden;
+        aspect-ratio: 4 / 5;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #f8fbff;
+      }
+
+      .case-study-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .case-study-body {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .case-study-title {
+        font-size: 1.35rem;
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+        color: var(--text);
+      }
+
+      .case-study-desc {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+      }
+
+      .case-study-point {
+        display: inline-flex;
+        width: fit-content;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(79, 98, 130, 0.06);
+        border: 1px solid rgba(79, 98, 130, 0.1);
+        color: #4f6282;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .project-card {
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        border-radius: 28px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .project-card:hover {
+        transform: translateY(-6px);
+        border-color: rgba(124, 140, 255, 0.18);
+        box-shadow: 0 18px 32px rgba(95, 118, 160, 0.1);
+      }
+
+      .project-thumb {
+        aspect-ratio: 16 / 11;
+        overflow: hidden;
+        background: #f8fbff;
+      }
+
+      .project-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .project-body {
+        padding: 24px;
+      }
+
+      .project-tag {
+        display: inline-block;
+        padding: 7px 12px;
+        margin-bottom: 14px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #4f6282;
+        background: rgba(79, 98, 130, 0.06);
+        border: 1px solid rgba(79, 98, 130, 0.1);
+      }
+
+      .project-title {
+        font-size: 1.35rem;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .project-desc {
+        color: var(--text-muted);
+        font-size: 0.96rem;
+        margin-bottom: 22px;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        color: var(--text);
+      }
+
+      .contact-wrap {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .contact-info,
+      .contact-form {
+        background: #ffffff;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+      }
+
+      .contact-info h3 {
+        font-size: 1.75rem;
+        margin-bottom: 16px;
+        letter-spacing: -0.03em;
+      }
+
+      .contact-info p {
+        color: var(--text-muted);
+        margin-bottom: 24px;
+      }
+
+      .contact-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      .contact-item {
+        padding: 16px 18px;
+        border-radius: 20px;
+        background: #f8fbff;
+        border: 1px solid rgba(30, 38, 53, 0.06);
+      }
+
+      .contact-item strong {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.95rem;
+      }
+
+      .contact-item span {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 16px;
+      }
+
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid rgba(30, 38, 53, 0.1);
+        background: #ffffff;
+        color: #1e2635;
+        border-radius: 16px;
+        padding: 15px 16px;
+        font: inherit;
+        outline: none;
+        transition:
+          border-color 0.25s ease,
+          background 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: rgba(124, 140, 255, 0.32);
+        box-shadow: 0 0 0 4px rgba(124, 140, 255, 0.08);
+      }
+
+      textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .form-submit {
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .form-message {
+        margin-top: 14px;
+        font-size: 0.95rem;
+        color: var(--accent-2);
+        min-height: 24px;
+      }
+
+      .site-footer {
+        padding: 0 0 40px;
+        color: var(--text-muted);
+        font-size: 0.92rem;
+      }
+
+      .footer-inner {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.2fr auto;
+        gap: 28px;
+        align-items: center;
+        padding: 34px 36px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        border-radius: 30px;
+        background: #ffffff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .footer-brand {
+        position: relative;
+        z-index: 1;
+      }
+
+      .footer-logo {
+        font-family: "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+        display: inline-block;
+        margin-bottom: 12px;
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        color: var(--text);
+        text-transform: uppercase;
+      }
+
+      .footer-logo span {
+        color: var(--accent-2);
+      }
+
+      .footer-text {
+        max-width: 520px;
+        color: var(--text-muted);
+        margin-bottom: 18px;
+      }
+
+      .footer-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        color: var(--text-muted);
+        font-size: 0.88rem;
+      }
+
+      .footer-actions {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 16px;
+      }
+
+      .footer-note {
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #f8fbff;
+        color: var(--text);
+        font-size: 0.88rem;
+        white-space: nowrap;
+      }
+
+      .footer-nav {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        gap: 10px;
+        max-width: none;
+        white-space: nowrap;
+      }
+
+      .footer-nav a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 12px;
+        border: 1px solid rgba(30, 38, 53, 0.08);
+        background: #ffffff;
+        color: var(--text);
+        font-size: 0.9rem;
+        font-weight: 600;
+        flex: 0 0 auto;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          background 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .footer-nav a:hover {
+        transform: translateY(-1px);
+        border-color: rgba(124, 140, 255, 0.18);
+        background: #f8fbff;
+        box-shadow: 0 10px 20px rgba(95, 118, 160, 0.06);
+      }
+
+      @media (max-width: 980px) {
+        .about-wrap,
+        .skills-wrap,
+        .process-wrap,
+        .contact-wrap,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .case-study-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .case-study-visual {
+          aspect-ratio: 16 / 10;
+        }
+
+        .hero {
+          padding: 130px 0 90px;
+          background-position: center;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 980px) {
+        .about-wrap,
+        .skills-wrap,
+        .process-wrap,
+        .contact-wrap,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 130px 0 90px;
+          background-position: center;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .section {
+          padding: 90px 0;
+        }
+
+        .header-inner {
+          min-height: 72px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+        }
+
+        .nav {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 20px;
+          right: 20px;
+          display: none;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0;
+          padding: 12px;
+          background: #ffffff;
+          border: 1px solid rgba(124, 140, 255, 0.12);
+          border-radius: 22px;
+          box-shadow: var(--shadow);
+        }
+
+        .nav.open {
+          display: flex;
+        }
+
+        .nav a {
+          width: 100%;
+          padding: 14px 12px;
+          border-radius: 14px;
+        }
+
+        .nav a:hover {
+          background: rgba(124, 140, 255, 0.08);
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.4rem, 9vw, 4rem);
+        }
+
+        .about-card,
+        .about-summary,
+        .skills-intro,
+        .skills-board,
+        .process-intro,
+        .process-timeline,
+        .contact-info,
+        .contact-form {
+          padding: 24px;
+        }
+
+        .about-points,
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .skills-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .process-step {
+          grid-template-columns: 64px 1fr;
+        }
+
+        .about-metrics {
+          grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+          padding: 28px 24px;
+        }
+
+        .footer-actions {
+          align-items: flex-start;
+        }
+
+        .footer-nav {
+          justify-content: flex-start;
+          max-width: 100%;
+          overflow-x: auto;
+          padding-bottom: 4px;
+        }
+
+        .footer-nav::-webkit-scrollbar {
+          height: 6px;
+        }
+
+        .footer-nav::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.14);
+          border-radius: 999px;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .case-study-card {
+          padding: 18px;
+        }
+
+        .case-study-no {
+          width: 52px;
+          height: 52px;
+        }
+
+        .case-study-visual {
+          aspect-ratio: 4 / 5;
+        }
+
+        .hero-actions .btn-primary {
+          min-width: 100%;
+          min-height: 56px;
+          padding: 16px 24px;
+        }
+
+        .hero-actions .btn-secondary {
+          min-width: 100%;
+          min-height: 46px;
+          padding: 12px 18px;
+        }
+
+        .logo {
+          font-size: 1.28rem;
+        }
+
+        .footer-logo {
+          font-size: 1.22rem;
+        }
+
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .container {
+          width: min(calc(100% - 28px), var(--container));
+        }
+
+        .hero {
+          padding: 120px 0 80px;
+          min-height: 100svh;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .footer-note {
+          white-space: normal;
+        }
+
+        .footer-nav a {
+          width: auto;
+          padding: 10px 14px;
+          font-size: 0.84rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#home" class="logo">KG PORTFOLIO</a>
+
+        <nav class="nav" id="navMenu">
+          <a href="#home" class="active">Home</a>
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#process">Process</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero section" id="home">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="section-label">Portfolio</span>
+            <h1>
+              디테일로 완성하는
+              <span>모던 포트폴리오</span>
+            </h1>
+            <p>
+              감각적인 비주얼과 명확한 구조를 바탕으로, 프로젝트의 가치와 나의
+              역량을 한 페이지 안에서 직관적으로 보여주는 개인 포트폴리오입니다.
+            </p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+              <a href="#contact" class="btn btn-secondary">문의하기</a>
+            </div>
+            <div class="hero-badge">
+              <strong>Creative Developer</strong>
+              <span>Responsive Web · UI Design · Frontend</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="about">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">About Me</span>
+            <h2 class="section-title">나를 소개하는 섹션</h2>
+            <p class="section-desc">
+              디자인 감각과 사용자 경험을 함께 고려하며, 보기 좋은 화면을 넘어
+              목적이 분명한 웹사이트를 만드는 것을 지향합니다.
+            </p>
+          </div>
+
+          <div class="about-wrap">
+            <div class="about-card">
+              <h3 class="about-intro">
+                시각적 완성도와 사용성을 함께 설계하는 모던 웹 디자이너이자
+                프론트엔드 작업자입니다.
+              </h3>
+              <p class="about-text">
+                브랜드의 분위기를 화면 안에 자연스럽게 담아내고, 정보의 흐름이
+                명확하게 전달되도록 구성하는 작업을 좋아합니다. 트렌디한
+                디자인과 반응형 구현을 기반으로, PC와 모바일 어디서든 일관된
+                경험을 제공하는 포트폴리오와 웹사이트를 제작합니다.
+              </p>
+
+              <div class="about-points">
+                <div class="about-point">
+                  <strong>Design Focus</strong>
+                  <span>깔끔한 레이아웃과 세련된 비주얼 중심의 화면 구성</span>
+                </div>
+                <div class="about-point">
+                  <strong>Responsive</strong>
+                  <span>PC와 모바일 모두 자연스럽게 이어지는 반응형 설계</span>
+                </div>
+                <div class="about-point">
+                  <strong>User Experience</strong>
+                  <span>직관적인 정보 구조와 쉬운 탐색 흐름을 고려한 UI</span>
+                </div>
+                <div class="about-point">
+                  <strong>Frontend</strong>
+                  <span>HTML, CSS, JavaScript 기반의 탄탄한 실제 구현</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-summary">
+              <div>
+                <h3 class="about-summary-title">Core Summary</h3>
+                <p>
+                  브랜드의 첫인상을 만드는 히어로 섹션부터 프로젝트 소개, 컨택트
+                  영역까지 하나의 흐름으로 설계하여 완성도 높은 원페이지
+                  포트폴리오를 만듭니다.
+                </p>
+              </div>
+
+              <div class="about-metrics">
+                <div class="about-metric">
+                  <strong>UI</strong>
+                  <span>Modern Visual</span>
+                </div>
+                <div class="about-metric">
+                  <strong>UX</strong>
+                  <span>Clear Flow</span>
+                </div>
+                <div class="about-metric">
+                  <strong>WEB</strong>
+                  <span>Responsive Build</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">My Skills</span>
+            <h2 class="section-title">스킬</h2>
+            <p class="section-desc">
+              디자인 툴과 웹 퍼블리싱 기술을 함께 활용하여, 기획 의도를 실제
+              화면으로 완성하는 작업을 합니다.
+            </p>
+          </div>
+
+          <div class="skills-wrap">
+            <div class="skills-intro">
+              <div>
+                <h3>디자인부터 구현까지 이어지는 실무형 스킬셋</h3>
+                <p>
+                  비주얼 디자인 툴과 프론트엔드 기술을 함께 다루며, 브랜드의
+                  분위기와 사용성을 모두 고려한 결과물을 만드는 데 집중하고
+                  있습니다.
+                </p>
+              </div>
+
+              <div class="skills-chip-row">
+                <span class="skills-chip">Design Tool</span>
+                <span class="skills-chip">Publishing</span>
+                <span class="skills-chip">Frontend</span>
+              </div>
+            </div>
+
+            <div class="skills-board">
+              <div class="skills-grid">
+                <div class="skill-card" style="--value: 92">
+                  <div class="skill-top">
+                    <span class="skill-no">01</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">92%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">Photoshop</strong>
+                    <span class="skill-category">Design Tool</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      브랜드 비주얼 작업과 이미지 보정, 완성도 높은 그래픽
+                      레이아웃 제작이 가능합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="skill-card" style="--value: 88">
+                  <div class="skill-top">
+                    <span class="skill-no">02</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">88%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">Illustrator</strong>
+                    <span class="skill-category">Design Tool</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      벡터 그래픽 제작과 아이콘 디자인, 다양한 시각 자산 작업에
+                      활용합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="skill-card" style="--value: 95">
+                  <div class="skill-top">
+                    <span class="skill-no">03</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">95%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">Figma</strong>
+                    <span class="skill-category">UI Design</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      와이어프레임 설계부터 UI 시스템 정리, 협업 중심의 화면
+                      디자인에 강점이 있습니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="skill-card" style="--value: 91">
+                  <div class="skill-top">
+                    <span class="skill-no">04</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">91%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">HTML5</strong>
+                    <span class="skill-category">Publishing</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      시맨틱한 구조와 접근성을 고려한 웹 문서 마크업을
+                      안정적으로 구현합니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="skill-card" style="--value: 90">
+                  <div class="skill-top">
+                    <span class="skill-no">05</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">90%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">CSS3</strong>
+                    <span class="skill-category">Styling</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      반응형 레이아웃과 세밀한 스타일 조정으로 화면의 완성도를
+                      높입니다.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="skill-card" style="--value: 84">
+                  <div class="skill-top">
+                    <span class="skill-no">06</span>
+                    <div class="skill-ring">
+                      <span class="skill-value">84%</span>
+                    </div>
+                  </div>
+                  <div class="skill-body">
+                    <strong class="skill-name">JavaScript</strong>
+                    <span class="skill-category">Frontend</span>
+                    <div class="skill-bar">
+                      <div class="skill-bar-fill"></div>
+                    </div>
+                    <p class="skill-desc">
+                      바닐라 자바스크립트를 활용해 인터랙션과 동적인 화면 동작을
+                      구현합니다.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="process">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">UI/UX Process</span>
+            <h2 class="section-title">작업 과정</h2>
+            <p class="section-desc">
+              사용자 경험을 고려한 화면 설계부터 최종 구현까지, UI/UX 작업은
+              단계별 흐름에 맞춰 체계적으로 진행합니다.
+            </p>
+          </div>
+
+          <div class="process-wrap">
+            <div class="process-intro">
+              <div>
+                <h3>문제 정의부터 화면 구현까지 이어지는 UI/UX Workflow</h3>
+                <p>
+                  목적이 분명한 화면을 만들기 위해 사용자 관점에서 흐름을
+                  정리하고, 시각적 완성도와 사용성을 함께 고려하여 결과물을
+                  설계합니다.
+                </p>
+              </div>
+
+              <div class="process-badges">
+                <span class="process-badge">Research</span>
+                <span class="process-badge">Wireframe</span>
+                <span class="process-badge">UI Design</span>
+                <span class="process-badge">Prototype</span>
+              </div>
+            </div>
+
+            <div class="process-timeline">
+              <article class="process-step">
+                <div class="process-number">01</div>
+                <div class="process-content">
+                  <span class="process-sub">Research</span>
+                  <h3 class="process-title">사용자와 목적 분석</h3>
+                  <p class="process-desc">
+                    프로젝트의 목적과 주요 타깃을 파악하고, 필요한 기능과 사용
+                    흐름을 정리하여 전체 방향성을 설정합니다.
+                  </p>
+                </div>
+              </article>
+
+              <article class="process-step">
+                <div class="process-number">02</div>
+                <div class="process-content">
+                  <span class="process-sub">Structure</span>
+                  <h3 class="process-title">정보 구조 및 와이어프레임 설계</h3>
+                  <p class="process-desc">
+                    콘텐츠의 우선순위를 정리하고 화면 구조를 설계하여 사용자가
+                    직관적으로 탐색할 수 있는 흐름을 만듭니다.
+                  </p>
+                </div>
+              </article>
+
+              <article class="process-step">
+                <div class="process-number">03</div>
+                <div class="process-content">
+                  <span class="process-sub">Visual Design</span>
+                  <h3 class="process-title">UI 스타일과 비주얼 디자인</h3>
+                  <p class="process-desc">
+                    브랜드 분위기에 맞는 컬러, 타이포그래피, 컴포넌트를 구성하여
+                    일관성 있는 인터페이스를 디자인합니다.
+                  </p>
+                </div>
+              </article>
+
+              <article class="process-step">
+                <div class="process-number">04</div>
+                <div class="process-content">
+                  <span class="process-sub">Prototype</span>
+                  <h3 class="process-title">프로토타입과 인터랙션 검토</h3>
+                  <p class="process-desc">
+                    실제 사용 흐름을 가정한 프로토타입으로 전환 효과와
+                    인터랙션을 점검하고 사용성을 보완합니다.
+                  </p>
+                </div>
+              </article>
+
+              <article class="process-step">
+                <div class="process-number">05</div>
+                <div class="process-content">
+                  <span class="process-sub">Implementation</span>
+                  <h3 class="process-title">반응형 구현 및 최종 완성</h3>
+                  <p class="process-desc">
+                    디자인 결과물을 HTML, CSS, JavaScript로 구현하고, 다양한
+                    디바이스에서 자연스럽게 동작하도록 마무리합니다.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section case-study" id="case-study">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">UI/UX Case Study</span>
+            <h2 class="section-title">UI/UX Case Study</h2>
+            <p class="section-desc">
+              UX/UI 평가 중 진행한 롯데리아 앱 프로젝트를 기준으로, 분석부터
+              화면 설계와 최종 목업까지의 흐름을 3단계로 정리했습니다.
+            </p>
+          </div>
+
+          <div class="case-study-wrap">
+            <article class="case-study-card">
+              <div class="case-study-head">
+                <div class="case-study-no">01</div>
+                <span class="case-study-step">Analysis</span>
+              </div>
+              <div
+                class="case-study-visual"
+                aria-label="롯데리아 앱 분석 단계 목업 이미지"
+              >
+                <img
+                  src="./images/Free-MacBook-Mockup-Raw-Series.jpg"
+                  alt="롯데리아 앱 분석 단계 이미지"
+                />
+              </div>
+              <div class="case-study-body">
+                <h3 class="case-study-title">사용자 흐름과 문제점 분석</h3>
+                <p class="case-study-desc">
+                  주문, 쿠폰, 매장 탐색 과정에서 사용자가 자주 마주치는 불편
+                  요소를 정리하고, 홈 화면에서 어떤 정보가 가장 먼저 보여야
+                  하는지 우선순위를 설정했습니다.
+                </p>
+                <span class="case-study-point"
+                  >쿠폰 / 최근 주문 / 매장 정보 중심 구조 정리</span
+                >
+              </div>
+            </article>
+
+            <article class="case-study-card">
+              <div class="case-study-head">
+                <div class="case-study-no">02</div>
+                <span class="case-study-step">Design</span>
+              </div>
+              <div
+                class="case-study-visual"
+                aria-label="롯데리아 앱 디자인 단계 목업 이미지"
+              >
+                <img
+                  src="./images/Scene-8.jpg"
+                  alt="롯데리아 앱 디자인 단계 이미지"
+                />
+              </div>
+              <div class="case-study-body">
+                <h3 class="case-study-title">정보 구조 재정리와 UI 설계</h3>
+                <p class="case-study-desc">
+                  핵심 기능이 빠르게 보이도록 레이아웃을 단순화하고, 메뉴 이동
+                  탭과 프로모션 영역, 쿠폰 정보 구조를 직관적으로 재배치해 화면
+                  흐름을 정리했습니다.
+                </p>
+                <span class="case-study-point"
+                  >메인 화면 · 메뉴 탭 · 쿠폰 UI 시안 설계</span
+                >
+              </div>
+            </article>
+
+            <article class="case-study-card">
+              <div class="case-study-head">
+                <div class="case-study-no">03</div>
+                <span class="case-study-step">Result</span>
+              </div>
+              <div
+                class="case-study-visual"
+                aria-label="롯데리아 앱 최종 목업 이미지"
+              >
+                <img
+                  src="./images/iPhone 17.png"
+                  alt="롯데리아 앱 최종 목업 이미지"
+                />
+              </div>
+              <div class="case-study-body">
+                <h3 class="case-study-title">최종 목업과 사용 경험 정리</h3>
+                <p class="case-study-desc">
+                  완성된 화면을 모바일 목업 형태로 정리하여 실제 서비스처럼
+                  보이도록 구성하고, 사용자가 혜택과 주문 정보를 한눈에 파악할
+                  수 있는 결과물로 마무리했습니다.
+                </p>
+                <span class="case-study-point"
+                  >모바일 앱 목업 기반 최종 결과물 정리</span
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Featured Works</span>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-desc">
+              사용자 경험과 시각적 완성도를 동시에 고려하여 제작한 대표
+              프로젝트입니다.
+            </p>
+          </div>
+
+          <div class="projects-grid">
+            <article class="project-card">
+              <div class="project-thumb">
+                <img src="./images/12E2.jpg" alt="프로젝트 이미지" />
+              </div>
+              <div class="project-body">
+                <span class="project-tag">Brand Website</span>
+                <h3 class="project-title">Modern Brand Landing Page</h3>
+                <p class="project-desc">
+                  세련된 레이아웃과 강한 첫인상을 주는 비주얼 중심의 브랜드 소개
+                  웹사이트를 제작했습니다.
+                </p>
+                <a href="#contact" class="project-link">자세히 보기 →</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-thumb">
+                <img
+                  src="./images/Hand-Holding-iPhone-17-Pro-Free-psd-Mockup.jpg"
+                  alt="프로젝트 이미지"
+                />
+              </div>
+              <div class="project-body">
+                <span class="project-tag">Mobile UI</span>
+                <h3 class="project-title">App Service Prototype</h3>
+                <p class="project-desc">
+                  직관적인 사용자 흐름과 깔끔한 인터페이스를 중심으로 모바일
+                  서비스 화면을 설계했습니다.
+                </p>
+                <a href="#contact" class="project-link">자세히 보기 →</a>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-thumb">
+                <img
+                  src="./images/DFS_DesktopMonitor_Mockup_V01.jpg"
+                  alt="프로젝트 이미지"
+                />
+              </div>
+              <div class="project-body">
+                <span class="project-tag">PRD</span>
+                <h3 class="project-title">Product Requirement Document</h3>
+                <p class="project-desc">
+                  서비스 구조와 핵심 기능을 명확하게 정의하기 위해 작성한 PRD
+                  기반 기획 문서입니다.
+                </p>
+                <a href="#contact" class="project-link">자세히 보기 →</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">컨택트</h2>
+            <p class="section-desc">
+              프로젝트 협업이나 문의가 있다면 아래 폼을 통해 메시지를
+              남겨주세요.
+            </p>
+          </div>
+
+          <div class="contact-wrap">
+            <div class="contact-info">
+              <h3>함께 작업할 준비가 되어 있습니다.</h3>
+              <p>
+                웹사이트 제작, UI 디자인, 포트폴리오 리뉴얼 등 다양한 작업
+                문의를 환영합니다.
+              </p>
+
+              <div class="contact-list">
+                <div class="contact-item">
+                  <strong>Email</strong>
+                  <span>kka041206@naver.com</span>
+                </div>
+                <div class="contact-item">
+                  <strong>Phone</strong>
+                  <span>010-1234-5678</span>
+                </div>
+                <div class="contact-item">
+                  <strong>Location</strong>
+                  <span>Seoul, Korea</span>
+                </div>
+              </div>
+            </div>
+
+            <form class="contact-form" id="contactForm">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label for="name">이름</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="이름을 입력하세요"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email">이메일</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="이메일을 입력하세요"
+                    required
+                  />
+                </div>
+
+                <div class="form-group full">
+                  <label for="subject">제목</label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="문의 제목을 입력하세요"
+                    required
+                  />
+                </div>
+
+                <div class="form-group full">
+                  <label for="message">메시지</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    placeholder="메시지를 입력하세요"
+                    required
+                  ></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary form-submit">
+                메시지 보내기
+              </button>
+              <p class="form-message" id="formMessage"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <a href="#home" class="footer-logo">KG PORTFOLIO</a>
+          <p class="footer-text">
+            감각적인 디자인과 탄탄한 구조로, 브랜드와 프로젝트의 가치를 선명하게
+            전달하는 포트폴리오를 만듭니다.
+          </p>
+          <div class="footer-meta">
+            <span>© 2026 KG PORTFOLIO</span>
+            <span>Responsive One Page</span>
+            <span>Designed for KG PORTFOLIO</span>
+          </div>
+        </div>
+
+        <div class="footer-actions">
+          <div class="footer-note">Let’s build something modern.</div>
+          <div class="footer-nav" aria-label="푸터 섹션 이동">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#process">Process</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const navMenu = document.getElementById("navMenu");
+      const navLinks = document.querySelectorAll(".nav a");
+      const sections = document.querySelectorAll("main section");
+      const contactForm = document.getElementById("contactForm");
+      const formMessage = document.getElementById("formMessage");
+      const skillCards = document.querySelectorAll(".skill-card");
+      let hasUserScrolled = false;
+
+      menuToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("open");
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("open");
+        });
+      });
+
+      window.addEventListener("scroll", () => {
+        let currentSection = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 120;
+          if (window.scrollY >= sectionTop) {
+            currentSection = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${currentSection}`) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      function animateSkillCard(card) {
+        if (card.dataset.animated === "true") return;
+        card.dataset.animated = "true";
+        card.classList.add("reveal");
+
+        const targetValue = Number(card.style.getPropertyValue("--value")) || 0;
+        const skillRing = card.querySelector(".skill-ring");
+        const skillValue = card.querySelector(".skill-value");
+        const duration = 1500;
+        const start = performance.now();
+
+        function updateProgress(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const currentValue = Math.round(targetValue * progress);
+
+          skillRing.style.setProperty("--progress", currentValue);
+          skillValue.textContent = `${currentValue}%`;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateProgress);
+          } else {
+            skillRing.style.setProperty("--progress", targetValue);
+            skillValue.textContent = `${targetValue}%`;
+          }
+        }
+
+        requestAnimationFrame(updateProgress);
+      }
+
+      const skillCardObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && hasUserScrolled) {
+              const card = entry.target;
+              const index = Array.from(skillCards).indexOf(card);
+              setTimeout(() => animateSkillCard(card), index * 120);
+              observer.unobserve(card);
+            }
+          });
+        },
+        {
+          threshold: 0.55,
+          rootMargin: "0px 0px -6% 0px",
+        },
+      );
+
+      skillCards.forEach((card) => {
+        skillCardObserver.observe(card);
+      });
+
+      function enableScrollTriggeredAnimation() {
+        if (!hasUserScrolled) {
+          hasUserScrolled = true;
+          skillCards.forEach((card) => {
+            const rect = card.getBoundingClientRect();
+            const inView =
+              rect.top < window.innerHeight * 0.88 &&
+              rect.bottom > window.innerHeight * 0.18;
+            if (inView) {
+              animateSkillCard(card);
+              skillCardObserver.unobserve(card);
+            }
+          });
+        }
+      }
+
+      window.addEventListener("scroll", enableScrollTriggeredAnimation, {
+        passive: true,
+      });
+      window.addEventListener("wheel", enableScrollTriggeredAnimation, {
+        passive: true,
+      });
+      window.addEventListener("touchmove", enableScrollTriggeredAnimation, {
+        passive: true,
+      });
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        formMessage.textContent = "메시지가 성공적으로 전송되었습니다.";
+        contactForm.reset();
+      });
+    </script>
+  </body>
+</html>
