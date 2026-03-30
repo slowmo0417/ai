@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+body {
+  font-family: "맑은 고딕", "malgun gothic", sans-serif;
+}
+.wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  width: 600px;
+  background-color: #ffffff;
+}
+
+th,
+td {
+  border: 1px solid #333;
+  padding: 16px;
+  text-align: center;
+}
+
+th {
+  background-color: orange;
+}
+
+td {
+  background-color: rgb(224, 255, 47);
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  background-color: deepskyblue;
+}

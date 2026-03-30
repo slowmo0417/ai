@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+body {
+  font-family: "맑은 고딕", "malgun gothic", sans-serif;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding-top: 20px;
+}
+
+.table1,
+.table2 {
+  width: 400px;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.table2 col:first-child {
+  width: 130px;
+}
+
+.table2 col:last-child {
+  width: 270px;
+}
+
+th,
+td {
+  border: 1px solid #333;
+  padding: 10px;
+  text-align: center;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
