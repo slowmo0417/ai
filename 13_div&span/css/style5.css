@@ -40,7 +40,8 @@ div h1 {
 div ul {
   margin: 42px 42px;
 }
-div p {
+.bottom1,
+.last {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 48px;
