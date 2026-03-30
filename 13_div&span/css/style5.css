@@ -7,9 +7,9 @@ body {
   padding: 0;
 }
 div {
-  width: 644px;
+  width: 640px;
   border: 2px solid red;
-  padding: 36px 16px;
+  padding: 36px 24px;
   margin: 0 auto;
 }
 div h1,
@@ -23,7 +23,7 @@ div h1 {
 }
 .top {
   color: blue;
-  font-size: 18px;
+  font-weight: 500;
   margin-bottom: 22px;
 }
 div h3 {
@@ -38,6 +38,17 @@ div h2 {
 div ul {
   margin: 42px 42px;
 }
+p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 48px;
+}
 div .last {
-  margin-bottom: 0;
+  margin-bottom: 36;
+}
+div .event {
+  font-size: 14px;
+  background-color: #850082;
+  padding: 8px 5px;
+  color: #fff;
 }
