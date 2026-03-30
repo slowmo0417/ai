@@ -21,16 +21,6 @@ div h1 {
   padding: 22px 0 16px;
   margin-bottom: 27px;
 }
-.top {
-  color: blue;
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 22px;
-}
-.top2 {
-  font-size: 20px;
-  font-weight: 600;
-}
 div h2 {
   background-color: #d3d3d3;
   padding: 16px;
@@ -44,6 +34,16 @@ p {
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 48px;
+}
+.top {
+  color: blue;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+.top2 {
+  font-size: 20px;
+  font-weight: 600;
 }
 .last {
   margin-bottom: 36;
