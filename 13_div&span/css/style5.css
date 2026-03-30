@@ -43,10 +43,10 @@ p {
   font-weight: 600;
   margin-bottom: 48px;
 }
-div .last {
+.last {
   margin-bottom: 36;
 }
-div .event {
+.event {
   font-size: 14px;
   background-color: #850082;
   padding: 8px 5px;
