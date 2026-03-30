@@ -1,0 +1,59 @@
+@charset "utf-8";
+body {
+  font-family: "맑은 고딕";
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+div {
+  width: 630px;
+  border: 1px dotted #7e7e7e;
+  padding: 36px 16px;
+  margin: 0 auto;
+}
+.box {
+  background: black;
+  color: white;
+  padding: 9px 6px;
+}
+
+div h1,
+h2,
+p {
+  margin-bottom: 24px;
+}
+p {
+  text-align: justify;
+}
+.red {
+  color: #b01a23;
+  font-weight: 600;
+}
+.h22 {
+  color: blue;
+}
+.blue {
+  color: blue;
+  font-weight: 600;
+}
+.free {
+  background-color: green;
+  padding: 4px;
+  font-size: 14px;
+  color: #fff;
+}
+
+div .p1 {
+  letter-spacing: 5px;
+}
+div .p2 {
+  line-height: 28px;
+}
+div .p3 {
+  letter-spacing: -2px;
+}
+div .last {
+  margin-bottom: 42;
+  letter-spacing: -2px;
+}
