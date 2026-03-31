@@ -1,0 +1,56 @@
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.box {
+  width: 630px;
+  border: 1px dashed #7e7e7e;
+  background-color: #fff;
+  padding: 36px 16px;
+  margin: 0 auto;
+}
+
+.title1,
+.title2,
+.title3,
+.text1,
+.text2,
+.text3 {
+  margin-bottom: 26px;
+}
+
+.title2 {
+  background-color: #000;
+  color: #fff;
+  padding: 9px 6px;
+}
+
+.point1 {
+  color: #a62b19;
+  font-weight: 600;
+}
+
+.title3 {
+  color: blue;
+}
+
+.text1,
+.text2,
+.text3,
+.text4 {
+  text-align: justify;
+}
+
+.text4 {
+  color: blue;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.point2 {
+  color: blue;
+  font-weight: 600;
+}
