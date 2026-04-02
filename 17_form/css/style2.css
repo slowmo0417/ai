@@ -1,0 +1,18 @@
+@charset "UTF-8";
+body {
+  font-family: "맑은 고딕";
+}
+form {
+  width: 428px;
+}
+
+form ul li {
+  margin-bottom: 22px;
+  list-style: none;
+}
+form .namebox {
+  margin-left: 33px;
+}
+form .idbox {
+  margin-left: 16px;
+}

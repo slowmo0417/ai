@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form태그</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+
+  <body>
+    <h1>[폼 구성 요소 알아보기]</h1>
+    <!-- 데이터 전송 방식 기본값은 GET 방식 -->
+    <!-- 데이터 전송 방식 POST 방식 -->
+    <form action="" name="login" method="post">
+      <fieldset>
+        <legend>로그인 화면</legend>
+        <ol>
+          <li>
+            <label for="idinput">ID</label>
+            <input
+              type="text"
+              class="idbox"
+              name="id"
+              id="idinput"
+              placeholder="아이디 또는 전화번호"
+            />
+          </li>
+          <li>
+            <label for="pwinput">PASSWORD</label>
+            <input
+              type="password"
+              name="pw"
+              id="pwinput"
+              placeholder=" 비밀번호"
+            />
+          </li>
+        </ol>
+      </fieldset>
+      <!-- 서버로 데이터 전송 -->
+      <input type="submit" value="로그인" />
+      <!-- 입력 데이터 초기화 -->
+      <input type="reset" value="다시입력" />
+    </form>
+
+    <form action="" name="my" method="post">
+      <fieldset>
+        <legend>개인신상정보</legend>
+        <ul>
+          <li>
+            <!-- 라디오 버튼 여러개 요소 중에서 하나만 선택시 사용 -->
+            <input type="radio" name="gender" id="man" /><label for="man"
+              >남자</label
+            >
+            <input type="radio" name="gender" id="girl" /><label for="girl"
+              >여자</label
+            >
+            <input type="radio" name="gender" id="unknow" />
+            <label for="unknow"> 중성자</label>
+          </li>
+          <li>
+            <label for="tour">여행</label>
+            <input type="checkbox" id="tour" name="chk" value="여행" />
+            <label for="movi">영화</label>
+            <input type="checkbox" id="movi" name="chk2" value="영화" />
+            <label for="book">독서</label>
+            <input type="checkbox" id="book" name="chk3" value="독서" />
+          </li>
+          <li>
+            <label for="sel">컬러선택</label>
+            <select name="color" id="sel">
+              <option value="defalt">:::::색상 선택:::::</option>
+              <option value="red">빨간색</option>
+              <option value="orange">주황색</option>
+              <option value="yellow">노란색</option>
+              <option value="green">초록색</option>
+              <option value="blue">파란색</option>
+              <option value="navy">남색</option>
+              <option value="pupple">보라색</option>
+            </select>
+          </li>
+          <li>
+            <label for="msg">MESSAGE</label>
+            <!-- 여러줄을 입력 받을때 -->
+            <textarea
+              name=""
+              id="msg"
+              cols="60"
+              rows="20"
+              placeholder="문의사항 작성"
+            ></textarea>
+          </li>
+          <li>
+            <label for="file">파일첨부</label>
+            <input type="file" id="file" name="file" />
+          </li>
+          <li>
+            <label for="cr">색상선택</label>
+            <input type="color" name="cr" id="cr" />
+          </li>
+          <li>
+            <label for="ddd">예약날짜</label>
+            <input type="date" name="date" id="ddd" />
+          </li>
+          <li>
+            <label for="tim">예약시간</label>
+            <input type="time" name="time" id="tim" />
+          </li>
+          <li>
+            <label for="dt">날짜/시간예약</label>
+            <input type="datetime-local" name="datetime" id="dt" />
+          </li>
+          <li>
+            <label for="mul">리스트 목록 (다중선택)</label>
+            <select name="sel2" id="mul" multiple>
+              <option value="def">사이즈를 선택하세요</option>
+              <option value="44">44</option>
+              <option value="55">55</option>
+              <option value="66">66</option>
+            </select>
+          </li>
+        </ul>
+      </fieldset>
+      <input type="submit" value="가입" />
+      <input type="reset" value="다시입력" />
+    </form>
+  </body>
+</html>
