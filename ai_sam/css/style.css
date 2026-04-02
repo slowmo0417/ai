@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  background: #fff;
+  color: #222;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.community-section {
+  width: 100%;
+  padding: 108px 0 86px;
+}
+
+.inner {
+  width: 922px;
+  margin: 0 auto;
+}
+
+.community-header {
+  text-align: center;
+}
+
+.community-header h2 {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+
+.community-header p {
+  margin-top: 28px;
+  font-size: 18px;
+  line-height: 1.52;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+  color: #333;
+}
+
+.sns-list {
+  margin-top: 57px;
+  display: flex;
+  justify-content: center;
+  gap: 13px;
+}
+
+.sns-item {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.sns-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.community-grid {
+  margin-top: 46px;
+  display: grid;
+  grid-template-columns: 254px 382px 252px;
+  grid-template-rows: 174px 174px 174px;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #7c7c7c;
+  background: transparent;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.card-body {
+  padding: 20px 24px 22px;
+}
+
+.card h2 {
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  font-weight: 700;
+  color: #111;
+  transition: color 0.25s ease;
+}
+
+.card p {
+  margin-top: 14px;
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: -0.35px;
+  word-break: keep-all;
+  color: #222;
+  transition: color 0.25s ease;
+}
+
+.more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 71px;
+  height: 22px;
+  margin-top: 23px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #ff6b00;
+  color: #fff;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  font-weight: 700;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card-empty {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+}
+
+.card-empty:hover {
+  background: rgb(255, 107, 0);
+  border-color: rgb(255, 107, 0);
+}
+
+.card-video {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+
+.card-video .card-body {
+  padding: 20px 32px 24px;
+}
+
+.card-video:hover {
+  background: rgb(52, 152, 219);
+  border-color: rgb(52, 152, 219);
+}
+
+.card-video:hover h2,
+.card-video:hover p {
+  color: #fff;
+}
+
+.card-video:hover .more-btn {
+  background: rgb(20, 90, 140);
+  color: #fff;
+}
+
+.card-share {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+.card-share:hover {
+  background: rgb(46, 204, 113);
+  border-color: rgb(46, 204, 113);
+}
+
+.card-share:hover h2,
+.card-share:hover p {
+  color: #fff;
+}
+
+.card-share:hover .more-btn {
+  background: rgb(20, 120, 60);
+  color: #fff;
+}
+
+.card-notice {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+
+.card-notice .card-body,
+.card-share .card-body,
+.card-mall .card-body {
+  padding: 20px 24px 22px;
+}
+
+.card-notice p {
+  white-space: nowrap;
+  font-size: 14px;
+  letter-spacing: -0.5px;
+}
+
+.card-notice:hover {
+  background: rgb(155, 89, 182);
+  border-color: rgb(155, 89, 182);
+}
+
+.card-notice:hover h2,
+.card-notice:hover p {
+  color: #fff;
+}
+
+.card-notice:hover .more-btn {
+  background: rgb(90, 40, 120);
+  color: #fff;
+}
+
+.card-contact {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.card-contact .card-body {
+  padding: 23px 32px 22px;
+}
+
+.card-contact:hover {
+  background: rgb(231, 76, 60);
+  border-color: rgb(231, 76, 60);
+}
+
+.card-contact:hover h2,
+.card-contact:hover p {
+  color: #fff;
+}
+
+.card-contact:hover .more-btn {
+  background: rgb(120, 30, 20);
+  color: #fff;
+}
+
+.card-mall {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
+
+.card-mall:hover {
+  background: rgb(26, 188, 156);
+  border-color: rgb(26, 188, 156);
+}
+
+.card-mall:hover h2,
+.card-mall:hover p {
+  color: #fff;
+}
+
+.card-mall:hover .more-btn {
+  background: rgb(10, 90, 80);
+  color: #fff;
+}
