@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>매일 밤 10시 이벤트</title>
+    <!-- 폰트 적용 (Noto Sans KR) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 타이틀 -->
+      <h1 class="title">
+        매일 밤 <span class="highlight">10시</span> 이벤트가 시작됩니다!
+      </h1>
+
+      <!-- 타이머 -->
+      <div class="timer-container" id="timer">
+        <div class="time-group">
+          <div class="digit" id="h1">0</div>
+          <div class="digit" id="h2">0</div>
+        </div>
+        <span class="colon">:</span>
+        <div class="time-group">
+          <div class="digit" id="m1">0</div>
+          <div class="digit" id="m2">0</div>
+        </div>
+        <span class="colon">:</span>
+        <div class="time-group">
+          <div class="digit" id="s1">0</div>
+          <div class="digit" id="s2">0</div>
+        </div>
+      </div>
+
+      <!-- 힌트 및 검색창 -->
+      <div class="search-hint-wrap">
+        <span>회원님이 보다 빠르게 정답을 찾을 수 있도록</span>
+        <div class="search-box">
+          <input type="text" placeholder="검색창을 띄워두세요!" readonly />
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <path
+              d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <!-- 메인 이벤트 박스 -->
+      <div class="event-box">
+        <div class="question">
+          <span class="q-mark">Q</span>. 3월 13일 문제 : 커넥츠에서 등업을
+          하려면 어떤 신청을 해야 할까요?<br />
+          (힌트 : 000신청 / 3글자)
+        </div>
+
+        <!-- 상품 선택 그리드 -->
+        <div class="prize-grid">
+          <!-- 상품 1 -->
+          <label class="prize-card">
+            <div class="prize-title">iPad 11(A16 모델)</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/ipad.png"
+                alt="iPad"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=iPad'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>1</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input
+                type="radio"
+                name="prize"
+                value="iPad 11(A16 모델)"
+                checked
+              />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+
+          <!-- 상품 2 -->
+          <label class="prize-card">
+            <div class="prize-title">문화상품권 1만원</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/cul.png"
+                alt="문화상품권"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=Culture+Voucher'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>50</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input type="radio" name="prize" value="문화상품권 1만원" />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+
+          <!-- 상품 3 -->
+          <label class="prize-card">
+            <div class="prize-title">갤럭시 버즈 프로4</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/sam.png"
+                alt="갤럭시 버즈"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=Galaxy+Buds'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>3</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input type="radio" name="prize" value="갤럭시 버즈 프로4" />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+
+          <!-- 상품 4 -->
+          <label class="prize-card">
+            <div class="prize-title">Airpods 4</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/air.png"
+                alt="Airpods"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=Airpods'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>3</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input type="radio" name="prize" value="Airpods 4" />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+
+          <!-- 상품 5 -->
+          <label class="prize-card">
+            <div class="prize-title">백화점 상품권 10만원</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/shin.png"
+                alt="백화점 상품권"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=Dept+Voucher'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>10</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input type="radio" name="prize" value="백화점 상품권 10만원" />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+
+          <!-- 상품 6 -->
+          <label class="prize-card">
+            <div class="prize-title">편의점 상품권 1만원</div>
+            <div class="prize-image-wrap">
+              <img
+                src="./images/gs.png"
+                alt="편의점 상품권"
+                class="prize-image"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/150/ffffff/000000?text=CVS+Voucher'
+                "
+              />
+            </div>
+            <div class="prize-stock"><strong>100</strong>개 남음</div>
+            <div class="radio-area">
+              <div class="prize-divider"></div>
+              <input type="radio" name="prize" value="편의점 상품권 1만원" />
+              <span class="custom-radio"></span>
+            </div>
+          </label>
+        </div>
+
+        <!-- 정답 입력 -->
+        <div class="answer-area">
+          <span class="answer-label">정답 :</span>
+          <input
+            type="text"
+            class="answer-input"
+            placeholder="띄어쓰기까지 정확하게 입력해 주세요."
+          />
+        </div>
+
+        <!-- 제출 버튼 -->
+        <button class="btn btn-primary submit-btn" onclick="submitEvent()">
+          응모하기
+        </button>
+      </div>
+    </div>
+
+    <!-- 추가 정보 입력 모달 -->
+    <div id="applicationModal" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+        <div class="modal-header">
+          <h2 class="modal-title">경품 응모 정보 입력</h2>
+        </div>
+        <form id="applyForm" class="modal-form">
+          <!-- 상품 이름 (텍스트로 표시 및 hidden 필드로 전송) -->
+          <div class="form-group">
+            <label class="form-label">선택 상품</label>
+            <div id="prizeDisplayName" class="selected-prize-display">
+              상품명 로딩 중...
+            </div>
+            <!-- 인풋네임 name으로 지정 -->
+            <input type="hidden" id="selectedPrizeName" name="name" />
+          </div>
+          <!-- 이름 -->
+          <div class="form-group">
+            <label class="form-label">이름</label>
+            <input
+              type="text"
+              name="Name"
+              class="modal-input-field"
+              placeholder="이름"
+            />
+          </div>
+          <!-- 연락처 -->
+          <div class="form-group">
+            <label class="form-label">연락처</label>
+            <input
+              type="text"
+              name="Num"
+              class="modal-input-field"
+              placeholder="연락처"
+            />
+          </div>
+          <!-- 이메일 -->
+          <div class="form-group">
+            <label class="form-label">이메일</label>
+            <input
+              type="text"
+              name="Email"
+              class="modal-input-field"
+              placeholder="이메일"
+            />
+          </div>
+          <!-- 생년월일 -->
+          <div class="form-group">
+            <label class="form-label">생년월일</label>
+            <input
+              type="text"
+              name="Date"
+              class="modal-input-field"
+              placeholder="생년월일 (예: 900101)"
+            />
+          </div>
+
+          <button
+            type="submit"
+            id="finalSubmitBtn"
+            class="btn btn-primary modal-submit-btn"
+          >
+            신청 완료하기
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 토스트 메시지 -->
+    <div id="toast" class="toast-message">메시지</div>
+
+    <!-- 스크립트 -->
+    <script src="./js/script.js"></script>
+  </body>
+</html>
