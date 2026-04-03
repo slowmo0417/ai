@@ -20,6 +20,28 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+:target,
+:focus,
+:focus-visible {
+  outline: none !important;
+}
+
+:target:not(input):not(textarea) {
+  caret-color: transparent !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.section-wrapper,
+.s2-wrapper,
+.s3-wrapper,
+.cta-wrapper {
+  scroll-margin-top: 80px;
+}
+
 body {
   font-family:
     "Pretendard Variable",
