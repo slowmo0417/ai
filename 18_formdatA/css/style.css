@@ -71,3 +71,7 @@ body {
 .formbox textarea {
   color: #fff;
 }
+span {
+  color: #fff;
+  font-size: 18px;
+}
