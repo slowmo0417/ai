@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>헤더 배너 메인 푸터 레이아웃</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Pretendard", sans-serif;
+      }
+
+      header {
+        width: 1200px;
+        height: 150px;
+        margin: 0 auto;
+        background: #e8dcc8;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      header .box {
+        width: 350px;
+      }
+
+      header .right {
+        height: 90px;
+        background: #4f6f4f;
+      }
+
+      header .logo {
+        height: 70px;
+        background: #49a79b;
+      }
+
+      header .search {
+        height: 60px;
+        background: #9a9896;
+      }
+
+      .banner {
+        width: 100%;
+        height: 450px;
+        background: linear-gradient(90deg, #8a2be2 0%, #9932cc 100%);
+      }
+
+      main {
+        width: 1200px;
+        min-height: 600px;
+        margin: 0 auto;
+        background: #7cff00;
+      }
+
+      main > div {
+        width: 100%;
+        margin: 0;
+      }
+
+      main .side-dish {
+        height: 1000px;
+        background: #18c7e8;
+      }
+
+      main .regular-side-dish {
+        height: 600px;
+        background: #ffb703;
+      }
+
+      main .new-side-dish {
+        height: 1000px;
+        background: #fb8500;
+      }
+
+      main .sub-banner {
+        height: 200px;
+        background: #8ecae6;
+      }
+
+      main .md-recommend {
+        height: 1000px;
+        background: #219ebc;
+      }
+
+      footer {
+        width: 1200px;
+        height: 200px;
+        margin: 0 auto;
+        background: #b8860b;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      footer .left-footer {
+        width: 375px;
+        height: 125px;
+        background: #ff0000;
+      }
+
+      footer .right-footer {
+        width: 775px;
+        height: 125px;
+        background: #2f00ff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="box search"></div>
+      <div class="box logo"></div>
+      <div class="box right"></div>
+    </header>
+    <section class="banner"></section>
+    <main>
+      <div class="side-dish"></div>
+      <div class="regular-side-dish"></div>
+      <div class="new-side-dish"></div>
+      <div class="sub-banner"></div>
+      <div class="md-recommend"></div>
+    </main>
+    <footer>
+      <div class="left-footer"></div>
+      <div class="right-footer"></div>
+    </footer>
+  </body>
+</html>
