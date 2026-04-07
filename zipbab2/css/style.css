@@ -1,0 +1,268 @@
+@charset "utf-8";
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2")
+    format("woff2");
+  font-weight: 100;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraLight.woff2")
+    format("woff2");
+  font-weight: 200;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-ExtraBold.woff2")
+    format("woff2");
+  font-weight: 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-display: swap;
+}
+body {
+  font-family: "Pretendard";
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* 헤더 영역 */
+header {
+  width: 1200px;
+  height: 150px;
+  background: antiquewhite;
+  margin: 0 auto;
+  /* 세로 배치된것을 가로로 배치 */
+  display: flex;
+  justify-content: space-between;
+  /* 부모 요소 기준 위 아래 중앙 정렬 */
+  align-items: center;
+}
+/* 검색 영역 */
+header .search {
+  width: 350px;
+  height: 60px;
+  background: #446644;
+}
+/* 로고 영역 */
+header .logo {
+  width: 350px;
+  height: 70px;
+  background: #449988;
+}
+/* 로그인 & 메뉴 영역 */
+header .right {
+  width: 350px;
+  height: 90px;
+  background: #7d7c7c;
+}
+#slider {
+  width: 100%;
+  height: 450px;
+  background: blueviolet;
+  margin: 0 auto;
+}
+main {
+  width: 1200px;
+  /* 최소 높이는 600 */
+  min-height: 600px;
+  /* background: chartreuse; */
+  margin: 0 auto;
+}
+
+main .banchan {
+  width: 100%;
+  height: 1256px;
+  /* border: 5px solid black; */
+  padding: 50px 16px 16px;
+}
+main .banchan .tit {
+  text-align: center;
+}
+main .banchan .tit h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+main .banchan .tit p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #636363;
+}
+
+/* 제품 박스 8개 나열 */
+main .banchan .product {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 41px;
+}
+
+main .banchan .product .card {
+  width: 280px;
+  height: 532px;
+  /* background: #c8c8c8; */
+}
+
+main .banchan .product .card .imgbox {
+  width: 100%;
+  height: 370px;
+}
+
+main .banchan .product .card .imgbox img {
+  width: 100%;
+  height: 100%;
+  /* 이미지 왜곡 발생 x */
+  object-fit: cover;
+}
+
+main .banchan .product .card .info {
+  padding: 16px 8px;
+}
+main .banchan .product .card .info .new {
+  font-size: 12px;
+  color: #c33835;
+  background: #f5dede;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+}
+main .banchan .product .card .info .hot {
+  font-size: 12px;
+  color: #467e49;
+  background: #dbe6dc;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+}
+main .banchan .product .card .info .spicy {
+  font-size: 12px;
+  color: #f4a423;
+  background: #fdf0dc;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+main .banchan .product .card .info h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 16px;
+}
+main .banchan .product .card .info p {
+  font-size: 12px;
+  color: #848484;
+  margin-top: 16px;
+}
+main .banchan .product .card .info h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 16px;
+}
+main .banchan .product .card .info h4 .sale {
+  color: #c1312d;
+}
+main .banchan .product .card .info .discount {
+  font-size: 10px;
+  color: #848484;
+  font-weight: 600;
+  text-decoration: line-through;
+}
+main .daybanchan {
+  width: 100%;
+  height: 600px;
+  border: 5px solid blue;
+}
+main .newbanchan {
+  width: 100%;
+  height: 1000px;
+  border: 5px solid red;
+}
+main .banner {
+  width: 100%;
+  height: 200px;
+  border: 5px solid yellow;
+}
+main .mdbanchan {
+  width: 100%;
+  height: 1000px;
+  border: 5px solid purple;
+}
+/* 푸터 영역 */
+footer {
+  width: 1200px;
+  height: 200px;
+  background: darkgoldenrod;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* 왼쪽 푸터 */
+footer .leftfoot {
+  width: 375px;
+  height: 125px;
+  background: red;
+}
+/* 오른쪽 푸터 */
+footer .rightfoot {
+  width: 775px;
+  height: 125px;
+  background: blue;
+}
