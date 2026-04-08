@@ -1,0 +1,65 @@
+@charset "uft-8";
+body {
+  font-family: "맑은 고딕";
+  height: 3000px;
+}
+
+div {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #000;
+}
+.box1 {
+  background: red;
+  width: 100%;
+  /* 공중에 띄워서 고정시켜서 배치 */
+  /* position: fixed; */
+  left: 0;
+  top: 0;
+  /* 레이어 순서 바꾸는 명령 */
+  z-index: 3;
+}
+
+.box2 {
+  background: green;
+  position: relative;
+}
+
+.box2 div {
+  width: 80px;
+  height: 80px;
+  border: 1px solid black;
+}
+.box2 .mini1 {
+  background: yellow;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+}
+.box2 .mini2 {
+  background: pink;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+
+.box3 {
+  background: blue;
+}
+.box4 {
+  /* 공중에 띄우기 */
+  position: absolute;
+  /* 공중에 띄운거 해제 */
+  position: static;
+  position: absolute;
+  /* right: 0;
+  top: 0; */
+  /* left: 50px;
+  top: 50px; */
+
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+  background: skyblue;
+}
