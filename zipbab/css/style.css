@@ -241,7 +241,7 @@ main .daybanchan .tit h2 {
 main .daybanchan .tit p {
   font-size: 16px;
   font-weight: 500;
-  margin-bottom: 16px;
+  margin-bottom: 41px;
   color: #666;
 }
 main .daybanchan .product {
@@ -333,6 +333,7 @@ main .daybanchan .product .card .info .discount {
   font-size: 12px;
   font-weight: 600;
   color: #bababa;
+  margin-top: 8px;
   text-decoration: line-through;
 }
 main .newbanchan {
