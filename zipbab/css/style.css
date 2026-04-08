@@ -118,19 +118,222 @@ main {
   width: 1200px;
   /* 최소 높이는 600 */
   min-height: 600px;
-  background: chartreuse;
+  /* background: chartreuse; */
   margin: 0 auto;
 }
 
 main .banchan {
   width: 100%;
-  height: 1000px;
-  border: 5px solid black;
+  height: 1256px;
+  /* border: 5px solid black; */
+  padding: 50px 16px 16px;
+}
+main .banchan .tit {
+  text-align: center;
+}
+main .banchan .tit h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+main .banchan .tit p {
+  font-size: 16px;
+  font-weight: 500;
+  color: #636363;
+}
+
+/* 제품 박스 8개 나열 */
+main .banchan .product {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 41px;
+}
+
+main .banchan .product .card {
+  width: 280px;
+  height: 532px;
+  /* background: #c8c8c8; */
+}
+
+main .banchan .product .card .imgbox {
+  width: 100%;
+  height: 370px;
+}
+
+main .banchan .product .card .imgbox img {
+  width: 100%;
+  height: 100%;
+  /* 이미지 왜곡 발생 x */
+  object-fit: cover;
+}
+
+main .banchan .product .card .info {
+  padding: 16px 8px;
+}
+main .banchan .product .card .info .new {
+  font-size: 12px;
+  color: #c33835;
+  background: #f5dede;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+}
+main .banchan .product .card .info .hot {
+  font-size: 12px;
+  color: #467e49;
+  background: #dbe6dc;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+}
+main .banchan .product .card .info .spicy {
+  font-size: 12px;
+  color: #f4a423;
+  background: #fdf0dc;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+main .banchan .product .card .info h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 16px;
+}
+main .banchan .product .card .info p {
+  font-size: 12px;
+  color: #848484;
+  margin-top: 16px;
+}
+main .banchan .product .card .info h4 {
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 16px;
+}
+main .banchan .product .card .info h4 .sale {
+  color: #c1312d;
+}
+main .banchan .product .card .info .discount {
+  font-size: 10px;
+  color: #848484;
+  font-weight: 600;
+  text-decoration: line-through;
 }
 main .daybanchan {
   width: 100%;
-  height: 600px;
-  border: 5px solid blue;
+  padding: 50px 16px 16px;
+}
+main .daybanchan .tit {
+  text-align: center;
+}
+
+main .daybanchan .tit h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+}
+main .daybanchan .tit p {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: #666;
+}
+main .daybanchan .product {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+
+main .daybanchan .product .card {
+  width: 278px;
+  height: 528px;
+}
+
+main .daybanchan .product .card .imgbox {
+  width: 100%;
+  height: 370px;
+  position: relative;
+}
+main .daybanchan .product .card .imgbox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+main .daybanchan .product .card .imgbox .sale2 {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+}
+main .daybanchan .product .card .imgbox .sss {
+  text-align: center;
+  position: absolute;
+  font-size: 17px;
+  font-weight: 600;
+  color: #fff;
+  left: 27px;
+  top: 33.5px;
+  z-index: 1;
+}
+
+main .daybanchan .product .card .imgbox .bag {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+}
+main .daybanchan .product .card .info {
+  padding: 16px 8px;
+}
+main .daybanchan .product .card .info .new {
+  font-size: 12px;
+  color: #c33835;
+  background: #f5dede;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+main .daybanchan .product .card .info .spicy {
+  font-size: 12px;
+  color: #f4a423;
+  background: #fdf0dc;
+  font-weight: 500;
+  padding: 4px;
+  border-radius: 4px;
+}
+main .daybanchan .product .card .info h3 {
+  font-size: 17px;
+  color: #333;
+  font-weight: 600;
+  margin-top: 8px;
+}
+main .daybanchan .product .card .info p {
+  font-size: 12px;
+  color: #838383;
+  margin-top: 8px;
+}
+main .daybanchan .product .card .info h4 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 8px;
+  color: #333;
+}
+main .daybanchan .product .card .info .sale {
+  color: #bd2420;
+  margin-right: 4px;
+}
+
+main .daybanchan .product .card .info .discount {
+  font-size: 12px;
+  font-weight: 600;
+  color: #bababa;
+  text-decoration: line-through;
 }
 main .newbanchan {
   width: 100%;
