@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>집반찬연구소ai</title>
+    <title>헤더 배너 메인 푸터 레이아웃</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link
       rel="stylesheet"
@@ -21,32 +21,141 @@
       }
 
       header {
-        width: 1200px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        width: 100%;
         height: 150px;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      .header-inner {
+        width: 1200px;
+        height: 100%;
         margin: 0 auto;
-        background: #e8dcc8;
+        padding: 22px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      header .box {
+      .header-search {
         width: 350px;
       }
 
-      header .right {
-        height: 90px;
-        background: #4f6f4f;
+      .header-search-box {
+        width: 100%;
+        height: 50px;
+        background: #fff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 8px 0 10px;
       }
 
-      header .logo {
-        height: 70px;
-        background: #49a79b;
+      .header-search-input {
+        flex: 1;
+        height: 100%;
+        border: 0;
+        background: transparent;
+        font-size: 12px;
+        font-weight: 400;
+        color: #333;
+        line-height: 1;
+        outline: none;
       }
 
-      header .search {
-        height: 60px;
-        background: #9a9896;
+      .header-search-input::placeholder {
+        color: #ccc;
+      }
+
+      .header-search-btn {
+        width: 36px;
+        height: 36px;
+        flex-shrink: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        appearance: none;
+        -webkit-appearance: none;
+        cursor: pointer;
+      }
+
+      .header-search-btn img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .header-logo {
+        width: 160px;
+        height: 66px;
+      }
+
+      .header-logo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .header-right {
+        width: 283px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .header-top-links {
+        height: 23px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 10px;
+        gap: 8px;
+      }
+
+      .header-top-links a {
+        font-size: 14px;
+        font-weight: 400;
+        color: #8c7b89;
+        line-height: 1;
+        text-decoration: none;
+      }
+
+      .header-menu {
+        height: 29px;
+        margin-top: 20px;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 0 10px;
+      }
+
+      .header-menu-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        line-height: 1;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+
+      .header-menu-item img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
       }
 
       .banner {
@@ -286,6 +395,8 @@
         position: absolute;
         right: 16px;
         bottom: 16px;
+        width: 40px;
+        height: 40px;
         object-fit: contain;
       }
 
@@ -388,7 +499,8 @@
         width: 1200px;
         height: 200px;
         margin: 0 auto;
-        background: #b8860b;
+        background: #fff;
+        border-top: 1px solid #e5e5e5;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -397,21 +509,129 @@
       footer .left-footer {
         width: 375px;
         height: 125px;
-        background: #ff0000;
+        background: transparent;
+        padding: 12px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      footer .left-footer .cs-title {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #333;
+      }
+
+      footer .left-footer .cs-phone {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #333;
+      }
+
+      footer .left-footer .cs-email {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #333;
+        margin-bottom: 12px;
+      }
+
+      footer .left-footer .cs-time,
+      footer .left-footer .cs-holiday {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #757575;
       }
 
       footer .right-footer {
         width: 775px;
         height: 125px;
-        background: #2f00ff;
+        background: transparent;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      footer .right-footer .company-name {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #757575;
+        margin-bottom: 12px;
+      }
+
+      footer .right-footer .company-info,
+      footer .right-footer .company-extra,
+      footer .right-footer .company-mail {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #333333;
+      }
+
+      footer .right-footer .company-mail {
+        margin-bottom: 12px;
+      }
+
+      footer .right-footer .footer-links,
+      footer .right-footer .footer-copy {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #cccccc;
       }
     </style>
   </head>
   <body>
     <header>
-      <div class="box search"></div>
-      <div class="box logo"></div>
-      <div class="box right"></div>
+      <div class="header-inner">
+        <div class="header-search">
+          <div class="header-search-box">
+            <input
+              class="header-search-input"
+              type="text"
+              placeholder="반찬을 입력해주세요"
+            />
+            <button class="header-search-btn" type="button">
+              <img src="./images/icons/imgi_27_icon-search.png" alt="검색" />
+            </button>
+          </div>
+        </div>
+
+        <h1 class="header-logo">
+          <img src="./images/icons/logo_pc.svg" alt="집밥찬연구소" />
+        </h1>
+
+        <div class="header-right">
+          <div class="header-top-links">
+            <a href="#">로그인</a>
+            <a href="#">회원정보</a>
+            <a href="#">내정보</a>
+          </div>
+          <div class="header-menu">
+            <a href="#" class="header-menu-item">
+              <img src="./images/icons/icon-tel2.svg" alt="전화주문" />
+              <span>전화주문</span>
+            </a>
+            <a href="#" class="header-menu-item">
+              <img src="./images/icons/icon-document.svg" alt="브랜드" />
+              <span>브랜드</span>
+            </a>
+            <a href="#" class="header-menu-item">
+              <img src="./images/icons/icon-list.svg" alt="반찬보기" />
+              <span>반찬보기</span>
+            </a>
+            <a href="#" class="header-menu-item">
+              <img src="./images/icons/icon-cart.svg" alt="장바구니" />
+              <span>장바구니</span>
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
     <section class="banner"></section>
     <main>
@@ -568,7 +788,7 @@
           <div class="regular-item">
             <div class="regular-thumb">
               <div class="discount-badge">
-                <img src="./images/discount2.png" alt="할인 배지" />
+                <img src="./images/icons/discount2.png" alt="할인 배지" />
                 <span class="discount-badge-text">11%</span>
               </div>
               <img
@@ -576,7 +796,11 @@
                 src="./images/ban9.jpg"
                 alt="메추리알 간장조림"
               />
-              <img class="lock-icon" src="./images/bag.png" alt="잠금 아이콘" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
             </div>
             <div class="regular-info">
               <div class="tag-wrap"></div>
@@ -592,7 +816,7 @@
           <div class="regular-item">
             <div class="regular-thumb">
               <div class="discount-badge">
-                <img src="./images/discount2.png" alt="할인 배지" />
+                <img src="./images/icons/discount2.png" alt="할인 배지" />
                 <span class="discount-badge-text">12%</span>
               </div>
               <img
@@ -600,7 +824,11 @@
                 src="./images/ban10.jpg"
                 alt="한우야채카레"
               />
-              <img class="lock-icon" src="./images/bag.png" alt="잠금 아이콘" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
             </div>
             <div class="regular-info">
               <div class="tag-wrap">
@@ -621,7 +849,7 @@
           <div class="regular-item">
             <div class="regular-thumb">
               <div class="discount-badge">
-                <img src="./images/discount2.png" alt="할인 배지" />
+                <img src="./images/icons/discount2.png" alt="할인 배지" />
                 <span class="discount-badge-text">11%</span>
               </div>
               <img
@@ -629,7 +857,11 @@
                 src="./images/ban11.jpg"
                 alt="[원더스푼] 한우 소고기 미역국"
               />
-              <img class="lock-icon" src="./images/bag.png" alt="잠금 아이콘" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
             </div>
             <div class="regular-info">
               <div class="tag-wrap">
@@ -651,7 +883,7 @@
           <div class="regular-item">
             <div class="regular-thumb">
               <div class="discount-badge">
-                <img src="./images/discount2.png" alt="할인 배지" />
+                <img src="./images/icons/discount2.png" alt="할인 배지" />
                 <span class="discount-badge-text">12%</span>
               </div>
               <img
@@ -659,7 +891,11 @@
                 src="./images/ban12.jpg"
                 alt="한끼 한돈 김치두루치기_완조리"
               />
-              <img class="lock-icon" src="./images/bag.png" alt="잠금 아이콘" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
             </div>
             <div class="regular-info">
               <div class="tag-wrap"></div>
@@ -681,8 +917,30 @@
       <div class="md-recommend"></div>
     </main>
     <footer>
-      <div class="left-footer"></div>
-      <div class="right-footer"></div>
+      <div class="left-footer">
+        <p class="cs-title">고객센터</p>
+        <p class="cs-phone">1588-3754</p>
+        <p class="cs-email">zipbanchan@sannamchon.co.kr</p>
+        <p class="cs-time">평일 08:30~17:30 / 토요일 08:30~12:00</p>
+        <p class="cs-time">점심시간 12:00~13:00</p>
+        <p class="cs-holiday">일요일, 공휴일은 휴무입니다.</p>
+      </div>
+      <div class="right-footer">
+        <p class="company-name">집반찬연구소</p>
+        <p class="company-info">
+          인천광역시 서구 가석로 26 (가좌동) 집반찬연구소 &nbsp;&nbsp; 대표자 :
+          박종천
+        </p>
+        <p class="company-extra">
+          사업자등록번호 : 121-86-17743 &nbsp;&nbsp; 통신판매업 신고번호 : 제
+          2023-인천서구-3834 호 &nbsp;&nbsp; 개인정보보호책임자 : 정문채
+        </p>
+        <p class="company-mail">제휴 문의 : zipbanchan@sannamchon.co.kr</p>
+        <p class="footer-links">집반찬연구소 소개 이용약관 개인정보처리방침</p>
+        <p class="footer-copy">
+          Copyright © SANNAMCHON CORP. All Rights Reserved.
+        </p>
+      </div>
     </footer>
   </body>
 </html>
