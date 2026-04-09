@@ -1,0 +1,39 @@
+@charset "utf-8";
+body {
+  font-family: "맑은 고딕";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.box {
+  width: 1000px;
+  height: 600px;
+  border: 10px solid red;
+  margin: 0 auto;
+  /* 반복 삽입 */
+  background-image: url("../images/icon\ \(1\)\ \(1\).png");
+  background-repeat: repeat-x;
+  background-repeat: repeat-y;
+  background-repeat: no-repeat;
+
+  /* 배경 이미지 위치 조정 */
+  background-position: 100% 100%;
+  background-position: right bottom;
+  background-size: 64px 64px;
+  background: green;
+}
+/* 약식방식 */
+.box1 {
+  width: 1000px;
+  height: 600px;
+  border: 10px solid red;
+  margin: 0 auto;
+  background: green url("../images/icon\ \(1\)\ \(1\).png") no-repeat right
+    bottom;
+  background-size: 64px 64px;
+}
+/* 배경 이미지 삽입은 css */

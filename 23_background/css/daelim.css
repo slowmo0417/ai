@@ -1,0 +1,83 @@
+@charset "utf-8";
+body {
+  font-family: "맑은 고딕";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+header {
+  width: 1200px;
+  height: 70px;
+  margin: 0 auto;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 a {
+  display: block;
+  width: 98px;
+  height: 28px;
+  background: url("../images/pic_mtopLogo.png") no-repeat;
+  text-indent: -99999px;
+}
+.gnb {
+  display: flex;
+  gap: 64px;
+}
+.gnb li a {
+  color: #333;
+  font-weight: 600;
+}
+.util {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.util li:first-child a {
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: url("../images/ico_mTopetc01.png") no-repeat;
+  text-indent: -99999px;
+}
+.util li:nth-child(2) a {
+  display: block;
+  width: 27px;
+  height: 10px;
+  background: url("../images/ico_mTopetc02.png") no-repeat;
+  text-indent: -99999px;
+}
+.util li:last-child a {
+  display: block;
+  width: 14px;
+  height: 12px;
+  background: url("../images/ico_mTopetc04.png") no-repeat;
+  text-indent: -99999px;
+}
+
+.hero {
+  width: 100%;
+  height: 920px;
+  background: url("../images/main_01_03.jpg") no-repeat center top;
+}
+
+.box {
+  width: 393px;
+  height: 158px;
+  background: #907354 url("../images/speed_menu_icon_02.png") no-repeat 234px
+    center;
+  padding: 30px;
+  color: #fff;
+}
