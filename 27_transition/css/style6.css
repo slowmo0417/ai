@@ -11,7 +11,7 @@ body {
 div {
   width: 658px;
   height: 507px;
-  border: 5px #fff solid;
+  border: 10px #fff solid;
   margin: 100px auto;
   position: relative;
   overflow: hidden;
