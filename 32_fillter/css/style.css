@@ -1,0 +1,20 @@
+@charset "utf-8 ";
+
+.test1 {
+  filter: blur(10px);
+}
+.test2 {
+  filter: brightness(5);
+}
+.test3 {
+  filter: grayscale();
+}
+.test4 {
+  filter: drop-shadow(10px 10px 10px #000);
+}
+.test5 {
+  filter: saturate(10);
+}
+.test6 {
+  filter: invert();
+}
