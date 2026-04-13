@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>헤더 배너 메인 푸터 레이아웃</title>
+    <title>집반찬연구소</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link
       rel="stylesheet"
@@ -171,7 +171,8 @@
       .banner {
         width: 100%;
         height: 450px;
-        background: linear-gradient(90deg, #8a2be2 0%, #9932cc 100%);
+        background: url("./images/banner/banner.jpg") no-repeat center center;
+        background-size: cover;
       }
 
       main {
@@ -269,7 +270,10 @@
 
       .side-dish .badge-wrap {
         display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         gap: 4px;
+        min-height: 22px;
         margin-bottom: 10px;
       }
 
@@ -278,26 +282,29 @@
       }
 
       .side-dish .badge {
-        padding: 4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 22px;
+        padding: 0 6px;
         font-size: 12px;
         font-weight: 500;
         line-height: 1;
         border-radius: 4px;
+        color: #fff;
+        white-space: nowrap;
       }
 
       .side-dish .badge.hot {
         background: #f15b4a;
-        color: #fff;
       }
 
       .side-dish .badge.best {
         background: #5f8f3c;
-        color: #fff;
       }
 
       .side-dish .badge.mild {
         background: #f29a2e;
-        color: #fff;
       }
 
       .side-dish .item-title {
@@ -416,31 +423,38 @@
         background: #fff;
       }
 
-      .regular-side-dish .tag-wrap {
+      .regular-side-dish .badge-wrap {
         display: flex;
+        align-items: center;
+        flex-wrap: wrap;
         gap: 4px;
         min-height: 22px;
         margin-bottom: 10px;
       }
 
-      .regular-side-dish .tag-wrap:empty {
+      .regular-side-dish .badge-wrap:empty {
         display: none;
       }
 
-      .regular-side-dish .tag {
-        padding: 4px;
+      .regular-side-dish .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 22px;
+        padding: 0 6px;
         border-radius: 4px;
         font-size: 12px;
         font-weight: 500;
         line-height: 1;
         color: #fff;
+        white-space: nowrap;
       }
 
-      .regular-side-dish .tag.new {
+      .regular-side-dish .badge.hot {
         background: #f15b4a;
       }
 
-      .regular-side-dish .tag.mild {
+      .regular-side-dish .badge.mild {
         background: #f29a2e;
       }
 
@@ -491,18 +505,421 @@
       }
 
       main .new-side-dish {
-        height: 1000px;
-        background: #fb8500;
+        height: auto;
+        background: transparent;
+        padding: 50px 16px 16px;
+      }
+
+      .new-side-dish .side-dish-title {
+        text-align: center;
+        margin-bottom: 16px;
+        font-size: 28px;
+        font-weight: 700;
+        color: #333;
+        line-height: 1.2;
+      }
+
+      .new-side-dish .side-dish-sub-title {
+        text-align: center;
+        margin-bottom: 41px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #666;
+        line-height: 1.4;
+      }
+
+      .new-side-dish .side-dish-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .new-side-dish .item {
+        width: 278px;
+        background: #fff;
+      }
+
+      .new-side-dish .thumb {
+        position: relative;
+        width: 100%;
+        height: 370px;
+        overflow: hidden;
+        background: #efebe6;
+      }
+
+      .new-side-dish .thumb > img:first-child {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .new-side-dish .lock-icon {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .new-side-dish .item-info {
+        min-height: 158px;
+        padding: 16px 8px;
+        background: #fff;
+      }
+
+      .new-side-dish .text-box {
+        padding: 0;
+      }
+
+      .new-side-dish .badge-wrap {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        min-height: 22px;
+        margin-bottom: 10px;
+      }
+
+      .new-side-dish .badge-wrap:empty {
+        display: none;
+      }
+
+      .new-side-dish .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 22px;
+        padding: 0 6px;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1;
+        border-radius: 4px;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      .new-side-dish .badge.hot {
+        background: #f15b4a;
+      }
+
+      .new-side-dish .badge.best {
+        background: #5f8f3c;
+      }
+
+      .new-side-dish .badge.mild {
+        background: #f29a2e;
+      }
+
+      .new-side-dish .badge.cold {
+        background: #9ed0ee;
+      }
+
+      .new-side-dish .item-title {
+        margin-bottom: 8px;
+        font-size: 17px;
+        font-weight: 700;
+        color: #222;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+      }
+
+      .new-side-dish .item-desc {
+        margin-bottom: 12px;
+        font-size: 12px;
+        font-weight: 400;
+        color: #8b8b8b;
+        line-height: 1.4;
+        letter-spacing: -0.02em;
+      }
+
+      .new-side-dish .price {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .new-side-dish .current-price {
+        font-size: 17px;
+        font-weight: 700;
+        color: #222;
+        line-height: 1;
       }
 
       main .sub-banner {
-        height: 200px;
-        background: #8ecae6;
+        padding: 25px 16px;
+        background: transparent;
+      }
+
+      .sub-banner .banner-list {
+        display: flex;
+        gap: 16px;
+      }
+
+      .sub-banner .banner-item {
+        width: 389px;
+        height: 150px;
+        border-radius: 16px;
+        padding: 0 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .sub-banner .banner-item.tel {
+        background: #b6edbf;
+      }
+
+      .sub-banner .banner-item.kids {
+        background: #f5e98d;
+      }
+
+      .sub-banner .banner-item.delivery {
+        background: #d8e1df;
+      }
+
+      .sub-banner .banner-text {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .sub-banner .banner-sub-text {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.2;
+        color: #333;
+        letter-spacing: -0.02em;
+      }
+
+      .sub-banner .banner-main-text {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.25;
+        color: #333;
+        letter-spacing: -0.02em;
+      }
+
+      .sub-banner .banner-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+      }
+
+      .sub-banner .banner-icon img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
       }
 
       main .md-recommend {
-        height: 1000px;
-        background: #219ebc;
+        padding: 50px 16px 16px;
+        background: transparent;
+      }
+
+      .md-recommend .regular-title {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #333;
+        margin-bottom: 16px;
+      }
+
+      .md-recommend .regular-sub-title {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #666;
+        margin-bottom: 0;
+      }
+
+      .md-recommend .tab-list {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 41px;
+        margin-bottom: 41px;
+        flex-wrap: wrap;
+      }
+
+      .md-recommend .tab-btn {
+        min-width: 62px;
+        height: auto;
+        padding: 16px 24px;
+        border: 0;
+        border-radius: 999px;
+        background: #f1f1f1;
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1;
+        color: #333;
+        cursor: pointer;
+      }
+
+      .md-recommend .tab-btn.active {
+        background: #0c6b1d;
+        color: #fff;
+      }
+
+      .md-recommend .regular-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .md-recommend .regular-item {
+        width: 278px;
+        background: #fff;
+      }
+
+      .md-recommend .regular-thumb {
+        position: relative;
+        width: 100%;
+        height: 370px;
+        background: #efebe6;
+        overflow: hidden;
+      }
+
+      .md-recommend .regular-thumb img.product-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .md-recommend .discount-badge {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 56px;
+        height: 56px;
+      }
+
+      .md-recommend .discount-badge img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .md-recommend .discount-badge-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      .md-recommend .lock-icon {
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+      }
+
+      .md-recommend .regular-info {
+        min-height: 158px;
+        padding: 16px 8px;
+        background: #fff;
+      }
+
+      .md-recommend .badge-wrap {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 4px;
+        min-height: 22px;
+        margin-bottom: 10px;
+      }
+
+      .md-recommend .badge-wrap:empty {
+        display: none;
+      }
+
+      .md-recommend .badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 22px;
+        padding: 0 6px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1;
+        color: #fff;
+        white-space: nowrap;
+      }
+
+      .md-recommend .badge.hot {
+        background: #f15b4a;
+      }
+
+      .md-recommend .badge.mild {
+        background: #f29a2e;
+      }
+
+      .md-recommend .badge.best {
+        background: #5f8f3c;
+      }
+
+      .md-recommend .regular-item-title {
+        font-size: 17px;
+        font-weight: 700;
+        line-height: 1.35;
+        color: #222;
+        margin-bottom: 8px;
+        letter-spacing: -0.02em;
+      }
+
+      .md-recommend .regular-item-desc {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.4;
+        color: #8b8b8b;
+        margin-bottom: 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .md-recommend .regular-price {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+
+      .md-recommend .regular-discount-rate {
+        font-size: 17px;
+        font-weight: 700;
+        color: #d83d2f;
+      }
+
+      .md-recommend .regular-current-price {
+        font-size: 17px;
+        font-weight: 700;
+        color: #222;
+      }
+
+      .md-recommend .regular-origin-price {
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1;
+        color: #8b8b8b;
+        text-decoration: line-through;
       }
 
       footer {
@@ -532,21 +949,21 @@
       }
 
       footer .left-footer .cs-title {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 1.4;
         color: #333;
       }
 
       footer .left-footer .cs-phone {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 500;
         line-height: 1.4;
         color: #333;
       }
 
       footer .left-footer .cs-email {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 1.4;
         color: #333;
@@ -555,7 +972,7 @@
 
       footer .left-footer .cs-time,
       footer .left-footer .cs-holiday {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 1.4;
         color: #757575;
@@ -572,7 +989,7 @@
       }
 
       footer .right-footer .company-name {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 1.4;
         color: #757575;
@@ -582,7 +999,7 @@
       footer .right-footer .company-info,
       footer .right-footer .company-extra,
       footer .right-footer .company-mail {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 1.4;
         color: #333333;
@@ -594,7 +1011,7 @@
 
       footer .right-footer .footer-links,
       footer .right-footer .footer-copy {
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 400;
         line-height: 1.4;
         color: #cccccc;
@@ -818,7 +1235,7 @@
               />
             </div>
             <div class="regular-info">
-              <div class="tag-wrap"></div>
+              <div class="badge-wrap"></div>
               <h3 class="regular-item-title">메추리알 간장조림</h3>
               <p class="regular-price">
                 <span class="regular-discount-rate">11%</span>
@@ -846,8 +1263,8 @@
               />
             </div>
             <div class="regular-info">
-              <div class="tag-wrap">
-                <span class="tag mild">맵지않음</span>
+              <div class="badge-wrap">
+                <span class="badge mild">맵지않음</span>
               </div>
               <h3 class="regular-item-title">한우야채카레</h3>
               <p class="regular-item-desc">
@@ -879,9 +1296,9 @@
               />
             </div>
             <div class="regular-info">
-              <div class="tag-wrap">
-                <span class="tag new">신제품</span>
-                <span class="tag mild">맵지않음</span>
+              <div class="badge-wrap">
+                <span class="badge hot">신제품</span>
+                <span class="badge mild">맵지않음</span>
               </div>
               <h3 class="regular-item-title">[원더스푼] 한우 소고기 미역국</h3>
               <p class="regular-item-desc">
@@ -913,7 +1330,7 @@
               />
             </div>
             <div class="regular-info">
-              <div class="tag-wrap"></div>
+              <div class="badge-wrap"></div>
               <h3 class="regular-item-title">한끼 한돈 김치두루치기_완조리</h3>
               <p class="regular-item-desc">
                 국내산 한돈으로 만든 든든한 한끼 두루치기
@@ -927,9 +1344,439 @@
           </div>
         </div>
       </div>
-      <div class="new-side-dish"></div>
-      <div class="sub-banner"></div>
-      <div class="md-recommend"></div>
+      <div class="new-side-dish">
+        <h2 class="side-dish-title">새로 나온 반찬</h2>
+        <p class="side-dish-sub-title">따끈따끈 신메뉴 출시</p>
+        <div class="side-dish-list">
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban13.jpg" alt="[원더스푼] 두부덮밥" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge best">인기</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">[원더스푼] 두부덮밥</h3>
+                <p class="item-desc">아이들도 입맛 없는 날 뚝딱 한 그릇</p>
+                <p class="price"><span class="current-price">3,500원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban14.jpg" alt="[원더스푼] 한돈 순두부 덮밥" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">[원더스푼] 한돈 순두부 덮밥</h3>
+                <p class="item-desc">몽글몽글 부드러운 한돈 순두부 소스</p>
+                <p class="price"><span class="current-price">3,800원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img
+                src="./images/ban15.jpg"
+                alt="[원더스푼] 한우 하이라이스 덮밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">[원더스푼] 한우 하이라이스 덮밥</h3>
+                <p class="item-desc">부드럽게 끓여낸 한우 하이라이스 소스</p>
+                <p class="price"><span class="current-price">4,300원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img
+                src="./images/ban16.jpg"
+                alt="[원더스푼] 한우 삼색 소보로 덮밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">[원더스푼] 한우 삼색 소보로 덮밥</h3>
+                <p class="item-desc">알록달록 색감까지 맛있는 삼색 덮밥</p>
+                <p class="price"><span class="current-price">4,800원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban17.jpg" alt="저당 두부면 팟타이" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">저당 두부면 팟타이</h3>
+                <p class="item-desc">저당 두부면 팟타이</p>
+                <p class="price"><span class="current-price">8,300원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban18.jpg" alt="저당 두부면 까르보나라" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge mild">맵지않음</span>
+                </div>
+                <h3 class="item-title">저당 두부면 까르보나라</h3>
+                <p class="item-desc">가볍게 즐기는 진한 크림 파스타</p>
+                <p class="price"><span class="current-price">8,800원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban19.jpg" alt="맑은 한우 배추국_냉동" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap">
+                  <span class="badge hot">신제품</span>
+                  <span class="badge cold">냉동</span>
+                </div>
+                <h3 class="item-title">맑은 한우 배추국_냉동</h3>
+                <p class="item-desc">담백하고 개운한, 배추와 한우의 깊은 맛</p>
+                <p class="price"><span class="current-price">9,800원</span></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="thumb">
+              <img src="./images/ban20.jpg" alt="봄나물 샐러드" />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="item-info">
+              <div class="text-box">
+                <div class="badge-wrap"></div>
+                <h3 class="item-title">봄나물 샐러드</h3>
+                <p class="item-desc">입 안에 퍼지는 향긋한 봄향기</p>
+                <p class="price"><span class="current-price">8,800원</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sub-banner">
+        <div class="banner-list">
+          <a href="#" class="banner-item tel">
+            <div class="banner-text">
+              <p class="banner-sub-text">1588-1234</p>
+              <p class="banner-main-text">전화주문 바로가기</p>
+            </div>
+            <div class="banner-icon">
+              <img src="./images/icons/banner-tel.png" alt="전화주문 아이콘" />
+            </div>
+          </a>
+
+          <a href="#" class="banner-item kids">
+            <div class="banner-text">
+              <p class="banner-sub-text">우리 가족 건강하게</p>
+              <p class="banner-main-text">우리아이 영양식단 레벨업!</p>
+            </div>
+            <div class="banner-icon">
+              <img src="./images/icons/banner-kid.png" alt="영양식단 아이콘" />
+            </div>
+          </a>
+
+          <a href="#" class="banner-item delivery">
+            <div class="banner-text">
+              <p class="banner-sub-text">우리 집은 새벽배송 가능한가요?</p>
+              <p class="banner-main-text">배송 지역 검색하기</p>
+            </div>
+            <div class="banner-icon">
+              <img src="./images/icons/banner-deli.png" alt="배송지역 아이콘" />
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="md-recommend">
+        <h2 class="regular-title">MD 추천 반찬</h2>
+        <p class="regular-sub-title">
+          이번 주 가장 추천하는 제품만 골라 드려요
+        </p>
+        <div class="tab-list">
+          <button type="button" class="tab-btn active">비빔밥</button>
+          <button type="button" class="tab-btn">국/찌개/탕</button>
+          <button type="button" class="tab-btn">어린이 반찬</button>
+          <button type="button" class="tab-btn">조림</button>
+          <button type="button" class="tab-btn">볶음</button>
+          <button type="button" class="tab-btn">메인요리</button>
+          <button type="button" class="tab-btn">무침</button>
+        </div>
+        <div class="regular-list">
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <div class="discount-badge">
+                <img src="./images/icons/discount2.png" alt="할인 배지" />
+                <span class="discount-badge-text">13%</span>
+              </div>
+              <img
+                class="product-img"
+                src="./images/ban21.jpg"
+                alt="아이를 한우 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap">
+                <span class="badge mild">맵지않음</span>
+              </div>
+              <h3 class="regular-item-title">아이를 한우 비빔밥</h3>
+              <p class="regular-item-desc">아이들도 맛있게 먹는 비빔밥 출시</p>
+              <p class="regular-price">
+                <span class="regular-discount-rate">13%</span>
+                <span class="regular-current-price">9,400원</span>
+              </p>
+              <p class="regular-origin-price">10,800원</p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban22.jpg"
+                alt="나물 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap"></div>
+              <h3 class="regular-item-title">나물 비빔밥</h3>
+              <p class="regular-item-desc">가성비 가득, 정성 가득 비빔밥</p>
+              <p class="regular-price">
+                <span class="regular-current-price">10,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban23.jpg"
+                alt="한우 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap">
+                <span class="badge best">인기</span>
+              </div>
+              <h3 class="regular-item-title">한우 비빔밥</h3>
+              <p class="regular-item-desc">고기도 더더 더 맛깔스레워진</p>
+              <p class="regular-price">
+                <span class="regular-current-price">12,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban24.jpg"
+                alt="양념꼬막 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap"></div>
+              <h3 class="regular-item-title">양념꼬막 비빔밥</h3>
+              <p class="regular-item-desc">꼬막이 쫀맛꿀</p>
+              <p class="regular-price">
+                <span class="regular-current-price">13,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban25.jpg"
+                alt="집반찬 베스트 9종 찬합"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap">
+                <span class="badge best">인기</span>
+              </div>
+              <h3 class="regular-item-title">집반찬 베스트 9종 찬합</h3>
+              <p class="regular-item-desc">만족감 가득 9종 반찬 모음</p>
+              <p class="regular-price">
+                <span class="regular-current-price">10,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban26.png"
+                alt="건나물 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap"></div>
+              <h3 class="regular-item-title">건나물 비빔밥</h3>
+              <p class="regular-item-desc">8가지 건나물로 즐긴 비빔밥</p>
+              <p class="regular-price">
+                <span class="regular-current-price">14,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban27.png"
+                alt="포두부 야채 쌈 키트"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap">
+                <span class="badge best">인기</span>
+              </div>
+              <h3 class="regular-item-title">포두부 야채 쌈 키트</h3>
+              <p class="regular-item-desc">다채롭게 즐기는 건강한쌈</p>
+              <p class="regular-price">
+                <span class="regular-current-price">16,800원</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="regular-item">
+            <div class="regular-thumb">
+              <img
+                class="product-img"
+                src="./images/ban28.jpg"
+                alt="저당 고추장 나물 비빔밥"
+              />
+              <img
+                class="lock-icon"
+                src="./images/icons/bag.png"
+                alt="잠금 아이콘"
+              />
+            </div>
+            <div class="regular-info">
+              <div class="badge-wrap"></div>
+              <h3 class="regular-item-title">저당 고추장 나물 비빔밥</h3>
+              <p class="regular-item-desc">
+                집반찬연구소의 저당, 비빔밥을 처음으로
+              </p>
+              <p class="regular-price">
+                <span class="regular-current-price">11,800원</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
       <div class="footer-inner">
