@@ -109,11 +109,8 @@ footer {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  body {
-    padding: 0 16px;
-  }
   .wrap {
-    width: 100%;
+    width: 96%;
   }
   header {
     width: 100%;
@@ -140,11 +137,8 @@ footer {
   }
 }
 @media (min-width: 320px) and (max-width: 767px) {
-  body {
-    padding: 0 16px;
-  }
   .wrap {
-    width: 100%;
+    width: 96%;
   }
   header {
     width: 100%;
