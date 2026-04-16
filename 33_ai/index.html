@@ -6,6 +6,10 @@
     <title>집반찬연구소</title>
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
     />
     <link rel="stylesheet" href="./css/reset.css" />
@@ -53,7 +57,14 @@
               <img src="./images/icons/icon-list.svg" alt="반찬보기" />
               <span>반찬보기</span>
             </a>
-            <a href="#" class="header-menu-item">
+            <a href="#" class="header-menu-item mobile-menu-btn">
+              <img
+                src="./images/icons/material-symbols_menu-rounded.png"
+                alt="메뉴보기"
+              />
+              <span>메뉴보기</span>
+            </a>
+            <a href="#" class="header-menu-item mobile-menu-only">
               <img src="./images/icons/icon-cart.svg" alt="장바구니" />
               <span>장바구니</span>
             </a>
@@ -61,7 +72,48 @@
         </div>
       </div>
     </header>
-    <section class="banner"></section>
+    <section class="banner">
+      <div class="swiper main-visual-slider">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./images/banner/banner1.png" alt="메인 슬라이드 1" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/banner/banner2.png" alt="메인 슬라이드 2" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/banner/banner3.png" alt="메인 슬라이드 3" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/banner/banner4.png" alt="메인 슬라이드 4" />
+          </div>
+          <div class="swiper-slide">
+            <img src="./images/banner/banner5.png" alt="메인 슬라이드 5" />
+          </div>
+        </div>
+      </div>
+
+      <div class="main-visual-controls">
+        <div class="inner">
+          <div class="main-nav">
+            <button
+              type="button"
+              class="main-visual-prev"
+              aria-label="이전 슬라이드"
+            ></button>
+            <button
+              type="button"
+              class="main-visual-next"
+              aria-label="다음 슬라이드"
+            ></button>
+          </div>
+
+          <div class="main-pagination-wrap">
+            <div class="main-visual-pagination"></div>
+          </div>
+        </div>
+      </div>
+    </section>
     <main>
       <div class="side-dish">
         <h2 class="side-dish-title">부담없는 알뜰 반찬</h2>
@@ -807,4 +859,32 @@
       </div>
     </footer>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const mainVisualSwiper = new Swiper(".main-visual-slider", {
+      loop: true,
+      speed: 700,
+      autoplay: {
+        delay: 4000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        prevEl: ".main-visual-prev",
+        nextEl: ".main-visual-next",
+      },
+      pagination: {
+        el: ".main-visual-pagination",
+        type: "fraction",
+        renderFraction: function (currentClass, totalClass) {
+          return (
+            '<span class="' +
+            currentClass +
+            '"></span><span> | </span><span class="' +
+            totalClass +
+            '"></span>'
+          );
+        },
+      },
+    });
+  </script>
 </html>
