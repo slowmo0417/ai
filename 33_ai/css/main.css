@@ -1,8 +1,128 @@
-.banner {
+.main-visual-wrap {
   width: 100%;
-  height: 450px;
-  background: #eee url("../images/banner/banner.jpg") no-repeat center center;
-  background-size: cover;
+  padding: 24px 0;
+}
+
+.banner {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.main-visual-slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-visual-slider .swiper-slide {
+  overflow: hidden;
+}
+
+.main-visual-slider .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-visual-controls {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+.main-visual-controls .inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.main-nav {
+  pointer-events: auto;
+  position: absolute;
+  left: 10%;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.main-nav button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.main-nav button::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-top: 3px solid #8f8f8f;
+  border-right: 3px solid #8f8f8f;
+}
+
+.main-visual-prev::before {
+  transform: rotate(-135deg);
+  margin-left: 4px;
+}
+
+.main-visual-next::before {
+  transform: rotate(45deg);
+  margin-right: 4px;
+}
+
+.main-pagination-wrap {
+  pointer-events: auto;
+  position: absolute;
+  right: 10%;
+  bottom: 30px;
+}
+
+.main-visual-pagination {
+  min-width: 72px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  backdrop-filter: blur(2px);
+}
+
+.main-visual-pagination .swiper-pagination-current,
+.main-visual-pagination .swiper-pagination-total {
+  display: inline-block;
+  min-width: 10px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    left: 6%;
+    bottom: 24px;
+  }
+
+  .main-nav button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .main-pagination-wrap {
+    right: 6%;
+    bottom: 24px;
+  }
 }
 main > div {
   width: 100%;
@@ -643,116 +763,6 @@ main .md-recommend {
 
 /* --- responsive mobile --- */
 @media (max-width: 768px) {
-  body {
-    min-width: 320px;
-    background: #fff;
-  }
-  header {
-    height: 80px;
-    border-bottom: 1px solid #ececec;
-    position: sticky;
-  }
-  .header-inner {
-    width: 100%;
-    padding: 0 24px;
-    height: 80px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .header-search {
-    width: 44px;
-    position: absolute;
-    left: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .header-search-box {
-    border: 0;
-    border-radius: 0;
-    height: 44px;
-    padding: 0;
-    justify-content: flex-start;
-    background: transparent;
-  }
-  .header-search-input {
-    display: none;
-  }
-  .header-search-btn {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .header-search-btn img {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-  }
-  .header-logo {
-    position: static;
-    transform: none;
-    width: auto;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .header-logo a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .header-logo img {
-    width: 116px;
-    height: 48px;
-  }
-  .header-right {
-    width: auto;
-    position: absolute;
-    right: 24px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .header-top-links {
-    display: none;
-  }
-  .header-menu {
-    margin-top: 0;
-    height: 44px;
-    padding: 0;
-    gap: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .header-menu-item {
-    display: none;
-  }
-  .header-menu-item:nth-last-child(-n + 2) {
-    display: inline-flex;
-    font-size: 0;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 44px;
-  }
-  .header-menu-item:nth-last-child(-n + 2) img {
-    width: 28px;
-    height: 28px;
-    display: block;
-    object-fit: contain;
-  }
-
   .banner {
     height: 200px;
     background-position: center center;
