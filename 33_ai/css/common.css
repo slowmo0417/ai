@@ -1,12 +1,9 @@
-@charset "utf-8";
 html {
   overflow-y: scroll;
 }
-
 body {
   font-family: "Pretendard", sans-serif;
 }
-
 header {
   position: sticky;
   top: 0;
@@ -16,7 +13,6 @@ header {
   background: #fff;
   border-bottom: 1px solid #e5e5e5;
 }
-
 .header-inner {
   position: relative;
   width: 1200px;
@@ -27,11 +23,9 @@ header {
   align-items: center;
   justify-content: space-between;
 }
-
 .header-search {
   width: 350px;
 }
-
 .header-search-box {
   width: 100%;
   height: 50px;
@@ -43,7 +37,6 @@ header {
   justify-content: space-between;
   padding: 0 8px 0 10px;
 }
-
 .header-search-input {
   flex: 1;
   height: 100%;
@@ -55,11 +48,9 @@ header {
   line-height: 1;
   outline: none;
 }
-
 .header-search-input::placeholder {
   color: #ccc;
 }
-
 .header-search-btn {
   width: 36px;
   height: 36px;
@@ -71,14 +62,12 @@ header {
   -webkit-appearance: none;
   cursor: pointer;
 }
-
 .header-search-btn img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 .header-logo {
   position: absolute;
   left: 50%;
@@ -87,21 +76,18 @@ header {
   width: 160px;
   height: 66px;
 }
-
 .header-logo img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
 .header-right {
   width: 283px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
-
 .header-top-links {
   height: 23px;
   background: transparent;
@@ -111,7 +97,6 @@ header {
   padding: 0 10px;
   gap: 8px;
 }
-
 .header-top-links a {
   font-size: 14px;
   font-weight: 400;
@@ -119,7 +104,6 @@ header {
   line-height: 1;
   text-decoration: none;
 }
-
 .header-menu {
   height: 29px;
   margin-top: 20px;
@@ -130,7 +114,6 @@ header {
   gap: 10px;
   padding: 0 10px;
 }
-
 .header-menu-item {
   display: flex;
   align-items: center;
@@ -142,14 +125,12 @@ header {
   text-decoration: none;
   white-space: nowrap;
 }
-
 .header-menu-item img {
   width: 28px;
   height: 28px;
   object-fit: contain;
   flex-shrink: 0;
 }
-
 .header-menu-item img[alt="전화주문"] {
   width: 24px;
   height: 24px;
@@ -160,7 +141,6 @@ footer {
   background: #fff;
   border-top: 1px solid #e5e5e5;
 }
-
 .footer-inner {
   width: 1200px;
   height: 100%;
@@ -169,7 +149,6 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
-
 footer .left-footer {
   width: 375px;
   height: 125px;
@@ -179,21 +158,18 @@ footer .left-footer {
   flex-direction: column;
   justify-content: center;
 }
-
 footer .left-footer .cs-title {
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
   color: #333;
 }
-
 footer .left-footer .cs-phone {
   font-size: 18px;
   font-weight: 500;
   line-height: 1.4;
   color: #333;
 }
-
 footer .left-footer .cs-email {
   font-size: 14px;
   font-weight: 500;
@@ -201,7 +177,6 @@ footer .left-footer .cs-email {
   color: #333;
   margin-bottom: 12px;
 }
-
 footer .left-footer .cs-time,
 footer .left-footer .cs-holiday {
   font-size: 14px;
@@ -209,7 +184,6 @@ footer .left-footer .cs-holiday {
   line-height: 1.4;
   color: #757575;
 }
-
 footer .right-footer {
   width: 775px;
   height: 125px;
@@ -219,7 +193,6 @@ footer .right-footer {
   flex-direction: column;
   justify-content: center;
 }
-
 footer .right-footer .company-name {
   font-size: 14px;
   font-weight: 400;
@@ -227,7 +200,6 @@ footer .right-footer .company-name {
   color: #757575;
   margin-bottom: 12px;
 }
-
 footer .right-footer .company-info,
 footer .right-footer .company-extra,
 footer .right-footer .company-mail {
@@ -236,11 +208,9 @@ footer .right-footer .company-mail {
   line-height: 1.4;
   color: #333333;
 }
-
 footer .right-footer .company-mail {
   margin-bottom: 12px;
 }
-
 footer .right-footer .footer-links,
 footer .right-footer .footer-copy {
   font-size: 14px;
@@ -254,7 +224,6 @@ main {
   margin: 0 auto;
   background: transparent;
 }
-/* --- responsive mobile --- */
 @media (max-width: 768px) {
   body {
     min-width: 320px;
@@ -305,10 +274,12 @@ main {
     object-fit: contain;
   }
   .header-logo {
-    position: static;
-    transform: none;
-    width: auto;
-    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 116px;
+    height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -321,9 +292,10 @@ main {
   .header-logo img {
     width: 116px;
     height: 48px;
+    display: block;
   }
   .header-right {
-    width: auto;
+    width: 44px;
     position: absolute;
     right: 24px;
     top: 50%;
@@ -340,7 +312,7 @@ main {
     margin-top: 0;
     height: 44px;
     padding: 0;
-    gap: 8px;
+    gap: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -349,7 +321,7 @@ main {
   .header-menu-item {
     display: none;
   }
-  .header-menu-item:nth-last-child(-n + 2) {
+  .header-menu-item.mobile-menu-btn {
     display: inline-flex;
     font-size: 0;
     width: 44px;
@@ -359,51 +331,13 @@ main {
     justify-content: center;
     flex: 0 0 44px;
   }
-  .header-menu-item:nth-last-child(-n + 2) img {
+  .header-menu-item.mobile-menu-btn img {
     width: 28px;
     height: 28px;
     display: block;
     object-fit: contain;
   }
-  footer {
-    height: auto;
-    padding: 28px 16px 34px;
-    margin-top: 36px;
-    text-align: center;
-  }
-  .footer-inner {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  footer .left-footer,
-  footer .right-footer {
-    width: 100%;
-    height: auto;
-    padding: 0;
-    align-items: center;
-    text-align: center;
-  }
-  footer .left-footer {
-    margin-bottom: 18px;
-    justify-content: center;
-  }
-  footer .left-footer .cs-title,
-  footer .left-footer .cs-email,
-  footer .left-footer .cs-time,
-  footer .left-footer .cs-holiday,
-  footer .right-footer .company-name,
-  footer .right-footer .company-info,
-  footer .right-footer .company-extra,
-  footer .right-footer .company-mail,
-  footer .right-footer .footer-links,
-  footer .right-footer .footer-copy {
-    font-size: 12px;
-    line-height: 1.6;
-    text-align: center;
-  }
-  footer .left-footer .cs-phone {
-    font-size: 14px;
-    margin: 2px 0;
+  .header-menu-item.mobile-menu-only {
+    display: none;
   }
 }
