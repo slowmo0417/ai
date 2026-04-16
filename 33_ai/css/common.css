@@ -135,6 +135,9 @@ header {
   width: 24px;
   height: 24px;
 }
+.header-menu-item.mobile-menu-btn {
+  display: none !important;
+}
 footer {
   width: 100%;
   height: 200px;
@@ -320,6 +323,31 @@ main {
   }
   .header-menu-item {
     display: none;
+  }
+  .header-menu-item {
+    display: none;
+  }
+
+  .header-menu-item.mobile-menu-btn {
+    display: inline-flex !important;
+    font-size: 0;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+  }
+
+  .header-menu-item.mobile-menu-btn img {
+    width: 28px;
+    height: 28px;
+    display: block;
+    object-fit: contain;
+  }
+
+  .header-menu-item.mobile-menu-only {
+    display: none !important;
   }
   .header-menu-item.mobile-menu-btn {
     display: inline-flex;
