@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>제주 자전거 여행 앱</title>
+    <link rel="stylesheet" href="./css/style2.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="hero" id="heroSlider">
+        <div class="hero-track" id="heroTrack">
+          <div class="hero-slide">
+            <img src="./images/main.png" alt="메인 배너 이미지 1" />
+          </div>
+          <div class="hero-slide">
+            <img src="./images/main2.png" alt="메인 배너 이미지 2" />
+          </div>
+          <div class="hero-slide">
+            <img src="./images/main3.png" alt="메인 배너 이미지 3" />
+          </div>
+        </div>
+        <div class="hero-pagination" aria-label="현재 배너 페이지">
+          <span class="hero-pagination-current" id="heroPaginationCurrent"
+            >1</span
+          >
+          <span class="hero-pagination-divider">/</span>
+          <span class="hero-pagination-total" id="heroPaginationTotal">3</span>
+        </div>
+      </header>
+
+      <main class="content">
+        <section class="weather-row">
+          <article class="weather-main">
+            <div class="weather-main-info">
+              <p class="weather-title" id="weatherLocation">
+                현재 위치 확인 중
+              </p>
+              <p class="weather-temp" id="weatherTemp">--<span>°</span></p>
+              <p class="loading" id="weatherStatus">
+                위치 정보를 불러오고 있어요.
+              </p>
+              <p class="error-text" id="weatherError" style="display: none"></p>
+            </div>
+            <div class="weather-icon-wrap">
+              <img
+                id="weatherIcon"
+                src="./images/weather-default.png"
+                alt="날씨 아이콘"
+              />
+            </div>
+          </article>
+
+          <div class="weather-side">
+            <article class="mini-card">
+              <p class="mini-label">완주코스</p>
+              <p class="mini-value"><strong>1</strong><span>/10</span></p>
+            </article>
+            <article class="mini-card">
+              <p class="mini-label">이동거리</p>
+              <p class="mini-value">
+                <strong id="travelDistance">15</strong><span>km</span>
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">제주도 자전거 여행정보 가이드</h2>
+          <div class="guide-slider" id="guideSlider">
+            <button
+              class="guide-nav prev"
+              id="guidePrev"
+              type="button"
+              aria-label="이전 가이드 보기"
+            ></button>
+            <div class="guide-track" id="guideTrack">
+              <div class="guide-card">
+                <img src="./images/Frame 42.png" alt="가이드 이미지 1" />
+              </div>
+              <div class="guide-card">
+                <img src="./images/Frame 43.png" alt="가이드 이미지 2" />
+              </div>
+              <div class="guide-card">
+                <img src="./images/Frame 44.png" alt="가이드 이미지 3" />
+              </div>
+            </div>
+            <button
+              class="guide-nav next"
+              id="guideNext"
+              type="button"
+              aria-label="다음 가이드 보기"
+            ></button>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-title">제주도 자전거 여행정보 가이드</h2>
+          <div class="story-list">
+            <article class="story-card">
+              <div class="story-overlay">
+                제주도 자전거 여행 패키지<br />첫번째 코스 이야기
+              </div>
+              <img src="./images/img1.png" alt="패키지 이미지 1" />
+            </article>
+            <article class="story-card">
+              <div class="story-overlay">
+                제주도 자전거 여행 패키지<br />첫번째 코스 이야기
+              </div>
+              <img src="./images/img2.png" alt="패키지 이미지 2" />
+            </article>
+            <article class="story-card">
+              <div class="story-overlay">
+                제주도 자전거 여행 패키지<br />첫번째 코스 이야기
+              </div>
+              <img src="./images/img3.png" alt="패키지 이미지 3" />
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav">
+        <button class="nav-item active" type="button">
+          <img src="./images/icons/material-symbols_home.png" alt="홈" />
+          <span>홈</span>
+        </button>
+        <button class="nav-item" type="button">
+          <img src="./images/icons/material-symbols_note.png" alt="커뮤니티" />
+          <span>커뮤니티</span>
+        </button>
+        <button class="nav-item" type="button">
+          <img src="./images/icons/material-symbols_map.png" alt="코스" />
+          <span>코스</span>
+        </button>
+        <button class="nav-item" type="button">
+          <img src="./images/icons/material-symbols_crown.png" alt="랭킹" />
+          <span>랭킹</span>
+        </button>
+        <button class="nav-item" type="button">
+          <img src="./images/icons/material-symbols_person.png" alt="마이" />
+          <span>마이</span>
+        </button>
+      </nav>
+    </div>
+    <script src="./script/script2.js"></script>
+  </body>
+</html>
