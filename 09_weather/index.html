@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>전 세계 날씨</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --line: rgba(255, 255, 255, 0.62);
+        --line-soft: rgba(255, 255, 255, 0.45);
+        --text-main: rgba(255, 255, 255, 0.96);
+        --text-sub: rgba(255, 255, 255, 0.82);
+        --text-soft: rgba(255, 255, 255, 0.72);
+        --card-bg: rgba(255, 255, 255, 0.04);
+      }
+
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        min-height: 100%;
+        font-family:
+          "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+        color: var(--text-main);
+        background: linear-gradient(
+          180deg,
+          #9eb8e2 0%,
+          #c9b7e4 48%,
+          #e6b4d0 100%
+        );
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 430px;
+        min-height: 100vh;
+        padding: 22px 16px 28px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 30px;
+      }
+
+      .headline {
+        padding-top: 2px;
+      }
+
+      .headline h1 {
+        margin: 0 0 6px;
+        font-size: 2.1rem;
+        line-height: 1.14;
+        letter-spacing: -0.05em;
+        font-weight: 800;
+      }
+
+      .headline p {
+        margin: 0;
+        font-size: 0.88rem;
+        line-height: 1;
+        color: var(--text-sub);
+        letter-spacing: -0.04em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .location-btn {
+        flex: 0 0 auto;
+        min-width: 64px;
+        height: 44px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text-main);
+        font-size: 0.95rem;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .search-box,
+      .weather-box {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--card-bg);
+      }
+
+      .search-box {
+        position: relative;
+        padding: 23px 16px 16px;
+        margin-bottom: 34px;
+      }
+
+      .search-form {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .input-area {
+        position: relative;
+        flex: 1;
+      }
+
+      .input-area svg {
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        width: 22px;
+        height: 22px;
+        transform: translateY(-50%);
+        opacity: 0.95;
+        pointer-events: none;
+      }
+
+      .search-input {
+        width: 100%;
+        height: 54px;
+        padding: 0 16px 0 40px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text-main);
+        font-size: 0.98rem;
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: rgba(255, 255, 255, 0.74);
+      }
+
+      .suggestions {
+        position: absolute;
+        top: calc(100% - 6px);
+        left: 16px;
+        right: 16px;
+        z-index: 20;
+        margin: 0;
+        padding: 6px;
+        list-style: none;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(121, 111, 170, 0.36);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .suggestions.hidden {
+        display: none;
+      }
+
+      .suggestion-item {
+        width: 100%;
+        border: 0;
+        background: transparent;
+        color: var(--text-main);
+        text-align: left;
+        padding: 10px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.92rem;
+      }
+
+      .suggestion-item:active,
+      .suggestion-item:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .suggestion-city {
+        display: block;
+        font-weight: 700;
+        line-height: 1.2;
+      }
+
+      .suggestion-meta {
+        display: block;
+        margin-top: 4px;
+        font-size: 0.8rem;
+        color: var(--text-soft);
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .search-btn {
+        width: 62px;
+        height: 54px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: transparent;
+        color: var(--text-main);
+        font-size: 0.98rem;
+        font-weight: 700;
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .status {
+        min-height: 20px;
+        margin: 10px 2px 0;
+        font-size: 0.84rem;
+        line-height: 1.4;
+        color: var(--text-soft);
+      }
+
+      .status.error {
+        color: #fff0f4;
+      }
+
+      .weather-box {
+        padding: 16px 15px 15px;
+      }
+
+      .weather-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+        gap: 12px;
+      }
+
+      .city-title {
+        margin: 0;
+        font-size: 1.55rem;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .weather-desc {
+        margin: 8px 0 0;
+        font-size: 0.88rem;
+        color: var(--text-soft);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .temp-display {
+        font-size: 2rem;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .detail-item {
+        min-height: 80px;
+        border: 1px solid var(--line-soft);
+        border-radius: 10px;
+        padding: 15px 14px 13px;
+        background: transparent;
+      }
+
+      .detail-label {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 0.92rem;
+        color: var(--text-sub);
+        font-weight: 500;
+      }
+
+      .detail-value-row {
+        display: flex;
+        align-items: baseline;
+        gap: 0;
+        flex-wrap: wrap;
+      }
+
+      .detail-value {
+        font-size: 1.05rem;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+      }
+
+      .detail-unit {
+        margin-left: 1px;
+        font-size: 0.84rem;
+        color: var(--text-sub);
+        font-weight: 500;
+      }
+
+      .guide {
+        display: none;
+      }
+
+      @media (min-width: 431px) {
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="app">
+      <section class="topbar">
+        <div class="headline">
+          <h1>전 세계 날씨</h1>
+          <p>현재 위치 + 도시 검색으로 전 세계 날씨 조회 서비스</p>
+        </div>
+        <button type="button" class="location-btn" id="locationBtn">
+          내 위치
+        </button>
+      </section>
+
+      <section class="search-box">
+        <form class="search-form" id="searchForm">
+          <div class="input-area">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="M21 21L16.65 16.65M18 11C18 14.866 14.866 18 11 18C7.13401 18 4 14.866 4 11C4 7.13401 7.13401 4 11 4C14.866 4 18 7.13401 18 11Z"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <input
+              type="text"
+              id="cityInput"
+              class="search-input"
+              placeholder="도시명을 입력하세요 (ex. 서울, 도쿄)"
+              autocomplete="off"
+            />
+          </div>
+          <button type="submit" class="search-btn">검색</button>
+        </form>
+        <ul class="suggestions hidden" id="suggestionsList"></ul>
+        <p class="status" id="statusText"></p>
+      </section>
+
+      <section class="weather-box" id="weatherCard">
+        <div class="weather-head">
+          <div>
+            <h2 class="city-title" id="cityName">도시명</h2>
+            <p class="weather-desc" id="weatherDesc"></p>
+          </div>
+          <div class="temp-display"><span id="currentTemp">15</span>°</div>
+        </div>
+
+        <div class="detail-grid">
+          <article class="detail-item">
+            <span class="detail-label">풍속</span>
+            <div class="detail-value-row">
+              <span class="detail-value" id="windSpeed">6.69</span
+              ><span class="detail-unit">m/s</span>
+            </div>
+          </article>
+
+          <article class="detail-item">
+            <span class="detail-label">습도</span>
+            <div class="detail-value-row">
+              <span class="detail-value" id="humidity">100</span
+              ><span class="detail-unit">%</span>
+            </div>
+          </article>
+
+          <article class="detail-item">
+            <span class="detail-label">체감기온</span>
+            <div class="detail-value-row">
+              <span class="detail-value" id="feelsLike">15</span
+              ><span class="detail-unit">°C</span>
+            </div>
+          </article>
+
+          <article class="detail-item">
+            <span class="detail-label">오존</span>
+            <div class="detail-value-row">
+              <span class="detail-value" id="ozone">111</span
+              ><span class="detail-unit">μg/m</span
+              ><span class="detail-unit">³</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script/script.js"></script>
+  </body>
+</html>
