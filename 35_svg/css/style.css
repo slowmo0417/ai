@@ -1,0 +1,23 @@
+@charset "utf-8";
+body {
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+section {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+section svg {
+  fill: blue;
+  stroke-width: 5px;
+  fill: none;
+  stroke: darkblue;
+  width: 800px;
+}
