@@ -288,7 +288,7 @@
 
       .food-name {
         margin-bottom: 14px;
-        font-size: 22px;
+        font-size: 20px;
         line-height: 1.15;
         font-weight: 800;
         letter-spacing: -0.8px;
@@ -611,13 +611,70 @@
       .map {
         width: calc(100% - 32px);
         height: 190px;
-        margin: 0 16px 30px;
+        margin: 0 16px 10px;
         background: #f1f1f1;
         animation: detailUp 0.42s ease 0.2s both;
       }
 
+      .direction-wrap {
+        width: calc(100% - 32px);
+        margin: 0 16px 30px;
+        display: flex;
+        justify-content: flex-end;
+        animation: detailUp 0.42s ease 0.24s both;
+      }
+
+      .direction-btn {
+        min-width: 92px;
+        height: 36px;
+        padding: 0 13px;
+        border: 1px solid #eee;
+        border-radius: 18px;
+        background: #333;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease;
+      }
+
+      .direction-btn:active {
+        transform: scale(0.96);
+        background: #111;
+      }
+
       .review-list {
+        padding: 0 16px 18px;
+      }
+
+      .review-bottom-action {
         padding: 0 16px 96px;
+      }
+
+      .review-write-bottom-btn {
+        width: 100%;
+        height: 48px;
+        border: 1px solid #333;
+        border-radius: 8px;
+        background: #333;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: -0.5px;
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease;
+      }
+
+      .review-write-bottom-btn:active {
+        transform: scale(0.98);
+        background: #111;
       }
 
       .review-card {
@@ -953,7 +1010,7 @@
 
       @media (max-width: 420px) {
         .food-name {
-          font-size: 21px;
+          font-size: 20px;
         }
 
         .card-actions {
@@ -1142,10 +1199,24 @@
           </div>
 
           <div class="map" id="map"></div>
+          <div class="direction-wrap">
+            <button class="direction-btn" id="directionBtn" type="button">
+              길찾기
+            </button>
+          </div>
         </div>
 
         <div class="detail-panel" id="reviewPanel">
           <div class="review-list" id="reviewList"></div>
+          <div class="review-bottom-action">
+            <button
+              class="review-write-bottom-btn"
+              id="reviewWriteBottomBtn"
+              type="button"
+            >
+              리뷰 작성하기
+            </button>
+          </div>
         </div>
       </section>
 
@@ -1291,6 +1362,7 @@
         detailTab: "info",
         reviewRating: 5,
         reviews: JSON.parse(localStorage.getItem("busanFoodReviews") || "{}"),
+        currentRouteFood: null,
       };
 
       const foodList = document.getElementById("foodList");
@@ -1318,12 +1390,16 @@
       const reviewPanel = document.getElementById("reviewPanel");
       const reviewList = document.getElementById("reviewList");
       const reviewWriteFab = document.getElementById("reviewWriteFab");
+      const reviewWriteBottomBtn = document.getElementById(
+        "reviewWriteBottomBtn",
+      );
       const reviewForm = document.getElementById("reviewForm");
       const reviewTextInput = document.getElementById("reviewTextInput");
       const ratingSelect = document.getElementById("ratingSelect");
       const cancelReviewBtn = document.getElementById("cancelReviewBtn");
       const writeFoodName = document.getElementById("writeFoodName");
       const ratingGuide = document.getElementById("ratingGuide");
+      const directionBtn = document.getElementById("directionBtn");
 
       const defaultReviewTexts = [
         "가게가 깔끔하고 음식이 맛있어요",
@@ -1555,6 +1631,7 @@
         if (!food) return;
 
         state.currentFoodId = foodId;
+        state.currentRouteFood = food;
         setDetailTab("info");
 
         document.getElementById("detailImage").src =
@@ -1757,14 +1834,72 @@
           const geocoder = new kakaoMaps.services.Geocoder();
           geocoder.addressSearch(food.address, (result, status) => {
             if (status !== kakaoMaps.services.Status.OK || !result[0]) return;
+            const searchedLat = Number(result[0].y);
+            const searchedLng = Number(result[0].x);
             const searchedPosition = new kakaoMaps.LatLng(
-              result[0].y,
-              result[0].x,
+              searchedLat,
+              searchedLng,
             );
+            state.currentRouteFood = {
+              ...food,
+              lat: searchedLat,
+              lng: searchedLng,
+            };
             state.map.setCenter(searchedPosition);
             state.marker.setPosition(searchedPosition);
           });
         }
+      }
+
+      function openDirection() {
+        const food = state.currentRouteFood;
+        if (!food) return;
+
+        const destinationName = encodeURIComponent(food.name);
+        const destinationAddress = encodeURIComponent(food.address);
+        const hasCoords =
+          Number.isFinite(food.lat) && Number.isFinite(food.lng);
+
+        const openKakaoRoute = (startLat, startLng) => {
+          let routeUrl = "";
+
+          if (hasCoords) {
+            routeUrl = `https://map.kakao.com/link/from/내위치,${startLat},${startLng}/to/${destinationName},${food.lat},${food.lng}`;
+          } else {
+            routeUrl = `https://map.kakao.com/link/search/${destinationAddress}`;
+          }
+
+          window.open(routeUrl, "_blank");
+        };
+
+        if (!navigator.geolocation) {
+          showToast("위치 정보를 지원하지 않는 브라우저입니다");
+          window.open(
+            `https://map.kakao.com/link/search/${destinationAddress}`,
+            "_blank",
+          );
+          return;
+        }
+
+        showToast("현재 위치를 확인하는 중입니다");
+
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            openKakaoRoute(position.coords.latitude, position.coords.longitude);
+          },
+          () => {
+            showToast("현재 위치 권한을 허용해주세요");
+            window.open(
+              `https://map.kakao.com/link/search/${destinationAddress}`,
+              "_blank",
+            );
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 6000,
+            maximumAge: 30000,
+          },
+        );
       }
 
       function toggleLike(foodId) {
@@ -1965,6 +2100,8 @@
       infoDetailTab.addEventListener("click", () => setDetailTab("info"));
       reviewDetailTab.addEventListener("click", () => setDetailTab("review"));
       reviewWriteFab.addEventListener("click", openReviewWritePage);
+      reviewWriteBottomBtn.addEventListener("click", openReviewWritePage);
+      directionBtn.addEventListener("click", openDirection);
       cancelReviewBtn.addEventListener("click", closeReviewWritePage);
       reviewForm.addEventListener("submit", saveReview);
       ratingSelect.addEventListener("click", (event) => {
