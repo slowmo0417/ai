@@ -163,6 +163,44 @@
         color: #e2e2e2;
       }
 
+      .quick-keywords {
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .quick-keywords::-webkit-scrollbar {
+        display: none;
+      }
+
+      .keyword-chip {
+        flex: 0 0 auto;
+        height: 34px;
+        padding: 0 14px;
+        border: 1px solid #eee;
+        border-radius: 17px;
+        background: #fff;
+        color: #555;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: -0.4px;
+        transition:
+          transform 0.18s ease,
+          background 0.18s ease,
+          color 0.18s ease,
+          border-color 0.18s ease;
+      }
+
+      .keyword-chip:active,
+      .keyword-chip.active {
+        transform: scale(0.96);
+        background: #333;
+        color: #fff;
+        border-color: #333;
+      }
+
       .list {
         padding: 16px 16px 0;
       }
@@ -350,6 +388,57 @@
         background: #333;
         color: #fff;
         animation: tabPop 0.24s ease;
+      }
+
+      .pagination-wrap {
+        padding: 8px 16px 18px;
+      }
+
+      .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+
+      .page-btn {
+        min-width: 38px;
+        height: 38px;
+        padding: 0 10px;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        background: #fff;
+        color: #333;
+        font-size: 14px;
+        font-weight: 800;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .page-btn:active {
+        transform: scale(0.94);
+      }
+
+      .page-btn.active {
+        border-color: #333;
+        background: #333;
+        color: #fff;
+      }
+
+      .page-btn:disabled {
+        opacity: 0.35;
+        cursor: default;
+      }
+
+      .page-info {
+        margin-top: 8px;
+        color: #999;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
       }
 
       .loading,
@@ -697,7 +786,29 @@
           </form>
         </header>
 
+        <div class="quick-keywords" id="quickKeywords">
+          <button class="keyword-chip" type="button" data-keyword="국밥">
+            국밥
+          </button>
+          <button class="keyword-chip" type="button" data-keyword="밀면">
+            밀면
+          </button>
+          <button class="keyword-chip" type="button" data-keyword="해운대">
+            해운대
+          </button>
+          <button class="keyword-chip" type="button" data-keyword="서면">
+            서면
+          </button>
+          <button class="keyword-chip" type="button" data-keyword="광안리">
+            광안리
+          </button>
+        </div>
+
         <main class="list" id="foodList"></main>
+        <div class="pagination-wrap" id="paginationWrap">
+          <div class="pagination" id="pagination"></div>
+          <p class="page-info" id="pageInfo"></p>
+        </div>
       </section>
 
       <section class="page" id="detailPage">
@@ -737,7 +848,7 @@
     </div>
 
     <!-- 카카오맵 JavaScript 키를 넣어주세요 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cc8c124f8a594a01e630a3c43ae4349a&libraries=services"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cc8c124f8a594a01e630a3c43ae4349as&libraries=services"></script>
 
     <script>
       const API_KEY =
@@ -756,6 +867,8 @@
         map: null,
         marker: null,
         toastTimer: null,
+        pageSize: 10,
+        currentPage: 1,
       };
 
       const foodList = document.getElementById("foodList");
@@ -771,6 +884,10 @@
       const backBtn = document.getElementById("backBtn");
       const bottomTabs = document.getElementById("bottomTabs");
       const toast = document.getElementById("toast");
+      const quickKeywords = document.getElementById("quickKeywords");
+      const paginationWrap = document.getElementById("paginationWrap");
+      const pagination = document.getElementById("pagination");
+      const pageInfo = document.getElementById("pageInfo");
 
       const icons = {
         search: `
@@ -889,6 +1006,7 @@
             API 주소, 서비스키, CORS 허용 여부를 확인해주세요.
           </div>
         `;
+          paginationWrap.style.display = "none";
           totalCount.textContent = "전체 0건";
           showToast("데이터를 불러오지 못했습니다");
         }
@@ -938,7 +1056,9 @@
         }
 
         state.filteredFoods = list;
+        state.currentPage = 1;
         renderList();
+        updateKeywordChips();
       }
 
       function renderList() {
@@ -946,10 +1066,21 @@
 
         if (state.filteredFoods.length === 0) {
           foodList.innerHTML = `<div class="empty">표시할 맛집이 없습니다.</div>`;
+          paginationWrap.style.display = "none";
           return;
         }
 
-        foodList.innerHTML = state.filteredFoods
+        const totalPages = Math.ceil(
+          state.filteredFoods.length / state.pageSize,
+        );
+        const safePage = Math.min(Math.max(state.currentPage, 1), totalPages);
+        state.currentPage = safePage;
+
+        const startIndex = (safePage - 1) * state.pageSize;
+        const endIndex = startIndex + state.pageSize;
+        const visibleFoods = state.filteredFoods.slice(startIndex, endIndex);
+
+        foodList.innerHTML = visibleFoods
           .map((food) => {
             const liked = state.likedIds.includes(food.id);
             return `
@@ -967,6 +1098,10 @@
           `;
           })
           .join("");
+
+        renderPagination(totalPages);
+        paginationWrap.style.display = totalPages > 1 ? "block" : "none";
+        pageInfo.textContent = `${safePage} / ${totalPages} 페이지 · 총 ${state.filteredFoods.length}개`;
       }
 
       function openDetail(foodId) {
@@ -986,6 +1121,7 @@
         detailPage.classList.add("active");
         backBtn.classList.add("show");
         bottomTabs.style.display = "grid";
+        bottomTabs.classList.remove("detail-mode", "show-on-bottom");
         bottomTabs.classList.add("detail-mode");
         bottomTabs.classList.remove("show-on-bottom");
         window.scrollTo({ top: 0, behavior: "instant" });
@@ -999,7 +1135,6 @@
         listPage.classList.add("active");
         backBtn.classList.remove("show");
         bottomTabs.style.display = "grid";
-        bottomTabs.classList.remove("detail-mode", "show-on-bottom");
         window.scrollTo({ top: 0, behavior: "instant" });
       }
 
@@ -1081,6 +1216,68 @@
         showToast("검색어를 초기화했습니다");
       }
 
+      function updateKeywordChips() {
+        document.querySelectorAll(".keyword-chip").forEach((chip) => {
+          chip.classList.toggle(
+            "active",
+            chip.dataset.keyword === state.keyword,
+          );
+        });
+      }
+
+      function renderPagination(totalPages) {
+        const pages = getPageNumbers(totalPages, state.currentPage);
+
+        pagination.innerHTML = `
+        <button class="page-btn" type="button" data-page="prev" ${state.currentPage === 1 ? "disabled" : ""}>‹</button>
+        ${pages
+          .map(
+            (page) => `
+            <button class="page-btn ${page === state.currentPage ? "active" : ""}" type="button" data-page="${page}">${page}</button>
+          `,
+          )
+          .join("")}
+        <button class="page-btn" type="button" data-page="next" ${state.currentPage === totalPages ? "disabled" : ""}>›</button>
+      `;
+      }
+
+      function getPageNumbers(totalPages, currentPage) {
+        const maxVisible = 5;
+        let start = Math.max(1, currentPage - 2);
+        let end = Math.min(totalPages, start + maxVisible - 1);
+
+        if (end - start + 1 < maxVisible) {
+          start = Math.max(1, end - maxVisible + 1);
+        }
+
+        const pages = [];
+        for (let page = start; page <= end; page += 1) {
+          pages.push(page);
+        }
+        return pages;
+      }
+
+      function movePage(page) {
+        const totalPages = Math.ceil(
+          state.filteredFoods.length / state.pageSize,
+        );
+
+        if (page === "prev") {
+          state.currentPage -= 1;
+        } else if (page === "next") {
+          state.currentPage += 1;
+        } else {
+          state.currentPage = Number(page);
+        }
+
+        state.currentPage = Math.min(
+          Math.max(state.currentPage, 1),
+          totalPages,
+        );
+        renderList();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       function updateLikeButtons(foodId, liked) {
         document.querySelectorAll(".food-card").forEach((card) => {
           if (card.dataset.id !== foodId) return;
@@ -1131,6 +1328,23 @@
 
       searchInput.addEventListener("focus", () => {
         clearSearch();
+      });
+
+      quickKeywords.addEventListener("click", (event) => {
+        const chip = event.target.closest(".keyword-chip");
+        if (!chip) return;
+
+        const keyword = chip.dataset.keyword;
+        searchInput.value = keyword;
+        state.keyword = keyword;
+        applyFilter();
+        showToast(`${keyword} 검색 결과입니다`);
+      });
+
+      pagination.addEventListener("click", (event) => {
+        const button = event.target.closest(".page-btn");
+        if (!button || button.disabled) return;
+        movePage(button.dataset.page);
       });
 
       foodList.addEventListener("click", (event) => {
