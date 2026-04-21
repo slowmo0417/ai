@@ -62,6 +62,7 @@
         display: flex;
         justify-content: center;
       }
+
       .logo {
         width: 195px;
         height: 106px;
@@ -97,11 +98,13 @@
       }
 
       .field-error {
-        display: none;
+        display: block;
+        min-height: 18px;
         margin-top: 8px;
         margin-bottom: -3px;
         font-size: 13px;
         color: #e34848;
+        visibility: hidden;
       }
 
       .login-btn {
@@ -303,7 +306,7 @@
         const pwValue = userPw.value.trim();
 
         if (!idValue || !pwValue) {
-          fieldError.style.display = "block";
+          fieldError.style.visibility = "visible";
 
           if (!idValue) {
             userId.focus();
@@ -314,14 +317,14 @@
           return;
         }
 
-        fieldError.style.display = "none";
+        fieldError.style.visibility = "hidden";
         window.location.href = "./main.html";
       });
 
       [userId, userPw].forEach(function (input) {
         input.addEventListener("input", function () {
           if (userId.value.trim() && userPw.value.trim()) {
-            fieldError.style.display = "none";
+            fieldError.style.visibility = "hidden";
           }
         });
       });
