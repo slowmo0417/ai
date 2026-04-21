@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>CHABAK Splash</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+          "Noto Sans KR", "Segoe UI", sans-serif;
+        background: #ffffff;
+        color: #314873;
+        overflow: hidden;
+      }
+
+      .splash {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 640px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 86px 24px 120px;
+        background: #ffffff;
+        overflow: hidden;
+      }
+
+      .splash-inner {
+        width: 100%;
+        max-width: 430px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(-18px);
+      }
+
+      .logo-box {
+        width: min(52vw, 190px);
+        animation: logoFadeUp 0.7s ease both;
+      }
+
+      .logo-box img {
+        display: block;
+        width: 100%;
+        height: auto;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+      }
+
+      .loading-wrap {
+        width: min(58vw, 220px);
+        height: 6px;
+        margin-top: 46px;
+        border-radius: 999px;
+        background: #e8edf7;
+        overflow: hidden;
+        animation: barFadeUp 0.7s ease 0.18s both;
+      }
+
+      .loading-bar {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: #5871b5;
+        transition: width 0.03s linear;
+      }
+
+      .loading-text {
+        margin-top: 14px;
+        font-size: 13px;
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #9aacd2;
+      }
+
+      @keyframes loading {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes logoFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes barFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 360px) {
+        .splash {
+          min-height: 600px;
+          padding: 76px 22px 112px;
+        }
+
+        .splash-inner {
+          transform: translateY(-14px);
+        }
+
+        .logo-box {
+          width: min(54vw, 172px);
+        }
+
+        .loading-wrap {
+          width: min(60vw, 200px);
+          margin-top: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="splash">
+      <div class="splash-inner">
+        <div class="logo-box">
+          <img src="./images/logo +.png" alt="CHABAK" />
+        </div>
+
+        <div class="loading-wrap" aria-label="로딩 중">
+          <div class="loading-bar" id="loadingBar"></div>
+        </div>
+
+        <p class="loading-text"><span id="loadingPercent">0</span>%</p>
+      </div>
+    </main>
+
+    <script>
+      const MOVE_URL = "./onboarding.html";
+      const LOADING_TIME = 3000;
+      const loadingPercent = document.getElementById("loadingPercent");
+      const loadingBar = document.getElementById("loadingBar");
+
+      function startLoading() {
+        let percent = 0;
+        const intervalTime = LOADING_TIME / 100;
+
+        const percentTimer = setInterval(() => {
+          percent += 1;
+
+          loadingPercent.textContent = percent;
+          loadingBar.style.width = percent + "%";
+
+          if (percent >= 100) {
+            clearInterval(percentTimer);
+
+            setTimeout(() => {
+              window.location.href = MOVE_URL;
+            }, 150);
+          }
+        }, intervalTime);
+      }
+
+      startLoading();
+    </script>
+  </body>
+</html>
