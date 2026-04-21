@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>CHABAK Splash</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #ffffff;
+      }
+
+      body {
+        overflow: hidden;
+      }
+
+      .splash {
+        width: 100%;
+        min-height: 100vh;
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #ffffff;
+      }
+
+      .splash-inner {
+        width: 100%;
+        max-width: 390px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-box {
+        width: 170px;
+        max-width: 52vw;
+        animation: logoFadeUp 0.7s ease both;
+      }
+
+      .logo-box img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .loading-wrap {
+        width: 190px;
+        max-width: 58vw;
+        height: 6px;
+        margin-top: 38px;
+        border-radius: 999px;
+        background: #e8edf7;
+        overflow: hidden;
+        animation: barFadeUp 0.7s ease 0.18s both;
+      }
+
+      .loading-bar {
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: #32539a;
+        animation: loading 3s linear forwards;
+      }
+
+      @keyframes loading {
+        from {
+          width: 0%;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes logoFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes barFadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes textBlink {
+        0%,
+        100% {
+          opacity: 0.45;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="splash">
+      <div class="splash-inner">
+        <div class="logo-box">
+          <img src="./images/logo +.png" alt="CHABAK" />
+        </div>
+
+        <div class="loading-wrap" aria-label="로딩 중">
+          <div class="loading-bar"></div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const MOVE_URL = "./index2.html";
+      const LOADING_TIME = 3000;
+
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.location.href = MOVE_URL;
+        }, LOADING_TIME);
+      });
+    </script>
+  </body>
+</html>
