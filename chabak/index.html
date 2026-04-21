@@ -2,126 +2,173 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
-    <title>CHABAK Splash</title>
-    <style>
-      /* 기본 여백 제거 및 박스 모델 설정 */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      /* 메인 컬러 설정 (이미지에서 추출한 유사한 파란색) */
-      :root {
-        --main-blue: #546ea8;
-      }
-
-      body {
-        /* 전체 화면을 채우고 내용물을 중앙에 배치 */
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffff;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        overflow: hidden; /* 스크롤 방지 */
-        transition: opacity 0.5s ease-out; /* 페이드 아웃 효과를 위한 트랜지션 */
-      }
-
-      .splash-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* 부드럽게 나타나는 애니메이션 */
-        animation: fadeIn 1.2s ease-out forwards;
-      }
-
-      .logo-svg {
-        width: 220px;
-        height: auto;
-        margin-bottom: 8px; /* 로고와 텍스트 사이 간격 */
-      }
-
-      .brand-text {
-        color: var(--main-blue);
-        font-size: 38px;
-        font-weight: 700;
-        letter-spacing: 2px; /* 글자 간격 조정 */
-      }
-
-      /* 페이드 인 애니메이션 키프레임 */
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: translateY(15px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>전국 캠핑장 검색</title>
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
+
   <body>
-    <div class="splash-content" id="splashScreen">
-      <svg
-        class="logo-svg"
-        viewBox="0 0 240 120"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path d="M 125 90 L 165 35 L 210 90 Z" fill="#546EA8" />
-        <path
-          d="M 165 35 L 185 90"
-          stroke="#ffffff"
-          stroke-width="2.5"
-          fill="none"
-        />
+    <div id="app">
+      <section class="screen screen-search active" id="searchScreen">
+        <main class="search-page">
+          <div class="search-row">
+            <form id="searchForm" class="search-form">
+              <input
+                type="search"
+                id="searchInput"
+                placeholder="지역 또는 캠핑장명을 입력하세요."
+                autocomplete="off"
+              />
+            </form>
 
-        <path
-          d="M 165 20 Q 165 15 160 15 Q 165 15 165 10 Q 165 15 170 15 Q 165 15 165 20 Z"
-          fill="#546EA8"
-        />
+            <button
+              type="button"
+              class="map-icon-btn"
+              id="openMapBtn"
+              aria-label="전국 캠핑장 지도 보기"
+            >
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M9 18L3 21V6L9 3M9 18L15 21M9 18V3M15 21L21 18V3L15 6M15 21V6M15 6L9 3"
+                />
+              </svg>
+            </button>
+          </div>
 
-        <path
-          d="M 50 65 L 60 40 Q 65 35 75 35 L 105 35 Q 115 35 120 45 L 125 65 Z"
-          fill="#546EA8"
-        />
-        <rect x="35" y="60" width="105" height="25" rx="6" fill="#546EA8" />
+          <section class="keyword-section">
+            <div class="section-head">
+              <h2>최근 검색어</h2>
+              <button type="button" id="clearRecentBtn">전체 삭제</button>
+            </div>
+            <div class="keyword-list primary" id="recentKeywordsTop"></div>
+          </section>
 
-        <path d="M 62 42 L 80 42 L 80 60 L 53 60 Z" fill="#ffffff" />
-        <path d="M 85 42 L 105 42 L 115 60 L 85 60 Z" fill="#ffffff" />
+          <section class="keyword-section second">
+            <h2>추천 검색어</h2>
+            <div class="keyword-list gray" id="recentKeywordsBottom"></div>
+          </section>
+        </main>
+      </section>
 
-        <path
-          d="M 135 70 L 142 70 Q 145 70 145 75 L 145 80 Q 145 85 140 85 L 135 85 Z"
-          fill="#ffffff"
-        />
+      <section class="screen screen-list" id="listScreen">
+        <header class="app-header">
+          <button type="button" class="back-btn" data-back="search">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18L9 12L15 6" />
+            </svg>
+          </button>
+          <h1 id="listTitle">검색 결과</h1>
+          <div></div>
+        </header>
 
-        <circle cx="60" cy="85" r="10" fill="#ffffff" />
-        <circle cx="60" cy="85" r="4.5" fill="#546EA8" />
-        <circle cx="115" cy="85" r="10" fill="#ffffff" />
-        <circle cx="115" cy="85" r="4.5" fill="#546EA8" />
+        <main class="result-list" id="resultList"></main>
+        <div class="loading" id="listLoading">캠핑장을 불러오는 중입니다.</div>
+      </section>
 
-        <path
-          d="M 20 95 L 215 95"
-          stroke="#546EA8"
-          stroke-width="2.5"
-          stroke-linecap="round"
-        />
-      </svg>
+      <section class="screen screen-favorites" id="favoriteScreen">
+        <header class="app-header">
+          <button type="button" class="back-btn" data-back="search">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18L9 12L15 6" />
+            </svg>
+          </button>
+          <h1>즐겨찾기</h1>
+          <button type="button" class="text-btn" id="clearFavoriteBtn">
+            비우기
+          </button>
+        </header>
 
-      <h1 class="brand-text">CHABAK</h1>
+        <main class="result-list" id="favoriteList"></main>
+      </section>
+
+      <section class="screen screen-map" id="mapScreen">
+        <header class="app-header">
+          <button type="button" class="back-btn" data-back="search">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18L9 12L15 6" />
+            </svg>
+          </button>
+          <h1>전국 캠핑장 지도</h1>
+          <button type="button" class="text-btn" id="mapToListBtn">
+            목록보기
+          </button>
+        </header>
+
+        <div id="kakaoMap" class="kakao-map"></div>
+
+        <div class="map-guide" id="mapGuide">
+          전국 캠핑장 데이터를 불러오는 중입니다.
+        </div>
+
+        <div class="map-card-wrap" id="mapCardWrap"></div>
+      </section>
+
+      <section class="screen screen-detail" id="detailScreen">
+        <header class="detail-header">
+          <button type="button" class="back-btn" id="detailBackBtn">
+            <svg viewBox="0 0 24 24">
+              <path d="M15 18L9 12L15 6" />
+            </svg>
+          </button>
+          <h1 id="detailTitle">캠핑장 정보</h1>
+          <button type="button" class="text-btn" id="confirmBtn">
+            선택완료
+          </button>
+        </header>
+
+        <main id="detailContent"></main>
+      </section>
+
+      <nav class="bottom-nav">
+        <button type="button" data-nav="home">
+          <svg class="nav-svg" viewBox="0 0 24 24">
+            <path d="M3 11L12 4L21 11V21H15V15H9V21H3V11Z" />
+          </svg>
+          <span>홈</span>
+        </button>
+
+        <button type="button" class="active" data-nav="search">
+          <svg class="nav-svg" viewBox="0 0 24 24">
+            <path
+              d="M10.8 18.2C14.886 18.2 18.2 14.886 18.2 10.8C18.2 6.714 14.886 3.4 10.8 3.4C6.714 3.4 3.4 6.714 3.4 10.8C3.4 14.886 6.714 18.2 10.8 18.2Z"
+            />
+            <path d="M16.2 16.2L21 21" />
+          </svg>
+          <span>검색</span>
+        </button>
+
+        <button type="button" data-nav="map">
+          <svg class="nav-svg" viewBox="0 0 24 24">
+            <path
+              d="M9 18L3 21V6L9 3M9 18L15 21M9 18V3M15 21L21 18V3L15 6M15 21V6M15 6L9 3"
+            />
+          </svg>
+          <span>지도</span>
+        </button>
+
+        <button type="button" data-nav="favorites">
+          <svg class="nav-svg" viewBox="0 0 24 24">
+            <path
+              d="M6 4.5C6 3.7 6.7 3 7.5 3H16.5C17.3 3 18 3.7 18 4.5V21L12 17.5L6 21V4.5Z"
+            />
+          </svg>
+          <span>저장</span>
+        </button>
+
+        <button type="button" data-nav="my">
+          <svg class="nav-svg" viewBox="0 0 24 24">
+            <path
+              d="M12 12C14.485 12 16.5 9.985 16.5 7.5C16.5 5.015 14.485 3 12 3C9.515 3 7.5 5.015 7.5 7.5C7.5 9.985 9.515 12 12 12Z"
+            />
+            <path
+              d="M4.5 21C5.25 16.9 8.1 14.8 12 14.8C15.9 14.8 18.75 16.9 19.5 21"
+            />
+          </svg>
+          <span>MY</span>
+        </button>
+      </nav>
     </div>
 
-    <script>
-      setTimeout(function () {
-        window.location.href = "./work1.html";
-      }, 3000);
-    </script>
+    <script src="./script/script.js"></script>
   </body>
 </html>
