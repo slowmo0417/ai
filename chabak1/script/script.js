@@ -16,6 +16,12 @@ const RECENT_KEY = "camping_recent_keywords";
 const FAVORITE_KEY = "camping_favorites";
 const FAVORITE_DATA_KEY = "camping_favorite_data";
 
+const MAP_CACHE_KEY = "camping_map_cache";
+const MAP_CACHE_TIME_KEY = "camping_map_cache_time";
+const MAP_CACHE_TTL = 1000 * 60 * 60 * 24;
+
+const MAP_BASE_PAGE_COUNT = 8;
+
 const RECOMMEND_KEYWORDS = [
   "경기도",
   "강원",
@@ -148,9 +154,16 @@ function init() {
   dom.openMapBtn.addEventListener("click", openClusterMap);
   dom.clearRecentBtn.addEventListener("click", clearRecentKeywords);
   dom.clearFavoriteBtn.addEventListener("click", clearFavorites);
-  dom.detailBackBtn.addEventListener("click", () =>
-    showScreen(lastScreen, activeNavKey),
-  );
+
+  dom.detailBackBtn.addEventListener("click", () => {
+    showScreen(lastScreen, activeNavKey);
+  });
+
+  const mapBackBtn = $("#mapScreen .back-btn");
+
+  if (mapBackBtn) {
+    mapBackBtn.addEventListener("click", handleMapBackButton);
+  }
 
   dom.mapToListBtn.addEventListener("click", () => {
     const items =
@@ -165,7 +178,11 @@ function init() {
   });
 
   $$(".back-btn[data-back]").forEach((btn) => {
-    btn.addEventListener("click", () => showScreen(btn.dataset.back, "search"));
+    if (btn.closest("#mapScreen")) return;
+
+    btn.addEventListener("click", () => {
+      showScreen(btn.dataset.back, "search");
+    });
   });
 
   $$("[data-nav]").forEach((btn) => {
@@ -191,7 +208,9 @@ function init() {
   });
 }
 
-/* 화면 전환 */
+/* ===============================
+   화면 전환
+================================ */
 function showScreen(name, navKey) {
   Object.values(screens).forEach((screen) => {
     screen.classList.remove("active");
@@ -220,7 +239,9 @@ function setLastScreen(name) {
   }
 }
 
-/* API */
+/* ===============================
+   API
+================================ */
 async function requestGoCamping(path, params = {}) {
   const query = new URLSearchParams({
     serviceKey: GOCAMPING_SERVICE_KEY,
@@ -246,7 +267,9 @@ function normalizeItems(data) {
   return Array.isArray(item) ? item : [item];
 }
 
-/* 검색 */
+/* ===============================
+   검색
+================================ */
 async function handleSearchSubmit(e) {
   e.preventDefault();
 
@@ -399,7 +422,9 @@ function getKeywordVariants(keyword) {
   return [normalizedKeyword];
 }
 
-/* 저장소 / 키워드 */
+/* ===============================
+   저장소 / 키워드
+================================ */
 function getStorage(key, fallback) {
   try {
     return JSON.parse(localStorage.getItem(key)) || fallback;
@@ -468,7 +493,9 @@ function renderKeywordBox(container, keywords) {
   });
 }
 
-/* 리스트 / 즐겨찾기 */
+/* ===============================
+   리스트 / 즐겨찾기
+================================ */
 function renderResultList(items) {
   dom.resultList.innerHTML = "";
 
@@ -614,7 +641,9 @@ function mergeLoadedItems(items) {
   allLoadedItems = [...map.values()];
 }
 
-/* 카카오맵 공통 */
+/* ===============================
+   카카오맵 공통
+================================ */
 function loadKakaoMapScript() {
   return new Promise((resolve, reject) => {
     if (window.kakao && window.kakao.maps) {
@@ -670,7 +699,43 @@ function initEmptyKakaoMap() {
   kakaoMap.relayout();
 }
 
-/* 전국 지도 */
+/* ===============================
+   지도 뒤로가기
+================================ */
+function handleMapBackButton(e) {
+  if (isFocusedMarkerMode) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+
+    clearFocusedMarkerMode();
+    return;
+  }
+
+  showScreen("search", "search");
+}
+
+function clearFocusedMarkerMode() {
+  isFocusedMarkerMode = false;
+  focusedMarkerItems = [];
+
+  clearMapObjects();
+  dom.mapCardWrap.innerHTML = "";
+
+  if (kakaoMap) {
+    kakaoMap.setCenter(new kakao.maps.LatLng(36.4, 127.9));
+    kakaoMap.setLevel(12);
+  }
+
+  showMapGuide("지역 선택을 해제했습니다.", 1200);
+
+  setTimeout(() => {
+    renderClusterLevel();
+  }, 120);
+}
+
+/* ===============================
+   전국 지도
+================================ */
 async function openClusterMap() {
   showScreen("map", "map");
   setLastScreen("map");
@@ -683,19 +748,17 @@ async function openClusterMap() {
 
   try {
     await loadKakaoMapScript();
+    initEmptyKakaoMap();
 
-    setTimeout(() => {
-      initEmptyKakaoMap();
-    }, 50);
-
-    if (!allMapLoaded) {
-      await loadRegionalSamples();
-      allMapLoaded = true;
+    if (allMapLoaded && clusterSourceItems.length) {
+      initClusterMap();
+      return;
     }
 
-    setTimeout(() => {
-      initClusterMap();
-    }, 100);
+    await loadRegionalSamples();
+    allMapLoaded = true;
+
+    initClusterMap();
   } catch (error) {
     console.error(error);
     showMapError();
@@ -703,51 +766,80 @@ async function openClusterMap() {
 }
 
 async function loadRegionalSamples() {
-  const regionPromises = REGION_INFO.map((region) => loadRegionSamples(region));
-  const settled = await Promise.allSettled(regionPromises);
+  const cachedItems = getValidMapCache();
 
-  clusterSourceItems = settled
-    .filter((result) => result.status === "fulfilled")
-    .flatMap((result) => result.value)
-    .filter((item) => item.mapX && item.mapY);
+  if (cachedItems.length) {
+    clusterSourceItems = cachedItems;
+    mapResults = cachedItems;
+    mergeLoadedItems(cachedItems);
+    return;
+  }
+
+  const allItems = await fetchMapBaseListPages(MAP_BASE_PAGE_COUNT);
+
+  clusterSourceItems = allItems
+    .filter((item) => item.mapX && item.mapY)
+    .map((item) => ({
+      ...item,
+      regionName: getRegionName(item),
+    }))
+    .filter((item) =>
+      REGION_INFO.some((region) => region.name === item.regionName),
+    );
 
   clusterSourceItems = dedupeItems(clusterSourceItems);
   mapResults = clusterSourceItems;
 
+  setMapCache(clusterSourceItems);
   mergeLoadedItems(clusterSourceItems);
 }
 
-async function loadRegionSamples(region) {
-  const keywordPromises = region.keywords.map(async (keyword) => {
+async function fetchMapBaseListPages(maxPages = 8) {
+  const pageNumbers = Array.from({ length: maxPages }, (_, index) => index + 1);
+
+  const requests = pageNumbers.map(async (pageNo) => {
     try {
-      const data = await requestGoCamping("/searchList", {
-        numOfRows: 80,
-        pageNo: 1,
-        keyword,
+      const data = await requestGoCamping("/basedList", {
+        numOfRows: 100,
+        pageNo,
       });
 
       return normalizeItems(data);
     } catch (error) {
-      console.warn(`${keyword} 검색 실패`, error);
+      console.warn(`지도 목록 ${pageNo}페이지 로드 실패`, error);
       return [];
     }
   });
 
-  const settled = await Promise.allSettled(keywordPromises);
+  const settled = await Promise.allSettled(requests);
 
-  let items = settled
+  return settled
     .filter((result) => result.status === "fulfilled")
     .flatMap((result) => result.value);
+}
 
-  const baseItems = await fetchBaseListByKeywords(region.keywords);
-  items = [...items, ...baseItems];
+function getValidMapCache() {
+  try {
+    const cachedTime = Number(localStorage.getItem(MAP_CACHE_TIME_KEY));
+    const cachedItems = JSON.parse(localStorage.getItem(MAP_CACHE_KEY)) || [];
 
-  return dedupeItems(
-    items.map((item) => ({
-      ...item,
-      regionName: region.name,
-    })),
-  );
+    if (!cachedTime || !cachedItems.length) return [];
+
+    const isValid = Date.now() - cachedTime < MAP_CACHE_TTL;
+
+    return isValid ? cachedItems : [];
+  } catch {
+    return [];
+  }
+}
+
+function setMapCache(items) {
+  try {
+    localStorage.setItem(MAP_CACHE_KEY, JSON.stringify(items));
+    localStorage.setItem(MAP_CACHE_TIME_KEY, String(Date.now()));
+  } catch {
+    console.warn("지도 캐시 저장 실패");
+  }
 }
 
 function initClusterMap() {
@@ -796,17 +888,11 @@ function renderClusterLevel() {
 
   if (isFocusedMarkerMode) {
     clearOverlayObjects();
-    dom.mapCardWrap.innerHTML = "";
 
-    if (level >= 10) {
-      isFocusedMarkerMode = false;
-      focusedMarkerItems = [];
-      clearMarkerObjects();
-      renderRegionClusters(source);
-      return;
+    if (!kakaoMarkers.length && focusedMarkerItems.length) {
+      renderExactMarkers(focusedMarkerItems);
     }
 
-    renderExactMarkers(focusedMarkerItems);
     return;
   }
 
@@ -903,7 +989,10 @@ function showExactMarkerGroup(group, label) {
   renderExactMarkers(group);
   fitGroupBounds(group);
 
-  showMapGuide(`${label} 캠핑장 ${group.length}곳을 표시했습니다.`, 1800);
+  showMapGuide(
+    `${label} 캠핑장 ${group.length}곳을 표시했습니다. 뒤로가기를 누르면 지역 선택이 해제됩니다.`,
+    2600,
+  );
 }
 
 function renderExactMarkers(items) {
@@ -1014,7 +1103,9 @@ function showMapError() {
   `;
 }
 
-/* 상세 화면 */
+/* ===============================
+   상세 화면
+================================ */
 function renderDetail(camp) {
   const image = camp.firstImageUrl || camp.firstImageUrl2 || DEFAULT_IMAGE;
   const name = camp.facltNm || "캠핑장 이름 없음";
@@ -1178,7 +1269,9 @@ function openKakaoDirectionWithoutLocation(camp) {
   );
 }
 
-/* Utils */
+/* ===============================
+   유틸
+================================ */
 function makeTags(camp) {
   const raw = [camp.induty, camp.lctCl, camp.themaEnvrnCl]
     .filter(Boolean)
@@ -1215,13 +1308,7 @@ function getRegionName(item) {
   if (text.includes("울산")) return "울산";
   if (text.includes("세종")) return "세종";
   if (text.includes("경기")) return "경기도";
-  if (
-    text.includes("강원") ||
-    text.includes("강원도") ||
-    text.includes("강원특별자치도")
-  ) {
-    return "강원";
-  }
+  if (text.includes("강원")) return "강원";
   if (text.includes("충북") || text.includes("충청북도")) return "충청북도";
   if (text.includes("충남") || text.includes("충청남도")) return "충청남도";
   if (text.includes("전북") || text.includes("전라북도")) return "전라북도";
