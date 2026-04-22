@@ -1,0 +1,23 @@
+@charset "utf-8";
+
+body {
+}
+.box {
+  width: 1200px;
+  display: flex;
+  gap: 20px;
+}
+.box div {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #000;
+}
+.orange {
+  background: orange;
+}
+.lightblue {
+  background: lightblue;
+}
+.lighepurple {
+  background: lavender;
+}
