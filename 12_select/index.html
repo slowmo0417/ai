@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서객체 선택</title>
+  </head>
+  <body>
+    <h1 id="txt1">제목태그1</h1>
+    <h1 id="txt2">제목태그2</h1>
+    <h1 id="txt3">제목태그3</h1>
+
+    <script>
+      let tit1 = document.getElementById("txt1");
+      console.log(tit1);
+      tit1.style.color = "red";
+      tit1.style.background = "yellow";
+      tit1.style.fontSize = "100px";
+
+      let tit2 = document.getElementById("txt2");
+      tit2.style.color = "blue";
+
+      let tit3 = document.getElementById("txt3");
+      tit3.style.color = "green";
+      tit3.style.background = "red";
+      tit3.style.fontSize = "48px";
+      tit3.style.fontWeight = "900";
+    </script>
+  </body>
+</html>

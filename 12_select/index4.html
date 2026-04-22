@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서객체선택방법</title>
+  </head>
+  <body>
+    <div class="box">
+      <h1>큰제목태그1</h1>
+      <h1>큰제목태그2</h1>
+      <h1>큰제목태그3</h1>
+    </div>
+    <h1>큰제목태그4</h1>
+    <h1>큰제목태그5</h1>
+
+    <script>
+      let tit = document.querySelectorAll(".box h1");
+      console.log(tit);
+      tit[0].style.border = "5px solid red";
+      tit[1].style.border = "5px solid blue";
+      tit[2].style.border = "5px solid green";
+    </script>
+  </body>
+</html>

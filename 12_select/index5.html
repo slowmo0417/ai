@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>문서객체 선택</title>
+  </head>
+  <body>
+    <h1>회원명단</h1>
+    <ul>
+      <li>홍길동</li>
+      <li>한만종</li>
+      <li>김흥부</li>
+      <li>이순신</li>
+      <li>강인구</li>
+      <li>민자영</li>
+    </ul>
+
+    <script>
+      let lii = document.getElementsByTagName("li");
+      console.log(lii);
+      lii[0].style.fontSize = "24px";
+      lii[0].style.background = "yellow";
+      lii[2].style.fontSize = "24px";
+      lii[2].style.background = "yellow";
+      lii[4].style.fontSize = "24px";
+      lii[4].style.background = "yellow";
+      lii[1].style.background = "orange";
+      lii[1].style.listStyle = "none";
+      lii[1].style.color = "#fff";
+      lii[3].style.background = "orange";
+      lii[3].style.listStyle = "none";
+      lii[3].style.color = "#fff";
+      lii[5].style.background = "orange";
+      lii[5].style.listStyle = "none";
+      lii[5].style.color = "#fff";
+    </script>
+  </body>
+</html>
