@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>월별 할 일 리스트</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Monthly Todo</p>
+          <h1 class="title">
+            월별 할 일<br />
+            리스트
+          </h1>
+        </div>
+
+        <div id="monthDropdown" class="month-dropdown">
+          <button
+            type="button"
+            id="monthTrigger"
+            class="month-trigger"
+            aria-expanded="false"
+            aria-label="월 선택"
+          >
+            1월
+          </button>
+          <div
+            id="monthList"
+            class="month-list"
+            role="listbox"
+            aria-label="월 목록"
+          ></div>
+        </div>
+      </header>
+
+      <section class="date-section" aria-label="날짜 선택">
+        <div id="dateTrack" class="date-track"></div>
+      </section>
+
+      <section class="summary-card">
+        <div>
+          <h2 id="summaryTitle" class="summary-title">오늘의 할 일</h2>
+          <p id="summaryDesc" class="summary-desc">
+            선택한 날짜의 할 일을 정리해보세요.
+          </p>
+        </div>
+
+        <div id="progressRing" class="progress-ring" style="--rate: 0deg">
+          <span id="progressText">0%</span>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="할 일 상태 필터">
+        <button type="button" class="tab-btn is-active" data-filter="all">
+          전체
+        </button>
+        <button type="button" class="tab-btn" data-filter="active">
+          미완료
+        </button>
+        <button type="button" class="tab-btn" data-filter="done">완료</button>
+      </nav>
+
+      <section>
+        <div id="todoList" class="todo-list"></div>
+        <div id="emptyState" class="empty">아직 등록된 할 일이 없습니다.</div>
+      </section>
+
+      <button type="button" id="openAddBtn" class="fab" aria-label="할 일 추가">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M12 5V19"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M5 12H19"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+    </main>
+
+    <div id="todoModal" class="modal-backdrop" aria-hidden="true">
+      <form id="todoForm" class="sheet">
+        <div class="sheet-handle"></div>
+
+        <h2 id="modalTitle" class="sheet-title">할 일 추가</h2>
+
+        <div class="field">
+          <label for="todoInput" class="label">할 일</label>
+          <input
+            id="todoInput"
+            class="input"
+            type="text"
+            placeholder="할 일을 입력해주세요"
+            autocomplete="off"
+          />
+        </div>
+
+        <p id="formError" class="error-message">할 일을 입력해주세요.</p>
+
+        <div class="field">
+          <span class="label">분류</span>
+
+          <div id="categoryDropdown" class="category-dropdown">
+            <button
+              type="button"
+              id="categoryTrigger"
+              class="category-trigger"
+              aria-expanded="false"
+              aria-label="분류 선택"
+            >
+              업무
+            </button>
+
+            <div
+              id="categoryList"
+              class="category-list"
+              role="listbox"
+              aria-label="분류 목록"
+            ></div>
+          </div>
+        </div>
+
+        <div class="sheet-actions">
+          <button type="button" id="closeModalBtn" class="sheet-btn cancel">
+            취소
+          </button>
+          <button type="submit" class="sheet-btn submit">저장</button>
+        </div>
+      </form>
+    </div>
+    <div id="deleteConfirm" class="confirm-backdrop" aria-hidden="true">
+      <div
+        class="confirm-box"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="deleteConfirmTitle"
+      >
+        <h2 id="deleteConfirmTitle" class="confirm-title">삭제하시겠습니까?</h2>
+        <p class="confirm-desc">삭제한 할 일은 다시 복구할 수 없습니다.</p>
+
+        <div class="confirm-actions">
+          <button type="button" id="cancelDeleteBtn" class="confirm-btn cancel">
+            취소
+          </button>
+          <button
+            type="button"
+            id="confirmDeleteBtn"
+            class="confirm-btn delete"
+          >
+            삭제
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="./script/main.js"></script>
+  </body>
+</html>
