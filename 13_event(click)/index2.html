@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>click</title>
+  </head>
+  <body>
+    <h1 id="txt">큰제목 태그</h1>
+    <h2 id="txt2">두번째 큰 제목태그</h2>
+    <p id="ppp">첫번째 문단</p>
+
+    <script>
+      let h1 = document.getElementById("txt");
+      let h2 = document.getElementById("txt2");
+      let p = document.getElementById("ppp");
+      console.log(h1);
+      h1.addEventListener("click", function () {
+        h1.style.background = "yellow";
+        h1.style.color = "red";
+      });
+      h2.addEventListener("click", function () {
+        h2.style.border = "solid 10px red";
+      });
+      p.addEventListener("mouseenter", function () {
+        p.style.fontSize = "24px";
+        this.style.color = "red";
+      });
+      p.addEventListener("mouseleave", function () {
+        p.style.fontSize = "16px";
+        this.style.color = "#000";
+      });
+    </script>
+  </body>
+</html>
