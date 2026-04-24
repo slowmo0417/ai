@@ -1,34 +1,33 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>모바일메뉴버튼</title>
+    <title>모바일메뉴</title>
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="cover"></div>
-    <nav class="mobile-menu">
+    <!-- 모바일 메뉴 -->
+    <div class="cover" id="cover"></div>
+    <nav class="mobile-menu" id="mobileMenu">
       <ul>
-        <li class="close">
+        <li class="close" id="closeBtn">
           <a href="#"
             ><img
               src="./images/icon/material-symbols_close-rounded.png"
-              alt="닫기"
+              alt="닫기버튼"
           /></a>
         </li>
-        <li><a href="#">홈</a></li>
-        <li><a href="#">회사소개</a></li>
-        <li><a href="#">서비스</a></li>
-        <li><a href="#">포트폴리오</a></li>
-        <li><a href="#">문의하기</a></li>
+        <li class="menu"><a href="#">홈</a></li>
+        <li class="menu"><a href="#">회사소개</a></li>
+        <li class="menu"><a href="#">서비스</a></li>
+        <li class="menu"><a href="#">포트폴리오</a></li>
+        <li class="menu"><a href="#">문의하기</a></li>
       </ul>
     </nav>
     <header>
-      <h1>
-        <a href="index.html">MOBILE</a>
-      </h1>
-      <button>
+      <h1><a href="./index.html">mobile</a></h1>
+      <button id="btn">
         <img
           src="./images/icon/material-symbols_menu-rounded.png"
           alt="전체메뉴"
@@ -38,11 +37,13 @@
     <main>
       <h2>모바일 메인 화면</h2>
       <p>
-        햄버거 버튼을 클릭하면 오른쪽에서 모바일 메뉴가 애니메이션으로 부트럽게
+        햄버거 버튼을 클릭하면 오른쪽에서 모바일 메뉴가 애니메이션으로 부드럽게
         나타납니다.
       </p>
     </main>
+    <!-- 제이쿼리 라이브러리 cdn방식 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="./script/script.js"></script>
+    <!-- <script src="./script/script.js"></script> -->
+    <script src="./script/script2.js"></script>
   </body>
 </html>
