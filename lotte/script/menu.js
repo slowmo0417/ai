@@ -193,6 +193,7 @@ const sheetClose = document.querySelector("#sheetClose");
 const addCartBtn = document.querySelector("#addCartBtn");
 const cartToast = document.querySelector("#cartToast");
 const setDetail = document.querySelector("#setDetail");
+
 const SET_EXTRA_PRICE = 2500;
 const SEASONED_POTATO_EXTRA_PRICE = 500;
 
@@ -220,26 +221,38 @@ function numberToPrice(number) {
   return number.toLocaleString("ko-KR") + "원";
 }
 
+function getCartMenuName() {
+  if (!selectedMenu) return "";
+
+  const baseName = textOnly(selectedMenu.name);
+
+  if (selectedSetType === "set") {
+    return `${baseName}세트`;
+  }
+
+  return baseName;
+}
+
 function createStarButton(menuName) {
   return `
-          <button type="button" class="favorite-btn" aria-label="${textOnly(menuName)} 즐겨찾기">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 2.4l2.98 6.04 6.67.97-4.82 4.7 1.14 6.64L12 17.62 6.03 20.75l1.14-6.64-4.82-4.7 6.67-.97L12 2.4z" />
-            </svg>
-          </button>
-        `;
+    <button type="button" class="favorite-btn" aria-label="${textOnly(menuName)} 즐겨찾기">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 2.4l2.98 6.04 6.67.97-4.82 4.7 1.14 6.64L12 17.62 6.03 20.75l1.14-6.64-4.82-4.7 6.67-.97L12 2.4z" />
+      </svg>
+    </button>
+  `;
 }
 
 function renderCategories() {
   categoryScroll.innerHTML = categories
     .map(
       (category) => `
-            <button
-              type="button"
-              class="category-btn ${category.id === selectedCategory ? "is-active" : ""}"
-              data-category="${category.id}"
-            >${category.label}</button>
-          `,
+        <button
+          type="button"
+          class="category-btn ${category.id === selectedCategory ? "is-active" : ""}"
+          data-category="${category.id}"
+        >${category.label}</button>
+      `,
     )
     .join("");
 }
@@ -252,15 +265,15 @@ function renderMenus() {
   menuGrid.innerHTML = filteredMenus
     .map(
       (menu) => `
-            <article class="menu-card" data-menu-index="${menus.indexOf(menu)}">
-              ${createStarButton(menu.name)}
-              <div class="menu-img-box">
-                <img class="menu-img" src="${menu.image}" alt="${textOnly(menu.name)}" />
-              </div>
-              <h2 class="menu-name">${textWithBreak(menu.name)}</h2>
-              <p class="menu-price">${menu.price}<span class="won">원~</span></p>
-            </article>
-          `,
+        <article class="menu-card" data-menu-index="${menus.indexOf(menu)}">
+          ${createStarButton(menu.name)}
+          <div class="menu-img-box">
+            <img class="menu-img" src="${menu.image}" alt="${textOnly(menu.name)}" />
+          </div>
+          <h2 class="menu-name">${textWithBreak(menu.name)}</h2>
+          <p class="menu-price">${menu.price}<span class="won">원~</span></p>
+        </article>
+      `,
     )
     .join("");
 }
@@ -271,6 +284,7 @@ function openOptionSheet(menu) {
   selectedSetType = "single";
   selectedSide = "감자튀김";
   selectedDrink = "콜라";
+
   resetChoiceButtons();
 
   optionImage.src = menu.image;
@@ -293,6 +307,7 @@ function closeOptionSheet() {
 
 function getSelectedOptionExtraPrice() {
   const setPrice = selectedSetType === "set" ? SET_EXTRA_PRICE : 0;
+
   const sidePrice =
     selectedSetType === "set" && selectedSide === "양념감자"
       ? SEASONED_POTATO_EXTRA_PRICE
@@ -342,6 +357,7 @@ function getCartItems() {
 
 function saveCartItems(items) {
   localStorage.setItem("cartItems", JSON.stringify(items));
+
   if (typeof window.updateCartCountBadge === "function") {
     window.updateCartCountBadge();
   }
@@ -351,12 +367,15 @@ function addSelectedMenuToCart() {
   if (!selectedMenu) return;
 
   const cartItems = getCartItems();
+  const cartMenuName = getCartMenuName();
+
   const cartId = [
-    textOnly(selectedMenu.name),
+    cartMenuName,
     selectedSetType,
     selectedSetType === "set" ? selectedSide : "",
     selectedSetType === "set" ? selectedDrink : "",
   ].join("-");
+
   const sameItem = cartItems.find((item) => item.id === cartId);
 
   if (sameItem) {
@@ -364,7 +383,8 @@ function addSelectedMenuToCart() {
   } else {
     cartItems.push({
       id: cartId,
-      name: selectedMenu.name,
+      name: cartMenuName,
+      originalName: textOnly(selectedMenu.name),
       price: priceToNumber(selectedMenu.price) + getSelectedOptionExtraPrice(),
       image: selectedMenu.image,
       quantity: selectedQty,
