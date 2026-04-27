@@ -363,7 +363,7 @@
       .choice-btn {
         min-height: 72px;
         padding: 8px 6px 7px;
-        border: 1px solid var(--gray-200);
+        border: 0;
         border-radius: 12px;
         background: #ffffff;
         color: #555555;
@@ -375,11 +375,12 @@
         align-items: center;
         justify-content: center;
         gap: 5px;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
         transition:
-          border-color 0.18s ease,
           background-color 0.18s ease,
           color 0.18s ease,
-          transform 0.18s ease;
+          transform 0.18s ease,
+          box-shadow 0.18s ease;
       }
 
       .choice-thumb {
@@ -401,7 +402,8 @@
       }
 
       .choice-btn:hover {
-        background: #fafafa;
+        background: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
 
       .choice-btn:active {
@@ -409,19 +411,36 @@
       }
 
       .choice-btn.is-active {
-        border-color: var(--red);
-        background: #fff4f5;
-        color: var(--red);
+        background: var(--red);
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(237, 26, 43, 0.22);
       }
 
       .set-detail {
-        display: none;
-        margin-top: 14px;
+        display: grid;
+        grid-template-rows: 0fr;
+        margin-top: 0;
         padding-top: 0;
+        opacity: 0;
+        transform: translateY(-4px) scale(0.985);
+        overflow: hidden;
+        transition:
+          grid-template-rows 0.3s cubic-bezier(0.2, 1.12, 0.36, 1),
+          margin-top 0.3s cubic-bezier(0.2, 1.12, 0.36, 1),
+          opacity 0.18s ease-out,
+          transform 0.3s cubic-bezier(0.2, 1.12, 0.36, 1);
+      }
+
+      .set-detail-inner {
+        min-height: 0;
+        overflow: hidden;
       }
 
       .set-detail.is-show {
-        display: block;
+        grid-template-rows: 1fr;
+        margin-top: 14px;
+        opacity: 1;
+        transform: translateY(0) scale(1);
       }
 
       .option-label {
