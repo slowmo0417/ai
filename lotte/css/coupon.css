@@ -1,0 +1,275 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: #fff;
+  color: #262626;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: #fff;
+  overflow-x: hidden;
+}
+
+.coupon-page {
+  min-height: calc(100vh - 48px - 77px);
+  padding: 48px 30px 101px;
+}
+
+.coupon-tabs {
+  display: flex;
+  gap: 14px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #d6d6d6;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.coupon-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.coupon-tab {
+  flex: 0 0 auto;
+  min-width: 48px;
+  height: 32px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #d9d9d9;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.coupon-tab:hover {
+  background: #cfcfcf;
+  transform: translateY(-1px);
+}
+
+.coupon-tab.is-active {
+  background: #ed1a2b;
+}
+
+.coupon-tab.is-active:hover {
+  background: #d91525;
+  box-shadow: 0 4px 10px rgba(237, 26, 43, 0.22);
+}
+
+.coupon-tab:active {
+  transform: scale(0.94);
+}
+
+.coupon-count-text {
+  margin-top: 13px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #222;
+}
+
+.coupon-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 156px);
+  justify-content: center;
+  gap: 16px;
+}
+
+.coupon-card {
+  width: 156px;
+  height: 196px;
+  min-width: 0;
+  padding: 10px 10px 7px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow:
+    0 5px 14px rgba(0, 0, 0, 0.12),
+    0 1px 3px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 10px 22px rgba(0, 0, 0, 0.16),
+    0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.coupon-card:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.coupon-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 136px;
+  height: 86px;
+  margin: 0 auto;
+}
+
+.coupon-thumb img {
+  width: 136px;
+  height: 86px;
+  object-fit: contain;
+}
+
+.coupon-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 51px;
+  padding: 8px 2px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #4a4a4a;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.coupon-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 0;
+}
+
+.coupon-origin-price {
+  font-size: 11px;
+  font-weight: 400;
+  color: #9a9a9a;
+  text-decoration: line-through;
+}
+
+.coupon-sale-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ed1a2b;
+  letter-spacing: -0.04em;
+}
+
+.coupon-date {
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 500;
+  color: #999;
+  text-align: center;
+}
+
+.coupon-card[hidden] {
+  display: none;
+}
+
+.coupon-empty {
+  display: none;
+  padding: 72px 20px;
+  color: #999;
+  text-align: center;
+}
+
+.coupon-empty.is-show {
+  display: block;
+}
+
+.coupon-empty strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+  color: #555;
+}
+
+.coupon-empty p {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.toast {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 93px;
+  z-index: 100;
+  width: auto;
+  padding: 13px 16px;
+  border-radius: 14px;
+  background: rgba(38, 38, 38, 0.92);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.24s ease,
+    transform 0.24s ease;
+}
+
+.toast.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@media (max-width: 360px) {
+  .coupon-page {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .coupon-grid {
+    grid-template-columns: repeat(2, 156px);
+    gap: 8px;
+  }
+}

@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>롯데리아</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/menu.css" />
+  </head>
+
+  <body>
+    <div
+      class="app"
+      data-header-mode="sub"
+      data-header-title="메뉴 선택"
+      data-show-bottom-nav="false"
+      data-active-nav="more"
+    >
+      <header class="app-header">
+        <div class="header-left">
+          <button class="header-back" type="button" aria-label="뒤로가기">
+            <svg
+              class="header-back-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M15.6 1.20001L17.28 3.00001L8.40003 12L17.28 21L15.6 22.8L4.80003 12L15.6 1.20001Z"
+                fill="#262626"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="header-center">
+          <img
+            class="header-logo"
+            src="./images/logo/LOTTERIA BI_wordmark_eng 1.png"
+            alt="롯데리아"
+          />
+          <h1 class="header-title"></h1>
+        </div>
+
+        <div class="header-right">
+          <a
+            href="./cart.html"
+            class="header-icon-btn header-cart"
+            aria-label="장바구니"
+            data-header-icon="cart"
+          >
+            <svg
+              class="header-icon-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2C9.24 2 7 4.24 7 7V8H4C3.45 8 3 8.45 3 9V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V9C21 8.45 20.55 8 20 8H17V7C17 4.24 14.76 2 12 2ZM9 7C9 5.35 10.35 4 12 4C13.65 4 15 5.35 15 7V8H9V7Z"
+                fill="#BFBFBF"
+              />
+            </svg>
+
+            <span class="cart-count-badge is-hidden" id="cartCountBadge"
+              >0</span
+            >
+          </a>
+
+          <a
+            href="./notice.html"
+            class="header-icon-btn header-bell"
+            data-header-icon="notice"
+            aria-label="알림"
+          >
+            <svg
+              class="header-icon-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 19V20H3V19L5 17V11C5 7.9 7.03 5.17 10 4.29V4C10 3.46957 10.2107 2.96086 10.5858 2.58579C10.9609 2.21071 11.4696 2 12 2C12.5304 2 13.0391 2.21071 13.4142 2.58579C13.7893 2.96086 14 3.46957 14 4V4.29C16.97 5.17 19 7.9 19 11V17L21 19ZM14 21C14 21.5304 13.7893 22.0391 13.4142 22.4142C13.0391 22.7893 12.5304 23 12 23C11.4696 23 10.9609 22.7893 10.5858 22.4142C10.2107 22.0391 10 21.5304 10 21"
+                fill="#BFBFBF"
+              />
+            </svg>
+          </a>
+        </div>
+      </header>
+      <div
+        class="app"
+        data-header-mode="sub"
+        data-header-title="메뉴선택"
+        data-show-bottom-nav="false"
+        data-active-nav=""
+      >
+        <main class="menu-page" aria-label="메뉴선택 화면">
+          <section class="store-area" aria-label="매장 정보">
+            <h1 class="store-name">김포장기점</h1>
+          </section>
+
+          <nav class="category-wrap" aria-label="메뉴 카테고리">
+            <div class="category-scroll" id="categoryScroll"></div>
+          </nav>
+
+          <section class="menu-content">
+            <div class="menu-grid" id="menuGrid"></div>
+          </section>
+        </main>
+
+        <div
+          class="option-backdrop"
+          id="optionBackdrop"
+          aria-hidden="true"
+        ></div>
+
+        <aside
+          class="option-sheet"
+          id="optionSheet"
+          aria-label="메뉴 담기 선택창"
+          aria-hidden="true"
+        >
+          <div class="option-handle" aria-hidden="true"></div>
+          <div class="option-top">
+            <div class="option-img-box">
+              <img class="option-img" id="optionImage" src="" alt="" />
+            </div>
+            <div class="option-info">
+              <h2 class="option-name" id="optionName"></h2>
+              <p class="option-price" id="optionPrice"></p>
+            </div>
+          </div>
+
+          <div class="option-row">
+            <p class="option-label">수량</p>
+            <div class="qty-control" aria-label="수량 선택">
+              <button
+                type="button"
+                class="qty-btn"
+                id="qtyMinus"
+                aria-label="수량 감소"
+              >
+                −
+              </button>
+              <span class="qty-number" id="qtyNumber">1</span>
+              <button
+                type="button"
+                class="qty-btn"
+                id="qtyPlus"
+                aria-label="수량 증가"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div class="choice-area">
+            <div class="choice-block">
+              <p class="choice-title">구성 선택</p>
+              <div
+                class="choice-list"
+                role="group"
+                aria-label="단품 또는 세트 선택"
+              >
+                <button
+                  type="button"
+                  class="choice-btn is-active"
+                  data-set-type="single"
+                >
+                  단품
+                </button>
+                <button type="button" class="choice-btn" data-set-type="set">
+                  세트 +2,500원
+                </button>
+              </div>
+            </div>
+
+            <div class="set-detail" id="setDetail">
+              <div class="choice-block">
+                <p class="choice-title">사이드 선택</p>
+                <div class="choice-list" role="group" aria-label="사이드 선택">
+                  <button
+                    type="button"
+                    class="choice-btn is-active"
+                    data-side-option="감자튀김"
+                  >
+                    <img
+                      class="choice-thumb"
+                      src="./images/menu/img-17.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="choice-text">감자튀김</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="choice-btn"
+                    data-side-option="양념감자"
+                  >
+                    <img
+                      class="choice-thumb"
+                      src="./images/menu/img-16.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="choice-text">양념감자 +500원</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="choice-block">
+                <p class="choice-title">음료 선택</p>
+                <div class="choice-list" role="group" aria-label="음료 선택">
+                  <button
+                    type="button"
+                    class="choice-btn is-active"
+                    data-drink-option="콜라"
+                  >
+                    <img
+                      class="choice-thumb"
+                      src="./images/menu/img-19.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="choice-text">콜라</span>
+                  </button>
+                  <button
+                    type="button"
+                    class="choice-btn"
+                    data-drink-option="사이다"
+                  >
+                    <img
+                      class="choice-thumb"
+                      src="./images/menu/img-20.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                    <span class="choice-text">사이다</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="option-total">
+            <p class="total-label">총 주문금액</p>
+            <p class="total-price" id="totalPrice">0원</p>
+          </div>
+
+          <div class="sheet-actions">
+            <button type="button" class="sheet-btn cancel" id="sheetClose">
+              취소
+            </button>
+            <button type="button" class="sheet-btn submit" id="addCartBtn">
+              장바구니 담기
+            </button>
+          </div>
+        </aside>
+
+        <div class="cart-toast" id="cartToast" role="status" aria-live="polite">
+          장바구니에 담았습니다
+        </div>
+      </div>
+
+      <nav class="bottom-nav" aria-label="하단 탭">
+        <ul class="bottom-nav-list">
+          <li class="bottom-nav-item">
+            <a
+              href="./main.html"
+              class="nav-item"
+              data-nav="home"
+              aria-label="홈"
+            >
+              <svg
+                class="nav-icon-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 19V10C4 9.68333 4.071 9.38333 4.213 9.1C4.355 8.81667 4.55067 8.58333 4.8 8.4L10.8 3.9C11.15 3.63333 11.55 3.5 12 3.5C12.45 3.5 12.85 3.63333 13.2 3.9L19.2 8.4C19.45 8.58333 19.646 8.81667 19.788 9.1C19.93 9.38333 20.0007 9.68333 20 10V19C20 19.55 19.804 20.021 19.412 20.413C19.02 20.805 18.5493 21.0007 18 21H15C14.7167 21 14.4793 20.904 14.288 20.712C14.0967 20.52 14.0007 20.2827 14 20V15C14 14.7167 13.904 14.4793 13.712 14.288C13.52 14.0967 13.2827 14.0007 13 14H11C10.7167 14 10.4793 14.096 10.288 14.288C10.0967 14.48 10.0007 14.7173 10 15V20C10 20.2833 9.904 20.521 9.712 20.713C9.52 20.905 9.28267 21.0007 9 21H6C5.45 21 4.97933 20.8043 4.588 20.413C4.19667 20.0217 4.00067 19.5507 4 19Z"
+                  fill="#ED1A2B"
+                />
+              </svg>
+              <span class="nav-label">홈</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav-item">
+            <a
+              href="./coupon.html"
+              class="nav-item"
+              data-nav="coupon"
+              aria-label="쿠폰"
+            >
+              <svg
+                class="nav-icon-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19 4C19.7652 3.99996 20.5015 4.29233 21.0583 4.81728C21.615 5.34224 21.9501 6.06011 21.995 6.824L22 7V8.817C21.9977 9.08708 21.925 9.35189 21.7888 9.58518C21.6527 9.81847 21.458 10.0121 21.224 10.147L21.117 10.205C20.7935 10.3638 20.5189 10.6071 20.3222 10.9091C20.1256 11.2111 20.0142 11.5607 19.9998 11.9208C19.9855 12.2809 20.0687 12.6382 20.2407 12.9549C20.4127 13.2716 20.6671 13.536 20.977 13.72L21.117 13.795C21.55 14.009 21.937 14.451 21.993 15.035L22 15.183V17C22 17.7652 21.7077 18.5015 21.1827 19.0583C20.6578 19.615 19.9399 19.9501 19.176 19.995L19 20H5C4.23479 20 3.49849 19.7077 2.94174 19.1827C2.38499 18.6578 2.04989 17.9399 2.005 17.176L2 17V15.183C2 14.577 2.352 14.105 2.776 13.853L2.883 13.795C3.20653 13.6362 3.48114 13.3929 3.67779 13.0909C3.87445 12.7889 3.98583 12.4393 4.00017 12.0792C4.01452 11.7191 3.93129 11.3618 3.75928 11.0451C3.58727 10.7284 3.33288 10.464 3.023 10.28L2.883 10.205C2.45 9.991 2.063 9.549 2.007 8.965L2 8.818V7C1.99996 6.23479 2.29233 5.49849 2.81728 4.94174C3.34224 4.38499 4.06011 4.04989 4.824 4.005L5 4H19ZM10 9C9.73478 9 9.48043 9.10536 9.29289 9.29289C9.10536 9.48043 9 9.73478 9 10V14C9 14.2652 9.10536 14.5196 9.29289 14.7071C9.48043 14.8946 9.73478 15 10 15C10.2652 15 10.5196 14.8946 10.7071 14.7071C10.8946 14.5196 11 14.2652 11 14V10C11 9.73478 10.8946 9.48043 10.7071 9.29289C10.5196 9.10536 10.2652 9 10 9Z"
+                  fill="#BFBFBF"
+                />
+              </svg>
+              <span class="nav-label">쿠폰</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav-item">
+            <button
+              type="button"
+              class="nav-item center"
+              id="orderNavFab"
+              aria-label="주문 방식 선택 열기"
+            >
+              <span class="nav-fab">
+                <span class="order-content">
+                  <span class="order-visual" aria-hidden="true">
+                    <span class="order-icon-wrap">
+                      <svg
+                        class="nav-order-icon-svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18.06 23H19.72C20.56 23 21.25 22.35 21.35 21.53L23 5.05H18V1H16.03V5.05H11.06L11.36 7.39C13.07 7.86 14.67 8.71 15.63 9.65C17.07 11.07 18.06 12.54 18.06 14.94V23ZM1 22V21H16.03V22C16.03 22.54 15.58 23 15 23H2C1.45 23 1 22.54 1 22ZM16.03 15C16.03 7 1 7 1 15H16.03ZM1 17H16V19H1V17Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+
+                      <span class="order-label">주문</span>
+                    </span>
+
+                    <span class="order-logo-wrap">
+                      <img
+                        class="nav-symbol-logo"
+                        src="./images/logo/LOTTERIA BI_symbol.png"
+                        alt=""
+                      />
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </button>
+          </li>
+
+          <li class="bottom-nav-item">
+            <a
+              href="./history.html"
+              class="nav-item"
+              data-nav="history"
+              aria-label="주문내역"
+            >
+              <svg
+                class="nav-icon-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17 2C17.7956 2 18.5587 2.31607 19.1213 2.87868C19.6839 3.44129 20 4.20435 20 5V21C20 21.181 19.9509 21.3587 19.8579 21.514C19.7648 21.6693 19.6314 21.7965 19.4718 21.8819C19.3121 21.9673 19.1323 22.0078 18.9515 21.999C18.7707 21.9902 18.5956 21.9325 18.445 21.832L16.127 20.287L14.707 21.707C14.5348 21.8792 14.3057 21.9826 14.0627 21.9979C13.8197 22.0132 13.5794 21.9393 13.387 21.79L13.293 21.707L12 20.415L10.707 21.707C10.5348 21.8792 10.3057 21.9826 10.0627 21.9979C9.81965 22.0132 9.5794 21.9393 9.387 21.79L9.293 21.707L7.872 20.287L5.555 21.832L5.536 21.844L5.482 21.874L5.454 21.891L5.4 21.914L5.35 21.937L5.301 21.952L5.241 21.971L5.189 21.98L5.132 21.991L5.048 21.997L5.022 22H5L4.951 21.997H4.912L4.899 21.994H4.883L4.842 21.986L4.804 21.981L4.789 21.976L4.771 21.974L4.737 21.963L4.697 21.953L4.678 21.946L4.663 21.942L4.634 21.929L4.594 21.914L4.573 21.903L4.56 21.898L4.532 21.882L4.496 21.864L4.482 21.854L4.464 21.844L4.426 21.817L4.404 21.803L4.394 21.794L4.374 21.78L4.329 21.739L4.317 21.731L4.293 21.707L4.258 21.668L4.238 21.648L4.231 21.637L4.22 21.625L4.188 21.58L4.168 21.555L4.156 21.536L4.126 21.482L4.109 21.454L4.086 21.4L4.063 21.35C4.04964 21.3147 4.03828 21.2786 4.029 21.242L4.019 21.185L4.009 21.132L4 21V5C4 4.20435 4.31607 3.44129 4.87868 2.87868C5.44129 2.31607 6.20435 2 7 2H17ZM15 14H13C12.7348 14 12.4804 14.1054 12.2929 14.2929C12.1054 14.4804 12 14.7348 12 15C12 15.2652 12.1054 15.5196 12.2929 15.7071C12.4804 15.8946 12.7348 16 13 16H15C15.2652 16 15.5196 15.8946 15.7071 15.7071C15.8946 15.5196 16 15.2652 16 15C16 14.7348 15.8946 14.4804 15.7071 14.2929C15.5196 14.1054 15.2652 14 15 14ZM15 10H9C8.73478 10 8.48043 10.1054 8.29289 10.2929C8.10536 10.4804 8 10.7348 8 11C8 11.2652 8.10536 11.5196 8.29289 11.7071C8.48043 11.8946 8.73478 12 9 12H15C15.2652 12 15.5196 11.8946 15.7071 11.7071C15.8946 11.5196 16 11.2652 16 11C16 10.7348 15.8946 10.4804 15.7071 10.2929C15.5196 10.1054 15.2652 10 15 10ZM15 6H9C8.73478 6 8.48043 6.10536 8.29289 6.29289C8.10536 6.48043 8 6.73478 8 7C8 7.26522 8.10536 7.51957 8.29289 7.70711C8.48043 7.89464 8.73478 8 9 8H15C15.2652 8 15.5196 7.89464 15.7071 7.70711C15.8946 7.51957 16 7.26522 16 7C16 6.73478 15.8946 6.48043 15.7071 6.29289C15.5196 6.10536 15.2652 6 15 6Z"
+                  fill="#BFBFBF"
+                />
+              </svg>
+              <span class="nav-label">주문내역</span>
+            </a>
+          </li>
+
+          <li class="bottom-nav-item">
+            <a
+              href="./more.html"
+              class="nav-item"
+              data-nav="more"
+              aria-label="더보기"
+            >
+              <svg
+                class="nav-icon-svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 18C3.71667 18 3.47934 17.904 3.288 17.712C3.09667 17.52 3.00067 17.2827 3 17C2.99934 16.7173 3.09534 16.48 3.288 16.288C3.48067 16.096 3.718 16 4 16H20C20.2833 16 20.521 16.096 20.713 16.288C20.905 16.48 21.0007 16.7173 21 17C20.9993 17.2827 20.9033 17.5203 20.712 17.713C20.5207 17.9057 20.2833 18.0013 20 18H4ZM4 13C3.71667 13 3.47934 12.904 3.288 12.712C3.09667 12.52 3.00067 12.2827 3 12C2.99934 11.7173 3.09534 11.48 3.288 11.288C3.48067 11.096 3.718 11 4 11H20C20.2833 11 20.521 11.096 20.713 11.288C20.905 11.48 21.0007 11.7173 21 12C20.9993 12.2827 20.9033 12.5203 20.712 12.713C20.5207 12.9057 20.2833 13.0013 20 13H4ZM4 8C3.71667 8 3.47934 7.904 3.288 7.712C3.09667 7.52 3.00067 7.28267 3 7C2.99934 6.71733 3.09534 6.48 3.288 6.288C3.48067 6.096 3.718 6 4 6H20C20.2833 6 20.521 6.096 20.713 6.288C20.905 6.48 21.0007 6.71733 21 7C20.9993 7.28267 20.9033 7.52033 20.712 7.713C20.5207 7.90567 20.2833 8.00133 20 8H4Z"
+                  fill="#BFBFBF"
+                />
+              </svg>
+              <span class="nav-label">더보기</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div
+        id="orderSheetBackdrop"
+        class="sheet-backdrop"
+        hidden
+        aria-hidden="true"
+      ></div>
+
+      <section
+        id="orderSheet"
+        class="order-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="sheetTitle"
+        hidden
+      >
+        <div class="sheet-header">
+          <div class="sheet-title-line" id="sheetTitle">
+            <strong class="sheet-title-accent">주문 방식을</strong>
+            <span class="sheet-title-text">선택해 주세요!</span>
+          </div>
+
+          <button
+            id="orderSheetClose"
+            type="button"
+            class="sheet-close"
+            aria-label="팝업 닫기"
+          >
+            ×
+          </button>
+        </div>
+
+        <div class="sheet-options">
+          <button type="button" class="sheet-option">
+            <span class="sheet-option-icon" aria-hidden="true">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 2V22M4 2.5V7.5C4 10 7 10 7 10C7 10 10 10 10 7.5V2.5M17 10V22"
+                  stroke="#FFAF00"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M20 6C20 8.209 18.657 10 17 10C15.343 10 14 8.209 14 6C14 3.791 15.343 2 17 2C18.657 2 20 3.791 20 6Z"
+                  fill="#FFAF00"
+                  stroke="#FFAF00"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="sheet-option-label">매장식사</span>
+          </button>
+
+          <button type="button" class="sheet-option">
+            <span class="sheet-option-icon" aria-hidden="true">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 2.5C14.4839 2.5 16.5 4.51614 16.5 7V8.5H20C20.2739 8.5 20.5 8.72614 20.5 9V20C20.5 20.8239 19.8239 21.5 19 21.5H5C4.17614 21.5 3.5 20.8239 3.5 20V9C3.5 8.72614 3.72614 8.5 4 8.5H7.5V7C7.5 4.51614 9.51614 2.5 12 2.5ZM12 3.5C10.0739 3.5 8.5 5.07386 8.5 7V8.5H15.5V7C15.5 5.07386 13.9261 3.5 12 3.5Z"
+                  fill="#FFAF00"
+                  stroke="#FFAF00"
+                />
+              </svg>
+            </span>
+            <span class="sheet-option-label">방문포장</span>
+          </button>
+
+          <button type="button" class="sheet-option">
+            <span class="sheet-option-icon" aria-hidden="true">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 5.5C17.3978 5.5 17.7792 5.65815 18.0605 5.93945C18.3419 6.22076 18.5 6.60218 18.5 7V10.1748L14.2598 15.5H9.5V16C9.5 17.3839 8.38386 18.5 7 18.5C5.61614 18.5 4.5 17.3839 4.5 16V15.5H2.5V13C2.5 11.0661 4.06614 9.5 6 9.5H9.5V14.5H13.7393L13.8896 14.3135L17.3896 9.96387L17.5 9.82617V6.5H14.5V5.5H17ZM19 13.5C20.3839 13.5 21.5 14.6161 21.5 16C21.5 17.3839 20.3839 18.5 19 18.5C17.6161 18.5 16.5 17.3839 16.5 16C16.5 14.6161 17.6161 13.5 19 13.5ZM5.5 16C5.5 16.8261 6.17386 17.5 7 17.5C7.82614 17.5 8.5 16.8261 8.5 16V15.5H5.5V16ZM19 14.5C18.1739 14.5 17.5 15.1739 17.5 16C17.5 16.8261 18.1739 17.5 19 17.5C19.8261 17.5 20.5 16.8261 20.5 16C20.5 15.1739 19.8261 14.5 19 14.5ZM9.5 6.5V7.5H5.5V6.5H9.5Z"
+                  fill="#FFAF00"
+                  stroke="#FFAF00"
+                />
+              </svg>
+            </span>
+            <span class="sheet-option-label">배달주문</span>
+          </button>
+        </div>
+      </section>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+    <script src="./script/common.js"></script>
+    <script src="./script/menu.js"></script>
+  </body>
+</html>

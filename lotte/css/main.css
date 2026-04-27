@@ -1,0 +1,605 @@
+@font-face {
+  font-family: "RiaSans";
+  src: url("../font/RiaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --app-header-height: 48px;
+  --app-bottom-nav-height: 77px;
+  --app-bottom-extra-space: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: #fff !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  color: #222;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  min-height: 100vh;
+  margin: 0;
+  background: #fff !important;
+  overflow-x: hidden;
+}
+
+/* =========================
+   헤더 / 하단탭 공간 대응
+========================= */
+
+.main,
+.page-content {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: var(--app-header-height);
+  padding-bottom: calc(
+    var(--app-bottom-nav-height) + var(--app-bottom-extra-space)
+  );
+  background: #fff !important;
+  overflow-x: hidden;
+}
+
+.app.no-bottom-nav .main,
+.app.no-bottom-nav .page-content {
+  padding-bottom: 24px;
+}
+
+/* =========================
+   메인 슬라이드 배너
+========================= */
+
+.hero-slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 390 / 197;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  touch-action: pan-y;
+}
+
+.hero-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.hero-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.hero-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+}
+
+.hero-pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+
+.hero-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  transition:
+    width 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero-dot:hover {
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.hero-dot.is-active {
+  width: 14px;
+  background: #fff;
+}
+
+/* =========================
+   콘텐츠 공통
+========================= */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 24px 24px;
+  background: #fff;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: #222;
+}
+
+.section-more {
+  font-size: 11px;
+  font-weight: 700;
+  color: #444;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.section-more:hover {
+  color: #ed1c24;
+}
+
+.section-more:active {
+  opacity: 0.65;
+}
+
+/* =========================
+   가로 스크롤 영역
+========================= */
+
+.pick-grid,
+.store-list,
+.horizontal-scroll {
+  display: flex;
+  gap: 12px;
+  margin: 0 -24px 0 0;
+  padding: 0 24px 4px 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x pan-y;
+  cursor: grab;
+}
+
+.pick-grid.is-dragging,
+.store-list.is-dragging,
+.horizontal-scroll.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  user-select: none;
+}
+
+.pick-grid::-webkit-scrollbar,
+.store-list::-webkit-scrollbar,
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================
+   픽업 카드
+========================= */
+
+.pick-card {
+  scroll-snap-align: start;
+  flex: 0 0 212px;
+  width: 212px;
+  height: 136px;
+  padding: 18px 12px 14px;
+  border-radius: 13px;
+  background: #f6f6f6;
+  text-align: center;
+}
+
+.pick-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 8px;
+  color: #c7c7c7;
+}
+
+.pick-desc {
+  margin-bottom: 10px;
+  color: #a2a2a2;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.04em;
+}
+
+.primary-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: #ed1c24;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.primary-pill:hover:not(:disabled) {
+  background: #d71920;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(237, 28, 36, 0.25);
+}
+
+.primary-pill:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+  box-shadow: none;
+}
+
+.primary-pill:disabled {
+  background: #bfbfbf;
+  transform: none;
+  box-shadow: none;
+}
+
+.pick-card .primary-pill {
+  width: 100px;
+  height: 32px;
+  padding: 0;
+}
+
+/* =========================
+   매장 카드
+========================= */
+
+.store-card {
+  scroll-snap-align: start;
+  position: relative;
+  flex: 0 0 324px;
+  width: 324px;
+  height: 101px;
+  min-height: 101px;
+  padding: 16px 56px 14px 24px;
+  border-radius: 14px;
+  background: #ffe8ea;
+}
+
+.store-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.store-name {
+  color: #222;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 16px;
+  padding: 0 5px;
+  border-radius: 4px;
+  background: #ed1c24;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.store-badge.gray {
+  background: #c7c7c7;
+}
+
+.store-address {
+  margin-bottom: 8px;
+  color: #999;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+
+.store-distance {
+  color: #ffa600;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.store-star {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+  width: 20px;
+  height: 20px;
+  color: #bfbfbf;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.store-star.is-active {
+  color: #ffa600;
+}
+
+.store-star:hover {
+  color: #ffa600;
+  transform: scale(1.08);
+}
+
+.store-star:active {
+  transform: scale(0.94);
+}
+
+.store-order {
+  position: absolute;
+  right: 18px;
+  bottom: 17px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.store-card.is-disabled {
+  background: #ffe8ea;
+}
+
+.store-card.is-disabled .store-order {
+  background: #bfbfbf;
+  pointer-events: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.store-state-card {
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 324px;
+  width: 324px;
+  height: 101px;
+  min-height: 101px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #fff4f5;
+}
+
+.store-state-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffe0e3;
+  color: #ed1c24;
+}
+
+.store-state-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.store-state-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.store-state-card .store-name {
+  margin-bottom: 6px;
+}
+
+.store-state-card .store-address {
+  margin-bottom: 0;
+}
+
+.location-allow-btn {
+  flex: 0 0 78px;
+  width: 78px;
+  height: 32px;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   쿠폰 / 랭킹 카드
+========================= */
+
+.coupon-card,
+.rank-card {
+  scroll-snap-align: start;
+  position: relative;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.coupon-card:hover,
+.rank-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.18);
+}
+
+.coupon-card:active,
+.rank-card:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.product-img {
+  object-fit: contain;
+}
+
+.coupon-card {
+  flex: 0 0 156px;
+  width: 156px;
+  height: 196px;
+  min-height: 196px;
+  padding: 14px 11px 13px;
+}
+
+.coupon-card .product-img {
+  width: 134px;
+  height: 86px;
+  margin: 0 auto 10px;
+}
+
+.product-name {
+  min-height: 34px;
+  color: #333;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.05em;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 7px;
+}
+
+.origin-price {
+  color: #aaa;
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: line-through;
+}
+
+.sale-price {
+  color: #ed1c24;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.date-text {
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.rank-card {
+  flex: 0 0 138px;
+  width: 138px;
+  height: 148px;
+  min-height: 148px;
+  padding: 0 0 12px;
+}
+
+.rank-card .product-img {
+  width: 138px;
+  height: 100px;
+  margin: 0 auto 5px;
+}
+
+.rank-card .product-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.rank-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #cfcfcf;
+  color: #fff;
+  font-family: "RiaSans", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.rank-badge.top {
+  background: #ffa600;
+}

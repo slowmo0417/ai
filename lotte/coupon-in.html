@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>쿠폰</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/couponin.css" />
+  </head>
+  <body>
+    <div
+      class="app"
+      data-header-mode="sub"
+      data-header-title="쿠폰"
+      data-show-bottom-nav="true"
+      data-active-nav="coupon"
+    >
+      <header class="app-header">
+        <div class="header-left">
+          <button class="header-back" type="button" aria-label="뒤로가기">
+            <svg
+              class="header-back-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M15.6 1.20001L17.28 3.00001L8.40003 12L17.28 21L15.6 22.8L4.80003 12L15.6 1.20001Z"
+                fill="#262626"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="header-center">
+          <img
+            class="header-logo"
+            src="./images/logo/LOTTERIA BI_wordmark_eng 1.png"
+            alt="롯데리아"
+          />
+          <h1 class="header-title"></h1>
+        </div>
+
+        <div class="header-right">
+          <a
+            href="./cart.html"
+            class="header-icon-btn header-cart"
+            aria-label="장바구니"
+            data-header-icon="cart"
+          >
+            <svg
+              class="header-icon-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2C9.24 2 7 4.24 7 7V8H4C3.45 8 3 8.45 3 9V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V9C21 8.45 20.55 8 20 8H17V7C17 4.24 14.76 2 12 2ZM9 7C9 5.35 10.35 4 12 4C13.65 4 15 5.35 15 7V8H9V7Z"
+                fill="#BFBFBF"
+              />
+            </svg>
+
+            <span class="cart-count-badge is-hidden" id="cartCountBadge"
+              >0</span
+            >
+          </a>
+
+          <a
+            href="./notice.html"
+            class="header-icon-btn header-bell"
+            data-header-icon="notice"
+            aria-label="알림"
+          >
+            <svg
+              class="header-icon-svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M21 19V20H3V19L5 17V11C5 7.9 7.03 5.17 10 4.29V4C10 3.46957 10.2107 2.96086 10.5858 2.58579C10.9609 2.21071 11.4696 2 12 2C12.5304 2 13.0391 2.21071 13.4142 2.58579C13.7893 2.96086 14 3.46957 14 4V4.29C16.97 5.17 19 7.9 19 11V17L21 19ZM14 21C14 21.5304 13.7893 22.0391 13.4142 22.4142C13.0391 22.7893 12.5304 23 12 23C11.4696 23 10.9609 22.7893 10.5858 22.4142C10.2107 22.0391 10 21.5304 10 21"
+                fill="#BFBFBF"
+              />
+            </svg>
+          </a>
+        </div>
+      </header>
+      <main class="coupon-page">
+        <article class="coupon-card" aria-label="쿠폰 바코드">
+          <div class="barcode-area">
+            <img
+              class="barcode-img"
+              src="./images/바코드.png"
+              alt="쿠폰 바코드"
+            />
+          </div>
+
+          <div class="coupon-product">
+            <img
+              class="coupon-product-img"
+              src="./images/img.png"
+              alt="리아불고기세트"
+            />
+            <strong class="coupon-product-name">리아불고기세트</strong>
+          </div>
+        </article>
+
+        <section class="section coupon-info" aria-labelledby="couponInfoTitle">
+          <h2 class="section-title" id="couponInfoTitle">쿠폰정보</h2>
+
+          <div class="info-list">
+            <div class="info-row">
+              <span class="info-label">쿠폰명</span>
+              <span class="info-value">리아불고기세트</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">유효기간</span>
+              <span class="info-value">2026년 03월 22일까지</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">주문방법</span>
+              <span class="info-value">매장 / 포장 / 배달</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">제품금액</span>
+              <span class="info-value">7,300원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">할인금액</span>
+              <span class="info-value">1,000원</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">결제금액</span>
+              <span class="info-value">6,300원</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <section class="section notice-section" aria-labelledby="noticeTitle">
+          <h2 class="section-title" id="noticeTitle">유의사항</h2>
+
+          <ul class="notice-list">
+            <li>본 쿠폰은 행사 기간 내에만 사용 가능합니다.</li>
+            <li>일부 매장에서는 사용이 제한될 수 있습니다.</li>
+            <li>타 쿠폰 및 할인 혜택과 중복 사용이 불가할 수 있습니다.</li>
+            <li>
+              매장 상황에 따라 조기 종료 또는 메뉴 품절이 발생할 수 있습니다.
+            </li>
+            <li>쿠폰 사용 후 주문 취소 시 재사용이 불가할 수 있습니다.</li>
+            <li>
+              세트 변경, 사이드 추가 등 옵션 선택 시 추가 금액이 발생할 수
+              있습니다.
+            </li>
+          </ul>
+        </section>
+      </main>
+
+      <div class="bottom-action">
+        <button class="order-button" type="button">주문하기</button>
+      </div>
+    </div>
+
+    <script src="./script/common.js"></script>
+    <script src="./script/couponin.js"></script>
+  </body>
+</html>

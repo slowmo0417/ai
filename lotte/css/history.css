@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background: #fff;
+  color: #222;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+button {
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  padding-top: 48px;
+  padding-bottom: 77px;
+  background: #fff;
+  overflow: visible;
+}
+
+.page-header-space,
+.bottom-nav-space {
+  display: none;
+}
+
+.order-page {
+  width: 100%;
+  padding: 24px 24px 24px;
+  background: #fff;
+  overflow: visible;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 22px;
+  width: 100%;
+  min-height: 0;
+  padding: 24px 24px 16px 24px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.14);
+}
+
+.order-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 3px;
+}
+
+.order-thumb img {
+  display: block;
+  width: 138px;
+  height: 88px;
+  object-fit: contain;
+}
+
+.order-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.order-title {
+  width: 100%;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+  word-break: keep-all;
+}
+
+.order-date {
+  margin-top: 16px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 500;
+  color: #ffaf00;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.order-price {
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 600;
+  color: #ed1a2b;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+.detail-button {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 186px;
+  height: 32px;
+  margin-top: 16px;
+  border-radius: 999px;
+  background: #ed1a2b;
+  color: #fff;
+  font-size: 13px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+  text-align: center;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    filter 0.18s ease;
+}
+
+.detail-button:hover {
+  background: #d91424;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.detail-button:active {
+  transform: scale(0.97);
+  filter: brightness(0.96);
+}
+
+@media (max-width: 360px) {
+  .order-page {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .order-card {
+    grid-template-columns: 104px minmax(0, 1fr);
+    column-gap: 16px;
+    padding-left: 22px;
+    padding-right: 20px;
+  }
+
+  .order-thumb img {
+    width: 113px;
+    height: 100px;
+  }
+
+  .order-title,
+  .order-price {
+    font-size: 15px;
+  }
+
+  .detail-button {
+    width: 180px;
+  }
+}

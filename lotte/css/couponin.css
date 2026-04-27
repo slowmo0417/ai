@@ -1,0 +1,246 @@
+@font-face {
+  font-family: "RiaSans";
+  src: url("./font/RiaSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+  color: #262626;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR",
+    "Segoe UI", sans-serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.app {
+  --header-height: 48px;
+  --bottom-action-height: 96px;
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.header-spacer {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  height: var(--header-height);
+  background: #fff;
+}
+
+.coupon-page {
+  width: 100%;
+  padding: 64px 24px var(--bottom-action-height);
+}
+
+.coupon-card {
+  width: 100%;
+  min-height: 234px;
+  padding: 24px 24px 20px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.barcode-area {
+  width: 100%;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.barcode-img {
+  width: 100%;
+  height: 84px;
+  object-fit: contain;
+}
+
+.coupon-product {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.coupon-product-img {
+  flex: 0 0 142px;
+  width: 156px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.coupon-product-name {
+  flex: 1;
+  padding-bottom: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #333;
+  white-space: nowrap;
+}
+
+.section {
+  margin-top: 24px;
+}
+
+.section-title {
+  margin-bottom: 24px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ed1a2b;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 13px;
+  line-height: 1.1;
+}
+
+.info-label {
+  flex: 0 0 auto;
+  color: #595959;
+  font-weight: 600;
+}
+
+.info-value {
+  min-width: 0;
+  color: #4c4c4c;
+  font-weight: 500;
+  text-align: right;
+  word-break: keep-all;
+}
+
+.divider {
+  width: calc(100% + 48px);
+  height: 1px;
+  margin: 24px -24px 0;
+  background: #e8e8e8;
+}
+
+.notice-section {
+  margin-top: 28px;
+}
+
+.notice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+}
+
+.notice-list li {
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #6b6b6b;
+  letter-spacing: -0.02em;
+}
+
+.bottom-action {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  width: 100%;
+  padding: 0 24px 32px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.96) 28%,
+    #fff 100%
+  );
+}
+
+.order-button {
+  width: 100%;
+  height: 48px;
+  border-radius: 16px;
+  background: #ed1a2b;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(237, 26, 43, 0.22);
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.order-button:active {
+  transform: translateY(1px) scale(0.99);
+  background: #d91525;
+  box-shadow: 0 3px 8px rgba(237, 26, 43, 0.18);
+}
+
+@media (max-width: 340px) {
+  .coupon-page {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .coupon-card {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .coupon-product {
+    gap: 12px;
+  }
+
+  .coupon-product-img {
+    flex-basis: 124px;
+    width: 124px;
+  }
+
+  .coupon-product-name {
+    font-size: 14px;
+  }
+
+  .bottom-action {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}

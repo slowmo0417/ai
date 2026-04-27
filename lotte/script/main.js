@@ -1,0 +1,428 @@
+const KAKAO_JAVASCRIPT_KEY = "cc8c124f8a594a01e630a3c43ae4349a";
+
+let heroTrack = null;
+let heroSlides = [];
+let heroPagination = null;
+
+let currentHeroIndex = 0;
+let heroStartX = 0;
+let heroMoveX = 0;
+let isHeroDragging = false;
+let heroAutoTimer = null;
+
+function initHeroSlider() {
+  heroTrack = document.querySelector("#heroTrack");
+  heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
+  heroPagination = document.querySelector("#heroPagination");
+
+  if (!heroTrack || !heroSlides.length || !heroPagination) return;
+
+  heroPagination.innerHTML = "";
+
+  heroSlides.forEach((_, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-dot";
+    dot.setAttribute("aria-label", `${index + 1}번째 배너 보기`);
+
+    if (index === 0) dot.classList.add("is-active");
+
+    dot.addEventListener("click", () => {
+      moveHero(index);
+      restartHeroAutoSlide();
+    });
+
+    heroPagination.appendChild(dot);
+  });
+
+  heroTrack.addEventListener("pointerdown", (event) => {
+    isHeroDragging = true;
+    heroStartX = event.clientX;
+    heroMoveX = 0;
+
+    stopHeroAutoSlide();
+    heroTrack.setPointerCapture(event.pointerId);
+    heroTrack.style.transition = "none";
+  });
+
+  heroTrack.addEventListener("pointermove", (event) => {
+    if (!isHeroDragging) return;
+
+    heroMoveX = event.clientX - heroStartX;
+    const movePercent = (heroMoveX / heroTrack.clientWidth) * 100;
+
+    heroTrack.style.transform = `translateX(${
+      -(currentHeroIndex * 100) + movePercent
+    }%)`;
+  });
+
+  heroTrack.addEventListener("pointerup", endHeroDrag);
+  heroTrack.addEventListener("pointercancel", endHeroDrag);
+
+  startHeroAutoSlide();
+}
+
+function endHeroDrag() {
+  if (!isHeroDragging || !heroTrack) return;
+
+  isHeroDragging = false;
+  heroTrack.style.transition = "transform 0.35s ease";
+
+  if (heroMoveX < -45) {
+    moveHero(currentHeroIndex + 1);
+  } else if (heroMoveX > 45) {
+    moveHero(currentHeroIndex - 1);
+  } else {
+    moveHero(currentHeroIndex);
+  }
+
+  restartHeroAutoSlide();
+}
+
+function moveHero(index) {
+  if (!heroTrack || !heroSlides.length) return;
+
+  const dots = Array.from(document.querySelectorAll(".hero-dot"));
+
+  currentHeroIndex = (index + heroSlides.length) % heroSlides.length;
+  heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+
+  dots.forEach((dot, dotIndex) => {
+    dot.classList.toggle("is-active", dotIndex === currentHeroIndex);
+  });
+}
+
+function nextHero() {
+  moveHero(currentHeroIndex + 1);
+}
+
+function startHeroAutoSlide() {
+  stopHeroAutoSlide();
+  heroAutoTimer = window.setInterval(nextHero, 3000);
+}
+
+function stopHeroAutoSlide() {
+  if (!heroAutoTimer) return;
+
+  window.clearInterval(heroAutoTimer);
+  heroAutoTimer = null;
+}
+
+function restartHeroAutoSlide() {
+  stopHeroAutoSlide();
+  startHeroAutoSlide();
+}
+
+function enableHorizontalDrag(selector) {
+  document.querySelectorAll(selector).forEach((scrollArea) => {
+    let isDown = false;
+    let startDragX = 0;
+    let startScrollLeft = 0;
+
+    scrollArea.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") return;
+      if (event.target.closest("button, a")) return;
+
+      isDown = true;
+      startDragX = event.clientX;
+      startScrollLeft = scrollArea.scrollLeft;
+
+      scrollArea.classList.add("is-dragging");
+      scrollArea.setPointerCapture(event.pointerId);
+    });
+
+    scrollArea.addEventListener("pointermove", (event) => {
+      if (!isDown) return;
+
+      event.preventDefault();
+
+      const distance = event.clientX - startDragX;
+      scrollArea.scrollLeft = startScrollLeft - distance;
+    });
+
+    function endDrag() {
+      if (!isDown) return;
+
+      isDown = false;
+      scrollArea.classList.remove("is-dragging");
+    }
+
+    scrollArea.addEventListener("pointerup", endDrag);
+    scrollArea.addEventListener("pointercancel", endDrag);
+    scrollArea.addEventListener("pointerleave", endDrag);
+  });
+}
+
+function loadKakaoMapSdk() {
+  return new Promise((resolve, reject) => {
+    if (window.kakao?.maps?.services) {
+      resolve();
+      return;
+    }
+
+    if (
+      !KAKAO_JAVASCRIPT_KEY ||
+      KAKAO_JAVASCRIPT_KEY === "여기에_카카오_JavaScript_KEY_입력"
+    ) {
+      reject(new Error("카카오 JavaScript 키가 설정되지 않았습니다."));
+      return;
+    }
+
+    const existingScript = document.querySelector("#kakaoMapSdk");
+
+    if (existingScript) {
+      existingScript.addEventListener(
+        "load",
+        () => {
+          window.kakao.maps.load(resolve);
+        },
+        { once: true },
+      );
+      existingScript.addEventListener("error", reject, { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "kakaoMapSdk";
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JAVASCRIPT_KEY}&libraries=services&autoload=false`;
+
+    script.onload = () => {
+      if (!window.kakao?.maps) {
+        reject(new Error("카카오맵 객체를 찾을 수 없습니다."));
+        return;
+      }
+
+      window.kakao.maps.load(() => {
+        if (!window.kakao?.maps?.services) {
+          reject(new Error("카카오 Places 서비스를 찾을 수 없습니다."));
+          return;
+        }
+
+        resolve();
+      });
+    };
+
+    script.onerror = () => {
+      reject(new Error("카카오맵 SDK 로드에 실패했습니다."));
+    };
+
+    document.head.appendChild(script);
+  });
+}
+
+function formatDistance(distance) {
+  const meter = Number(distance);
+
+  if (!Number.isFinite(meter)) return "거리정보 없음";
+  if (meter >= 1000) return `${(meter / 1000).toFixed(1)}km`;
+
+  return `${Math.round(meter)}m`;
+}
+
+function renderLocationRequired() {
+  const storeList = document.querySelector("#storeList");
+  if (!storeList) return;
+
+  storeList.innerHTML = `
+    <article class="store-state-card is-disabled">
+      <div class="store-state-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.5C8.3 2.5 5.3 5.5 5.3 9.2C5.3 14.15 12 21.5 12 21.5C12 21.5 18.7 14.15 18.7 9.2C18.7 5.5 15.7 2.5 12 2.5ZM12 11.65C10.65 11.65 9.55 10.55 9.55 9.2C9.55 7.85 10.65 6.75 12 6.75C13.35 6.75 14.45 7.85 14.45 9.2C14.45 10.55 13.35 11.65 12 11.65Z" />
+        </svg>
+      </div>
+
+      <div class="store-state-text">
+        <h3 class="store-name">위치 정보 승인이 필요해요</h3>
+        <p class="store-address">내 위치 기준 가까운 매장 2개를 확인할 수 있어요.</p>
+      </div>
+
+      <button type="button" class="primary-pill location-allow-btn" id="locationAllowButton">
+        위치 승인
+      </button>
+    </article>
+  `;
+}
+
+function renderStoreLoading() {
+  const storeList = document.querySelector("#storeList");
+  if (!storeList) return;
+
+  storeList.innerHTML = `
+    <article class="store-state-card is-disabled">
+      <div class="store-state-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.5C8.3 2.5 5.3 5.5 5.3 9.2C5.3 14.15 12 21.5 12 21.5C12 21.5 18.7 14.15 18.7 9.2C18.7 5.5 15.7 2.5 12 2.5ZM12 11.65C10.65 11.65 9.55 10.55 9.55 9.2C9.55 7.85 10.65 6.75 12 6.75C13.35 6.75 14.45 7.85 14.45 9.2C14.45 10.55 13.35 11.65 12 11.65Z" />
+        </svg>
+      </div>
+
+      <div class="store-state-text">
+        <h3 class="store-name">가까운 매장을 찾는 중이에요</h3>
+        <p class="store-address">현재 위치 기준으로 롯데리아 매장을 검색하고 있어요.</p>
+      </div>
+
+      <button type="button" class="primary-pill location-allow-btn" disabled>
+        검색중
+      </button>
+    </article>
+  `;
+}
+
+function renderStoreSearchFailed() {
+  const storeList = document.querySelector("#storeList");
+  if (!storeList) return;
+
+  storeList.innerHTML = `
+    <article class="store-state-card is-disabled">
+      <div class="store-state-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 17H13V15H11V17ZM11 13H13V7H11V13ZM12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2C17.52 2 22 6.48 22 12C22 17.52 17.52 22 12 22Z" />
+        </svg>
+      </div>
+
+      <div class="store-state-text">
+        <h3 class="store-name">가까운 매장을 찾지 못했어요</h3>
+        <p class="store-address">잠시 후 다시 시도하거나 위치 권한을 확인해주세요.</p>
+      </div>
+
+      <button type="button" class="primary-pill location-allow-btn" id="locationAllowButton">
+        재시도
+      </button>
+    </article>
+  `;
+}
+
+function renderStores(stores) {
+  const storeList = document.querySelector("#storeList");
+  if (!storeList) return;
+
+  storeList.innerHTML = stores
+    .slice(0, 2)
+    .map((store) => {
+      const name = (store.place_name || "롯데리아").replace(/^롯데리아\s*/, "");
+      const address =
+        store.road_address_name || store.address_name || "주소 정보 없음";
+      const distance = formatDistance(store.distance);
+
+      return `
+        <article class="store-card">
+          <div class="store-top">
+            <h3 class="store-name">${name}</h3>
+            <span class="store-badge">주문가능</span>
+          </div>
+
+          <p class="store-address">${address}</p>
+          <p class="store-distance">${distance}</p>
+
+          <button type="button" class="store-star" aria-label="즐겨찾기" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M12 2.8L14.85 8.55L21.2 9.47L16.6 13.95L17.68 20.28L12 17.3L6.32 20.28L7.4 13.95L2.8 9.47L9.15 8.55L12 2.8Z" />
+            </svg>
+          </button>
+
+          <button type="button" class="primary-pill store-order">
+            주문하기
+          </button>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+async function searchNearbyLotteriaStores(latitude, longitude) {
+  try {
+    await loadKakaoMapSdk();
+  } catch (error) {
+    console.error(error);
+    renderStoreSearchFailed();
+    return;
+  }
+
+  const places = new window.kakao.maps.services.Places();
+  const location = new window.kakao.maps.LatLng(latitude, longitude);
+
+  places.keywordSearch(
+    "롯데리아",
+    (data, status) => {
+      if (status !== window.kakao.maps.services.Status.OK || !data.length) {
+        console.warn("롯데리아 검색 실패:", status, data);
+        renderStoreSearchFailed();
+        return;
+      }
+
+      const stores = data
+        .filter((place) => place.place_name.includes("롯데리아"))
+        .slice(0, 2);
+
+      if (!stores.length) {
+        renderStoreSearchFailed();
+        return;
+      }
+
+      renderStores(stores);
+    },
+    {
+      location,
+      radius: 20000,
+      size: 15,
+      sort: window.kakao.maps.services.SortBy.DISTANCE,
+    },
+  );
+}
+
+function initNearbyStores() {
+  if (!navigator.geolocation) {
+    renderLocationRequired();
+    return;
+  }
+
+  renderStoreLoading();
+
+  navigator.geolocation.getCurrentPosition(
+    (position) => {
+      searchNearbyLotteriaStores(
+        position.coords.latitude,
+        position.coords.longitude,
+      );
+    },
+    (error) => {
+      console.warn("위치 권한 또는 위치 조회 실패:", error);
+      renderLocationRequired();
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 1000 * 60 * 5,
+    },
+  );
+}
+
+function initStoreEvents() {
+  document.addEventListener("click", (event) => {
+    const locationButton = event.target.closest("#locationAllowButton");
+
+    if (locationButton) {
+      initNearbyStores();
+      return;
+    }
+
+    const starButton = event.target.closest(".store-star");
+
+    if (!starButton) return;
+
+    starButton.classList.toggle("is-active");
+
+    const isActive = starButton.classList.contains("is-active");
+    starButton.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initHeroSlider();
+
+  enableHorizontalDrag(".pick-grid");
+  enableHorizontalDrag(".store-list");
+  enableHorizontalDrag(".horizontal-scroll");
+
+  initStoreEvents();
+  renderLocationRequired();
+});

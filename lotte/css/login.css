@@ -1,0 +1,302 @@
+@font-face {
+  font-family: "RiaSans";
+  src:
+    url("./fonts/RiaSans-Regular.woff2") format("woff2"),
+    url("./font/RiaSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+  color: #222;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+body {
+  width: 100%;
+}
+
+button,
+input {
+  border: 0;
+  outline: none;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.login-app {
+  width: 100%;
+  min-height: 100vh;
+  padding: 95px 24px 40px;
+  background: #fff;
+}
+
+.brand-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.logo {
+  display: block;
+  width: 96px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.login-section {
+  width: 100%;
+}
+
+.title {
+  margin-bottom: 24px;
+  color: #222;
+  font-family:
+    "RiaSans",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: -0.04em;
+}
+
+.title .point {
+  color: rgb(237, 26, 43);
+}
+
+.login-form {
+  width: 100%;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-field {
+  width: 100%;
+  height: 48px;
+  padding: 0 18px;
+  border-radius: 8px;
+  background: #f1f1f1;
+  color: #222;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.input-field::placeholder {
+  color: #b8b8b8;
+}
+
+.error-message {
+  display: none;
+  margin-top: 8px;
+  color: rgb(237, 26, 43);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: -0.03em;
+}
+
+.error-message.is-active {
+  display: block;
+}
+
+.option-group {
+  margin-top: 14px;
+  border: 0;
+}
+
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #8a8a8a;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.check-label input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.custom-check {
+  position: relative;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d0d0d0;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.check-label input:checked + .custom-check {
+  border-color: rgb(237, 26, 43);
+  background: rgb(237, 26, 43);
+}
+
+.check-label input:checked + .custom-check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 4px;
+  width: 7px;
+  height: 4px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+.login-btn {
+  width: 100%;
+  height: 48px;
+  margin-top: 24px;
+  border-radius: 16px;
+  background: rgb(237, 26, 43);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  box-shadow: 0 8px 18px rgba(237, 26, 43, 0.18);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-btn:hover {
+  background: rgb(201, 22, 37);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+.login-footer {
+  margin-top: 24px;
+}
+
+.account-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: #8a8a8a;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.divider-dot {
+  width: 1px;
+  height: 12px;
+  background: #9b9b9b;
+}
+
+.simple-login-section {
+  margin-top: 38px;
+}
+
+.or-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: #b0b0b0;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.or-row::before,
+.or-row::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #d7d7d7;
+}
+
+.social-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 25px;
+  list-style: none;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.social-btn img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 360px) {
+  .login-app {
+    padding-inline: 20px;
+  }
+
+  .account-nav {
+    gap: 14px;
+  }
+}

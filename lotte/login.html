@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>롯데리아</title>
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <main class="login-app">
+      <header class="brand-header">
+        <img
+          class="logo"
+          src="./images/logo/LOTTERIA BI_symbol.png"
+          alt="롯데리아"
+        />
+      </header>
+
+      <section class="login-section" aria-labelledby="loginTitle">
+        <h1 class="title" id="loginTitle">
+          지금 로그인하고<br />
+          <span class="point">롯데리아</span>의 다양한<br />
+          혜택을 만나보세요.
+        </h1>
+
+        <form class="login-form" novalidate>
+          <div class="input-group">
+            <label class="sr-only" for="userId">아이디 또는 이메일</label>
+            <input
+              id="userId"
+              class="input-field"
+              type="text"
+              name="userId"
+              placeholder="아이디 또는 이메일을 입력해주세요."
+              autocomplete="username"
+            />
+
+            <label class="sr-only" for="userPassword">비밀번호</label>
+            <input
+              id="userPassword"
+              class="input-field"
+              type="password"
+              name="userPassword"
+              placeholder="비밀번호를 입력해주세요."
+              autocomplete="current-password"
+            />
+          </div>
+
+          <p class="error-message" aria-live="polite" role="alert"></p>
+
+          <fieldset class="option-group">
+            <legend class="sr-only">로그인 옵션</legend>
+            <div class="option-row">
+              <label class="check-label" for="autoLogin">
+                <input id="autoLogin" type="checkbox" name="autoLogin" />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span>자동 로그인</span>
+              </label>
+
+              <label class="check-label" for="saveId">
+                <input id="saveId" type="checkbox" name="saveId" />
+                <span class="custom-check" aria-hidden="true"></span>
+                <span>아이디 저장</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button class="login-btn" type="submit">로그인</button>
+        </form>
+      </section>
+
+      <footer class="login-footer">
+        <nav class="account-nav" aria-label="계정 메뉴">
+          <a href="#">아이디 찾기</a>
+          <span class="divider-dot" aria-hidden="true"></span>
+          <a href="#">비밀번호 찾기</a>
+          <span class="divider-dot" aria-hidden="true"></span>
+          <a href="#">회원가입</a>
+        </nav>
+
+        <section
+          class="simple-login-section"
+          aria-labelledby="simpleLoginTitle"
+        >
+          <h2 class="sr-only" id="simpleLoginTitle">간편 로그인</h2>
+          <div class="or-row" aria-hidden="true">OR</div>
+
+          <ul class="social-list">
+            <li>
+              <a href="#" class="social-btn" aria-label="애플 로그인">
+                <img src="./images/login icon/apple.png" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-btn" aria-label="네이버 로그인">
+                <img src="./images/login icon/naver.png" alt="" />
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-btn" aria-label="페이스북 로그인">
+                <img src="./images/login icon/Facebook.png" alt="" />
+              </a>
+            </li>
+          </ul>
+        </section>
+      </footer>
+    </main>
+
+    <script src="./script/login.js"></script>
+  </body>
+</html>

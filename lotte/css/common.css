@@ -1,0 +1,607 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: #fff;
+  color: #222;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+}
+
+body {
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+}
+
+img,
+svg {
+  display: block;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #fff;
+  overflow-x: hidden;
+}
+.header-icon-btn.is-active svg path {
+  fill: #ed1a2b;
+}
+
+/* =========================
+   header
+   ========================= */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  width: 100%;
+  height: 48px;
+  padding: 0 24px;
+  display: grid;
+  align-items: center;
+  background: #fff;
+}
+
+.header-left,
+.header-center,
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.header-back,
+.header-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  transition: opacity 0.2s ease;
+}
+
+.header-back:hover,
+.header-icon-btn:hover {
+  opacity: 0.75;
+}
+
+.header-back-svg,
+.header-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.header-back-svg path {
+  fill: #262626;
+  transition: fill 0.2s ease;
+}
+
+.header-icon-svg path {
+  fill: #bfbfbf;
+  transition: fill 0.2s ease;
+}
+
+.header-back:hover .header-back-svg path,
+.header-icon-btn:hover .header-icon-svg path {
+  fill: rgb(237, 26, 43);
+}
+
+.header-logo {
+  width: 91px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.header-title {
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* header state */
+.is-main .header-left,
+.is-main .header-title {
+  display: none;
+}
+
+.is-main .app-header {
+  grid-template-columns: 1fr 56px;
+}
+
+.is-main .header-center {
+  justify-content: flex-start;
+}
+
+.is-sub .header-left {
+  display: flex;
+}
+
+.is-sub .app-header {
+  grid-template-columns: 24px 1fr 56px;
+}
+
+.is-sub .header-center {
+  justify-content: center;
+}
+
+.is-sub .header-back,
+.is-sub .header-title {
+  display: inline-flex;
+}
+
+.is-sub .header-logo {
+  display: none;
+}
+
+/* =========================
+   page
+   ========================= */
+.page-content {
+  min-height: 100vh;
+  padding: 48px 0 77px;
+  background: #fff;
+}
+
+.app.no-bottom-nav .page-content {
+  padding-bottom: 0;
+}
+
+.screen-placeholder {
+  min-height: calc(100vh - 48px - 77px);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 15px;
+}
+
+.app.no-bottom-nav .screen-placeholder {
+  min-height: calc(100vh - 48px);
+}
+
+/* =========================
+   bottom nav
+   ========================= */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 30;
+  width: 100%;
+  height: 77px;
+  background: #fff;
+  overflow: visible;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.app.no-bottom-nav .bottom-nav {
+  display: none;
+}
+
+.bottom-nav-list {
+  position: relative;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: stretch;
+  padding: 0 12px;
+  list-style: none;
+  overflow: visible;
+}
+
+.bottom-nav-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.nav-item {
+  width: 100%;
+  height: 48px;
+  margin: 14.5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #bfbfbf;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-icon-svg path {
+  fill: #bfbfbf;
+  transition: fill 0.2s ease;
+}
+
+.nav-item:hover {
+  color: rgb(237, 26, 43);
+}
+
+.nav-item:hover .nav-icon-svg path {
+  fill: rgb(237, 26, 43);
+}
+
+.nav-item.is-active {
+  color: rgb(237, 26, 43);
+}
+
+.nav-item.is-active .nav-icon-svg path {
+  fill: rgb(237, 26, 43);
+}
+
+.nav-item.is-active:hover {
+  color: rgb(201, 22, 37);
+}
+
+.nav-item.is-active:hover .nav-icon-svg path {
+  fill: rgb(201, 22, 37);
+}
+
+.nav-item:not(.center):hover {
+  transform: translateY(-1px);
+}
+
+/* =========================
+   order fab
+   ========================= */
+.nav-item.center {
+  position: relative;
+  width: 100%;
+  height: 77px;
+  margin: 0;
+  z-index: 5;
+  transform: none;
+}
+
+.nav-item.center:hover {
+  transform: none;
+}
+
+/* 원 자체가 기준 */
+.nav-fab {
+  position: absolute;
+  left: 50%;
+  top: -20px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #fff;
+  transform: translateX(-50%);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-item.center:hover .nav-fab {
+  background: #f0f0f0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+  transform: translateX(-50%) translateY(-1px);
+}
+
+/* 원 내부 전환 무대 */
+.order-content {
+  position: absolute;
+  inset: 0;
+}
+
+/* 기존 order-visual은 위치 기준 */
+.order-visual {
+  position: absolute;
+  inset: 0;
+}
+
+/* 기본 아이콘+텍스트 세트 */
+.order-icon-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #bfbfbf;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0.28s ease,
+    color 0.2s ease;
+}
+
+/* SVG 아이콘 */
+.nav-order-icon-svg {
+  width: 24px;
+  height: 24px;
+  color: currentColor;
+  transition: color 0.2s ease;
+}
+
+.nav-item.center:hover .order-icon-wrap {
+  color: rgb(237, 26, 43);
+}
+
+.nav-item.center.is-active .order-icon-wrap {
+  color: rgb(237, 26, 43);
+}
+
+/* 주문 텍스트 */
+.order-label {
+  color: currentColor;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* 로고 단독 */
+.order-logo-wrap {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%) scale(0.86);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease,
+    visibility 0.28s ease;
+}
+
+.nav-symbol-logo {
+  width: 40px;
+  height: 38px;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+}
+
+/* 로고 상태 전환 */
+.nav-item.center.is-logo .order-icon-wrap {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%) scale(0.86);
+}
+
+.nav-item.center.is-logo .order-logo-wrap {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* =========================
+   order sheet
+   ========================= */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0, 0, 0, 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 300ms ease,
+    visibility 300ms ease;
+}
+
+.order-sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  height: 204px;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 300ms ease,
+    opacity 300ms ease,
+    visibility 300ms ease;
+  will-change: transform, opacity;
+}
+
+.sheet-header {
+  position: relative;
+  padding: 24px 7px 0 24px;
+}
+
+.sheet-title-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.sheet-title-accent,
+.sheet-title-text {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.03em;
+}
+
+.sheet-title-accent {
+  color: #ed1a2b;
+}
+
+.sheet-title-text {
+  color: #222;
+}
+
+.sheet-close {
+  position: absolute;
+  top: 12px;
+  right: 7px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #444;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.sheet-options {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  justify-content: center;
+  gap: 13.5px;
+  margin-top: 19px;
+  padding: 0 24px 48px;
+}
+
+.sheet-option {
+  width: 100px;
+  height: 73px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 0 10px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.sheet-option:hover {
+  transform: translateY(-1px);
+  background: #fff8ef;
+}
+
+.sheet-option-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheet-option-icon img,
+.sheet-option-icon svg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.sheet-option-label {
+  color: #444;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* popup open state */
+.app.is-sheet-open .sheet-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+.app.is-sheet-open .order-sheet {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+}
+.header-cart {
+  position: relative;
+}
+
+.cart-count-badge {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  min-width: 12px;
+  padding: 0;
+  border-radius: 999px;
+  background: #ffaf00;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 800;
+  line-height: 12px;
+  text-align: center;
+  pointer-events: none;
+  transform: translate(35%, -35%);
+}
+
+.cart-count-badge.is-hidden {
+  display: none;
+}
+
+[hidden] {
+  display: none !important;
+}
