@@ -16,10 +16,11 @@
         --gray-300: #dddddd;
         --gray-500: #bdbdbd;
         --text: #222222;
-        --card-width: 179px;
-        --card-height: 191px;
-        --card-gap-x: 18px;
+        --page-padding: 24px;
+        --card-gap-x: clamp(12px, 4vw, 18px);
         --card-gap-y: 14px;
+        --card-width: min(179px, calc((100vw - (var(--page-padding) * 2) - var(--card-gap-x)) / 2));
+        --card-height: calc(var(--card-width) * 191 / 179);
       }
 
       * {
@@ -95,7 +96,7 @@
         gap: 8px;
         width: 100%;
         overflow-x: auto;
-        padding: 14px 24px 10px;
+        padding: 14px var(--page-padding) 10px;
         scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
       }
@@ -134,7 +135,7 @@
       }
 
       .menu-content {
-        padding: 16px 24px 18px;
+        padding: 16px var(--page-padding) 18px;
       }
 
       .menu-grid {
@@ -149,8 +150,8 @@
         width: var(--card-width);
         height: var(--card-height);
         min-height: var(--card-height);
-        padding: 16px 11px;
-        border-radius: 16px;
+        padding: calc(var(--card-width) * 16 / 179) calc(var(--card-width) * 11 / 179);
+        border-radius: calc(var(--card-width) * 16 / 179);
         background: #ffffff;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
         overflow: hidden;
@@ -166,11 +167,11 @@
 
       .favorite-btn {
         position: absolute;
-        top: 11px;
-        right: 13px;
+        top: calc(var(--card-width) * 11 / 179);
+        right: calc(var(--card-width) * 13 / 179);
         z-index: 2;
-        width: 23px;
-        height: 23px;
+        width: calc(var(--card-width) * 23 / 179);
+        height: calc(var(--card-width) * 23 / 179);
         color: #bfbfbf;
       }
 
@@ -186,28 +187,28 @@
 
       .menu-img-box {
         width: 100%;
-        height: 83px;
-        margin-bottom: 6px;
+        height: calc(var(--card-width) * 83 / 179);
+        margin-bottom: calc(var(--card-width) * 6 / 179);
         display: flex;
         align-items: flex-end;
         justify-content: center;
       }
 
       .menu-img {
-        width: 115px;
-        height: 83px;
+        width: calc(var(--card-width) * 115 / 179);
+        height: calc(var(--card-width) * 83 / 179);
         object-fit: contain;
       }
 
       .menu-name {
-        min-height: 39px;
-        margin-bottom: 6px;
+        min-height: calc(var(--card-width) * 39 / 179);
+        margin-bottom: calc(var(--card-width) * 6 / 179);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
         color: #222222;
-        font-size: 15px;
+        font-size: clamp(13px, calc(var(--card-width) * 15 / 179), 15px);
         font-weight: 600;
         line-height: 1.22;
         letter-spacing: -0.05em;
@@ -217,14 +218,14 @@
       .menu-price {
         text-align: center;
         color: var(--red);
-        font-size: 17px;
+        font-size: clamp(15px, calc(var(--card-width) * 17 / 179), 17px);
         font-weight: 600;
         line-height: 1.2;
         letter-spacing: -0.04em;
       }
 
       .menu-price .won {
-        font-size: 15px;
+        font-size: clamp(13px, calc(var(--card-width) * 15 / 179), 15px);
         font-weight: 600;
       }
 
@@ -249,14 +250,15 @@
         bottom: 0;
         z-index: 21;
         width: 100%;
-        padding: 18px 24px 20px;
+        max-height: min(88dvh, 680px);
+        padding: 16px 24px calc(18px + env(safe-area-inset-bottom));
         border-radius: 24px 24px 0 0;
         background: #ffffff;
         box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.14);
         transform: translateY(100%);
         transition: transform 0.24s ease;
-        max-height: 88vh;
         overflow-y: auto;
+        overscroll-behavior: contain;
       }
 
       .option-backdrop.is-open {
@@ -271,7 +273,7 @@
       .option-handle {
         width: 38px;
         height: 4px;
-        margin: 0 auto 16px;
+        margin: 0 auto 14px;
         border-radius: 999px;
         background: #d9d9d9;
       }
@@ -280,7 +282,7 @@
         display: flex;
         align-items: center;
         gap: 14px;
-        padding: 0 0 14px;
+        padding: 0 0 12px;
       }
 
       .option-img-box {
@@ -327,15 +329,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 12px;
-        padding: 14px 16px;
+        margin-top: 10px;
+        padding: 13px 16px;
         border-radius: 16px;
         background: #fafafa;
       }
 
       .choice-area {
-        margin-top: 12px;
-        padding: 14px 16px 16px;
+        margin-top: 10px;
+        padding: 13px 16px 15px;
         border-radius: 16px;
         background: #fafafa;
       }
@@ -494,8 +496,8 @@
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        margin-top: 12px;
-        padding: 14px 0 16px;
+        margin-top: 10px;
+        padding: 12px 0 14px;
       }
 
       .total-label {
@@ -580,59 +582,88 @@
         transform: translateY(0);
       }
 
-      @media (max-width: 390px) {
+      @media (max-width: 429px) {
         :root {
-          --card-width: 156px;
-          --card-height: 167px;
-          --card-gap-x: 16px;
           --card-gap-y: 12px;
         }
 
-        .store-area,
-        .category-scroll,
-        .menu-content {
-          padding-left: 24px;
-          padding-right: 24px;
+        .option-sheet {
+          max-height: 90dvh;
+          padding-left: var(--page-padding);
+          padding-right: var(--page-padding);
+        }
+      }
+
+      @media (max-height: 740px) {
+        .option-sheet {
+          max-height: 92dvh;
+          padding-top: 12px;
         }
 
-        .menu-card {
-          padding: 14px 10px;
+        .option-handle {
+          margin-bottom: 10px;
+        }
+
+        .option-img-box {
+          flex-basis: 78px;
+          width: 78px;
+          height: 62px;
           border-radius: 14px;
         }
 
-        .favorite-btn {
-          top: 10px;
-          right: 11px;
-          width: 20px;
-          height: 20px;
+        .option-img {
+          width: 70px;
+          height: 52px;
         }
 
-        .menu-img-box {
-          height: 72px;
-          margin-bottom: 5px;
+        .option-top {
+          gap: 12px;
+          padding-bottom: 10px;
         }
 
-        .menu-img {
-          width: 100px;
-          height: 72px;
+        .option-row {
+          margin-top: 8px;
+          padding: 11px 14px;
         }
 
-        .menu-name {
+        .choice-area {
+          margin-top: 8px;
+          padding: 11px 14px 13px;
+        }
+
+        .choice-title {
+          margin-bottom: 8px;
+        }
+
+        .choice-block + .choice-block {
+          margin-top: 12px;
+        }
+
+        .choice-btn {
+          min-height: 62px;
+          padding-top: 6px;
+          padding-bottom: 6px;
+        }
+
+        .choice-btn[data-set-type] {
           min-height: 34px;
-          margin-bottom: 5px;
-          font-size: 13px;
         }
 
-        .menu-price {
-          font-size: 15px;
+        .choice-thumb {
+          width: 36px;
+          height: 28px;
         }
 
-        .menu-price .won {
-          font-size: 13px;
+        .set-detail.is-show {
+          margin-top: 10px;
         }
 
-        .option-sheet {
-          padding-left: 24px;
-          padding-right: 24px;
+        .option-total {
+          margin-top: 8px;
+          padding: 10px 0 12px;
+        }
+
+        .sheet-btn {
+          height: 44px;
         }
       }
