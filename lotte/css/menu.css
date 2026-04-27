@@ -81,17 +81,6 @@ img {
   background: #ffffff;
 }
 
-.store-area {
-  padding: 14px 24px 10px;
-}
-
-.store-name {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: -0.03em;
-}
-
 .category-wrap {
   position: sticky;
   top: var(--header-height);
