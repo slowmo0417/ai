@@ -1,25 +1,64 @@
 const KAKAO_JAVASCRIPT_KEY = "cc8c124f8a594a01e630a3c43ae4349a";
 
+const LOCATION_CACHE_KEY = "lotteriaUserLocation";
+const LOCATION_CACHE_MAX_AGE = 1000 * 60 * 60 * 24;
+
 let heroTrack = null;
 let heroSlides = [];
+let realHeroSlides = [];
 let heroPagination = null;
 
-let currentHeroIndex = 0;
+let currentHeroIndex = 1;
 let heroStartX = 0;
 let heroMoveX = 0;
 let isHeroDragging = false;
 let heroAutoTimer = null;
+let heroPointerId = null;
 
 function initHeroSlider() {
   heroTrack = document.querySelector("#heroTrack");
-  heroSlides = Array.from(document.querySelectorAll(".hero-slide"));
   heroPagination = document.querySelector("#heroPagination");
 
-  if (!heroTrack || !heroSlides.length || !heroPagination) return;
+  if (!heroTrack || !heroPagination) return;
+
+  realHeroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
+  if (!realHeroSlides.length) return;
 
   heroPagination.innerHTML = "";
 
-  heroSlides.forEach((_, index) => {
+  if (realHeroSlides.length === 1) {
+    currentHeroIndex = 0;
+    heroTrack.style.transform = "translateX(0%)";
+
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-dot is-active";
+    dot.setAttribute("aria-label", "1번째 배너 보기");
+    heroPagination.appendChild(dot);
+
+    return;
+  }
+
+  const firstClone = realHeroSlides[0].cloneNode(true);
+  const lastClone = realHeroSlides[realHeroSlides.length - 1].cloneNode(true);
+
+  firstClone.classList.add("is-clone");
+  lastClone.classList.add("is-clone");
+
+  heroTrack.insertBefore(lastClone, realHeroSlides[0]);
+  heroTrack.appendChild(firstClone);
+
+  heroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
+  currentHeroIndex = 1;
+
+  heroTrack.style.transition = "none";
+  heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+
+  requestAnimationFrame(() => {
+    heroTrack.style.transition = "transform 0.35s ease";
+  });
+
+  realHeroSlides.forEach((_, index) => {
     const dot = document.createElement("button");
     dot.type = "button";
     dot.className = "hero-dot";
@@ -28,49 +67,69 @@ function initHeroSlider() {
     if (index === 0) dot.classList.add("is-active");
 
     dot.addEventListener("click", () => {
-      moveHero(index);
+      moveHero(index + 1);
       restartHeroAutoSlide();
     });
 
     heroPagination.appendChild(dot);
   });
 
-  heroTrack.addEventListener("pointerdown", (event) => {
-    isHeroDragging = true;
-    heroStartX = event.clientX;
-    heroMoveX = 0;
-
-    stopHeroAutoSlide();
-    heroTrack.setPointerCapture(event.pointerId);
-    heroTrack.style.transition = "none";
-  });
-
-  heroTrack.addEventListener("pointermove", (event) => {
-    if (!isHeroDragging) return;
-
-    heroMoveX = event.clientX - heroStartX;
-    const movePercent = (heroMoveX / heroTrack.clientWidth) * 100;
-
-    heroTrack.style.transform = `translateX(${
-      -(currentHeroIndex * 100) + movePercent
-    }%)`;
-  });
-
+  heroTrack.addEventListener("pointerdown", startHeroDrag);
+  heroTrack.addEventListener("pointermove", moveHeroDrag);
   heroTrack.addEventListener("pointerup", endHeroDrag);
   heroTrack.addEventListener("pointercancel", endHeroDrag);
+  heroTrack.addEventListener("transitionend", fixHeroLoopPosition);
 
   startHeroAutoSlide();
+}
+
+function startHeroDrag(event) {
+  if (!heroTrack) return;
+  if (event.target.closest("button, a")) return;
+
+  isHeroDragging = true;
+  heroPointerId = event.pointerId;
+  heroStartX = event.clientX;
+  heroMoveX = 0;
+
+  stopHeroAutoSlide();
+
+  heroTrack.classList.add("is-dragging");
+  heroTrack.setPointerCapture(event.pointerId);
+  heroTrack.style.transition = "none";
+}
+
+function moveHeroDrag(event) {
+  if (!isHeroDragging || !heroTrack) return;
+
+  heroMoveX = event.clientX - heroStartX;
+
+  const movePercent = (heroMoveX / heroTrack.clientWidth) * 100;
+
+  heroTrack.style.transform = `translateX(${
+    -(currentHeroIndex * 100) + movePercent
+  }%)`;
 }
 
 function endHeroDrag() {
   if (!isHeroDragging || !heroTrack) return;
 
   isHeroDragging = false;
+
+  if (heroPointerId !== null && heroTrack.hasPointerCapture(heroPointerId)) {
+    heroTrack.releasePointerCapture(heroPointerId);
+  }
+
+  heroPointerId = null;
+
+  heroTrack.classList.remove("is-dragging");
   heroTrack.style.transition = "transform 0.35s ease";
 
-  if (heroMoveX < -45) {
+  const threshold = heroTrack.clientWidth * 0.15;
+
+  if (heroMoveX < -threshold) {
     moveHero(currentHeroIndex + 1);
-  } else if (heroMoveX > 45) {
+  } else if (heroMoveX > threshold) {
     moveHero(currentHeroIndex - 1);
   } else {
     moveHero(currentHeroIndex);
@@ -82,13 +141,57 @@ function endHeroDrag() {
 function moveHero(index) {
   if (!heroTrack || !heroSlides.length) return;
 
-  const dots = Array.from(document.querySelectorAll(".hero-dot"));
-
-  currentHeroIndex = (index + heroSlides.length) % heroSlides.length;
+  currentHeroIndex = index;
   heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
 
+  updateHeroPagination();
+}
+
+function fixHeroLoopPosition() {
+  if (!heroTrack || !realHeroSlides.length) return;
+
+  if (currentHeroIndex === 0) {
+    currentHeroIndex = realHeroSlides.length;
+
+    heroTrack.style.transition = "none";
+    heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+
+    requestAnimationFrame(() => {
+      heroTrack.style.transition = "transform 0.35s ease";
+    });
+  }
+
+  if (currentHeroIndex === realHeroSlides.length + 1) {
+    currentHeroIndex = 1;
+
+    heroTrack.style.transition = "none";
+    heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+
+    requestAnimationFrame(() => {
+      heroTrack.style.transition = "transform 0.35s ease";
+    });
+  }
+
+  updateHeroPagination();
+}
+
+function updateHeroPagination() {
+  const dots = Array.from(document.querySelectorAll(".hero-dot"));
+
+  if (!dots.length || !realHeroSlides.length) return;
+
+  let realIndex = currentHeroIndex - 1;
+
+  if (currentHeroIndex === 0) {
+    realIndex = realHeroSlides.length - 1;
+  }
+
+  if (currentHeroIndex === realHeroSlides.length + 1) {
+    realIndex = 0;
+  }
+
   dots.forEach((dot, dotIndex) => {
-    dot.classList.toggle("is-active", dotIndex === currentHeroIndex);
+    dot.classList.toggle("is-active", dotIndex === realIndex);
   });
 }
 
@@ -118,12 +221,13 @@ function enableHorizontalDrag(selector) {
     let isDown = false;
     let startDragX = 0;
     let startScrollLeft = 0;
+    let pointerId = null;
 
     scrollArea.addEventListener("pointerdown", (event) => {
-      if (event.pointerType === "touch") return;
       if (event.target.closest("button, a")) return;
 
       isDown = true;
+      pointerId = event.pointerId;
       startDragX = event.clientX;
       startScrollLeft = scrollArea.scrollLeft;
 
@@ -134,8 +238,6 @@ function enableHorizontalDrag(selector) {
     scrollArea.addEventListener("pointermove", (event) => {
       if (!isDown) return;
 
-      event.preventDefault();
-
       const distance = event.clientX - startDragX;
       scrollArea.scrollLeft = startScrollLeft - distance;
     });
@@ -144,6 +246,12 @@ function enableHorizontalDrag(selector) {
       if (!isDown) return;
 
       isDown = false;
+
+      if (pointerId !== null && scrollArea.hasPointerCapture(pointerId)) {
+        scrollArea.releasePointerCapture(pointerId);
+      }
+
+      pointerId = null;
       scrollArea.classList.remove("is-dragging");
     }
 
@@ -178,11 +286,13 @@ function loadKakaoMapSdk() {
         },
         { once: true },
       );
+
       existingScript.addEventListener("error", reject, { once: true });
       return;
     }
 
     const script = document.createElement("script");
+
     script.id = "kakaoMapSdk";
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_JAVASCRIPT_KEY}&libraries=services&autoload=false`;
 
@@ -208,6 +318,48 @@ function loadKakaoMapSdk() {
 
     document.head.appendChild(script);
   });
+}
+
+function saveLocationCache(latitude, longitude) {
+  localStorage.setItem(
+    LOCATION_CACHE_KEY,
+    JSON.stringify({
+      latitude,
+      longitude,
+      savedAt: Date.now(),
+    }),
+  );
+}
+
+function getLocationCache() {
+  try {
+    const rawData = localStorage.getItem(LOCATION_CACHE_KEY);
+
+    if (!rawData) return null;
+
+    const location = JSON.parse(rawData);
+
+    if (
+      !Number.isFinite(location.latitude) ||
+      !Number.isFinite(location.longitude) ||
+      !Number.isFinite(location.savedAt)
+    ) {
+      localStorage.removeItem(LOCATION_CACHE_KEY);
+      return null;
+    }
+
+    const isExpired = Date.now() - location.savedAt > LOCATION_CACHE_MAX_AGE;
+
+    if (isExpired) {
+      localStorage.removeItem(LOCATION_CACHE_KEY);
+      return null;
+    }
+
+    return location;
+  } catch (error) {
+    localStorage.removeItem(LOCATION_CACHE_KEY);
+    return null;
+  }
 }
 
 function formatDistance(distance) {
@@ -375,14 +527,28 @@ function initNearbyStores() {
     return;
   }
 
+  const cachedLocation = getLocationCache();
+
+  if (cachedLocation) {
+    renderStoreLoading();
+
+    searchNearbyLotteriaStores(
+      cachedLocation.latitude,
+      cachedLocation.longitude,
+    );
+
+    return;
+  }
+
   renderStoreLoading();
 
   navigator.geolocation.getCurrentPosition(
     (position) => {
-      searchNearbyLotteriaStores(
-        position.coords.latitude,
-        position.coords.longitude,
-      );
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      saveLocationCache(latitude, longitude);
+      searchNearbyLotteriaStores(latitude, longitude);
     },
     (error) => {
       console.warn("위치 권한 또는 위치 조회 실패:", error);
@@ -401,6 +567,7 @@ function initStoreEvents() {
     const locationButton = event.target.closest("#locationAllowButton");
 
     if (locationButton) {
+      localStorage.removeItem(LOCATION_CACHE_KEY);
       initNearbyStores();
       return;
     }
@@ -424,5 +591,12 @@ document.addEventListener("DOMContentLoaded", () => {
   enableHorizontalDrag(".horizontal-scroll");
 
   initStoreEvents();
-  renderLocationRequired();
+
+  const cachedLocation = getLocationCache();
+
+  if (cachedLocation) {
+    initNearbyStores();
+  } else {
+    renderLocationRequired();
+  }
 });
