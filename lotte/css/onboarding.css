@@ -1,6 +1,6 @@
 @font-face {
   font-family: "RiaSans";
-  src: url("./font/RiaSans-Bold.ttf") format("truetype");
+  src: url("../font/RiaSans-Bold.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "SFPro";
-  src: url("/font/SF-Pro.ttf") format("truetype");
+  src: url("../font/SF-Pro.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
