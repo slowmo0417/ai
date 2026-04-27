@@ -1,0 +1,165 @@
+@charset "utf-8";
+@font-face {
+        font-family: "RiaSans";
+        src: url("../font/RiaSans-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "RiaSans";
+        src: url("../font/RiaSans-Medium.ttf") format("truetype");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "RiaSans";
+        src: url("../font/RiaSans-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        background: #ffffff;
+        color: #262626;
+        font-family:
+          "RiaSans",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          sans-serif;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .notice-page {
+        min-height: 100vh;
+        background: #ffffff;
+      }
+
+      .notice-content {
+        width: 100%;
+        min-height: calc(100vh - 48px);
+        padding: 16px 0 32px;
+        background: #ffffff;
+      }
+
+      .notice-section + .notice-section {
+        margin-top: 14px;
+      }
+
+      .notice-section-title {
+        margin: 0;
+        padding: 0 24px 12px;
+        font-size: 13px;
+        line-height: 1.2;
+        font-weight: 600;
+        color: #262626;
+      }
+
+      .notice-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .notice-item {
+        width: 100%;
+      }
+
+      .notice-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+        min-height: 48px;
+        padding: 8px 24px;
+        border: 0;
+        border-radius: 0 0 6px 6px;
+        background: #f5f5f5;
+        color: inherit;
+        text-align: left;
+        text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
+        transition:
+          background-color 0.18s ease,
+          transform 0.18s ease;
+      }
+
+      .notice-link:active {
+        background: #eeeeee;
+        transform: scale(0.995);
+      }
+
+      .notice-text {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .notice-title {
+        display: block;
+        overflow: hidden;
+        color: #666666;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .notice-desc {
+        display: block;
+        overflow: hidden;
+        margin-top: 4px;
+        color: #bfbfbf;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .notice-date {
+        flex: 0 0 auto;
+        align-self: flex-start;
+        padding-top: 2px;
+        color: #ffaf00;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+
+      .notice-question {
+        color: #ed1a2b;
+      }
+
+      @media (hover: hover) {
+        .notice-link:hover {
+          background: #eeeeee;
+        }
+      }
