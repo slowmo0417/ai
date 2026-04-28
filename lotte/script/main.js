@@ -31,6 +31,9 @@ function initHeroSlider() {
   realHeroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
   if (!realHeroSlides.length) return;
 
+  if (heroTrack.dataset.heroReady === "true") return;
+  heroTrack.dataset.heroReady = "true";
+
   heroPagination.innerHTML = "";
 
   if (realHeroSlides.length === 1) {
@@ -110,7 +113,6 @@ function moveHeroDrag(event) {
   if (!isHeroDragging || !heroTrack) return;
 
   heroMoveX = event.clientX - heroStartX;
-
   const movePercent = (heroMoveX / heroTrack.clientWidth) * 100;
 
   heroTrack.style.transform = `translateX(${
@@ -229,6 +231,9 @@ function restartHeroAutoSlide() {
 
 function enableHorizontalDrag(selector) {
   document.querySelectorAll(selector).forEach((scrollArea) => {
+    if (scrollArea.dataset.dragReady === "true") return;
+    scrollArea.dataset.dragReady = "true";
+
     let isDown = false;
     let startDragX = 0;
     let startScrollLeft = 0;
@@ -578,6 +583,9 @@ function initNearbyStores() {
 }
 
 function initStoreEvents() {
+  if (document.body.dataset.storeEventsReady === "true") return;
+  document.body.dataset.storeEventsReady = "true";
+
   document.addEventListener("click", (event) => {
     const locationButton = event.target.closest("#locationAllowButton");
 
@@ -689,7 +697,7 @@ function createDefaultMyMenuCard() {
       </span>
 
       <p class="pick-desc">
-        나만의 메뉴를 등록해<br />빠르게 주문해보세요!
+        나만의 메뉴를 등록해<br>빠르게 주문해보세요!
       </p>
 
       <button type="button" class="primary-pill" data-menu-link>
@@ -738,7 +746,7 @@ function renderMyPickItems() {
       </button>
 
       <div class="my-menu-thumb">
-        <img src="${image}" alt="${name}" />
+        <img src="${image}" alt="${name}">
       </div>
 
       <p class="pick-desc my-menu-desc">
@@ -767,6 +775,9 @@ function renderMyPickItems() {
 }
 
 function initMenuLinkButton() {
+  if (document.body.dataset.menuLinkReady === "true") return;
+  document.body.dataset.menuLinkReady = "true";
+
   document.addEventListener("click", (event) => {
     const menuLinkButton = event.target.closest("[data-menu-link]");
 
@@ -780,6 +791,14 @@ function initMenuLinkButton() {
    초기 실행
 ========================= */
 
+function refreshMainDynamicData() {
+  renderMyPickItems();
+
+  if (typeof window.updateCartCountBadge === "function") {
+    window.updateCartCountBadge();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initHeroSlider();
 
@@ -789,7 +808,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initStoreEvents();
   initMenuLinkButton();
-  renderMyPickItems();
+  refreshMainDynamicData();
 
   const cachedLocation = getLocationCache();
 
@@ -799,12 +818,13 @@ document.addEventListener("DOMContentLoaded", () => {
     renderLocationRequired();
   }
 });
-window.addEventListener("pageshow", () => {
-  if (typeof renderMyPickList === "function") {
-    renderMyPickList();
-  }
 
-  if (typeof window.updateCartCountBadge === "function") {
-    window.updateCartCountBadge();
+window.addEventListener("pageshow", () => {
+  refreshMainDynamicData();
+});
+
+window.addEventListener("storage", (event) => {
+  if (event.key === MY_MENU_KEY || event.key === CART_ITEMS_KEY) {
+    refreshMainDynamicData();
   }
 });
