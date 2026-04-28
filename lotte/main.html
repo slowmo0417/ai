@@ -65,7 +65,9 @@
               />
             </svg>
 
-            <span class="cart-count-badge is-hidden" id="cartCountBadge">0</span>
+            <span class="cart-count-badge is-hidden" id="cartCountBadge"
+              >0</span
+            >
           </a>
 
           <a
@@ -114,22 +116,19 @@
         <div class="content">
           <section class="section" aria-labelledby="pickTitle">
             <h2 class="section-title" id="pickTitle">나의 Pick</h2>
-            <div class="pick-grid">
+            <div class="pick-grid" id="myPickList">
               <div class="pick-card">
                 <span class="pick-icon" aria-hidden="true">
                   <svg
+                    width="24"
+                    height="24"
                     viewBox="0 0 24 24"
-                    fill="currentColor"
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M4 10.2C4 6.8 7.58 4 12 4C16.42 4 20 6.8 20 10.2H4Z"
-                    />
-                    <path
-                      d="M3.5 12.2C3.5 11.65 3.95 11.2 4.5 11.2H19.5C20.05 11.2 20.5 11.65 20.5 12.2C20.5 12.75 20.05 13.2 19.5 13.2H4.5C3.95 13.2 3.5 12.75 3.5 12.2Z"
-                    />
-                    <path
-                      d="M5 15.2H19L17.8 18.25C17.5 19.02 16.75 19.53 15.93 19.53H8.07C7.25 19.53 6.5 19.02 6.2 18.25L5 15.2Z"
+                      d="M16 2H8C4.69 2 2 4.69 2 8C2 8.55 2.45 9 3 9H21C21.55 9 22 8.55 22 8C22 4.69 19.31 2 16 2ZM21 15H3C2.45 15 2 15.45 2 16C2 19.31 4.69 22 8 22H16C19.31 22 22 19.31 22 16C22 15.45 21.55 15 21 15ZM17 10C15.4 10 14.55 10.68 13.88 11.22C13.29 11.69 12.9 12 12.01 12C11.12 12 10.7 11.67 10.13 11.22C9.45 10.68 8.61 10 7.01 10C5.41 10 4.56 10.68 3.88 11.22C3.29 11.69 2.9 12 2 12V14C3.6 14 4.45 13.32 5.12 12.78C5.69 12.33 6.1 12 7 12C7.9 12 8.29 12.31 8.88 12.78C9.56 13.32 10.41 14 12.01 14C13.61 14 14.46 13.32 15.13 12.78C15.72 12.31 16.11 12 17.01 12C17.91 12 18.3 12.31 18.88 12.78C19.56 13.32 20.4 14 22 14V12C21.1 12 20.71 11.69 20.13 11.22C19.45 10.68 18.61 10 17.01 10H17Z"
+                      fill="#BFBFBF"
                     />
                   </svg>
                 </span>
@@ -145,7 +144,7 @@
                 </button>
               </div>
 
-              <div class="pick-card">
+              <div class="pick-card my-menu-empty-card">
                 <span class="pick-icon" aria-hidden="true">
                   <svg
                     viewBox="0 0 24 24"
@@ -160,7 +159,9 @@
                 <p class="pick-desc">
                   나만의 메뉴를 등록해<br>빠르게 주문해보세요!
                 </p>
-                <button type="button" class="primary-pill">등록하기</button>
+                <button type="button" class="primary-pill" data-menu-link>
+                  등록하기
+                </button>
               </div>
             </div>
           </section>
@@ -392,7 +393,7 @@
                       <img
                         class="nav-symbol-logo"
                         src="./images/logo/LOTTERIA_BI_symbol.png"
-                        alt="">
+                        alt="주문하기">
                     </span>
                   </span>
                 </span>
@@ -452,11 +453,7 @@
         </ul>
       </nav>
 
-      <div
-        id="orderSheetBackdrop"
-        class="sheet-backdrop"
-        hidden
-      ></div>
+      <div id="orderSheetBackdrop" class="sheet-backdrop" hidden></div>
 
       <div
         id="orderSheet"
