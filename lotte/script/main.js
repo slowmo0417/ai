@@ -799,3 +799,12 @@ document.addEventListener("DOMContentLoaded", () => {
     renderLocationRequired();
   }
 });
+window.addEventListener("pageshow", () => {
+  if (typeof renderMyPickList === "function") {
+    renderMyPickList();
+  }
+
+  if (typeof window.updateCartCountBadge === "function") {
+    window.updateCartCountBadge();
+  }
+});
