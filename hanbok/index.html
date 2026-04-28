@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>한국한복문화예술협회</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="util-bar" aria-label="사용자 메뉴">
+          <div class="util-inner">
+            <nav class="util-nav" aria-label="사용자 메뉴">
+              <a class="util-link login" href="./login.html">
+                <svg
+                  class="util-icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.71488 2.17483C2.42367 2.17483 2.17434 2.42415 2.17434 2.71537V13.2859C2.17434 13.5771 2.42368 13.8265 2.71488 13.8265H9.44163C9.73284 13.8265 9.98217 13.5771 9.98217 13.2859V11.364C9.98217 11.1318 10.1704 10.9436 10.4026 10.9436C10.6348 10.9436 10.823 11.1318 10.823 11.364V13.2859C10.823 14.0415 10.1972 14.6673 9.44163 14.6673H2.71488C1.95929 14.6673 1.3335 14.0415 1.3335 13.2859V2.71537C1.3335 1.95977 1.95928 1.33398 2.71488 1.33398H9.44163C10.1972 1.33398 10.823 1.95977 10.823 2.71537V4.63729C10.823 4.86948 10.6348 5.05771 10.4026 5.05771C10.1704 5.05771 9.98217 4.86948 9.98217 4.63729V2.71537C9.98217 2.42415 9.73284 2.17483 9.44163 2.17483H2.71488ZM8.77794 5.78125C8.94211 5.94545 8.94207 6.21165 8.77787 6.37581L7.57386 7.57953H14.2464C14.4786 7.57953 14.6668 7.76776 14.6668 7.99995C14.6668 8.23214 14.4786 8.42037 14.2464 8.42037H7.57351L8.77794 9.62509C8.94211 9.7893 8.94207 10.0555 8.77787 10.2197C8.61366 10.3838 8.34747 10.3838 8.1833 10.2196L6.26137 8.29719C6.18254 8.21834 6.13826 8.1114 6.13827 7.9999C6.13829 7.88839 6.18259 7.78146 6.26145 7.70263L8.18337 5.78118C8.34758 5.61701 8.61378 5.61704 8.77794 5.78125Z"
+                    fill="#121111"
+                  />
+                </svg>
+                로그인
+              </a>
+              <span
+                class="util-divider is-guest-only"
+                aria-hidden="true"
+              ></span>
+
+              <a class="util-link is-guest-only" href="./login.html#join"
+                >회원가입</a
+              >
+
+              <span
+                class="util-divider is-guest-only"
+                aria-hidden="true"
+              ></span>
+
+              <a class="util-link is-member-only" href="./login.html#mypage"
+                >마이페이지</a
+              >
+            </nav>
+          </div>
+        </div>
+
+        <div class="header-main">
+          <a
+            class="site-logo"
+            href="./index.html"
+            aria-label="한국한복문화예술협회 홈"
+          >
+            <img src="./images/logo.png" alt="한국한복문화예술협회" />
+          </a>
+
+          <nav class="gnb" aria-label="주요 메뉴">
+            <a href="./sub1.html" data-menu="intro">협회소개</a>
+            <a href="./sub2.html" data-menu="pr">홍보광장</a>
+            <a href="#" data-menu="azalea">아젤리아패션그룹</a>
+            <a href="#" data-menu="global">국제교류체험관</a>
+            <a href="#" data-menu="share">나눔과기쁨 &amp; 복지관</a>
+            <a href="#" data-menu="partner">협력기관</a>
+          </nav>
+
+          <button
+            class="menu-button"
+            type="button"
+            aria-label="메뉴 열기"
+            aria-expanded="false"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.2256 17.3867C19.6531 17.3867 19.9999 17.7336 20 18.1611C20 18.5887 19.6532 18.9355 19.2256 18.9355H4.77441C4.34684 18.9355 4 18.5887 4 18.1611C4.00008 17.7336 4.34689 17.3867 4.77441 17.3867H19.2256ZM19.2256 11.1934C19.6532 11.1934 20 11.5402 20 11.9678C20 12.3953 19.6532 12.7422 19.2256 12.7422H4.77441C4.34685 12.7422 4.00002 12.3953 4 11.9678C4 11.5402 4.34684 11.1934 4.77441 11.1934H19.2256ZM19.2256 5C19.6532 5 20 5.34684 20 5.77441C19.9999 6.20189 19.6531 6.54883 19.2256 6.54883H4.77441C4.34691 6.54883 4.00012 6.20189 4 5.77441C4 5.34684 4.34684 5 4.77441 5H19.2256Z"
+                fill="#121111"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="sub-menu" aria-label="2단 메뉴">
+          <div class="sub-menu-inner">
+            <div class="sub-menu-title">협회소개</div>
+            <nav class="sub-menu-list" aria-label="협회소개 하위 메뉴">
+              <a class="sub-menu-link" href="#">협회소개</a>
+              <a class="sub-menu-link" href="#">인사말</a>
+              <a class="sub-menu-link" href="#">연혁</a>
+              <a class="sub-menu-link" href="#">조직도</a>
+              <a class="sub-menu-link" href="#">오시는 길</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-backdrop" data-mobile-menu-close></div>
+        <aside class="mobile-menu-panel" aria-label="모바일 메뉴">
+          <div class="mobile-menu-head">
+            <img
+              class="mobile-menu-logo"
+              src="./images/logo.png"
+              alt="한국한복문화예술협회"
+            />
+            <button
+              class="mobile-menu-close"
+              type="button"
+              aria-label="메뉴 닫기"
+              data-mobile-menu-close
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19.2256 17.3867C19.6531 17.3867 19.9999 17.7336 20 18.1611C20 18.5887 19.6532 18.9355 19.2256 18.9355H4.77441C4.34684 18.9355 4 18.5887 4 18.1611C4.00008 17.7336 4.34689 17.3867 4.77441 17.3867H19.2256ZM19.2256 11.1934C19.6532 11.1934 20 11.5402 20 11.9678C20 12.3953 19.6532 12.7422 19.2256 12.7422H4.77441C4.34685 12.7422 4.00002 12.3953 4 11.9678C4 11.5402 4.34684 11.1934 4.77441 11.1934H19.2256ZM19.2256 5C19.6532 5 20 5.34684 20 5.77441C19.9999 6.20189 19.6531 6.54883 19.2256 6.54883H4.77441C4.34691 6.54883 4.00012 6.20189 4 5.77441C4 5.34684 4.34684 5 4.77441 5H19.2256Z"
+                  fill="#121111"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <nav class="mobile-menu-body" aria-label="모바일 주요 메뉴">
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                협회소개
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">협회소개</a>
+                <a href="#">인사말</a>
+                <a href="#">연혁</a>
+                <a href="#">조직도</a>
+                <a href="#">오시는 길</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                홍보광장
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">공지사항</a>
+                <a href="#">언론보도</a>
+                <a href="#">갤러리</a>
+                <a href="#">영상</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                아젤리아패션그룹
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">브랜드 소개</a>
+                <a href="#">아젤리아 드레스</a>
+                <a href="#">아젤리아 궁중한복</a>
+                <a href="#">아젤리아 키즈</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                국제교류체험관
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">아젤리아 매거진</a>
+                <a href="#">아젤리아 TV 방송</a>
+                <a href="#">아젤리아 앤터</a>
+                <a href="#">전통한문화포럼</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <a class="mobile-menu-link-only" href="#"
+                >나눔과기쁨 &amp; 복지관</a
+              >
+            </section>
+
+            <section class="mobile-menu-group">
+              <a class="mobile-menu-link-only" href="#">협력기관</a>
+            </section>
+          </nav>
+
+          <nav class="mobile-menu-util" aria-label="모바일 사용자 메뉴">
+            <a href="#">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2.71488 2.17483C2.42367 2.17483 2.17434 2.42415 2.17434 2.71537V13.2859C2.17434 13.5771 2.42368 13.8265 2.71488 13.8265H9.44163C9.73284 13.8265 9.98217 13.5771 9.98217 13.2859V11.364C9.98217 11.1318 10.1704 10.9436 10.4026 10.9436C10.6348 10.9436 10.823 11.1318 10.823 11.364V13.2859C10.823 14.0415 10.1972 14.6673 9.44163 14.6673H2.71488C1.95929 14.6673 1.3335 14.0415 1.3335 13.2859V2.71537C1.3335 1.95977 1.95928 1.33398 2.71488 1.33398H9.44163C10.1972 1.33398 10.823 1.95977 10.823 2.71537V4.63729C10.823 4.86948 10.6348 5.05771 10.4026 5.05771C10.1704 5.05771 9.98217 4.86948 9.98217 4.63729V2.71537C9.98217 2.42415 9.73284 2.17483 9.44163 2.17483H2.71488ZM8.77794 5.78125C8.94211 5.94545 8.94207 6.21165 8.77787 6.37581L7.57386 7.57953H14.2464C14.4786 7.57953 14.6668 7.76776 14.6668 7.99995C14.6668 8.23214 14.4786 8.42037 14.2464 8.42037H7.57351L8.77794 9.62509C8.94211 9.7893 8.94207 10.0555 8.77787 10.2197C8.61366 10.3838 8.34747 10.3838 8.1833 10.2196L6.26137 8.29719C6.18254 8.21834 6.13826 8.1114 6.13827 7.9999C6.13829 7.88839 6.18259 7.78146 6.26145 7.70263L8.18337 5.78118C8.34758 5.61701 8.61378 5.61704 8.77794 5.78125Z"
+                  fill="#121111"
+                />
+              </svg>
+              로그인
+            </a>
+            <span class="mobile-menu-util-divider"></span>
+            <a href="#">회원가입</a>
+            <span class="mobile-menu-util-divider"></span>
+            <a href="#">마이페이지</a>
+          </nav>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="메인 비주얼">
+        <div class="hero-top">
+          <div class="hero-copy">
+            <div class="hero-title-wrap">
+              <h1 class="hero-title">한복<span>한국의 전통의상</span></h1>
+              <p class="hero-desc">
+                “ 아름다운 우리 옷 한복<br />전통에 스며들다. ”
+              </p>
+            </div>
+            <div class="hero-slogan">BE INFLUENCED BY TRADITION</div>
+          </div>
+        </div>
+
+        <section class="design-summary" aria-label="디자인 등록 정보">
+          <div class="design-inner">
+            <div class="design-copy">
+              <div class="design-number">01</div>
+              <div class="design-description">
+                <div class="design-meta-group">
+                  <div class="design-meta">
+                    <img src="./images/yin-yang.png" alt="태극문양" />
+                    <span>태극문양디자인등록</span>
+                  </div>
+                  <h2 class="design-title">한복드레스</h2>
+                </div>
+                <p class="design-desc">디자인등록특허 <br />제30-1087062호</p>
+              </div>
+            </div>
+            <img
+              class="design-thumb"
+              src="./images/small-hanbok.png"
+              alt="한복드레스 이미지"
+            />
+          </div>
+        </section>
+      </section>
+
+      <section class="media-section" aria-label="홍보 미디어">
+        <div class="media-grid">
+          <article class="media-column">
+            <header class="section-head">
+              <div class="section-title-row">
+                <h2>포스터</h2>
+                <a class="more-button" href="#" aria-label="포스터 더보기"
+                  ><img src="./images/more.png" alt=""
+                /></a>
+              </div>
+              <p>Poster</p>
+            </header>
+            <div class="poster-list">
+              <a class="poster-card" href="#"
+                ><img
+                  src="./images/poster.png"
+                  alt="무궁화 한 모델 콘테스트 포스터"
+              /></a>
+              <a class="poster-card" href="#"
+                ><img
+                  src="./images/poster-1.png"
+                  alt="인터내셔널 CEO K스타 포스터"
+              /></a>
+            </div>
+          </article>
+
+          <article class="media-column">
+            <header class="section-head">
+              <div class="section-title-row">
+                <h2>동영상</h2>
+                <a class="more-button" href="#" aria-label="동영상 더보기"
+                  ><img src="./images/more.png" alt=""
+                /></a>
+              </div>
+              <p>Video</p>
+            </header>
+            <a class="video-card" href="#" aria-label="동영상 보기">
+              <span>
+                <img class="video-logo" src="./images/logo2.png" alt="" />
+                <strong class="video-title">한국한복문화예술협회</strong>
+                <p class="video-subtitle">
+                  Korean Hanbok Culture and Arts Association
+                </p>
+              </span>
+            </a>
+          </article>
+
+          <article class="media-column">
+            <header class="section-head">
+              <div class="section-title-row">
+                <h2>유튜브</h2>
+                <a class="more-button" href="#" aria-label="유튜브 더보기"
+                  ><img src="./images/more.png" alt=""
+                /></a>
+              </div>
+              <p>Youtube</p>
+            </header>
+            <a class="youtube-card" href="#" aria-label="유튜브 보기"></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="notice-section" aria-label="공지사항">
+        <div class="notice-bg" aria-hidden="true">
+          <img src="./images/flower-lf.png" alt="" />
+          <img src="./images/flower-r.png" alt="" />
+        </div>
+
+        <div class="notice-inner">
+          <header class="notice-head">
+            <div class="notice-title-group">
+              <h2>공지사항</h2>
+              <p>한국한복문화예술협회 문화 소통구</p>
+            </div>
+            <div class="notice-tabs" role="tablist" aria-label="공지사항 분류">
+              <button
+                class="notice-tab is-active"
+                type="button"
+                data-filter="all"
+              >
+                전체
+              </button>
+              <button class="notice-tab" type="button" data-filter="notice">
+                공지사항
+              </button>
+              <button class="notice-tab" type="button" data-filter="news">
+                뉴스
+              </button>
+            </div>
+          </header>
+
+          <div class="notice-list">
+            <div class="notice-row">
+              <article class="notice-card" data-category="notice">
+                <div class="notice-card-top">
+                  <span class="notice-badge">공지</span>
+                  <h3>2025년도 한국한복문화예술협회 공지사항</h3>
+                  <p>
+                    행사 및 프로그램과 관련된 중요한 소식을 빠르게 안내해
+                    드립니다. 업데이트되는 공지사항을 확인하시고, 놓치지 말고
+                    필요한 정보를 챙겨보세요!
+                  </p>
+                </div>
+                <time datetime="2025-01-16">2025-01-16</time>
+              </article>
+              <article class="notice-card" data-category="notice">
+                <div class="notice-card-top">
+                  <span class="notice-badge">공지</span>
+                  <h3>공지사항</h3>
+                  <p>
+                    행사 및 프로그램과 관련된 중요한 소식과 안내를 확인하세요.
+                    최신 정보를 통해 원활한 참여와 소통을 도와드립니다.
+                  </p>
+                </div>
+                <time datetime="2025-01-12">2025-01-12</time>
+              </article>
+              <article class="notice-card" data-category="notice">
+                <div class="notice-card-top">
+                  <span class="notice-badge">공지</span>
+                  <h3>2025 K-선비한복모델 선발대회</h3>
+                  <p>
+                    전통과 현대가 어우러진 축제의 장으로 여러분을 초대합니다!
+                    다양한 공연, 체험 프로그램, 전시 등이 마련되어 있으며,
+                    한국의 문화와 예술을 가까이에서 즐길 수 있는 특별한
+                    기회입니다. 가족, 친구와 함께 오셔서 잊지 못할 추억을
+                    만들어보세요!
+                  </p>
+                </div>
+                <time datetime="2025-01-09">2025-01-09</time>
+              </article>
+              <article class="notice-card" data-category="notice">
+                <div class="notice-card-top">
+                  <span class="notice-badge">공지</span>
+                  <h3>
+                    2025년도 각 복지센터와 함께하는 소외 계층을 위한 전통문화
+                    기부 프로젝트
+                  </h3>
+                  <p>
+                    한복을 기부받아 전통문화 체험 프로그램이나 해외 문화 교류
+                    행사에 활용하는 경우가 많습니다. 예를 들어, 지역
+                    문화재단이나 전통문화 보존 단체에서 한복 기부를 받고 이를
+                    행사에 사용하거나 보급합니다.
+                  </p>
+                </div>
+                <time datetime="2025-01-03">2025-01-03</time>
+              </article>
+            </div>
+
+            <div class="notice-row">
+              <article class="notice-card" data-category="news">
+                <div class="notice-card-top">
+                  <span class="notice-badge news">뉴스</span>
+                  <h3>
+                    [MJ포토] 아젤리아드레스 임은주 "문화 지킴이·알리미 디자이너
+                    목표"
+                  </h3>
+                  <p>
+                    대한민국 경제살리기 포럼 데이터자산공제회 공정회가 지난 6월
+                    25일 서울 영등포구 여의도 63컨벤션센터 그랜드볼룸에서
+                    개최됐다. 이날 3부 행사로 진행된 아젤리아 드레스
+                    패션쇼(AZALEA Dress Fashion Show)에 앞서 아젤리아 드레스
+                    임은주 디자이너가 포토타임을 갖고 있다.
+                  </p>
+                </div>
+                <time datetime="2021-07-05">2021-07-05</time>
+              </article>
+              <article class="notice-card" data-category="news">
+                <div class="notice-card-top">
+                  <span class="notice-badge news">뉴스</span>
+                  <h3>
+                    [MJ포토] 아젤리아드레스 임은주 "문화 지킴이·알리미 디자이너
+                    목표"
+                  </h3>
+                  <p>
+                    대한민국 경제살리기 포럼 데이터자산공제회 공정회가 지난 6월
+                    25일 서울 영등포구 여의도 63컨벤션센터 그랜드볼룸에서
+                    개최됐다. 이날 3부 행사로 진행된 아젤리아 드레스
+                    패션쇼(AZALEA Dress Fashion Show)에 앞서 아젤리아 드레스
+                    임은주 디자이너가 포토타임을 갖고 있다.
+                  </p>
+                </div>
+                <time datetime="2021-07-05">2021-07-05</time>
+              </article>
+              <article class="notice-card" data-category="news">
+                <div class="notice-card-top">
+                  <span class="notice-badge news">뉴스</span>
+                  <h3>
+                    [MJ포토] 아젤리아드레스 임은주 "문화 지킴이·알리미 디자이너
+                    목표"
+                  </h3>
+                  <p>
+                    대한민국 경제살리기 포럼 데이터자산공제회 공정회가 지난 6월
+                    25일 서울 영등포구 여의도 63컨벤션센터 그랜드볼룸에서
+                    개최됐다. 이날 3부 행사로 진행된 아젤리아 드레스
+                    패션쇼(AZALEA Dress Fashion Show)에 앞서 아젤리아 드레스
+                    임은주 디자이너가 포토타임을 갖고 있다.
+                  </p>
+                </div>
+                <time datetime="2021-07-05">2021-07-05</time>
+              </article>
+              <article class="notice-card" data-category="news">
+                <div class="notice-card-top">
+                  <span class="notice-badge news">뉴스</span>
+                  <h3>
+                    [MJ포토] 아젤리아드레스 임은주 "문화 지킴이·알리미 디자이너
+                    목표"
+                  </h3>
+                  <p>
+                    대한민국 경제살리기 포럼 데이터자산공제회 공정회가 지난 6월
+                    25일 서울 영등포구 여의도 63컨벤션센터 그랜드볼룸에서
+                    개최됐다. 이날 3부 행사로 진행된 아젤리아 드레스
+                    패션쇼(AZALEA Dress Fashion Show)에 앞서 아젤리아 드레스
+                    임은주 디자이너가 포토타임을 갖고 있다.
+                  </p>
+                </div>
+                <time datetime="2021-07-05">2021-07-05</time>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="gallery-section" aria-label="갤러리">
+        <img
+          class="gallery-bg"
+          src="./images/bg-gall.png"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="gallery-layout">
+          <div class="gallery-title">
+            <h2>갤러리</h2>
+            <p>사진으로 본 문화현장</p>
+          </div>
+
+          <div class="gallery-slider">
+            <div class="gallery-list">
+              <a class="gallery-card main" href="#">
+                <img
+                  src="./images/image.png"
+                  alt="제13회 효창원 8위 선열 숭모제전"
+                />
+                <div class="gallery-caption">
+                  <div class="gallery-title-line">
+                    <h3>제13회 효창원 8위 선열 숭모제전</h3>
+                    <span class="gallery-arrow">
+                      <img src="./images/arrow.png" alt="" />
+                    </span>
+                  </div>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </div>
+              </a>
+              <a class="gallery-card" href="#">
+                <img
+                  src="./images/image-1.png"
+                  alt="제13회 효창원 8위 선열 숭모제전"
+                />
+                <div class="gallery-caption">
+                  <div class="gallery-title-line">
+                    <h3>제13회 효창원 8위 선열 숭모제전</h3>
+                    <span class="gallery-arrow">
+                      <img src="./images/arrow.png" alt="" />
+                    </span>
+                  </div>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </div>
+              </a>
+              <a class="gallery-card" href="#">
+                <img
+                  src="./images/image-2.png"
+                  alt="제13회 효창원 8위 선열 숭모제전"
+                />
+                <div class="gallery-caption">
+                  <div class="gallery-title-line">
+                    <h3>제13회 효창원 8위 선열 숭모제전</h3>
+                    <span class="gallery-arrow">
+                      <img src="./images/arrow.png" alt="" />
+                    </span>
+                  </div>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </div>
+              </a>
+              <a class="gallery-card" href="#">
+                <img
+                  src="./images/image-3.png"
+                  alt="제13회 효창원 8위 선열 숭모제전"
+                />
+                <div class="gallery-caption">
+                  <div class="gallery-title-line">
+                    <h3>제13회 효창원 8위 선열 숭모제전</h3>
+                    <span class="gallery-arrow">
+                      <img src="./images/arrow.png" alt="" />
+                    </span>
+                  </div>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-controls" aria-label="갤러리 슬라이드 조작">
+          <button
+            class="gallery-control-button gallery-prev"
+            type="button"
+            aria-label="이전 갤러리"
+          >
+            ‹
+          </button>
+          <button
+            class="gallery-control-button gallery-next"
+            type="button"
+            aria-label="다음 갤러리"
+          >
+            ›
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-info">
+          <img
+            class="footer-logo"
+            src="./images/logo3.png"
+            alt="한국한복문화예술협회"
+          />
+          <p class="footer-meta">
+            <span>Homepage : www.khanbok.kr</span>
+            <span>Mobile : 010-7385-7888</span>
+            <span>Email : tj142536@naver.com</span>
+            <span
+              >Office : 서울특별시 용산구 후암로4길 64 (64, Huam-ro 4-gil,
+              Seoul, Korea)</span
+            >
+          </p>
+        </div>
+        <nav class="footer-sns-list" aria-label="소셜 채널">
+          <a class="footer-sns-link" href="#" aria-label="유튜브">
+            <img src="./images/icon/sns1.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="인스타그램">
+            <img src="./images/icon/sns2.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="페이스북">
+            <img src="./images/icon/sns3.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="블로그">
+            <img src="./images/icon/sns4.png" alt="" />
+          </a>
+        </nav>
+      </div>
+    </footer>
+
+    <button class="top-button" type="button" aria-label="상단으로 이동">
+      <img src="./images/top.png" alt="" />
+    </button>
+
+    <script src="./script/common.js"></script>
+    <script src="./script/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1116 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/sub2.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-content">
+        <div class="util-bar" aria-label="사용자 메뉴">
+          <div class="util-inner">
+            <nav class="util-nav" aria-label="사용자 메뉴">
+              <a class="util-link login" href="./login.html">
+                <svg
+                  class="util-icon"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M2.71488 2.17483C2.42367 2.17483 2.17434 2.42415 2.17434 2.71537V13.2859C2.17434 13.5771 2.42368 13.8265 2.71488 13.8265H9.44163C9.73284 13.8265 9.98217 13.5771 9.98217 13.2859V11.364C9.98217 11.1318 10.1704 10.9436 10.4026 10.9436C10.6348 10.9436 10.823 11.1318 10.823 11.364V13.2859C10.823 14.0415 10.1972 14.6673 9.44163 14.6673H2.71488C1.95929 14.6673 1.3335 14.0415 1.3335 13.2859V2.71537C1.3335 1.95977 1.95928 1.33398 2.71488 1.33398H9.44163C10.1972 1.33398 10.823 1.95977 10.823 2.71537V4.63729C10.823 4.86948 10.6348 5.05771 10.4026 5.05771C10.1704 5.05771 9.98217 4.86948 9.98217 4.63729V2.71537C9.98217 2.42415 9.73284 2.17483 9.44163 2.17483H2.71488ZM8.77794 5.78125C8.94211 5.94545 8.94207 6.21165 8.77787 6.37581L7.57386 7.57953H14.2464C14.4786 7.57953 14.6668 7.76776 14.6668 7.99995C14.6668 8.23214 14.4786 8.42037 14.2464 8.42037H7.57351L8.77794 9.62509C8.94211 9.7893 8.94207 10.0555 8.77787 10.2197C8.61366 10.3838 8.34747 10.3838 8.1833 10.2196L6.26137 8.29719C6.18254 8.21834 6.13826 8.1114 6.13827 7.9999C6.13829 7.88839 6.18259 7.78146 6.26145 7.70263L8.18337 5.78118C8.34758 5.61701 8.61378 5.61704 8.77794 5.78125Z"
+                    fill="#121111"
+                  />
+                </svg>
+                로그인
+              </a>
+              <span
+                class="util-divider is-guest-only"
+                aria-hidden="true"
+              ></span>
+
+              <a class="util-link is-guest-only" href="./login.html#join"
+                >회원가입</a
+              >
+
+              <span
+                class="util-divider is-guest-only"
+                aria-hidden="true"
+              ></span>
+
+              <a class="util-link is-member-only" href="./login.html#mypage"
+                >마이페이지</a
+              >
+            </nav>
+          </div>
+        </div>
+
+        <div class="header-main">
+          <a
+            class="site-logo"
+            href="./index.html"
+            aria-label="한국한복문화예술협회 홈"
+          >
+            <img src="./images/logo.png" alt="한국한복문화예술협회" />
+          </a>
+
+          <nav class="gnb" aria-label="주요 메뉴">
+            <a href="./sub1.html" data-menu="intro">협회소개</a>
+            <a href="./sub2.html" data-menu="pr">홍보광장</a>
+            <a href="#" data-menu="azalea">아젤리아패션그룹</a>
+            <a href="#" data-menu="global">국제교류체험관</a>
+            <a href="#" data-menu="share">나눔과기쁨 &amp; 복지관</a>
+            <a href="#" data-menu="partner">협력기관</a>
+          </nav>
+
+          <button
+            class="menu-button"
+            type="button"
+            aria-label="메뉴 열기"
+            aria-expanded="false"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              <path
+                d="M19.2256 17.3867C19.6531 17.3867 19.9999 17.7336 20 18.1611C20 18.5887 19.6532 18.9355 19.2256 18.9355H4.77441C4.34684 18.9355 4 18.5887 4 18.1611C4.00008 17.7336 4.34689 17.3867 4.77441 17.3867H19.2256ZM19.2256 11.1934C19.6532 11.1934 20 11.5402 20 11.9678C20 12.3953 19.6532 12.7422 19.2256 12.7422H4.77441C4.34685 12.7422 4.00002 12.3953 4 11.9678C4 11.5402 4.34684 11.1934 4.77441 11.1934H19.2256ZM19.2256 5C19.6532 5 20 5.34684 20 5.77441C19.9999 6.20189 19.6531 6.54883 19.2256 6.54883H4.77441C4.34691 6.54883 4.00012 6.20189 4 5.77441C4 5.34684 4.34684 5 4.77441 5H19.2256Z"
+                fill="#121111"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="sub-menu" aria-label="2단 메뉴">
+          <div class="sub-menu-inner">
+            <div class="sub-menu-title">협회소개</div>
+            <nav class="sub-menu-list" aria-label="협회소개 하위 메뉴">
+              <a class="sub-menu-link" href="#">협회소개</a>
+              <a class="sub-menu-link" href="#">인사말</a>
+              <a class="sub-menu-link" href="#">연혁</a>
+              <a class="sub-menu-link" href="#">조직도</a>
+              <a class="sub-menu-link" href="#">오시는 길</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-backdrop" data-mobile-menu-close></div>
+        <aside class="mobile-menu-panel" aria-label="모바일 메뉴">
+          <div class="mobile-menu-head">
+            <img
+              class="mobile-menu-logo"
+              src="./images/logo.png"
+              alt="한국한복문화예술협회"
+            />
+            <button
+              class="mobile-menu-close"
+              type="button"
+              aria-label="메뉴 닫기"
+              data-mobile-menu-close
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M19.2256 17.3867C19.6531 17.3867 19.9999 17.7336 20 18.1611C20 18.5887 19.6532 18.9355 19.2256 18.9355H4.77441C4.34684 18.9355 4 18.5887 4 18.1611C4.00008 17.7336 4.34689 17.3867 4.77441 17.3867H19.2256ZM19.2256 11.1934C19.6532 11.1934 20 11.5402 20 11.9678C20 12.3953 19.6532 12.7422 19.2256 12.7422H4.77441C4.34685 12.7422 4.00002 12.3953 4 11.9678C4 11.5402 4.34684 11.1934 4.77441 11.1934H19.2256ZM19.2256 5C19.6532 5 20 5.34684 20 5.77441C19.9999 6.20189 19.6531 6.54883 19.2256 6.54883H4.77441C4.34691 6.54883 4.00012 6.20189 4 5.77441C4 5.34684 4.34684 5 4.77441 5H19.2256Z"
+                  fill="#121111"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <nav class="mobile-menu-body" aria-label="모바일 주요 메뉴">
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                협회소개
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">협회소개</a>
+                <a href="#">인사말</a>
+                <a href="#">연혁</a>
+                <a href="#">조직도</a>
+                <a href="#">오시는 길</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                홍보광장
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">공지사항</a>
+                <a href="#">언론보도</a>
+                <a href="#">갤러리</a>
+                <a href="#">영상</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                아젤리아패션그룹
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">브랜드 소개</a>
+                <a href="#">아젤리아 드레스</a>
+                <a href="#">아젤리아 궁중한복</a>
+                <a href="#">아젤리아 키즈</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <button
+                class="mobile-menu-title"
+                type="button"
+                aria-expanded="false"
+              >
+                국제교류체험관
+                <span class="mobile-menu-arrow" aria-hidden="true">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M5 15L12 8L19 15"
+                      stroke="#121111"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <div class="mobile-sub-list">
+                <a href="#">아젤리아 매거진</a>
+                <a href="#">아젤리아 TV 방송</a>
+                <a href="#">아젤리아 앤터</a>
+                <a href="#">전통한문화포럼</a>
+              </div>
+            </section>
+
+            <section class="mobile-menu-group">
+              <a class="mobile-menu-link-only" href="#"
+                >나눔과기쁨 &amp; 복지관</a
+              >
+            </section>
+
+            <section class="mobile-menu-group">
+              <a class="mobile-menu-link-only" href="#">협력기관</a>
+            </section>
+          </nav>
+
+          <nav class="mobile-menu-util" aria-label="모바일 사용자 메뉴">
+            <a href="#">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M2.71488 2.17483C2.42367 2.17483 2.17434 2.42415 2.17434 2.71537V13.2859C2.17434 13.5771 2.42368 13.8265 2.71488 13.8265H9.44163C9.73284 13.8265 9.98217 13.5771 9.98217 13.2859V11.364C9.98217 11.1318 10.1704 10.9436 10.4026 10.9436C10.6348 10.9436 10.823 11.1318 10.823 11.364V13.2859C10.823 14.0415 10.1972 14.6673 9.44163 14.6673H2.71488C1.95929 14.6673 1.3335 14.0415 1.3335 13.2859V2.71537C1.3335 1.95977 1.95928 1.33398 2.71488 1.33398H9.44163C10.1972 1.33398 10.823 1.95977 10.823 2.71537V4.63729C10.823 4.86948 10.6348 5.05771 10.4026 5.05771C10.1704 5.05771 9.98217 4.86948 9.98217 4.63729V2.71537C9.98217 2.42415 9.73284 2.17483 9.44163 2.17483H2.71488ZM8.77794 5.78125C8.94211 5.94545 8.94207 6.21165 8.77787 6.37581L7.57386 7.57953H14.2464C14.4786 7.57953 14.6668 7.76776 14.6668 7.99995C14.6668 8.23214 14.4786 8.42037 14.2464 8.42037H7.57351L8.77794 9.62509C8.94211 9.7893 8.94207 10.0555 8.77787 10.2197C8.61366 10.3838 8.34747 10.3838 8.1833 10.2196L6.26137 8.29719C6.18254 8.21834 6.13826 8.1114 6.13827 7.9999C6.13829 7.88839 6.18259 7.78146 6.26145 7.70263L8.18337 5.78118C8.34758 5.61701 8.61378 5.61704 8.77794 5.78125Z"
+                  fill="#121111"
+                />
+              </svg>
+              로그인
+            </a>
+            <span class="mobile-menu-util-divider"></span>
+            <a href="#">회원가입</a>
+            <span class="mobile-menu-util-divider"></span>
+            <a href="#">마이페이지</a>
+          </nav>
+        </aside>
+      </div>
+    </header>
+    <main class="promo-page">
+      <section class="promo-visual" aria-labelledby="promoPageTitle">
+        <h1 id="promoPageTitle">홍보룸</h1>
+      </section>
+
+      <nav class="page-location" aria-label="페이지 위치">
+        <div class="page-location-inner">
+          <a href="./index.html" class="location-home" aria-label="홈">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4.5 10.8L12 4.5L19.5 10.8V19.5H14.5V14H9.5V19.5H4.5V10.8Z"
+                fill="#121111"
+              />
+            </svg>
+          </a>
+
+          <div class="location-select">
+            <span>홍보광장</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M6 9L12 15L18 9"
+                fill="none"
+                stroke="#121111"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div class="location-select is-current">
+            <span id="locationCurrent">공지사항</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M6 9L12 15L18 9"
+                fill="none"
+                stroke="#121111"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
+      </nav>
+
+      <section class="promo-content">
+        <div class="promo-inner">
+          <nav class="breadcrumb" aria-label="현재 위치">
+            <a href="./index.html" class="breadcrumb-home" aria-label="홈">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+              >
+                <path
+                  d="M2.5 7.2L8 2.7L13.5 7.2V13.5H9.8V9.6H6.2V13.5H2.5V7.2Z"
+                  fill="none"
+                  stroke="#121111"
+                  stroke-width="1.2"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </a>
+
+            <span class="breadcrumb-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <path
+                  d="M6 4L10 8L6 12"
+                  fill="none"
+                  stroke="#121111"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <span>홍보광장</span>
+
+            <span class="breadcrumb-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16">
+                <path
+                  d="M6 4L10 8L6 12"
+                  fill="none"
+                  stroke="#121111"
+                  stroke-width="1.3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+
+            <strong id="breadcrumbCategory">공지사항</strong>
+
+            <span
+              class="breadcrumb-detail-group"
+              id="breadcrumbDetailGroup"
+              hidden
+            >
+              <span class="breadcrumb-arrow" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16">
+                  <path
+                    d="M6 4L10 8L6 12"
+                    fill="none"
+                    stroke="#121111"
+                    stroke-width="1.3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+
+              <strong>상세보기</strong>
+            </span>
+          </nav>
+
+          <nav class="promo-tabs" aria-label="홍보광장 하위 메뉴">
+            <button
+              class="promo-tab is-active"
+              type="button"
+              data-target-view="notice-list"
+            >
+              공지사항
+            </button>
+            <button
+              class="promo-tab"
+              type="button"
+              data-target-view="press-list"
+            >
+              언론보도
+            </button>
+            <button
+              class="promo-tab"
+              type="button"
+              data-target-view="video-list"
+            >
+              영상홍보
+            </button>
+          </nav>
+
+          <!-- 공지사항 목록 -->
+          <section class="promo-view is-active" data-view="notice-list">
+            <div class="section-title">
+              <h2>공지사항</h2>
+              <p>Notice</p>
+            </div>
+
+            <div class="board-wrap">
+              <div class="board-table" role="table" aria-label="공지사항 목록">
+                <div class="board-row board-head" role="row">
+                  <div class="board-cell board-no" role="columnheader">
+                    번호
+                  </div>
+                  <div class="board-cell board-title" role="columnheader">
+                    제목
+                  </div>
+                  <div class="board-cell board-writer" role="columnheader">
+                    작성자
+                  </div>
+                  <div class="board-cell board-date" role="columnheader">
+                    작성일
+                  </div>
+                </div>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">130</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">129</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">128</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">127</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">126</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">125</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">124</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">123</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">122</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+
+                <button
+                  class="board-row board-body"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <span class="board-cell board-no">121</span>
+                  <span class="board-cell board-title">
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </span>
+                  <span class="board-cell board-writer">작성자</span>
+                  <span class="board-cell board-date">YYYY.MM.DD</span>
+                </button>
+              </div>
+
+              <div class="board-mobile-list" aria-label="공지사항 모바일 목록">
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+
+                <button
+                  class="mobile-board-card"
+                  type="button"
+                  data-target-view="notice-detail"
+                >
+                  <strong>
+                    공지사항입니다. 제목은 최대 한줄만 노출이 가능합니다. 그
+                    뒤로는 ... 처리 합니다.
+                  </strong>
+                  <span>
+                    <em>작성자</em>
+                    <i aria-hidden="true"></i>
+                    <em>YYYY.MM.DD</em>
+                  </span>
+                </button>
+              </div>
+
+              <nav class="pagination" aria-label="페이지네이션">
+                <button
+                  class="page-arrow"
+                  type="button"
+                  aria-label="처음 페이지"
+                >
+                  «
+                </button>
+                <button
+                  class="page-arrow"
+                  type="button"
+                  aria-label="이전 페이지"
+                >
+                  ‹
+                </button>
+                <button class="page-num is-active" type="button">1</button>
+                <button class="page-num" type="button">2</button>
+                <button class="page-num" type="button">3</button>
+                <button class="page-num" type="button">4</button>
+                <button class="page-num" type="button">5</button>
+                <button class="page-num pc-page" type="button">6</button>
+                <button class="page-num pc-page" type="button">7</button>
+                <button class="page-num pc-page" type="button">8</button>
+                <button class="page-num pc-page" type="button">9</button>
+                <button class="page-num pc-page" type="button">10</button>
+                <button
+                  class="page-arrow"
+                  type="button"
+                  aria-label="다음 페이지"
+                >
+                  ›
+                </button>
+                <button
+                  class="page-arrow"
+                  type="button"
+                  aria-label="마지막 페이지"
+                >
+                  »
+                </button>
+              </nav>
+            </div>
+          </section>
+
+          <!-- 공지사항 상세 -->
+          <section class="promo-view" data-view="notice-detail">
+            <article class="detail-board">
+              <header class="detail-header">
+                <h2>공지사항 타이틀</h2>
+                <div class="detail-meta">
+                  <span>작성자</span>
+                  <i aria-hidden="true"></i>
+                  <span>YYYY.MM.DD</span>
+                </div>
+              </header>
+
+              <div class="detail-body">
+                <p>
+                  늦은 저녁까지 놀다 보면 할머니가 그만 들어오라며 불렀고, 그
+                  순간의 아쉬움은 설명하기 어려울 정도였지만, 달빛 아래에서
+                  친구들과 숨바꼭질을 하던 순간은 여전히 생생합니다.
+                </p>
+                <p>
+                  한여름의 따스한 공기와 달빛이 가득한 마당, 그 안에서 각기 다른
+                  색채와 속도를 가진 사람들이 함께 얽혀 살아갑니다. 아침이면
+                  지하철은 어김없이 사람들로 가득 차고, 길거리는 출근을 서두르는
+                  사람들로 분주합니다.
+                </p>
+                <p>
+                  공지사항 본문 영역입니다. 여러 문단이 들어갈 수 있으며 PC와
+                  모바일에서 동일한 여백 흐름을 유지합니다.
+                </p>
+              </div>
+            </article>
+
+            <div class="detail-actions">
+              <button
+                class="list-button"
+                type="button"
+                data-target-view="notice-list"
+              >
+                목록
+              </button>
+            </div>
+          </section>
+
+          <!-- 언론보도 목록 -->
+          <section class="promo-view" data-view="press-list">
+            <div class="section-title">
+              <h2>언론보도</h2>
+              <p>Press Release</p>
+            </div>
+
+            <div class="press-grid">
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <span class="press-thumb press-thumb-empty">
+                  <img src="./images/logo-big.png" alt="" />
+                </span>
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+
+              <button
+                class="press-card"
+                type="button"
+                data-target-view="press-detail"
+              >
+                <img
+                  class="press-thumb"
+                  src="./images/image1.png"
+                  alt="언론보도 이미지"
+                />
+                <span class="press-info">
+                  <strong>제13회 효창원 8위 선열 숭모제전</strong>
+                  <time datetime="2023-11-15">2023-11-15</time>
+                </span>
+              </button>
+            </div>
+
+            <nav class="pagination" aria-label="페이지네이션">
+              <button class="page-arrow" type="button" aria-label="처음 페이지">
+                «
+              </button>
+              <button class="page-arrow" type="button" aria-label="이전 페이지">
+                ‹
+              </button>
+              <button class="page-num is-active" type="button">1</button>
+              <button class="page-num" type="button">2</button>
+              <button class="page-num" type="button">3</button>
+              <button class="page-num" type="button">4</button>
+              <button class="page-num" type="button">5</button>
+              <button class="page-arrow" type="button" aria-label="다음 페이지">
+                ›
+              </button>
+              <button
+                class="page-arrow"
+                type="button"
+                aria-label="마지막 페이지"
+              >
+                »
+              </button>
+            </nav>
+          </section>
+
+          <!-- 언론보도 상세 -->
+          <section class="promo-view" data-view="press-detail">
+            <article class="detail-board">
+              <header class="detail-header">
+                <h2>공지사항 타이틀</h2>
+                <div class="detail-meta">
+                  <span>작성자</span>
+                  <i aria-hidden="true"></i>
+                  <span>YYYY.MM.DD</span>
+                </div>
+              </header>
+
+              <div class="detail-body">
+                <img
+                  class="detail-main-img"
+                  src="./images/image1.png"
+                  alt="언론보도 상세 이미지"
+                />
+
+                <p>
+                  늦은 저녁까지 놀다 보면 할머니가 그만 들어오라며 불렀고, 그
+                  순간의 아쉬움은 설명하기 어려울 정도였지만, 달빛 아래에서
+                  친구들과 숨바꼭질을 하던 순간은 여전히 생생합니다.
+                </p>
+              </div>
+            </article>
+
+            <div class="detail-actions">
+              <button
+                class="list-button"
+                type="button"
+                data-target-view="press-list"
+              >
+                목록
+              </button>
+            </div>
+          </section>
+
+          <!-- 영상홍보 -->
+          <section class="promo-view" data-view="video-list">
+            <div class="section-title">
+              <h2>영상홍보</h2>
+              <p>Promotion Video</p>
+            </div>
+
+            <div class="ready-box">
+              <p>페이지 준비중입니다.</p>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-info">
+          <img
+            class="footer-logo"
+            src="./images/logo3.png"
+            alt="한국한복문화예술협회"
+          />
+          <p class="footer-meta">
+            <span>Homepage : www.khanbok.kr</span>
+            <span>Mobile : 010-7385-7888</span>
+            <span>Email : tj142536@naver.com</span>
+            <span
+              >Office : 서울특별시 용산구 후암로4길 64 (64, Huam-ro 4-gil,
+              Seoul, Korea)</span
+            >
+          </p>
+        </div>
+        <nav class="footer-sns-list" aria-label="소셜 채널">
+          <a class="footer-sns-link" href="#" aria-label="유튜브">
+            <img src="./images/icon/sns1.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="인스타그램">
+            <img src="./images/icon/sns2.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="페이스북">
+            <img src="./images/icon/sns3.png" alt="" />
+          </a>
+          <a class="footer-sns-link" href="#" aria-label="블로그">
+            <img src="./images/icon/sns4.png" alt="" />
+          </a>
+        </nav>
+      </div>
+    </footer>
+    <script src="./script/common.js"></script>
+    <script src="./script/sub2.js"></script>
+  </body>
+</html>
