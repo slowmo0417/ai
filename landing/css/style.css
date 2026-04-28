@@ -1,0 +1,40 @@
+@charset "utf-8";
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  scroll-behavior: smooth;
+}
+.hero-bg {
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("https://images.unsplash.com/photo-1513519245088-0e12902e5a38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+}
+nav {
+  transition: all 0.3s ease-in-out;
+}
+nav.scrolled {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+#progress-bar {
+  height: 3px;
+  background: linear-gradient(to right, #78716c, #44403c);
+  width: 0%;
+  transition: width 0.1s;
+}
+.mobile-menu {
+  transition: transform 0.3s ease-in-out;
+  transform: translateX(100%);
+}
+.mobile-menu.open {
+  transform: translateX(0);
+}
+section {
+  scroll-margin-top: 80px;
+}
+.faq-item[open] summary svg {
+  transform: rotate(180deg);
+}
