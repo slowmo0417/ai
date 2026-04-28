@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 @font-face {
   font-family: "RiaSans";
   src: url("../font/RiaSans-Bold.ttf") format("truetype");
@@ -249,6 +250,7 @@ img {
 
 .pick-card {
   scroll-snap-align: start;
+  position: relative;
   flex: 0 0 212px;
   width: 212px;
   height: 136px;
@@ -266,6 +268,11 @@ img {
   height: 24px;
   margin-bottom: 8px;
   color: #c7c7c7;
+}
+
+.pick-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .pick-desc {
@@ -316,6 +323,98 @@ img {
   width: 100px;
   height: 32px;
   padding: 0;
+}
+
+/* =========================
+   나만의 메뉴 카드
+========================= */
+
+.my-menu-card {
+  height: 136px;
+  padding: 12px 12px 14px;
+  background: #f6f6f6;
+  box-shadow: none;
+}
+
+.my-menu-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  margin-bottom: 6px;
+}
+
+.my-menu-thumb img {
+  width: 64px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.my-menu-desc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  min-height: 36px;
+  margin-bottom: 7px;
+  color: #a2a2a2;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.my-menu-name {
+  display: block;
+  width: 100%;
+  max-width: 150px;
+  overflow: hidden;
+  color: #a2a2a2;
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.my-menu-desc strong {
+  color: #a2a2a2;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.my-menu-order-btn {
+  width: 100px;
+  height: 32px;
+  padding: 0;
+  margin-top: 0;
+}
+
+.my-menu-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: transparent;
+  color: #bfbfbf;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.my-menu-delete:hover {
+  color: #777;
+}
+
+.my-menu-delete:active {
+  transform: scale(0.94);
 }
 
 /* =========================
