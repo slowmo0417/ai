@@ -1,12 +1,11 @@
-
 <!doctype html>
 <html lang="ko">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>롯데리아</title>
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/menu.css">
+    <link rel="stylesheet" href="./css/common.css" >
+    <link rel="stylesheet" href="./css/menu.css" >
   </head>
 
   <body>
@@ -104,7 +103,6 @@
         data-active-nav=""
       >
         <main class="menu-page" aria-label="메뉴선택 화면">
-
           <nav class="category-wrap" aria-label="메뉴 카테고리">
             <div class="category-scroll" id="categoryScroll"></div>
           </nav>
@@ -259,12 +257,19 @@
           </div>
 
           <div class="sheet-actions">
-            <button type="button" class="sheet-btn cancel" id="sheetClose">
-              취소
+            <button type="button" class="sheet-btn pick" id="addMyPickBtn">
+              나의 Pick 추가
             </button>
-            <button type="button" class="sheet-btn submit" id="addCartBtn">
-              장바구니 담기
-            </button>
+
+            <div class="sheet-action-row">
+              <button type="button" class="sheet-btn cancel" id="sheetClose">
+                취소
+              </button>
+
+              <button type="button" class="sheet-btn submit" id="addCartBtn">
+                장바구니 담기
+              </button>
+            </div>
           </div>
         </aside>
 
@@ -418,11 +423,7 @@
         </ul>
       </nav>
 
-      <div
-        id="orderSheetBackdrop"
-        class="sheet-backdrop"
-        hidden
-      ></div>
+      <div id="orderSheetBackdrop" class="sheet-backdrop" hidden></div>
 
       <div
         id="orderSheet"
