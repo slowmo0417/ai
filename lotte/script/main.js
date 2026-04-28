@@ -3,6 +3,9 @@ const KAKAO_JAVASCRIPT_KEY = "cc8c124f8a594a01e630a3c43ae4349a";
 const LOCATION_CACHE_KEY = "lotteriaUserLocation";
 const LOCATION_CACHE_MAX_AGE = 1000 * 60 * 60 * 24;
 
+const MY_MENU_KEY = "myMenuItems";
+const CART_ITEMS_KEY = "cartItems";
+
 let heroTrack = null;
 let heroSlides = [];
 let realHeroSlides = [];
@@ -14,6 +17,10 @@ let heroMoveX = 0;
 let isHeroDragging = false;
 let heroAutoTimer = null;
 let heroPointerId = null;
+
+/* =========================
+   메인 히어로 슬라이더
+========================= */
 
 function initHeroSlider() {
   heroTrack = document.querySelector("#heroTrack");
@@ -216,6 +223,10 @@ function restartHeroAutoSlide() {
   startHeroAutoSlide();
 }
 
+/* =========================
+   가로 드래그
+========================= */
+
 function enableHorizontalDrag(selector) {
   document.querySelectorAll(selector).forEach((scrollArea) => {
     let isDown = false;
@@ -260,6 +271,10 @@ function enableHorizontalDrag(selector) {
     scrollArea.addEventListener("pointerleave", endDrag);
   });
 }
+
+/* =========================
+   카카오 위치 / 매장
+========================= */
 
 function loadKakaoMapSdk() {
   return new Promise((resolve, reject) => {
@@ -583,6 +598,188 @@ function initStoreEvents() {
   });
 }
 
+/* =========================
+   나만의 메뉴 / 장바구니
+========================= */
+
+function getMyMenuItems() {
+  try {
+    const rawData = localStorage.getItem(MY_MENU_KEY);
+    const items = rawData ? JSON.parse(rawData) : [];
+
+    return Array.isArray(items) ? items : [];
+  } catch (error) {
+    localStorage.removeItem(MY_MENU_KEY);
+    return [];
+  }
+}
+
+function saveMyMenuItems(items) {
+  localStorage.setItem(MY_MENU_KEY, JSON.stringify(items));
+}
+
+function getCartItems() {
+  try {
+    const rawData = localStorage.getItem(CART_ITEMS_KEY);
+    const items = rawData ? JSON.parse(rawData) : [];
+
+    return Array.isArray(items) ? items : [];
+  } catch (error) {
+    localStorage.removeItem(CART_ITEMS_KEY);
+    return [];
+  }
+}
+
+function saveCartItems(items) {
+  localStorage.setItem(CART_ITEMS_KEY, JSON.stringify(items));
+
+  if (typeof window.updateCartCountBadge === "function") {
+    window.updateCartCountBadge();
+  }
+}
+
+function createCartItemFromMyMenu(menu) {
+  const menuName = menu.name || "선택 메뉴";
+  const originalName = menu.originalName || menu.burger || menuName;
+  const setType = menu.setType || "single";
+
+  return {
+    id: `${menu.id || menuName}-${Date.now()}`,
+    menuId: menu.id || "",
+    name: menuName,
+    originalName,
+    price: Number(menu.price) || 0,
+    image: menu.image || "",
+    quantity: 1,
+
+    setType,
+    burger: menu.burger || originalName,
+    side: menu.side || "",
+    drink: menu.drink || "",
+    sideImage: menu.sideImage || "",
+    drinkImage: menu.drinkImage || "",
+  };
+}
+
+function addMyMenuToCart(menu) {
+  const cartItems = getCartItems();
+  const cartItem = createCartItemFromMyMenu(menu);
+
+  cartItems.push(cartItem);
+  saveCartItems(cartItems);
+
+  window.location.href = "./cart.html";
+}
+
+function removeMyMenuItem(menuId) {
+  const myMenuItems = getMyMenuItems();
+  const nextItems = myMenuItems.filter((item) => item.id !== menuId);
+
+  saveMyMenuItems(nextItems);
+  renderMyPickItems();
+}
+
+function createDefaultMyMenuCard() {
+  return `
+    <div class="pick-card my-menu-empty-card">
+      <span class="pick-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3C7.04 3 3 7.04 3 12C3 16.96 7.04 21 12 21C16.96 21 21 16.96 21 12C21 7.04 16.96 3 12 3ZM16.4 12.9H12.9V16.4H11.1V12.9H7.6V11.1H11.1V7.6H12.9V11.1H16.4V12.9Z" />
+        </svg>
+      </span>
+
+      <p class="pick-desc">
+        나만의 메뉴를 등록해<br />빠르게 주문해보세요!
+      </p>
+
+      <button type="button" class="primary-pill" data-menu-link>
+        등록하기
+      </button>
+    </div>
+  `;
+}
+
+function renderMyPickItems() {
+  const myPickList = document.querySelector("#myPickList");
+
+  if (!myPickList) return;
+
+  const myMenuItems = getMyMenuItems();
+
+  myPickList.querySelectorAll(".my-menu-card").forEach((card) => {
+    card.remove();
+  });
+
+  const emptyCard = myPickList.querySelector(".my-menu-empty-card");
+
+  if (!myMenuItems.length) {
+    if (emptyCard) {
+      emptyCard.style.display = "";
+    } else {
+      myPickList.insertAdjacentHTML("beforeend", createDefaultMyMenuCard());
+    }
+
+    return;
+  }
+
+  if (emptyCard) emptyCard.style.display = "none";
+
+  myMenuItems.forEach((menu) => {
+    const card = document.createElement("div");
+    card.className = "pick-card my-menu-card";
+
+    const image = menu.image || "./images/img.png";
+    const name = menu.name || "선택 메뉴";
+    const price = Number(menu.price || 0).toLocaleString();
+
+    card.innerHTML = `
+      <button type="button" class="my-menu-delete" aria-label="${name} 나만의 메뉴 삭제">
+        ×
+      </button>
+
+      <div class="my-menu-thumb">
+        <img src="${image}" alt="${name}" />
+      </div>
+
+      <p class="pick-desc my-menu-desc">
+        <span class="my-menu-name">${name}</span>
+        <strong>${price}원</strong>
+      </p>
+
+      <button type="button" class="primary-pill my-menu-order-btn">
+        주문하기
+      </button>
+    `;
+
+    const orderButton = card.querySelector(".my-menu-order-btn");
+    const deleteButton = card.querySelector(".my-menu-delete");
+
+    orderButton.addEventListener("click", () => {
+      addMyMenuToCart(menu);
+    });
+
+    deleteButton.addEventListener("click", () => {
+      removeMyMenuItem(menu.id);
+    });
+
+    myPickList.appendChild(card);
+  });
+}
+
+function initMenuLinkButton() {
+  document.addEventListener("click", (event) => {
+    const menuLinkButton = event.target.closest("[data-menu-link]");
+
+    if (!menuLinkButton) return;
+
+    window.location.href = "./menu.html";
+  });
+}
+
+/* =========================
+   초기 실행
+========================= */
+
 document.addEventListener("DOMContentLoaded", () => {
   initHeroSlider();
 
@@ -591,6 +788,8 @@ document.addEventListener("DOMContentLoaded", () => {
   enableHorizontalDrag(".horizontal-scroll");
 
   initStoreEvents();
+  initMenuLinkButton();
+  renderMyPickItems();
 
   const cachedLocation = getLocationCache();
 
