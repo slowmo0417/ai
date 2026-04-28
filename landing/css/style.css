@@ -38,3 +38,14 @@ section {
 .faq-item[open] summary svg {
   transform: rotate(180deg);
 }
+   #top-btn {
+            transition: all 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+        #top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
