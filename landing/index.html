@@ -14,236 +14,412 @@
   </head>
 
   <body class="bg-stone-50 text-stone-800 relative">
-
     <div class="fixed top-0 left-0 w-full z-[60]">
-        <div id="progress-bar"></div>
+      <div id="progress-bar"></div>
     </div>
 
     <nav id="main-nav" class="fixed w-full z-50 bg-transparent py-6">
-        <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
-            <a href="#" class="flex items-center space-x-2 group">
-                <div class="w-8 h-8 bg-stone-800 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform">
-                    <i data-lucide="sparkles" class="text-white w-5 h-5"></i>
-                </div>
-                <span class="text-2xl font-bold text-stone-800 tracking-tighter transition-colors" id="nav-logo">감성 공방</span>
-            </a>
+      <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+        <a href="#" class="flex items-center space-x-2 group">
+          <div
+            class="w-8 h-8 bg-stone-800 rounded-lg flex items-center justify-center group-hover:rotate-12 transition-transform"
+          >
+            <i data-lucide="sparkles" class="text-white w-5 h-5"></i>
+          </div>
+          <span
+            class="text-2xl font-bold text-stone-800 tracking-tighter transition-colors"
+            id="nav-logo"
+            >감성 공방</span
+          >
+        </a>
 
-            <div class="hidden md:flex items-center space-x-10 text-sm font-medium">
-                <a href="#classes" class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all">클래스</a>
-                <a href="#benefits" class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all">특징</a>
-                <a href="#faq" class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all">문의사항</a>
-                <a href="#apply" class="nav-link px-6 py-2.5 bg-stone-800 text-white rounded-full hover:bg-stone-700 hover:shadow-lg transition-all active:scale-95">신청하기</a>
-            </div>
-
-            <div class="md:hidden flex items-center space-x-4">
-                <a href="#apply" class="text-xs px-4 py-2 bg-stone-800 text-white rounded-full font-bold">신청</a>
-                <button id="menu-toggle" class="p-2 text-stone-800 focus:outline-none">
-                    <i data-lucide="menu" id="menu-icon"></i>
-                </button>
-            </div>
+        <div class="hidden md:flex items-center space-x-10 text-sm font-medium">
+          <a
+            href="#classes"
+            class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all"
+            >클래스</a
+          >
+          <a
+            href="#benefits"
+            class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all"
+            >특징</a
+          >
+          <a
+            href="#faq"
+            class="nav-link text-stone-600 hover:text-stone-900 transition relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-stone-800 hover:after:w-full after:transition-all"
+            >문의사항</a
+          >
+          <a
+            href="#apply"
+            class="nav-link px-6 py-2.5 bg-stone-800 text-white rounded-full hover:bg-stone-700 hover:shadow-lg transition-all active:scale-95"
+            >신청하기</a
+          >
         </div>
+
+        <div class="md:hidden flex items-center space-x-4">
+          <a
+            href="#apply"
+            class="text-xs px-4 py-2 bg-stone-800 text-white rounded-full font-bold"
+            >신청</a
+          >
+          <button
+            id="menu-toggle"
+            class="p-2 text-stone-800 focus:outline-none"
+          >
+            <i data-lucide="menu" id="menu-icon"></i>
+          </button>
+        </div>
+      </div>
     </nav>
 
-    <div id="mobile-menu" class="mobile-menu fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center space-y-8 md:hidden">
-        <button id="menu-close" class="absolute top-6 right-6 p-2 text-stone-800">
-            <i data-lucide="x" class="w-8 h-8"></i>
-        </button>
-        <a href="#classes" class="text-2xl font-bold text-stone-800 mobile-link">원데이 클래스</a>
-        <a href="#benefits" class="text-2xl font-bold text-stone-800 mobile-link">공방 특징</a>
-        <a href="#faq" class="text-2xl font-bold text-stone-800 mobile-link">문의 사항</a>
-        <a href="#apply" class="px-10 py-4 bg-stone-800 text-white rounded-full text-xl font-bold mobile-link">지금 신청하기</a>
+    <div
+      id="mobile-menu"
+      class="mobile-menu fixed inset-0 z-[55] bg-white flex flex-col items-center justify-center space-y-8 md:hidden"
+    >
+      <button id="menu-close" class="absolute top-6 right-6 p-2 text-stone-800">
+        <i data-lucide="x" class="w-8 h-8"></i>
+      </button>
+      <a href="#classes" class="text-2xl font-bold text-stone-800 mobile-link"
+        >원데이 클래스</a
+      >
+      <a href="#benefits" class="text-2xl font-bold text-stone-800 mobile-link"
+        >공방 특징</a
+      >
+      <a href="#faq" class="text-2xl font-bold text-stone-800 mobile-link"
+        >문의 사항</a
+      >
+      <a
+        href="#apply"
+        class="px-10 py-4 bg-stone-800 text-white rounded-full text-xl font-bold mobile-link"
+        >지금 신청하기</a
+      >
     </div>
 
-    <section id="home" class="hero-bg h-screen flex items-center justify-center text-center px-4">
-        <div class="max-w-3xl">
-            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                하루 만에 완성하는<br>나만의 취미
-            </h1>
-            <p class="text-lg md:text-xl text-stone-100 mb-10 font-light">
-                복잡한 일상에서 벗어나 오롯이 나에게 집중하는 시간.<br>
-                감성 공방에서 나에게 맞는 클래스를 신청해보세요.
-            </p>
-            <a href="#apply" class="inline-block px-10 py-4 bg-white text-stone-900 font-semibold rounded-full shadow-xl hover:scale-105 transition-transform duration-300">
-                클래스 신청하기
-            </a>
-        </div>
+    <section
+      id="home"
+      class="hero-bg h-screen flex items-center justify-center text-center px-4"
+    >
+      <div class="max-w-3xl">
+        <h1
+          class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+        >
+          하루 만에 완성하는<br />나만의 취미
+        </h1>
+        <p class="text-lg md:text-xl text-stone-100 mb-10 font-light">
+          복잡한 일상에서 벗어나 오롯이 나에게 집중하는 시간.<br />
+          감성 공방에서 나에게 맞는 클래스를 신청해보세요.
+        </p>
+        <a
+          href="#apply"
+          class="inline-block px-10 py-4 bg-white text-stone-900 font-semibold rounded-full shadow-xl hover:scale-105 transition-transform duration-300"
+        >
+          클래스 신청하기
+        </a>
+      </div>
     </section>
 
     <section id="classes" class="py-24 max-w-6xl mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold mb-4">원데이 클래스 라인업</h2>
-            <p class="text-stone-500">정성껏 준비한 4가지 감성 체험</p>
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold mb-4">원데이 클래스 라인업</h2>
+        <p class="text-stone-500">정성껏 준비한 4가지 감성 체험</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+        >
+          <div class="h-64 bg-stone-200 relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80"
+              alt="향수 만들기"
+              class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">향수 만들기</h3>
+            <p class="text-stone-500 text-sm">
+              나만의 시그니처 향기를 조향해보는 시간
+            </p>
+          </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-64 bg-stone-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=600&q=80" alt="향수 만들기" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">향수 만들기</h3>
-                    <p class="text-stone-500 text-sm">나만의 시그니처 향기를 조향해보는 시간</p>
-                </div>
-            </div>
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-64 bg-stone-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80" alt="소이캔들 만들기" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">소이캔들 만들기</h3>
-                    <p class="text-stone-500 text-sm">천연 왁스로 만드는 따뜻한 빛의 조각</p>
-                </div>
-            </div>
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-64 bg-stone-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80" alt="도자기 페인팅" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">도자기 페인팅</h3>
-                    <p class="text-stone-500 text-sm">세상에 하나뿐인 나만의 그릇 디자인</p>
-                </div>
-            </div>
-            <div class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
-                <div class="h-64 bg-stone-200 relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80" alt="플라워 클래스" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">플라워 클래스</h3>
-                    <p class="text-stone-500 text-sm">계절 꽃으로 채우는 일상의 화사함</p>
-                </div>
-            </div>
+        <div
+          class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+        >
+          <div class="h-64 bg-stone-200 relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=600&q=80"
+              alt="소이캔들 만들기"
+              class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">소이캔들 만들기</h3>
+            <p class="text-stone-500 text-sm">
+              천연 왁스로 만드는 따뜻한 빛의 조각
+            </p>
+          </div>
         </div>
+        <div
+          class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+        >
+          <div class="h-64 bg-stone-200 relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80"
+              alt="도자기 페인팅"
+              class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">도자기 페인팅</h3>
+            <p class="text-stone-500 text-sm">
+              세상에 하나뿐인 나만의 그릇 디자인
+            </p>
+          </div>
+        </div>
+        <div
+          class="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition"
+        >
+          <div class="h-64 bg-stone-200 relative overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=600&q=80"
+              alt="플라워 클래스"
+              class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+            />
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">플라워 클래스</h3>
+            <p class="text-stone-500 text-sm">
+              계절 꽃으로 채우는 일상의 화사함
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="benefits" class="py-24 bg-stone-100">
-        <div class="max-w-6xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">왜 감성 공방인가요?</h2>
-                <p class="text-stone-500">오직 당신의 즐거움만을 생각합니다</p>
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                        <i data-lucide="package" class="text-stone-600"></i>
-                    </div>
-                    <h4 class="font-bold mb-2">준비물 제공</h4>
-                    <p class="text-stone-500 text-sm">몸만 오세요. 필요한 모든 재료는 준비되어 있습니다.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                        <i data-lucide="smile" class="text-stone-600"></i>
-                    </div>
-                    <h4 class="font-bold mb-2">초보자 가능</h4>
-                    <p class="text-stone-500 text-sm">손재주가 없어도 괜찮아요. 전문가가 1:1로 도와드립니다.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                        <i data-lucide="users" class="text-stone-600"></i>
-                    </div>
-                    <h4 class="font-bold mb-2">소규모 진행</h4>
-                    <p class="text-stone-500 text-sm">최대 4인 구성으로 프라이빗하고 조용하게 즐기세요.</p>
-                </div>
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm">
-                        <i data-lucide="gift" class="text-stone-600"></i>
-                    </div>
-                    <h4 class="font-bold mb-2">완성품 당일 수령</h4>
-                    <p class="text-stone-500 text-sm">체험이 끝나면 직접 만든 작품을 바로 가져갈 수 있습니다.</p>
-                </div>
-            </div>
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">왜 감성 공방인가요?</h2>
+          <p class="text-stone-500">오직 당신의 즐거움만을 생각합니다</p>
         </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm"
+            >
+              <i data-lucide="package" class="text-stone-600"></i>
+            </div>
+            <h4 class="font-bold mb-2">준비물 제공</h4>
+            <p class="text-stone-500 text-sm">
+              몸만 오세요. 필요한 모든 재료는 준비되어 있습니다.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm"
+            >
+              <i data-lucide="smile" class="text-stone-600"></i>
+            </div>
+            <h4 class="font-bold mb-2">초보자 가능</h4>
+            <p class="text-stone-500 text-sm">
+              손재주가 없어도 괜찮아요. 전문가가 1:1로 도와드립니다.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm"
+            >
+              <i data-lucide="users" class="text-stone-600"></i>
+            </div>
+            <h4 class="font-bold mb-2">소규모 진행</h4>
+            <p class="text-stone-500 text-sm">
+              최대 4인 구성으로 프라이빗하고 조용하게 즐기세요.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm"
+            >
+              <i data-lucide="gift" class="text-stone-600"></i>
+            </div>
+            <h4 class="font-bold mb-2">완성품 당일 수령</h4>
+            <p class="text-stone-500 text-sm">
+              체험이 끝나면 직접 만든 작품을 바로 가져갈 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="faq" class="py-24 bg-white">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">자주 묻는 질문</h2>
-                <p class="text-stone-500">문의하시기 전 확인해보시면 좋아요</p>
-            </div>
-            <div class="space-y-4">
-                <details class="faq-item group border border-stone-200 rounded-2xl p-6 bg-stone-50 cursor-pointer transition-all hover:border-stone-400">
-                    <summary class="flex items-center justify-between font-bold list-none">
-                        <span>당일 예약도 가능한가요?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-stone-400 transition-transform"></i>
-                    </summary>
-                    <p class="mt-4 text-stone-600 text-sm leading-relaxed">
-                        모든 클래스는 소규모 정원제로 운영되어 사전 예약이 원칙입니다. 공석 확인을 위해 전화 문의 부탁드립니다.
-                    </p>
-                </details>
-                <details class="faq-item group border border-stone-200 rounded-2xl p-6 bg-stone-50 cursor-pointer transition-all hover:border-stone-400">
-                    <summary class="flex items-center justify-between font-bold list-none">
-                        <span>초보자인데 잘 만들 수 있을까요?</span>
-                        <i data-lucide="chevron-down" class="w-5 h-5 text-stone-400 transition-transform"></i>
-                    </summary>
-                    <p class="mt-4 text-stone-600 text-sm leading-relaxed">
-                        그럼요! '감성 공방'의 모든 클래스는 입문자 맞춤형입니다. 전문 강사가 1:1로 꼼꼼하게 지도해 드립니다.
-                    </p>
-                </details>
-            </div>
+      <div class="max-w-3xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl font-bold mb-4">자주 묻는 질문</h2>
+          <p class="text-stone-500">문의하시기 전 확인해보시면 좋아요</p>
         </div>
+        <div class="space-y-4">
+          <details
+            class="faq-item group border border-stone-200 rounded-2xl p-6 bg-stone-50 cursor-pointer transition-all hover:border-stone-400"
+          >
+            <summary
+              class="flex items-center justify-between font-bold list-none"
+            >
+              <span>당일 예약도 가능한가요?</span>
+              <i
+                data-lucide="chevron-down"
+                class="w-5 h-5 text-stone-400 transition-transform"
+              ></i>
+            </summary>
+            <p class="mt-4 text-stone-600 text-sm leading-relaxed">
+              모든 클래스는 소규모 정원제로 운영되어 사전 예약이 원칙입니다.
+              공석 확인을 위해 전화 문의 부탁드립니다.
+            </p>
+          </details>
+          <details
+            class="faq-item group border border-stone-200 rounded-2xl p-6 bg-stone-50 cursor-pointer transition-all hover:border-stone-400"
+          >
+            <summary
+              class="flex items-center justify-between font-bold list-none"
+            >
+              <span>초보자인데 잘 만들 수 있을까요?</span>
+              <i
+                data-lucide="chevron-down"
+                class="w-5 h-5 text-stone-400 transition-transform"
+              ></i>
+            </summary>
+            <p class="mt-4 text-stone-600 text-sm leading-relaxed">
+              그럼요! '감성 공방'의 모든 클래스는 입문자 맞춤형입니다. 전문
+              강사가 1:1로 꼼꼼하게 지도해 드립니다.
+            </p>
+          </details>
+        </div>
+      </div>
     </section>
 
     <section id="apply" class="py-24 bg-stone-900 text-white">
-        <div class="max-w-2xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4">클래스 신청하기</h2>
-                <p class="text-stone-400">정보를 남겨주시면 확인 후 예약 안내를 도와드립니다.</p>
-            </div>
-            
-            <form name="submit-to-google-sheet" id="applicationForm" class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-stone-400 mb-2">이름</label>
-                        <input type="text" name="name" required class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition" placeholder="성함">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-stone-400 mb-2">연락처</label>
-                        <input type="tel" name="num" required class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition" placeholder="010-0000-0000">
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-400 mb-2">이메일</label>
-                    <input type="email" name="mail" required class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition" placeholder="example@mail.com">
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-stone-400 mb-2">희망 클래스</label>
-                    <select name="class" required class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition appearance-none text-white">
-                        <option value="" disabled selected class="text-stone-500">클래스를 선택해주세요</option>
-                        <option value="향수 만들기">향수 만들기</option>
-                        <option value="소이캔들 만들기">소이캔들 만들기</option>
-                        <option value="도자기 페인팅">도자기 페인팅</option>
-                        <option value="플라워 클래스">플라워 클래스</option>
-                    </select>
-                </div>
-                <div class="flex items-start space-x-3 pt-2">
-                    <input type="checkbox" id="consent" required class="mt-1 w-4 h-4 rounded border-stone-700 bg-stone-800 text-stone-500 focus:ring-stone-500">
-                    <label for="consent" class="text-sm text-stone-400 leading-snug">
-                        개인정보 수집 및 이용에 동의합니다.
-                    </label>
-                </div>
-                <button type="submit" id="submit-btn" class="w-full bg-white text-stone-900 font-bold py-4 rounded-lg hover:bg-stone-200 transition duration-300 active:scale-[0.98]">
-                    신청서 제출하기
-                </button>
-                <p id="msg" class="text-center text-sm font-medium mt-4 h-6"></p>
-            </form>
-
-            <div id="successMessage" class="hidden text-center p-8 bg-stone-800 rounded-2xl border border-stone-700">
-                <i data-lucide="check-circle" class="w-12 h-12 text-green-500 mx-auto mb-4"></i>
-                <h3 class="text-xl font-bold mb-2">신청이 완료되었습니다!</h3>
-                <p class="text-stone-400 text-sm">빠른 시일 내에 안내 문자를 보내드릴게요.</p>
-                <button onclick="location.reload()" class="mt-6 text-stone-400 underline text-sm">새로 신청하기</button>
-            </div>
+      <div class="max-w-2xl mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4">클래스 신청하기</h2>
+          <p class="text-stone-400">
+            정보를 남겨주시면 확인 후 예약 안내를 도와드립니다.
+          </p>
         </div>
+
+        <form
+          name="submit-to-google-sheet"
+          id="applicationForm"
+          class="space-y-6"
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-stone-400 mb-2"
+                >이름</label
+              >
+              <input
+                type="text"
+                name="name"
+                required
+                class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition"
+                placeholder="성함"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-stone-400 mb-2"
+                >연락처</label
+              >
+              <input
+                type="tel"
+                name="num"
+                required
+                class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition"
+                placeholder="010-0000-0000"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-stone-400 mb-2"
+              >이메일</label
+            >
+            <input
+              type="email"
+              name="mail"
+              required
+              class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition"
+              placeholder="example@mail.com"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-stone-400 mb-2"
+              >희망 클래스</label
+            >
+            <select
+              name="class"
+              required
+              class="w-full bg-stone-800 border border-stone-700 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-stone-500 transition appearance-none text-white"
+            >
+              <option value="" disabled selected class="text-stone-500">
+                클래스를 선택해주세요
+              </option>
+              <option value="향수 만들기">향수 만들기</option>
+              <option value="소이캔들 만들기">소이캔들 만들기</option>
+              <option value="도자기 페인팅">도자기 페인팅</option>
+              <option value="플라워 클래스">플라워 클래스</option>
+            </select>
+          </div>
+          <div class="flex items-start space-x-3 pt-2">
+            <input
+              type="checkbox"
+              id="consent"
+              required
+              class="mt-1 w-4 h-4 rounded border-stone-700 bg-stone-800 text-stone-500 focus:ring-stone-500"
+            />
+            <label for="consent" class="text-sm text-stone-400 leading-snug">
+              개인정보 수집 및 이용에 동의합니다.
+            </label>
+          </div>
+          <button
+            type="submit"
+            id="submit-btn"
+            class="w-full bg-white text-stone-900 font-bold py-4 rounded-lg hover:bg-stone-200 transition duration-300 active:scale-[0.98]"
+          >
+            신청서 제출하기
+          </button>
+          <p id="msg" class="text-center text-sm font-medium mt-4 h-6"></p>
+        </form>
+
+        <div
+          id="successMessage"
+          class="hidden text-center p-8 bg-stone-800 rounded-2xl border border-stone-700"
+        >
+          <i
+            data-lucide="check-circle"
+            class="w-12 h-12 text-green-500 mx-auto mb-4"
+          ></i>
+          <h3 class="text-xl font-bold mb-2">신청이 완료되었습니다!</h3>
+          <p class="text-stone-400 text-sm">
+            빠른 시일 내에 안내 문자를 보내드릴게요.
+          </p>
+          <button
+            onclick="location.reload()"
+            class="mt-6 text-stone-400 underline text-sm"
+          >
+            새로 신청하기
+          </button>
+        </div>
+      </div>
     </section>
 
-    <button id="top-btn" class="fixed bottom-8 right-8 w-12 h-12 bg-stone-800 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-stone-700 hover:-translate-y-1 active:scale-95 z-40">
-        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    <button
+      id="top-btn"
+      class="fixed bottom-8 right-8 w-12 h-12 bg-stone-800 text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-stone-700 hover:-translate-y-1 active:scale-95 z-40"
+    >
+      <i data-lucide="arrow-up" class="w-6 h-6"></i>
     </button>
 
     <footer class="py-12 border-t border-stone-200 bg-white">
-        <div class="max-w-6xl mx-auto px-4 text-center text-stone-400 text-sm">
-            <p class="mb-4">© 2024 감성 공방. All rights reserved.</p>
-            <p>서울시 성수동 감성로 123-4 | 문의: 02-1234-5678</p>
-        </div>
+      <div class="max-w-6xl mx-auto px-4 text-center text-stone-400 text-sm">
+        <p class="mb-4">© 2024 감성 공방. All rights reserved.</p>
+        <p>서울시 성수동 감성로 123-4 | 문의: 02-1234-5678</p>
+      </div>
     </footer>
 
     <script src="./script/script.js"></script>
