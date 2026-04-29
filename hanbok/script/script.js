@@ -37,6 +37,8 @@ function initNoticeTabs() {
       renderNoticeCards(tab.dataset.filter);
     });
   });
+
+  renderNoticeCards("all");
 }
 
 function initGallerySlider() {
@@ -50,20 +52,38 @@ function initGallerySlider() {
   const originalSlides = Array.from(
     galleryList.querySelectorAll(".gallery-card"),
   );
+
   if (originalSlides.length <= 1) return;
 
+  galleryList.querySelectorAll("img").forEach((img) => {
+    img.setAttribute("draggable", "false");
+  });
+
+  galleryList.addEventListener("dragstart", (event) => {
+    event.preventDefault();
+  });
+
   const slideCount = originalSlides.length;
+
   const copiesBefore = originalSlides.map((slide) => slide.cloneNode(true));
   const copiesAfter = originalSlides.map((slide) => slide.cloneNode(true));
 
   copiesBefore.forEach((slide) => {
     slide.setAttribute("aria-hidden", "true");
     slide.dataset.clone = "before";
+
+    slide.querySelectorAll("img").forEach((img) => {
+      img.setAttribute("draggable", "false");
+    });
   });
 
   copiesAfter.forEach((slide) => {
     slide.setAttribute("aria-hidden", "true");
     slide.dataset.clone = "after";
+
+    slide.querySelectorAll("img").forEach((img) => {
+      img.setAttribute("draggable", "false");
+    });
   });
 
   galleryList.prepend(...copiesBefore);
@@ -92,10 +112,45 @@ function initGallerySlider() {
     galleryList.style.transform = `translate3d(${x}px, 0, 0)`;
   }
 
+  function clearMainClasses() {
+    slides.forEach((slide) => {
+      slide.classList.remove("main", "is-main-changing");
+    });
+  }
+
+  function updateMainClass({ animate = true } = {}) {
+    clearMainClasses();
+
+    const currentSlide = slides[currentIndex];
+    if (!currentSlide) return;
+
+    currentSlide.classList.add("main");
+
+    if (!animate) return;
+
+    currentSlide.classList.add("is-main-changing");
+
+    window.clearTimeout(galleryList.mainChangeTimer);
+    galleryList.mainChangeTimer = window.setTimeout(() => {
+      currentSlide.classList.remove("is-main-changing");
+    }, 520);
+  }
+
   function moveTo(index, animate = true) {
     currentIndex = index;
     isAnimating = animate;
+
     galleryList.classList.toggle("is-animating", animate);
+
+    updateMainClass({ animate });
+
+    /*
+      중요:
+      .main 변경 후 카드 폭이 280/360으로 확정된 다음 offsetLeft를 계산해야 함.
+      이 강제 reflow가 없으면 강조 카드가 커지는 시점과 위치 계산이 어긋남.
+    */
+    galleryList.offsetWidth;
+
     setTransform(-getOffset(currentIndex));
   }
 
@@ -105,14 +160,31 @@ function initGallerySlider() {
 
     if (currentIndex > lastMiddleIndex) {
       currentIndex -= slideCount;
-      moveTo(currentIndex, false);
-      return;
+
+      galleryList.classList.remove("is-animating");
+      isAnimating = false;
+
+      updateMainClass({ animate: false });
+      galleryList.offsetWidth;
+      setTransform(-getOffset(currentIndex));
+
+      return true;
     }
 
     if (currentIndex < firstMiddleIndex) {
       currentIndex += slideCount;
-      moveTo(currentIndex, false);
+
+      galleryList.classList.remove("is-animating");
+      isAnimating = false;
+
+      updateMainClass({ animate: false });
+      galleryList.offsetWidth;
+      setTransform(-getOffset(currentIndex));
+
+      return true;
     }
+
+    return false;
   }
 
   function next() {
@@ -137,9 +209,12 @@ function initGallerySlider() {
   }
 
   galleryList.addEventListener("transitionend", (event) => {
+    if (event.target !== galleryList) return;
     if (event.propertyName !== "transform") return;
-    isAnimating = false;
+
     galleryList.classList.remove("is-animating");
+    isAnimating = false;
+
     normalizeLoop();
   });
 
@@ -150,16 +225,23 @@ function initGallerySlider() {
     didDrag = false;
     startX = event.clientX;
     startTranslate = currentX;
+
     galleryList.classList.remove("is-animating");
     galleryList.classList.add("is-dragging");
     galleryList.setPointerCapture?.(event.pointerId);
+
     stopAuto();
   });
 
   galleryList.addEventListener("pointermove", (event) => {
     if (!isDragging) return;
+
     const deltaX = event.clientX - startX;
-    if (Math.abs(deltaX) > 4) didDrag = true;
+
+    if (Math.abs(deltaX) > 4) {
+      didDrag = true;
+    }
+
     setTransform(startTranslate + deltaX);
   });
 
@@ -170,6 +252,7 @@ function initGallerySlider() {
 
     slides.forEach((slide, index) => {
       const distance = Math.abs(slide.offsetLeft - targetLeft);
+
       if (distance < closestDistance) {
         closestDistance = distance;
         closestIndex = index;
@@ -184,6 +267,7 @@ function initGallerySlider() {
 
     const deltaX = event.clientX - startX;
     const threshold = 56;
+
     isDragging = false;
     galleryList.classList.remove("is-dragging");
     galleryList.releasePointerCapture?.(event.pointerId);
@@ -201,6 +285,7 @@ function initGallerySlider() {
 
   galleryList.addEventListener("click", (event) => {
     if (!didDrag) return;
+
     event.preventDefault();
     didDrag = false;
   });
@@ -229,6 +314,7 @@ function initGallerySlider() {
 
   requestAnimationFrame(() => {
     refreshSlides();
+    clearMainClasses();
     moveTo(currentIndex, false);
     startAuto();
   });
@@ -237,24 +323,25 @@ function initGallerySlider() {
 document.addEventListener("DOMContentLoaded", () => {
   initNoticeTabs();
   initGallerySlider();
-});
-const heroSwiper = new Swiper(".hero-swiper", {
-  loop: true,
-  effect: "fade",
-  fadeEffect: {
-    crossFade: true,
-  },
-  speed: 900,
-  autoplay: {
-    delay: 4000,
-    disableOnInteraction: false,
-  },
-  pagination: {
-    el: ".hero-pagination",
-    clickable: true,
-  },
-  navigation: {
-    prevEl: ".hero-nav-prev",
-    nextEl: ".hero-nav-next",
-  },
+
+  const heroSwiper = new Swiper(".hero-swiper", {
+    loop: true,
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
+    },
+    speed: 900,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".hero-pagination",
+      clickable: true,
+    },
+    navigation: {
+      prevEl: ".hero-nav-prev",
+      nextEl: ".hero-nav-next",
+    },
+  });
 });
