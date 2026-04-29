@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 .promo-page {
   width: 100%;
   color: #121111;
@@ -579,6 +581,8 @@ button.press-card {
   .page-location-inner {
     width: 100%;
     height: 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
   }
 
   .location-home {
@@ -713,13 +717,15 @@ button.press-card {
   }
 
   .press-card {
-    max-width: 400px;
     width: 100%;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
   }
 
   .press-thumb {
-    height: 273px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 343 / 273;
   }
 
   .press-thumb-empty img {
