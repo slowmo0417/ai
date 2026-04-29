@@ -13,6 +13,10 @@ const aboutTabNames = {
 };
 
 function setAboutTab(tabName) {
+  if (!aboutTabNames[tabName]) {
+    tabName = "intro";
+  }
+
   aboutTabs.forEach((tab) => {
     tab.classList.toggle("is-active", tab.dataset.tab === tabName);
   });
@@ -26,8 +30,27 @@ function setAboutTab(tabName) {
   }
 }
 
+function getInitialAboutTab() {
+  const params = new URLSearchParams(window.location.search);
+  const tabFromUrl = params.get("tab");
+
+  if (tabFromUrl && aboutTabNames[tabFromUrl]) {
+    return tabFromUrl;
+  }
+
+  return "intro";
+}
+
 aboutTabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    setAboutTab(tab.dataset.tab);
+    const tabName = tab.dataset.tab;
+
+    setAboutTab(tabName);
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("tab", tabName);
+    window.history.replaceState(null, "", url);
   });
 });
+
+setAboutTab(getInitialAboutTab());

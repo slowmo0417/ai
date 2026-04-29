@@ -34,6 +34,12 @@ const goMainButton = document.querySelector("[data-go-main]");
 
 const mypageForm = document.querySelector(".mypage-form");
 const mypageCancelButton = document.querySelector("[data-mypage-cancel]");
+const mypageEmailDomain = document.querySelector(
+  'input[name="mypageEmailDomain"]',
+);
+const mypageEmailSelect = document.querySelector(
+  'select[name="mypageEmailSelect"]',
+);
 
 const withdrawModal = document.querySelector(".withdraw-modal");
 const withdrawOpenButton = document.querySelector("[data-withdraw-open]");
@@ -53,6 +59,13 @@ const mypagePhoneInputs = document.querySelectorAll(
 );
 const resultLoginButtons = document.querySelectorAll("[data-result-login]");
 const resultFindPwButtons = document.querySelectorAll("[data-result-find-pw]");
+
+const MYPAGE_STORAGE_KEY = "hanbokMypageInfo";
+
+const MYPAGE_SAVE_EXCLUDE_NAMES = new Set([
+  "mypagePassword",
+  "mypagePasswordConfirm",
+]);
 
 function showAuthView(viewName) {
   authViews.forEach((view) => {
@@ -76,6 +89,11 @@ function showAuthView(viewName) {
   if (viewName === "find") {
     resetJoinState();
     closeWithdrawModal();
+  }
+
+  if (viewName === "mypage") {
+    loadMypageData();
+    syncMypageEmailDomain();
   }
 
   if (viewName !== "mypage") {
@@ -302,6 +320,62 @@ function syncAgreeAllState() {
   if (!agreeAll) return;
 
   agreeAll.checked = areRequiredTermsChecked();
+}
+
+function getSavedMypageData() {
+  try {
+    return JSON.parse(localStorage.getItem(MYPAGE_STORAGE_KEY)) || {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveMypageData() {
+  if (!mypageForm) return;
+
+  const formData = new FormData(mypageForm);
+  const savedData = {};
+
+  formData.forEach((value, key) => {
+    if (MYPAGE_SAVE_EXCLUDE_NAMES.has(key)) return;
+
+    savedData[key] = value;
+  });
+
+  localStorage.setItem(MYPAGE_STORAGE_KEY, JSON.stringify(savedData));
+}
+
+function loadMypageData() {
+  if (!mypageForm) return;
+
+  const savedData = getSavedMypageData();
+
+  Object.entries(savedData).forEach(([name, value]) => {
+    const field = mypageForm.querySelector(`[name="${name}"]`);
+    if (!field) return;
+
+    if (field.type === "checkbox" || field.type === "radio") {
+      field.checked = value === "on" || value === true;
+      return;
+    }
+
+    field.value = value;
+  });
+}
+
+function syncMypageEmailDomain() {
+  if (!mypageEmailDomain || !mypageEmailSelect) return;
+
+  const selectedDomain = mypageEmailSelect.value;
+
+  if (selectedDomain) {
+    mypageEmailDomain.value = selectedDomain;
+    mypageEmailDomain.readOnly = true;
+    mypageEmailDomain.classList.add("is-disabled");
+  } else {
+    mypageEmailDomain.readOnly = false;
+    mypageEmailDomain.classList.remove("is-disabled");
+  }
 }
 
 function openWithdrawModal() {
@@ -537,6 +611,11 @@ if (mypageForm) {
       }
     }
 
+    saveMypageData();
+
+    password.value = "";
+    passwordConfirm.value = "";
+
     setMessage("mypage", "기본정보가 저장되었습니다.");
   });
 }
@@ -643,6 +722,8 @@ forms.forEach((form) => {
   });
 });
 
+mypageEmailSelect?.addEventListener("change", syncMypageEmailDomain);
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && withdrawModal && !withdrawModal.hidden) {
     closeWithdrawModal();
@@ -653,4 +734,6 @@ window.addEventListener("hashchange", openInitialViewFromURL);
 
 window.openInitialViewFromURL = openInitialViewFromURL;
 
+loadMypageData();
+syncMypageEmailDomain();
 openInitialViewFromURL();

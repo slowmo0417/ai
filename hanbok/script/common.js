@@ -1,41 +1,51 @@
 const subMenus = {
   intro: {
     title: "협회소개",
-    items: ["협회소개", "인사말", "연혁", "조직도", "오시는 길"],
+    items: [
+      { label: "협회소개", href: "./sub1.html?tab=intro" },
+      { label: "인사말", href: "./sub1.html?tab=chairman" },
+      { label: "연혁", href: "./sub1.html?tab=history" },
+      { label: "조직도", href: "./sub1.html?tab=organization" },
+      { label: "오시는 길", href: "./sub1.html?tab=location" },
+    ],
   },
   pr: {
     title: "홍보광장",
-    items: ["공지사항", "언론보도", "갤러리", "영상"],
+    items: [
+      { label: "공지사항", href: "./sub2.html#notice-list" },
+      { label: "언론보도", href: "./sub2.html#press-list" },
+      { label: "영상", href: "./sub2.html#video-list" },
+    ],
   },
   azalea: {
     title: "아젤리아패션그룹",
     items: [
-      "브랜드 소개",
-      "아젤리아 드레스",
-      "아젤리아 궁중한복",
-      "아젤리아 키즈",
-      "아젤리아패션쇼 & 어워즈",
-      "아젤리아 예술단",
+      { label: "브랜드 소개", href: "#" },
+      { label: "아젤리아 드레스", href: "#" },
+      { label: "아젤리아 궁중한복", href: "#" },
+      { label: "아젤리아 키즈", href: "#" },
+      { label: "아젤리아패션쇼 & 어워즈", href: "#" },
+      { label: "아젤리아 예술단", href: "#" },
     ],
   },
   global: {
     title: "국제교류체험관",
     items: [
-      "아젤리아 매거진",
-      "아젤리아 TV 방송",
-      "아젤리아 앤터",
-      "국내·국제교류 기획 공연 이벤트",
-      "국제교류한복체험",
-      "전통한문화포럼",
+      { label: "아젤리아 매거진", href: "#" },
+      { label: "아젤리아 TV 방송", href: "#" },
+      { label: "아젤리아 앤터", href: "#" },
+      { label: "국내·국제교류 기획 공연 이벤트", href: "#" },
+      { label: "국제교류한복체험", href: "#" },
+      { label: "전통한문화포럼", href: "#" },
     ],
   },
   share: {
     title: "나눔과기쁨 & 복지관",
-    items: ["(사) 나눔과 기쁨"],
+    items: [{ label: "(사) 나눔과 기쁨", href: "#" }],
   },
   partner: {
     title: "협력기관",
-    items: ["협력기관 정보"],
+    items: [{ label: "협력기관 정보", href: "#" }],
   },
 };
 
@@ -47,6 +57,7 @@ function initMobileMenu() {
 
   const closeButtons = mobileMenu.querySelectorAll("[data-mobile-menu-close]");
   const accordionButtons = mobileMenu.querySelectorAll(".mobile-menu-title");
+  const mobileLinks = mobileMenu.querySelectorAll("a");
 
   function openMobileMenu() {
     mobileMenu.classList.add("is-open");
@@ -90,6 +101,16 @@ function initMobileMenu() {
     });
   });
 
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const href = link.getAttribute("href");
+
+      if (!href || href === "#") return;
+
+      closeMobileMenu();
+    });
+  });
+
   window.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeMobileMenu();
   });
@@ -128,8 +149,12 @@ function initSubMenu() {
 
     subMenuTitle.textContent = menu.title;
     subMenuList.setAttribute("aria-label", `${menu.title} 하위 메뉴`);
+
     subMenuList.innerHTML = menu.items
-      .map((item) => `<a class="sub-menu-link" href="#">${item}</a>`)
+      .map(
+        (item) =>
+          `<a class="sub-menu-link" href="${item.href}">${item.label}</a>`,
+      )
       .join("");
   }
 
@@ -151,6 +176,20 @@ function initSubMenu() {
   gnbLinks.forEach((link) => {
     link.addEventListener("mouseenter", () => openSubMenu(link));
     link.addEventListener("focus", () => openSubMenu(link));
+  });
+
+  subMenuList.addEventListener("click", (event) => {
+    const link = event.target.closest(".sub-menu-link");
+    if (!link) return;
+
+    const href = link.getAttribute("href");
+
+    if (!href || href === "#") {
+      event.preventDefault();
+      return;
+    }
+
+    closeSubMenu();
   });
 
   siteHeader.addEventListener("mouseleave", closeSubMenu);

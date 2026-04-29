@@ -37,26 +37,33 @@ const viewMeta = {
 function setPromoView(viewName, shouldUpdateHash = true) {
   const meta = viewMeta[viewName];
 
-  if (!meta) return;
+  if (!meta) {
+    viewName = "notice-list";
+  }
+
+  const currentMeta = viewMeta[viewName];
 
   promoViews.forEach((view) => {
     view.classList.toggle("is-active", view.dataset.view === viewName);
   });
 
   promoTabs.forEach((tab) => {
-    tab.classList.toggle("is-active", tab.dataset.targetView === meta.tab);
+    tab.classList.toggle(
+      "is-active",
+      tab.dataset.targetView === currentMeta.tab,
+    );
   });
 
   if (locationCurrent) {
-    locationCurrent.textContent = meta.category;
+    locationCurrent.textContent = currentMeta.category;
   }
 
   if (breadcrumbCategory) {
-    breadcrumbCategory.textContent = meta.category;
+    breadcrumbCategory.textContent = currentMeta.category;
   }
 
   if (breadcrumbDetailGroup) {
-    breadcrumbDetailGroup.hidden = !meta.isDetail;
+    breadcrumbDetailGroup.hidden = !currentMeta.isDetail;
   }
 
   if (shouldUpdateHash) {
@@ -69,6 +76,16 @@ function setPromoView(viewName, shouldUpdateHash = true) {
   });
 }
 
+function getInitialPromoView() {
+  const hashView = window.location.hash.replace("#", "");
+
+  if (hashView && viewMeta[hashView]) {
+    return hashView;
+  }
+
+  return "notice-list";
+}
+
 viewButtons.forEach((button) => {
   button.addEventListener("click", () => {
     setPromoView(button.dataset.targetView);
@@ -76,13 +93,7 @@ viewButtons.forEach((button) => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  const hashView = window.location.hash.replace("#", "");
-
-  if (viewMeta[hashView]) {
-    setPromoView(hashView, false);
-  } else {
-    setPromoView("notice-list", false);
-  }
+  setPromoView(getInitialPromoView(), false);
 });
 
 window.addEventListener("hashchange", () => {
