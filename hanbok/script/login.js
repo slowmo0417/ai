@@ -432,8 +432,7 @@ if (loginForm) {
       return;
     }
 
-    window.location.hash = "mypage";
-    showAuthView("mypage");
+    window.location.href = "./index.html";
   });
 }
 
