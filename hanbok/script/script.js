@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     speed: 900,
     autoplay: {
-      delay: 4000,
+      delay: 2500,
       disableOnInteraction: false,
     },
     pagination: {
