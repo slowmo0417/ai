@@ -238,3 +238,23 @@ document.addEventListener("DOMContentLoaded", () => {
   initNoticeTabs();
   initGallerySlider();
 });
+const heroSwiper = new Swiper(".hero-swiper", {
+  loop: true,
+  effect: "fade",
+  fadeEffect: {
+    crossFade: true,
+  },
+  speed: 900,
+  autoplay: {
+    delay: 4000,
+    disableOnInteraction: false,
+  },
+  pagination: {
+    el: ".hero-pagination",
+    clickable: true,
+  },
+  navigation: {
+    prevEl: ".hero-nav-prev",
+    nextEl: ".hero-nav-next",
+  },
+});

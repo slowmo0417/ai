@@ -1437,7 +1437,7 @@ body.is-modal-open {
   }
 
   .join-panel {
-    padding: 40px 16px;
+    padding: 40px 24px;
     gap: 40px;
   }
 
@@ -1484,7 +1484,7 @@ body.is-modal-open {
   }
 
   .mypage-content {
-    padding: 40px 16px;
+    padding: 40px 24px;
     gap: 32px;
   }
 
@@ -1543,7 +1543,7 @@ body.is-modal-open {
 
   .withdraw-head {
     height: 64px;
-    padding: 0 16px;
+    padding: 0 24px;
     justify-content: space-between;
   }
 
@@ -1568,7 +1568,7 @@ body.is-modal-open {
 
   .withdraw-body {
     flex: 1 1 auto;
-    padding: 16px 16px 40px;
+    padding: 16px 24px 40px;
   }
 
   .withdraw-body::before {
@@ -1576,19 +1576,19 @@ body.is-modal-open {
   }
 
   .withdraw-actions {
-    padding: 0 16px 40px;
+    padding: 0 24px 40px;
   }
 }
 
 @media (max-width: 360px) {
   .login-section {
-    padding: 56px 16px 72px;
+    padding: 56px 24px 72px;
   }
 
   .auth-view[data-view="login"],
   .find-form,
   .find-result {
-    padding: 36px 16px;
+    padding: 36px 24px;
   }
 
   .tab {

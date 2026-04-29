@@ -724,7 +724,7 @@
 
   .about-inner {
     width: 100%;
-    padding: 0 16px;
+    padding: 0 24px;
   }
 
   .breadcrumb {
@@ -860,7 +860,7 @@
   }
 
   .ready-box {
-    padding: 56px 16px;
+    padding: 56px 24px;
   }
 
   .org-chart {
