@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>한국한복문화예술협회</title>
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/sub2.css" />
   </head>
@@ -32,23 +32,24 @@
                 </svg>
                 로그인
               </a>
-              <span
-                class="util-divider is-guest-only"
-                aria-hidden="true"
-              ></span>
-
-              <a class="util-link is-guest-only" href="./login.html#join"
-                >회원가입</a
-              >
 
               <span
                 class="util-divider is-guest-only"
                 aria-hidden="true"
               ></span>
 
-              <a class="util-link is-member-only" href="./login.html#mypage"
-                >마이페이지</a
-              >
+              <a class="util-link is-guest-only" href="./login.html#join">
+                회원가입
+              </a>
+
+              <span
+                class="util-divider is-guest-only"
+                aria-hidden="true"
+              ></span>
+
+              <a class="util-link is-member-only" href="./login.html#mypage">
+                마이페이지
+              </a>
             </nav>
           </div>
         </div>
@@ -96,12 +97,19 @@
         <div class="sub-menu" aria-label="2단 메뉴">
           <div class="sub-menu-inner">
             <div class="sub-menu-title">협회소개</div>
+
             <nav class="sub-menu-list" aria-label="협회소개 하위 메뉴">
-              <a class="sub-menu-link" href="#">협회소개</a>
-              <a class="sub-menu-link" href="#">인사말</a>
-              <a class="sub-menu-link" href="#">연혁</a>
-              <a class="sub-menu-link" href="#">조직도</a>
-              <a class="sub-menu-link" href="#">오시는 길</a>
+              <a class="sub-menu-link" href="./sub1.html?tab=intro">협회소개</a>
+              <a class="sub-menu-link" href="./sub1.html?tab=chairman"
+                >인사말</a
+              >
+              <a class="sub-menu-link" href="./sub1.html?tab=history">연혁</a>
+              <a class="sub-menu-link" href="./sub1.html?tab=organization">
+                조직도
+              </a>
+              <a class="sub-menu-link" href="./sub1.html?tab=location">
+                오시는 길
+              </a>
             </nav>
           </div>
         </div>
@@ -109,6 +117,7 @@
 
       <div class="mobile-menu" aria-hidden="true">
         <div class="mobile-menu-backdrop" data-mobile-menu-close></div>
+
         <aside class="mobile-menu-panel" aria-label="모바일 메뉴">
           <div class="mobile-menu-head">
             <img
@@ -116,6 +125,7 @@
               src="./images/logo.png"
               alt="한국한복문화예술협회"
             />
+
             <button
               class="mobile-menu-close"
               type="button"
@@ -164,12 +174,13 @@
                   </svg>
                 </span>
               </button>
+
               <div class="mobile-sub-list">
-                <a href="#">협회소개</a>
-                <a href="#">인사말</a>
-                <a href="#">연혁</a>
-                <a href="#">조직도</a>
-                <a href="#">오시는 길</a>
+                <a href="./sub1.html?tab=intro">협회소개</a>
+                <a href="./sub1.html?tab=chairman">인사말</a>
+                <a href="./sub1.html?tab=history">연혁</a>
+                <a href="./sub1.html?tab=organization">조직도</a>
+                <a href="./sub1.html?tab=location">오시는 길</a>
               </div>
             </section>
 
@@ -198,11 +209,11 @@
                   </svg>
                 </span>
               </button>
+
               <div class="mobile-sub-list">
-                <a href="#">공지사항</a>
-                <a href="#">언론보도</a>
-                <a href="#">갤러리</a>
-                <a href="#">영상</a>
+                <a href="./sub2.html#notice-list">공지사항</a>
+                <a href="./sub2.html#press-list">언론보도</a>
+                <a href="./sub2.html#video-list">영상</a>
               </div>
             </section>
 
@@ -231,6 +242,7 @@
                   </svg>
                 </span>
               </button>
+
               <div class="mobile-sub-list">
                 <a href="#">브랜드 소개</a>
                 <a href="#">아젤리아 드레스</a>
@@ -264,6 +276,7 @@
                   </svg>
                 </span>
               </button>
+
               <div class="mobile-sub-list">
                 <a href="#">아젤리아 매거진</a>
                 <a href="#">아젤리아 TV 방송</a>
@@ -273,9 +286,9 @@
             </section>
 
             <section class="mobile-menu-group">
-              <a class="mobile-menu-link-only" href="#"
-                >나눔과기쁨 &amp; 복지관</a
-              >
+              <a class="mobile-menu-link-only" href="#">
+                나눔과기쁨 &amp; 복지관
+              </a>
             </section>
 
             <section class="mobile-menu-group">
@@ -284,7 +297,7 @@
           </nav>
 
           <nav class="mobile-menu-util" aria-label="모바일 사용자 메뉴">
-            <a href="#">
+            <a href="./login.html">
               <svg
                 width="16"
                 height="16"
@@ -302,10 +315,14 @@
               </svg>
               로그인
             </a>
+
             <span class="mobile-menu-util-divider"></span>
-            <a href="#">회원가입</a>
+
+            <a href="./login.html#join">회원가입</a>
+
             <span class="mobile-menu-util-divider"></span>
-            <a href="#">마이페이지</a>
+
+            <a href="./login.html#mypage">마이페이지</a>
           </nav>
         </aside>
       </div>
@@ -1084,32 +1101,38 @@
             src="./images/logo3.png"
             alt="한국한복문화예술협회"
           />
+
           <p class="footer-meta">
             <span>Homepage : www.khanbok.kr</span>
             <span>Mobile : 010-7385-7888</span>
             <span>Email : tj142536@naver.com</span>
-            <span
-              >Office : 서울특별시 용산구 후암로4길 64 (64, Huam-ro 4-gil,
-              Seoul, Korea)</span
-            >
+            <span>
+              Office : 서울특별시 용산구 후암로4길 64 (64, Huam-ro 4-gil, Seoul,
+              Korea)
+            </span>
           </p>
         </div>
+
         <nav class="footer-sns-list" aria-label="소셜 채널">
           <a class="footer-sns-link" href="#" aria-label="유튜브">
-            <img src="./images/icon/sns1.png" alt="" />
+            <img src="./images/icon/sns1.png" alt="유튜브" />
           </a>
           <a class="footer-sns-link" href="#" aria-label="인스타그램">
-            <img src="./images/icon/sns2.png" alt="" />
+            <img src="./images/icon/sns2.png" alt="인스타그램" />
           </a>
           <a class="footer-sns-link" href="#" aria-label="페이스북">
-            <img src="./images/icon/sns3.png" alt="" />
+            <img src="./images/icon/sns3.png" alt="페이스북" />
           </a>
           <a class="footer-sns-link" href="#" aria-label="블로그">
-            <img src="./images/icon/sns4.png" alt="" />
+            <img src="./images/icon/sns4.png" alt="블로그" />
           </a>
         </nav>
       </div>
     </footer>
+
+    <button class="top-button" type="button" aria-label="상단으로 이동">
+      <img src="./images/top.png" alt="상단으로 이동" />
+    </button>
     <script src="./script/common.js"></script>
     <script src="./script/sub2.js"></script>
   </body>
