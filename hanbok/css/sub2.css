@@ -329,9 +329,12 @@ button.press-card {
 }
 
 .board-body .board-title {
+  display: block;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  line-height: 60px;
 }
 
 .board-mobile-list {
@@ -634,7 +637,7 @@ button.press-card {
   }
 
   .section-title {
-    margin: 0;
+    margin: 0 0 40px;
     text-align: center;
   }
 
