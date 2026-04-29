@@ -696,3 +696,6 @@ body.is-mobile-menu-open {
     object-fit: contain;
   }
 }
+.footer-meta .footer-address-detail::before {
+  display: none;
+}
