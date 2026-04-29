@@ -1,18 +1,5 @@
 @charset "utf-8";
 
-:root {
-  --login-primary: #ff4747;
-  --login-primary-hover: #ed1a2b;
-  --login-text: #121111;
-  --login-text-gray: #827f7f;
-  --login-gray-0: #ffffff;
-  --login-gray-5: #f5f5f5;
-  --login-gray-20: #cdcccc;
-  --login-gray-50: #827f7f;
-  --login-gray-90: #111111;
-  --login-gray-95: #121111;
-}
-
 .login-page {
   width: 100%;
   background: #f2f2f2;
@@ -62,7 +49,7 @@
 
 .login-title {
   margin: 0 0 40px;
-  color: var(--login-text);
+  color: #121111;
   font-size: 32px;
   font-weight: 700;
   line-height: 1.25;
@@ -89,8 +76,8 @@
   width: 100%;
   height: 48px;
   padding: 0 16px;
-  border: 1px solid var(--login-gray-20);
-  background: var(--login-gray-0);
+  border: 1px solid #cdcccc;
+  background: #ffffff;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -103,7 +90,7 @@
 .phone-select-wrap:focus-within,
 .phone-input-wrap:focus-within,
 .code-field:focus-within {
-  border-color: var(--login-gray-95);
+  border-color: #121111;
 }
 
 .login-input {
@@ -113,7 +100,7 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--login-text);
+  color: #121111;
   font: inherit;
   font-size: 15px;
   font-weight: 400;
@@ -123,7 +110,7 @@
 .login-input::placeholder,
 .phone-input::placeholder,
 .code-input::placeholder {
-  color: var(--login-gray-50);
+  color: #827f7f;
   opacity: 1;
 }
 
@@ -150,14 +137,14 @@
 
 .password-toggle:hover,
 .password-clear:hover {
-  background: var(--login-gray-5);
+  background: #f5f5f5;
 }
 
 .visibility-icon {
   position: relative;
   width: 20px;
   height: 12px;
-  border: 1.5px solid var(--login-gray-95);
+  border: 1.5px solid #121111;
   border-radius: 50% / 60%;
 }
 
@@ -169,7 +156,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--login-gray-95);
+  background: #121111;
   transform: translate(-50%, -50%);
 }
 
@@ -180,13 +167,13 @@
   top: 5px;
   width: 24px;
   height: 1.5px;
-  background: var(--login-gray-95);
+  background: #121111;
   transform: rotate(-35deg);
   transform-origin: center;
 }
 
 .password-clear {
-  background: var(--login-gray-5);
+  background: #f5f5f5;
 }
 
 .password-clear span {
@@ -204,7 +191,7 @@
   width: 12px;
   height: 1.5px;
   border-radius: 999px;
-  background: var(--login-gray-95);
+  background: #121111;
 }
 
 .password-clear span::before {
@@ -248,7 +235,7 @@
   position: relative;
   width: 24px;
   height: 24px;
-  border: 1px solid var(--login-gray-20);
+  border: 1px solid #cdcccc;
   border-radius: 999px;
   background: #ffffff;
   transition:
@@ -270,8 +257,8 @@
 }
 
 .save-check-input:checked + .save-check-ui {
-  border-color: var(--login-primary);
-  background-color: var(--login-primary);
+  border-color: #ff4747;
+  background-color: #ff4747;
 }
 
 .save-check-input:checked + .save-check-ui::before {
@@ -279,7 +266,7 @@
 }
 
 .save-check-label {
-  color: var(--login-text);
+  color: #121111;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -293,7 +280,7 @@
 }
 
 .login-links a {
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -303,7 +290,7 @@
 }
 
 .login-links a:hover {
-  color: var(--login-text);
+  color: #121111;
 }
 
 .tap-list {
@@ -312,7 +299,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--login-gray-20);
+  border-bottom: 1px solid #cdcccc;
 }
 
 .tab {
@@ -322,7 +309,7 @@
   padding: 0 8px;
   border: 0;
   background: #ffffff;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -337,7 +324,7 @@
 }
 
 .tab.is-active {
-  color: var(--login-gray-90);
+  color: #111111;
   font-weight: 600;
 }
 
@@ -348,7 +335,7 @@
   bottom: -1px;
   width: 100%;
   height: 2px;
-  background: var(--login-gray-95);
+  background: #121111;
 }
 
 .find-panel,
@@ -384,7 +371,7 @@
 
 .find-title h1 {
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 24px;
   font-weight: 600;
   line-height: 33.6px;
@@ -393,7 +380,7 @@
 
 .find-title p {
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -412,8 +399,8 @@
 .phone-input-wrap {
   flex: 1 1 0;
   height: 48px;
-  border: 1px solid var(--login-gray-20);
-  background: var(--login-gray-0);
+  border: 1px solid #cdcccc;
+  background: #ffffff;
   display: flex;
   align-items: center;
 }
@@ -429,8 +416,8 @@
   top: 50%;
   width: 8px;
   height: 8px;
-  border-right: 1.5px solid var(--login-gray-95);
-  border-bottom: 1.5px solid var(--login-gray-95);
+  border-right: 1.5px solid #121111;
+  border-bottom: 1.5px solid #121111;
   transform: translateY(-65%) rotate(45deg);
   pointer-events: none;
 }
@@ -442,7 +429,7 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font: inherit;
   font-size: 15px;
   font-weight: 400;
@@ -462,7 +449,7 @@
 
 .phone-dash {
   flex: 0 0 auto;
-  color: var(--login-text);
+  color: #121111;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.4;
@@ -490,7 +477,7 @@
   width: 100%;
   height: 48px;
   padding: 0 16px;
-  border: 1px solid var(--login-gray-20);
+  border: 1px solid #cdcccc;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -505,7 +492,7 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--login-text);
+  color: #121111;
   font: inherit;
   font-size: 16px;
   font-weight: 400;
@@ -514,7 +501,7 @@
 
 .code-time {
   flex: 0 0 auto;
-  color: var(--login-primary);
+  color: #ff4747;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -528,7 +515,7 @@
   display: none;
   width: 100%;
   margin: 0;
-  color: var(--login-primary);
+  color: #ff4747;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
@@ -551,14 +538,14 @@
 
 .result-label {
   margin: 0;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 16px;
   font-weight: 600;
   line-height: 22.4px;
 }
 
 .result-id {
-  color: var(--login-text);
+  color: #121111;
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
@@ -582,7 +569,7 @@
   width: 22px;
   height: 22px;
   border-radius: 999px;
-  background: var(--login-primary);
+  background: #ff4747;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
@@ -594,7 +581,7 @@
 .result-message {
   width: 100%;
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -632,22 +619,22 @@
 }
 
 .login-button {
-  background-color: var(--login-primary);
+  background-color: #ff4747;
   color: #ffffff;
 }
 
 .login-button:hover {
-  background-color: var(--login-primary-hover);
+  background-color: #ed1a2b;
 }
 
 .outline-button {
   background: #ffffff;
-  color: var(--login-gray-90);
-  border: 1px solid var(--login-gray-20);
+  color: #111111;
+  border: 1px solid #cdcccc;
 }
 
 .outline-button:hover {
-  border-color: var(--login-gray-95);
+  border-color: #121111;
 }
 
 .login-button:active,
@@ -663,7 +650,7 @@
   width: 100%;
   padding: 24px 0;
   background: #ffffff;
-  border-bottom: 1px solid var(--login-gray-20);
+  border-bottom: 1px solid #cdcccc;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -675,7 +662,7 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  color: var(--login-gray-50);
+  color: #827f7f;
 }
 
 .join-step-line {
@@ -687,7 +674,7 @@
 .join-line {
   flex: 1 1 0;
   height: 1px;
-  background: var(--login-gray-20);
+  background: #cdcccc;
 }
 
 .join-line.is-hidden {
@@ -699,8 +686,8 @@
   height: 28px;
   border-radius: 999px;
   background: #f2f2f2;
-  border: 1px solid var(--login-gray-20);
-  color: var(--login-gray-50);
+  border: 1px solid #cdcccc;
+  color: #827f7f;
   font-size: 12px;
   font-weight: 400;
   line-height: 16.8px;
@@ -711,7 +698,7 @@
 
 .join-step-label {
   width: 100%;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -720,21 +707,21 @@
 
 .join-step.is-active .join-number,
 .join-step.is-done .join-number {
-  background: var(--login-primary);
-  border-color: var(--login-primary);
+  background: #ff4747;
+  border-color: #ff4747;
   color: #ffffff;
   font-weight: 600;
 }
 
 .join-step.is-active .join-step-label,
 .join-step.is-done .join-step-label {
-  color: var(--login-primary);
+  color: #ff4747;
   font-weight: 600;
 }
 
 .join-step.is-done .join-line,
 .join-step.is-active .join-line {
-  background: var(--login-primary);
+  background: #ff4747;
 }
 
 .join-panel {
@@ -754,7 +741,7 @@
 .join-title {
   width: 100%;
   margin: 0;
-  color: var(--login-gray-90);
+  color: #111111;
   font-size: 24px;
   font-weight: 600;
   line-height: 33.6px;
@@ -771,7 +758,7 @@
 .terms-all {
   width: 100%;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--login-gray-20);
+  border-bottom: 1px solid #cdcccc;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -798,7 +785,7 @@
   width: 24px;
   height: 24px;
   border-radius: 999px;
-  border: 1px solid var(--login-gray-20);
+  border: 1px solid #cdcccc;
   background: #ffffff;
   flex: 0 0 auto;
 }
@@ -810,14 +797,14 @@
   top: 7px;
   width: 8px;
   height: 5px;
-  border-left: 2px solid var(--login-gray-50);
-  border-bottom: 2px solid var(--login-gray-50);
+  border-left: 2px solid #827f7f;
+  border-bottom: 2px solid #827f7f;
   transform: rotate(-45deg);
 }
 
 .terms-check input:checked + .terms-check-ui {
-  border-color: var(--login-primary);
-  background: var(--login-primary);
+  border-color: #ff4747;
+  background: #ff4747;
 }
 
 .terms-check input:checked + .terms-check-ui::before {
@@ -831,7 +818,7 @@
 }
 
 .terms-check-text {
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -840,7 +827,7 @@
 .terms-all-desc {
   margin: 0;
   padding-left: 32px;
-  color: var(--login-gray-90);
+  color: #111111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -866,7 +853,7 @@
   padding: 16px;
   background: #f2f2f2;
   overflow-y: auto;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -885,7 +872,7 @@
   height: 56px;
   padding: 0 40px;
   border: 0;
-  background: var(--login-primary);
+  background: #ff4747;
   color: #ffffff;
   font-size: 18px;
   font-weight: 600;
@@ -896,7 +883,7 @@
 }
 
 .join-primary-button:hover {
-  background: var(--login-primary-hover);
+  background: #ed1a2b;
 }
 
 .join-form {
@@ -930,7 +917,7 @@
 
 .join-complete-title h1 {
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 24px;
   font-weight: 600;
   line-height: 33.6px;
@@ -938,7 +925,7 @@
 
 .join-complete-title p {
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -984,7 +971,7 @@
 
 .mypage-side-title {
   margin: 0;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 600;
   line-height: 22.4px;
@@ -1003,7 +990,7 @@
   padding: 8px;
   border: 0;
   background: transparent;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 500;
   line-height: 22.4px;
@@ -1013,7 +1000,7 @@
 
 .mypage-side-link.is-active {
   background: #fff2eb;
-  color: var(--login-primary);
+  color: #ff4747;
   font-weight: 600;
 }
 
@@ -1032,14 +1019,14 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
 }
 
 .mypage-breadcrumb strong {
-  color: var(--login-text);
+  color: #121111;
   font-weight: 600;
 }
 
@@ -1051,13 +1038,13 @@
 }
 
 .mypage-breadcrumb-arrow {
-  color: var(--login-gray-50);
+  color: #827f7f;
 }
 
 .mypage-title-area {
   width: 100%;
   padding-bottom: 24px;
-  border-bottom: 1px solid var(--login-gray-20);
+  border-bottom: 1px solid #cdcccc;
 }
 
 .mypage-title-area h1 {
@@ -1083,7 +1070,7 @@
 }
 
 .mypage-label {
-  color: var(--login-text);
+  color: #121111;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
@@ -1094,9 +1081,9 @@
   width: 100%;
   height: 48px;
   padding: 0 16px;
-  border: 1px solid var(--login-gray-20);
+  border: 1px solid #cdcccc;
   background: #ffffff;
-  color: var(--login-text);
+  color: #121111;
   font: inherit;
   font-size: 18px;
   font-weight: 400;
@@ -1105,26 +1092,26 @@
 }
 
 .mypage-input::placeholder {
-  color: var(--login-gray-50);
+  color: #827f7f;
   opacity: 1;
 }
 
 .mypage-input:focus,
 .mypage-select:focus {
-  border-color: var(--login-gray-95);
+  border-color: #121111;
 }
 
 .mypage-input.is-disabled {
   display: flex;
   align-items: center;
   background: #f2f2f2;
-  color: var(--login-gray-50);
+  color: #827f7f;
   pointer-events: none;
 }
 
 .mypage-helper {
   margin: 0;
-  color: var(--login-gray-50);
+  color: #827f7f;
   font-size: 14px;
   font-weight: 400;
   line-height: 21px;
@@ -1141,7 +1128,7 @@
 .mypage-at,
 .mypage-dash {
   flex: 0 0 auto;
-  color: var(--login-text);
+  color: #121111;
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
@@ -1167,7 +1154,7 @@
 .mypage-withdraw-area {
   width: 100%;
   padding-top: 24px;
-  border-top: 1px solid var(--login-gray-20);
+  border-top: 1px solid #cdcccc;
 }
 
 .withdraw-open-button {
@@ -1241,7 +1228,7 @@
   top: 11px;
   width: 16px;
   height: 2px;
-  background: var(--login-text);
+  background: #121111;
   border-radius: 999px;
 }
 
@@ -1268,7 +1255,7 @@
 .withdraw-body::before {
   content: "회원탈퇴";
   width: 100%;
-  color: var(--login-text);
+  color: #121111;
   font-size: 24px;
   font-weight: 600;
   line-height: 33.6px;
@@ -1277,7 +1264,7 @@
 
 .withdraw-description {
   margin: 0;
-  color: var(--login-gray-90);
+  color: #111111;
   font-size: 16px;
   font-weight: 400;
   line-height: 22.4px;
@@ -1294,7 +1281,7 @@
 .withdraw-agree {
   width: 100%;
   padding-top: 16px;
-  border-top: 1px solid var(--login-gray-20);
+  border-top: 1px solid #cdcccc;
 }
 
 .withdraw-actions {
@@ -1567,7 +1554,7 @@ body.is-modal-open {
     overflow: visible;
     clip: auto;
     margin: 0;
-    color: var(--login-text);
+    color: #121111;
     font-size: 24px;
     font-weight: 600;
     line-height: 33.6px;

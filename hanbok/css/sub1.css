@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 .about-page {
   width: 100%;
   color: #121111;
@@ -337,13 +339,6 @@
 
 /* 조직도 */
 .org-chart {
-  --org-red: #ff4747;
-  --org-line: #ff9a9a;
-  --org-border: #dddddd;
-  --org-pink: #fff2eb;
-  --org-cream: #fff3e0;
-  --org-gray: #f2f2f2;
-
   width: 100%;
   max-width: 1224px;
   margin: 0 auto;
@@ -366,7 +361,7 @@
   left: 11%;
   right: 11%;
   top: 84px;
-  border-top: 1px dotted var(--org-line);
+  border-top: 1px dotted #ff9a9a;
   z-index: 0;
 }
 
@@ -376,7 +371,7 @@
   left: 50%;
   top: 168px;
   height: 64px;
-  border-left: 1px dotted var(--org-line);
+  border-left: 1px dotted #ff9a9a;
   transform: translateX(-50%);
   z-index: 0;
 }
@@ -409,7 +404,7 @@
 
 .org-side {
   width: 220px;
-  background: var(--org-pink);
+  background: #fff2eb;
   position: absolute;
   top: 32px;
   z-index: 1;
@@ -440,8 +435,8 @@
 
 .org-president {
   margin: 0 auto;
-  background: var(--org-red);
-  border: 1px solid var(--org-red);
+  background: #ff4747;
+  border: 1px solid #ff4747;
 }
 
 .org-president span,
@@ -466,7 +461,7 @@
   left: 8.5%;
   right: 8.5%;
   top: 84px;
-  border-top: 1px dotted var(--org-line);
+  border-top: 1px dotted #ff9a9a;
   z-index: 0;
 }
 
@@ -476,14 +471,14 @@
   left: 50%;
   top: 168px;
   height: 64px;
-  border-left: 1px dotted var(--org-line);
+  border-left: 1px dotted #ff9a9a;
   transform: translateX(-50%);
   z-index: 0;
 }
 
 .org-ceo {
   margin: 0 auto;
-  background: var(--org-cream);
+  background: #fff3e0;
 }
 
 .org-ceo strong {
@@ -508,7 +503,7 @@
 
 .org-outline {
   width: 220px;
-  border: 1px solid var(--org-border);
+  border: 1px solid #dddddd;
   background: #fff;
 }
 
@@ -518,7 +513,7 @@
 
 .org-group {
   width: 220px;
-  background: var(--org-gray);
+  background: #f2f2f2;
 }
 
 .org-group span {
@@ -545,7 +540,7 @@
 .org-list span {
   min-height: 55px;
   padding: 16px 20px;
-  border: 1px solid var(--org-border);
+  border: 1px solid #dddddd;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -567,7 +562,7 @@
 .org-center-item {
   width: 200px;
   padding: 16px 24px;
-  background: var(--org-pink);
+  background: #fff2eb;
   color: #bd2c0f;
   text-align: center;
   font-size: 16px;
@@ -882,16 +877,16 @@
     right: 82px;
     top: 144px;
     height: 32px;
-    border-top: 1px dotted var(--org-line);
-    border-left: 1px dotted var(--org-line);
-    border-right: 1px dotted var(--org-line);
+    border-top: 1px dotted #ff9a9a;
+    border-left: 1px dotted #ff9a9a;
+    border-right: 1px dotted #ff9a9a;
   }
 
   .org-row-top::after {
     left: 50%;
     top: 120px;
     height: 24px;
-    border-left: 1px dotted var(--org-line);
+    border-left: 1px dotted #ff9a9a;
   }
 
   .org-circle {
@@ -944,9 +939,9 @@
     right: 82px;
     top: -32px;
     height: 32px;
-    border-top: 1px dotted var(--org-line);
-    border-left: 1px dotted var(--org-line);
-    border-right: 1px dotted var(--org-line);
+    border-top: 1px dotted #ff9a9a;
+    border-left: 1px dotted #ff9a9a;
+    border-right: 1px dotted #ff9a9a;
   }
 
   .org-row-ceo::after {
