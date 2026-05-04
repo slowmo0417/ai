@@ -6,7 +6,7 @@ const app = document.getElementById("app");
 const track = document.getElementById("track");
 const dots = Array.from(document.querySelectorAll(".dot"));
 const nextBtn = document.getElementById("nextBtn");
-const startBtn = document.getElementById("startBtn");
+const nextBtnText = document.querySelector(".next-btn-text");
 const skipBtn = document.getElementById("skipBtn");
 
 const totalSlides = dots.length;
@@ -26,18 +26,52 @@ function clearTimers() {
   clearTimeout(redirectTimer);
 }
 
+function setTrackTranslate(value, unit = "%") {
+  const transformValue = `translate3d(${value}${unit}, 0, 0)`;
+  track.style.transform = transformValue;
+  track.style.webkitTransform = transformValue;
+}
+
+function setTrackTransition(value) {
+  track.style.transition = value;
+  track.style.webkitTransition = value.replace(
+    "transform",
+    "-webkit-transform",
+  );
+}
+
+function updateButtonText() {
+  const isLast = currentIndex === totalSlides - 1;
+  const text = isLast ? "시작하기" : "다음";
+
+  if (nextBtnText) {
+    nextBtnText.textContent = text;
+    return;
+  }
+
+  nextBtn.textContent = text;
+}
+
 function updateSlide(index, shouldRestart = true) {
   currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
-  track.style.transform = `translateX(-${currentIndex * (100 / totalSlides)}%)`;
+
+  setTrackTransition("transform 560ms cubic-bezier(0.22, 0.9, 0.26, 1)");
+  setTrackTranslate(-(currentIndex * (100 / totalSlides)));
 
   dots.forEach((dot, dotIndex) => {
     const isActive = dotIndex === currentIndex;
+
     dot.classList.toggle("active", isActive);
-    dot.setAttribute("aria-current", isActive ? "true" : "false");
+
+    if (isActive) {
+      dot.setAttribute("aria-current", "true");
+    } else {
+      dot.removeAttribute("aria-current");
+    }
   });
 
   app.classList.toggle("is-last", currentIndex === totalSlides - 1);
-  nextBtn.textContent = currentIndex === totalSlides - 1 ? "시작하기" : "다음";
+  updateButtonText();
 
   if (shouldRestart) {
     startAuto();
@@ -65,18 +99,21 @@ nextBtn.addEventListener("click", () => {
 
   updateSlide(currentIndex + 1);
 });
+
 skipBtn.addEventListener("click", goToNaver);
 
 track.addEventListener("pointerdown", (event) => {
   isDragging = true;
   startX = event.clientX;
   currentX = event.clientX;
-  track.style.transition = "none";
+
+  setTrackTransition("none");
   clearTimers();
 });
 
 track.addEventListener("pointermove", (event) => {
   if (!isDragging) return;
+
   currentX = event.clientX;
 
   const appWidth = app.clientWidth;
@@ -84,25 +121,28 @@ track.addEventListener("pointermove", (event) => {
   const dragDistance = currentX - startX;
   const limitedDistance = dragDistance * 0.35;
 
-  track.style.transform = `translateX(${baseTranslate + limitedDistance}px)`;
+  setTrackTranslate(baseTranslate + limitedDistance, "px");
 });
 
 function finishDrag() {
   if (!isDragging) return;
 
   isDragging = false;
-  track.style.transition = "transform 560ms cubic-bezier(0.22, 0.9, 0.26, 1)";
 
   const distance = currentX - startX;
   const threshold = app.clientWidth * 0.16;
 
   if (distance < -threshold && currentIndex < totalSlides - 1) {
     updateSlide(currentIndex + 1);
-  } else if (distance > threshold && currentIndex > 0) {
-    updateSlide(currentIndex - 1);
-  } else {
-    updateSlide(currentIndex);
+    return;
   }
+
+  if (distance > threshold && currentIndex > 0) {
+    updateSlide(currentIndex - 1);
+    return;
+  }
+
+  updateSlide(currentIndex);
 }
 
 track.addEventListener("pointerup", finishDrag);
