@@ -39,6 +39,12 @@ body {
   overflow: hidden;
 }
 
+img {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+
 button {
   border: 0;
   background: none;
@@ -90,6 +96,15 @@ button {
 
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.track:active {
+  cursor: grabbing;
 }
 
 .slide {
@@ -147,6 +162,7 @@ button {
 
   user-select: none;
   -webkit-user-select: none;
+  -webkit-user-drag: none;
   pointer-events: none;
 
   backface-visibility: hidden;
