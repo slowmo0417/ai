@@ -90,6 +90,10 @@ svg {
   justify-content: flex-start;
 }
 
+.header-center {
+  justify-content: center;
+}
+
 .header-right {
   justify-content: flex-end;
   gap: 16px;
@@ -164,11 +168,27 @@ svg {
 }
 
 .is-sub .app-header {
-  grid-template-columns: 44px 1fr auto;
+  grid-template-columns: 44px 1fr 44px;
 }
 
+/* 서브 헤더 타이틀 화면 중앙 고정 */
 .is-sub .header-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(100% - 120px);
   justify-content: center;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.is-sub .header-right {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  justify-content: flex-end;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }
 
 .is-sub .header-back,
@@ -593,10 +613,11 @@ svg {
   position: relative;
 }
 
+/* 44px 버튼 기준에서 아이콘 우상단에 오도록 보정 */
 .cart-count-badge {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 8px;
+  right: 8px;
   width: 12px;
   height: 12px;
   min-width: 12px;
