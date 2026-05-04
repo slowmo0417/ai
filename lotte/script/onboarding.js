@@ -13,9 +13,12 @@ const totalSlides = dots.length;
 let currentIndex = 0;
 let autoTimer = null;
 let redirectTimer = null;
+
 let startX = 0;
 let currentX = 0;
 let isDragging = false;
+
+const SLIDE_EASE = "560ms cubic-bezier(0.22, 0.9, 0.26, 1)";
 
 function goToNaver() {
   window.location.href = NAVER_URL;
@@ -24,20 +27,26 @@ function goToNaver() {
 function clearTimers() {
   clearTimeout(autoTimer);
   clearTimeout(redirectTimer);
+  autoTimer = null;
+  redirectTimer = null;
 }
 
 function setTrackTranslate(value, unit = "%") {
   const transformValue = `translate3d(${value}${unit}, 0, 0)`;
+
   track.style.transform = transformValue;
   track.style.webkitTransform = transformValue;
 }
 
-function setTrackTransition(value) {
-  track.style.transition = value;
-  track.style.webkitTransition = value.replace(
-    "transform",
-    "-webkit-transform",
-  );
+function setTrackTransition(enabled) {
+  if (!enabled) {
+    track.style.transition = "none";
+    track.style.webkitTransition = "none";
+    return;
+  }
+
+  track.style.transition = `transform ${SLIDE_EASE}`;
+  track.style.webkitTransition = `-webkit-transform ${SLIDE_EASE}`;
 }
 
 function updateButtonText() {
@@ -55,7 +64,7 @@ function updateButtonText() {
 function updateSlide(index, shouldRestart = true) {
   currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
 
-  setTrackTransition("transform 560ms cubic-bezier(0.22, 0.9, 0.26, 1)");
+  setTrackTransition(true);
   setTrackTranslate(-(currentIndex * (100 / totalSlides)));
 
   dots.forEach((dot, dotIndex) => {
@@ -91,30 +100,35 @@ function startAuto() {
   redirectTimer = setTimeout(goToNaver, LAST_REDIRECT_DELAY);
 }
 
-nextBtn.addEventListener("click", () => {
-  if (currentIndex === totalSlides - 1) {
-    goToNaver();
-    return;
+function getClientX(event) {
+  if (event.touches && event.touches.length > 0) {
+    return event.touches[0].clientX;
   }
 
-  updateSlide(currentIndex + 1);
-});
+  if (event.changedTouches && event.changedTouches.length > 0) {
+    return event.changedTouches[0].clientX;
+  }
 
-skipBtn.addEventListener("click", goToNaver);
+  return event.clientX;
+}
 
-track.addEventListener("pointerdown", (event) => {
+function startDrag(event) {
   isDragging = true;
-  startX = event.clientX;
-  currentX = event.clientX;
+  startX = getClientX(event);
+  currentX = startX;
 
-  setTrackTransition("none");
+  setTrackTransition(false);
   clearTimers();
-});
 
-track.addEventListener("pointermove", (event) => {
+  if (track.setPointerCapture && event.pointerId !== undefined) {
+    track.setPointerCapture(event.pointerId);
+  }
+}
+
+function moveDrag(event) {
   if (!isDragging) return;
 
-  currentX = event.clientX;
+  currentX = getClientX(event);
 
   const appWidth = app.clientWidth;
   const baseTranslate = -currentIndex * appWidth;
@@ -122,7 +136,7 @@ track.addEventListener("pointermove", (event) => {
   const limitedDistance = dragDistance * 0.35;
 
   setTrackTranslate(baseTranslate + limitedDistance, "px");
-});
+}
 
 function finishDrag() {
   if (!isDragging) return;
@@ -145,8 +159,33 @@ function finishDrag() {
   updateSlide(currentIndex);
 }
 
-track.addEventListener("pointerup", finishDrag);
-track.addEventListener("pointercancel", finishDrag);
-track.addEventListener("pointerleave", finishDrag);
+nextBtn.addEventListener("click", () => {
+  if (currentIndex === totalSlides - 1) {
+    goToNaver();
+    return;
+  }
+
+  updateSlide(currentIndex + 1);
+});
+
+skipBtn.addEventListener("click", goToNaver);
+
+/*
+  Safari / iOS Safari 대응:
+  pointer 이벤트가 안 먹거나 불안정한 환경을 위해
+  touch 이벤트도 같이 연결.
+*/
+if (window.PointerEvent) {
+  track.addEventListener("pointerdown", startDrag);
+  track.addEventListener("pointermove", moveDrag);
+  track.addEventListener("pointerup", finishDrag);
+  track.addEventListener("pointercancel", finishDrag);
+  track.addEventListener("pointerleave", finishDrag);
+} else {
+  track.addEventListener("touchstart", startDrag, { passive: true });
+  track.addEventListener("touchmove", moveDrag, { passive: true });
+  track.addEventListener("touchend", finishDrag);
+  track.addEventListener("touchcancel", finishDrag);
+}
 
 updateSlide(0);
