@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -30,6 +31,7 @@ button {
   background: transparent;
   cursor: pointer;
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
 }
 
 img,
@@ -56,6 +58,7 @@ svg {
   background: #fff;
   overflow-x: hidden;
 }
+
 .header-icon-btn.is-active svg path {
   fill: #ed1a2b;
 }
@@ -83,18 +86,23 @@ svg {
   align-items: center;
 }
 
+.header-left {
+  justify-content: flex-start;
+}
+
 .header-right {
   justify-content: flex-end;
   gap: 16px;
 }
 
+/* 터치타겟 개선: 아이콘은 24px 유지, 버튼 영역만 44px */
 .header-back,
 .header-icon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   transition: opacity 0.2s ease;
 }
 
@@ -144,7 +152,7 @@ svg {
 }
 
 .is-main .app-header {
-  grid-template-columns: 1fr 56px;
+  grid-template-columns: 1fr auto;
 }
 
 .is-main .header-center {
@@ -156,7 +164,7 @@ svg {
 }
 
 .is-sub .app-header {
-  grid-template-columns: 24px 1fr 56px;
+  grid-template-columns: 44px 1fr auto;
 }
 
 .is-sub .header-center {
@@ -494,12 +502,13 @@ svg {
   color: #222;
 }
 
+/* 터치타겟 개선: 닫기 아이콘은 그대로, 버튼 영역만 44px */
 .sheet-close {
   position: absolute;
-  top: 12px;
+  top: 6px;
   right: 7px;
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -576,14 +585,18 @@ svg {
   opacity: 1;
   visibility: visible;
 }
+
+/* =========================
+   cart badge
+   ========================= */
 .header-cart {
   position: relative;
 }
 
 .cart-count-badge {
   position: absolute;
-  top: 0;
-  right: -2px;
+  top: 4px;
+  right: 4px;
   width: 12px;
   height: 12px;
   min-width: 12px;
@@ -596,7 +609,6 @@ svg {
   line-height: 12px;
   text-align: center;
   pointer-events: none;
-  transform: translate(35%, -35%);
 }
 
 .cart-count-badge.is-hidden {
