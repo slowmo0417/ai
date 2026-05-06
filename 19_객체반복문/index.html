@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Api서버요청데이터 가져오기</title>
+  </head>
+  <link rel="stylesheet" href="./css/style.css" />
+  <body>
+    <header>
+      <h1>
+        <a href="index.html"></a>
+      </h1>
+    </header>
+    <section>
+      <div class="inner">
+        <h2>전체영화</h2>
+        <ul class="tab">
+          <li><a href="#">현재상영작</a></li>
+          <li><a href="#">추천영화</a></li>
+          <li><a href="#">최고인기작</a></li>
+          <li><a href="#">상영예정작</a></li>
+        </ul>
+
+        <!-- 현재상영작 -->
+        <ul class="list" id="list">
+          <li>
+            <a href="#">
+              <div class="imgbox">
+                <img
+                  src="./image/c7mvRZ4v7ycVD2hHupc7gLpR1hl5pwEN_420.jpg"
+                  alt="이미지"
+                />
+              </div>
+              <div class="txt">
+                <h3>악마는 프라다를 입는다 2</h3>
+                <p>
+                  <span>평점:8.7</span>
+                  <span>개봉일:2026-04-29</span>
+                </p>
+                <div class="btn_wrap"></div>
+                <button class="btn_like">♡1.3k</button>
+                <button class="btn_date">예매</button>
+                <button class="btn_cinema">CINEMA</button>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./script/script.js"></script>
+  </body>
+</html>
