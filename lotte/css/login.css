@@ -62,8 +62,10 @@ a {
 .login-app {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   padding: 95px 24px 40px;
   background: #fff;
+  overflow-y: auto; 
 }
 
 .brand-header {
