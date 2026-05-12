@@ -106,11 +106,12 @@ img {
 }
 
 .hero-track {
-  display: flex;
+display: flex;
   width: 100%;
   height: 100%;
   transition: transform 0.35s ease;
   will-change: transform;
+  user-select: none;
 }
 
 .hero-slide {
@@ -121,12 +122,13 @@ img {
 }
 
 .hero-slide img {
-  display: block;
+display: block;
   width: 100%;
   height: 100%;
   max-width: none;
   object-fit: contain;
   object-position: center;
+  -webkit-user-drag: none;
 }
 
 .hero-pagination {
