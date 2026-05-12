@@ -21,6 +21,18 @@ let heroPointerId = null;
 /* =========================
    메인 히어로 슬라이더
 ========================= */
+let heroTrack = null;
+let heroSlides = [];
+let realHeroSlides = [];
+let heroPagination = null;
+
+let currentHeroIndex = 1;
+let heroStartX = 0;
+let heroMoveX = 0;
+let isHeroDragging = false;
+let isHeroAnimating = false; // [추가] 애니메이션 중 중복 동작 방지 락(Lock)
+let heroAutoTimer = null;
+let heroPointerId = null;
 
 function initHeroSlider() {
   heroTrack = document.querySelector("#heroTrack");
@@ -39,21 +51,20 @@ function initHeroSlider() {
   if (realHeroSlides.length === 1) {
     currentHeroIndex = 0;
     heroTrack.style.transform = "translateX(0%)";
-
     const dot = document.createElement("button");
     dot.type = "button";
     dot.className = "hero-dot is-active";
     dot.setAttribute("aria-label", "1번째 배너 보기");
     heroPagination.appendChild(dot);
-
     return;
   }
 
+  // 무한 루프를 위한 클론 생성
   const firstClone = realHeroSlides[0].cloneNode(true);
   const lastClone = realHeroSlides[realHeroSlides.length - 1].cloneNode(true);
 
-  firstClone.classList.add("is-clone");
-  lastClone.classList.add("is-clone");
+  firstClone.classList.add("is-clone", "is-clone-first");
+  lastClone.classList.add("is-clone", "is-clone-last");
 
   heroTrack.insertBefore(lastClone, realHeroSlides[0]);
   heroTrack.appendChild(firstClone);
@@ -61,12 +72,12 @@ function initHeroSlider() {
   heroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
   currentHeroIndex = 1;
 
+  // 초기 위치 설정
   heroTrack.style.transition = "none";
   heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
-
-  requestAnimationFrame(() => {
-    heroTrack.style.transition = "transform 0.35s ease";
-  });
+  
+  // Reflow 강제 실행 (초기 세팅 확정)
+  void heroTrack.offsetWidth;
 
   realHeroSlides.forEach((_, index) => {
     const dot = document.createElement("button");
@@ -77,6 +88,7 @@ function initHeroSlider() {
     if (index === 0) dot.classList.add("is-active");
 
     dot.addEventListener("click", () => {
+      if (isHeroAnimating) return; // 애니메이션 중 클릭 방지
       moveHero(index + 1);
       restartHeroAutoSlide();
     });
@@ -84,18 +96,29 @@ function initHeroSlider() {
     heroPagination.appendChild(dot);
   });
 
+  // 이벤트 리스너
   heroTrack.addEventListener("pointerdown", startHeroDrag);
   heroTrack.addEventListener("pointermove", moveHeroDrag);
-  heroTrack.addEventListener("pointerup", endHeroDrag);
-  heroTrack.addEventListener("pointercancel", endHeroDrag);
+  window.addEventListener("pointerup", endHeroDrag); // 드래그가 밖으로 나갈 때를 대비해 window에 이벤트
+  window.addEventListener("pointercancel", endHeroDrag);
   heroTrack.addEventListener("transitionend", fixHeroLoopPosition);
+
+  // 슬라이드 내 버튼/링크 드래그 시 클릭 방지
+  heroTrack.addEventListener("click", (e) => {
+    if (Math.abs(heroMoveX) > 5) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
 
   startHeroAutoSlide();
 }
 
 function startHeroDrag(event) {
-  if (!heroTrack) return;
-  if (event.target.closest("button, a")) return;
+  if (!heroTrack || isHeroAnimating) return; // 애니메이션 중 드래그 무시
+  
+  // 마우스 우클릭 등 방지
+  if (event.button !== 0 && event.type === 'pointerdown') return;
 
   isHeroDragging = true;
   heroPointerId = event.pointerId;
@@ -105,7 +128,9 @@ function startHeroDrag(event) {
   stopHeroAutoSlide();
 
   heroTrack.classList.add("is-dragging");
-  heroTrack.setPointerCapture(event.pointerId);
+  if (typeof heroTrack.setPointerCapture === "function") {
+    heroTrack.setPointerCapture(heroPointerId);
+  }
   heroTrack.style.transition = "none";
 }
 
@@ -113,35 +138,38 @@ function moveHeroDrag(event) {
   if (!isHeroDragging || !heroTrack) return;
 
   heroMoveX = event.clientX - heroStartX;
-  const movePercent = (heroMoveX / heroTrack.clientWidth) * 100;
+  
+  // 개별 슬라이드의 너비를 기준으로 비율 계산 (트랙 전체 너비 X)
+  const slideWidth = realHeroSlides[0].clientWidth;
+  const movePercent = (heroMoveX / slideWidth) * 100;
 
-  heroTrack.style.transform = `translateX(${
-    -(currentHeroIndex * 100) + movePercent
-  }%)`;
+  // 저항 효과 (끝에 도달했을 때 뻑뻑하게 움직임 - 선택사항)
+  heroTrack.style.transform = `translateX(${-(currentHeroIndex * 100) + movePercent}%)`;
 }
 
-function endHeroDrag() {
+function endHeroDrag(event) {
   if (!isHeroDragging || !heroTrack) return;
 
   isHeroDragging = false;
 
-  if (heroPointerId !== null && heroTrack.hasPointerCapture(heroPointerId)) {
-    heroTrack.releasePointerCapture(heroPointerId);
+  if (heroPointerId !== null && typeof heroTrack.releasePointerCapture === "function") {
+    try { heroTrack.releasePointerCapture(heroPointerId); } catch(e) {}
   }
-
   heroPointerId = null;
 
   heroTrack.classList.remove("is-dragging");
   heroTrack.style.transition = "transform 0.35s ease";
 
-  const threshold = heroTrack.clientWidth * 0.15;
+  const slideWidth = realHeroSlides[0].clientWidth;
+  const threshold = slideWidth * 0.15; // 15% 이상 드래그해야 넘어감
 
+  // 드래그 거리가 임계점을 넘었는지 확인
   if (heroMoveX < -threshold) {
-    moveHero(currentHeroIndex + 1);
+    moveHero(currentHeroIndex + 1); // 다음으로
   } else if (heroMoveX > threshold) {
-    moveHero(currentHeroIndex - 1);
+    moveHero(currentHeroIndex - 1); // 이전으로
   } else {
-    moveHero(currentHeroIndex);
+    moveHero(currentHeroIndex); // 제자리로 복귀
   }
 
   restartHeroAutoSlide();
@@ -150,52 +178,48 @@ function endHeroDrag() {
 function moveHero(index) {
   if (!heroTrack || !heroSlides.length) return;
 
+  isHeroAnimating = true; // 트랜지션 락 걸기
   currentHeroIndex = index;
+  heroTrack.style.transition = "transform 0.35s ease";
   heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
 
   updateHeroPagination();
 }
 
-function fixHeroLoopPosition() {
+function fixHeroLoopPosition(event) {
   if (!heroTrack || !realHeroSlides.length) return;
+  
+  // 자식 요소의 transitionend 이벤트 버블링 방지
+  if (event && event.target !== heroTrack) return;
 
+  isHeroAnimating = false; // 트랜지션 락 해제
+
+  // 첫 번째 클론(0번 인덱스)에 도달했을 때 -> 진짜 마지막 슬라이드로 몰래 이동
   if (currentHeroIndex === 0) {
     currentHeroIndex = realHeroSlides.length;
-
-    heroTrack.style.transition = "none";
+    heroTrack.style.transition = "none"; // 트랜지션 끄기
     heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
-
-    requestAnimationFrame(() => {
-      heroTrack.style.transition = "transform 0.35s ease";
-    });
+    void heroTrack.offsetWidth; // 브라우저 Reflow 강제 발생 (핵심)
   }
 
+  // 마지막 클론(length + 1)에 도달했을 때 -> 진짜 첫 번째 슬라이드로 몰래 이동
   if (currentHeroIndex === realHeroSlides.length + 1) {
     currentHeroIndex = 1;
-
     heroTrack.style.transition = "none";
     heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
-
-    requestAnimationFrame(() => {
-      heroTrack.style.transition = "transform 0.35s ease";
-    });
+    void heroTrack.offsetWidth; // 브라우저 Reflow 강제 발생 (핵심)
   }
-
-  updateHeroPagination();
 }
 
 function updateHeroPagination() {
   const dots = Array.from(document.querySelectorAll(".hero-dot"));
-
   if (!dots.length || !realHeroSlides.length) return;
 
   let realIndex = currentHeroIndex - 1;
 
   if (currentHeroIndex === 0) {
     realIndex = realHeroSlides.length - 1;
-  }
-
-  if (currentHeroIndex === realHeroSlides.length + 1) {
+  } else if (currentHeroIndex === realHeroSlides.length + 1) {
     realIndex = 0;
   }
 
@@ -205,7 +229,9 @@ function updateHeroPagination() {
 }
 
 function nextHero() {
-  moveHero(currentHeroIndex + 1);
+  if (!isHeroAnimating) {
+    moveHero(currentHeroIndex + 1);
+  }
 }
 
 function startHeroAutoSlide() {
@@ -215,7 +241,6 @@ function startHeroAutoSlide() {
 
 function stopHeroAutoSlide() {
   if (!heroAutoTimer) return;
-
   window.clearInterval(heroAutoTimer);
   heroAutoTimer = null;
 }
