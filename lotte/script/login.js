@@ -46,3 +46,11 @@ loginForm.addEventListener("submit", function (event) {
     }
   });
 });
+
+[userIdInput, userPasswordInput].forEach(function (input) {
+  input.addEventListener("focus", function () {
+    setTimeout(function () {
+      input.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 300);
+  });
+});
