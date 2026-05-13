@@ -1,4 +1,4 @@
-const KAKAO_JAVASCRIPT_KEY = "cc8c124f8a594a01e630a3c43ae4349a";
+const KAKAO_JAVASCRIPT_KEY = ""; // 여기에 카카오 키 입력
 
 const LOCATION_CACHE_KEY = "lotteriaUserLocation";
 const LOCATION_CACHE_MAX_AGE = 1000 * 60 * 60 * 24;
@@ -6,20 +6,8 @@ const LOCATION_CACHE_MAX_AGE = 1000 * 60 * 60 * 24;
 const MY_MENU_KEY = "myMenuItems";
 const CART_ITEMS_KEY = "cartItems";
 
-let heroTrack = null;
-let heroSlides = [];
-let realHeroSlides = [];
-let heroPagination = null;
-
-let currentHeroIndex = 1;
-let heroStartX = 0;
-let heroMoveX = 0;
-let isHeroDragging = false;
-let heroAutoTimer = null;
-let heroPointerId = null;
-
 /* =========================
-   메인 히어로 슬라이더
+   메인 히어로 슬라이더 변수 (중복 선언 제거됨)
 ========================= */
 let heroTrack = null;
 let heroSlides = [];
@@ -35,26 +23,22 @@ let heroAutoTimer = null;
 let heroPointerId = null;
 
 /* =========================
-   슬라이더 초기화 함수
+   메인 히어로 슬라이더 로직
 ========================= */
 function initHeroSlider() {
   heroTrack = document.querySelector("#heroTrack");
   heroPagination = document.querySelector("#heroPagination");
 
-  // 요소가 없으면 중단
   if (!heroTrack || !heroPagination) return;
 
-  // 원본 슬라이드 수집
   realHeroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
-  if (realHeroSlides.length === 0) return;
+  if (!realHeroSlides.length) return;
 
-  // 중복 초기화 방지
   if (heroTrack.dataset.heroReady === "true") return;
   heroTrack.dataset.heroReady = "true";
 
   heroPagination.innerHTML = "";
 
-  // 슬라이드가 1개일 때 처리
   if (realHeroSlides.length === 1) {
     currentHeroIndex = 0;
     heroTrack.style.transform = "translateX(0%)";
@@ -64,32 +48,26 @@ function initHeroSlider() {
     return;
   }
 
-  // 무한 루프용 클론 생성
+  // 무한 루프 클론 생성
   const firstClone = realHeroSlides[0].cloneNode(true);
   const lastClone = realHeroSlides[realHeroSlides.length - 1].cloneNode(true);
-
   firstClone.classList.add("is-clone");
   lastClone.classList.add("is-clone");
 
   heroTrack.insertBefore(lastClone, realHeroSlides[0]);
   heroTrack.appendChild(firstClone);
 
-  // 전체 슬라이드 갱신 (클론 포함)
   heroSlides = Array.from(heroTrack.querySelectorAll(".hero-slide"));
-  
-  // 초기 위치 설정 (1번 슬라이드)
   currentHeroIndex = 1;
+
   heroTrack.style.transition = "none";
   heroTrack.style.transform = `translateX(-100%)`;
-  void heroTrack.offsetWidth; // 강제 리플로우
+  void heroTrack.offsetWidth;
 
-  // 페이지네이션(점) 생성
   realHeroSlides.forEach((_, index) => {
     const dot = document.createElement("button");
     dot.type = "button";
     dot.className = "hero-dot" + (index === 0 ? " is-active" : "");
-    dot.setAttribute("aria-label", `${index + 1}번째 배너 보기`);
-
     dot.addEventListener("click", () => {
       if (isHeroAnimating) return;
       moveHero(index + 1);
@@ -98,7 +76,6 @@ function initHeroSlider() {
     heroPagination.appendChild(dot);
   });
 
-  // 이벤트 연결
   heroTrack.addEventListener("pointerdown", startHeroDrag);
   heroTrack.addEventListener("pointermove", moveHeroDrag);
   window.addEventListener("pointerup", endHeroDrag);
@@ -107,6 +84,73 @@ function initHeroSlider() {
   startHeroAutoSlide();
 }
 
+function moveHero(index) {
+  if (!heroTrack) return;
+  isHeroAnimating = true;
+  currentHeroIndex = index;
+  heroTrack.style.transition = "transform 0.35s ease";
+  heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+  updateHeroPagination();
+}
+
+function fixHeroLoopPosition() {
+  isHeroAnimating = false;
+  if (currentHeroIndex === 0) {
+    currentHeroIndex = realHeroSlides.length;
+    heroTrack.style.transition = "none";
+    heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+  } else if (currentHeroIndex === realHeroSlides.length + 1) {
+    currentHeroIndex = 1;
+    heroTrack.style.transition = "none";
+    heroTrack.style.transform = `translateX(${-currentHeroIndex * 100}%)`;
+  }
+}
+
+function updateHeroPagination() {
+  const dots = document.querySelectorAll(".hero-dot");
+  let realIndex = currentHeroIndex - 1;
+  if (currentHeroIndex === 0) realIndex = realHeroSlides.length - 1;
+  else if (currentHeroIndex === realHeroSlides.length + 1) realIndex = 0;
+
+  dots.forEach((dot, i) => dot.classList.toggle("is-active", i === realIndex));
+}
+
+// 드래그 관련 함수들
+function startHeroDrag(e) {
+  if (isHeroAnimating) return;
+  isHeroDragging = true;
+  heroStartX = e.clientX;
+  heroTrack.style.transition = "none";
+  stopHeroAutoSlide();
+}
+
+function moveHeroDrag(e) {
+  if (!isHeroDragging) return;
+  heroMoveX = e.clientX - heroStartX;
+  const percent = (heroMoveX / heroTrack.clientWidth) * 100;
+  heroTrack.style.transform = `translateX(${-(currentHeroIndex * 100) + percent}%)`;
+}
+
+function endHeroDrag() {
+  if (!isHeroDragging) return;
+  isHeroDragging = false;
+  const threshold = 15; // 15% 이상 이동 시 전환
+  const movedPercent = (heroMoveX / heroTrack.clientWidth) * 100;
+
+  if (movedPercent < -threshold) moveHero(currentHeroIndex + 1);
+  else if (movedPercent > threshold) moveHero(currentHeroIndex - 1);
+  else moveHero(currentHeroIndex);
+  
+  restartHeroAutoSlide();
+}
+
+// 자동 슬라이드 함수들
+function startHeroAutoSlide() {
+  stopHeroAutoSlide();
+  heroAutoTimer = setInterval(() => moveHero(currentHeroIndex + 1), 3000);
+}
+function stopHeroAutoSlide() { clearInterval(heroAutoTimer); }
+function restartHeroAutoSlide() { startHeroAutoSlide(); }
 /* =========================
    가로 드래그
 ========================= */
