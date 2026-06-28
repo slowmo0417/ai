@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>안녕 조립 애니메이션</title>
+    <title>dkssud</title>
     <style>
       body,
       html {
@@ -87,7 +87,6 @@
           offsetX = width / 2;
           offsetY = height / 2;
 
-          // 화면 크기에 비례하여 글자 스케일 조정 (모바일은 작게)
           const scale = Math.min(width, height) / 350;
 
           const orders = baseStrokes
@@ -151,7 +150,7 @@
             const p = s.progress;
             const easeP = p * p * (3 - 2 * p);
 
-            const margin = 40; // 모바일을 위해 마진 조정
+            const margin = 40; 
             const rangeX = Math.max(0, width / 2 - margin);
             const rangeY = Math.max(0, height / 2 - margin);
 
