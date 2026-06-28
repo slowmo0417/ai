@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>안녕 조립 애니메이션</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #f9fafb;
+        touch-action: manipulation;
+      }
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="mainCanvas"></canvas>
+
+    <script>
+      window.onload = function () {
+        const canvas = document.getElementById("mainCanvas");
+        const ctx = canvas.getContext("2d");
+
+        let width, height, offsetX, offsetY;
+        let floatingStrokes = [];
+
+        let time = 0;
+        let currentOrder = -1;
+        let startDelay = 30;
+
+        function createCircleStrokes(cx, cy, r) {
+          const parts = 8;
+          const circleStrokes = [];
+          let currentAngle = -Math.PI / 2;
+          const angleStep = (Math.PI * 2) / parts;
+
+          for (let i = 0; i < parts; i++) {
+            const nextAngle = currentAngle - angleStep;
+            circleStrokes.push({
+              start: {
+                x: cx + Math.cos(currentAngle) * r,
+                y: cy + Math.sin(currentAngle) * r,
+              },
+              end: {
+                x: cx + Math.cos(nextAngle) * r,
+                y: cy + Math.sin(nextAngle) * r,
+              },
+            });
+            currentAngle = nextAngle;
+          }
+          return circleStrokes;
+        }
+
+        const baseStrokes = [
+          ...createCircleStrokes(-65, -45, 22),
+          { start: { x: -10, y: -80 }, end: { x: -10, y: 15 } },
+          { start: { x: -10, y: -30 }, end: { x: 20, y: -30 } },
+          { start: { x: -65, y: 40 }, end: { x: -65, y: 70 } },
+          { start: { x: -65, y: 70 }, end: { x: -10, y: 70 } },
+          { start: { x: 35, y: -85 }, end: { x: 35, y: -35 } },
+          { start: { x: 35, y: -35 }, end: { x: 80, y: -35 } },
+          { start: { x: 85, y: -50 }, end: { x: 120, y: -50 } },
+          { start: { x: 85, y: -20 }, end: { x: 120, y: -20 } },
+          { start: { x: 120, y: -80 }, end: { x: 120, y: 15 } },
+          ...createCircleStrokes(85, 55, 22),
+        ];
+
+        function initAnimation() {
+          canvas.width = window.innerWidth * window.devicePixelRatio;
+          canvas.height = window.innerHeight * window.devicePixelRatio;
+          ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+          width = window.innerWidth;
+          height = window.innerHeight;
+          offsetX = width / 2;
+          offsetY = height / 2;
+
+          // 화면 크기에 비례하여 글자 스케일 조정 (모바일은 작게)
+          const scale = Math.min(width, height) / 350;
+
+          const orders = baseStrokes
+            .map((_, i) => i)
+            .sort(() => Math.random() - 0.5);
+
+          floatingStrokes = baseStrokes.map((s, i) => {
+            const targetStart = {
+              x: s.start.x * scale + offsetX,
+              y: s.start.y * scale + offsetY,
+            };
+            const targetEnd = {
+              x: s.end.x * scale + offsetX,
+              y: s.end.y * scale + offsetY,
+            };
+
+            const cx = (targetStart.x + targetEnd.x) / 2;
+            const cy = (targetStart.y + targetEnd.y) / 2;
+
+            return {
+              originalStart: targetStart,
+              originalEnd: targetEnd,
+              cx: cx,
+              cy: cy,
+              phaseX: Math.random() * Math.PI * 2,
+              phaseY: Math.random() * Math.PI * 2,
+              phaseAngle: Math.random() * Math.PI * 2,
+              floatSpeedX: 0.002 + Math.random() * 0.004,
+              floatSpeedY: 0.002 + Math.random() * 0.004,
+              order: orders[i],
+              progress: 0,
+            };
+          });
+
+          time = 0;
+          currentOrder = -1;
+          startDelay = 30;
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, width, height);
+          time++;
+
+          if (currentOrder === -1) {
+            startDelay--;
+            if (startDelay <= 0) currentOrder = 0;
+          }
+
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+
+          floatingStrokes.forEach((s) => {
+            if (s.order === currentOrder) {
+              s.progress += 0.008;
+              if (s.progress >= 1) {
+                s.progress = 1;
+                currentOrder++;
+              }
+            }
+
+            const p = s.progress;
+            const easeP = p * p * (3 - 2 * p);
+
+            const margin = 40; // 모바일을 위해 마진 조정
+            const rangeX = Math.max(0, width / 2 - margin);
+            const rangeY = Math.max(0, height / 2 - margin);
+
+            const floatX =
+              offsetX + Math.sin(time * s.floatSpeedX + s.phaseX) * rangeX;
+            const floatY =
+              offsetY + Math.cos(time * s.floatSpeedY + s.phaseY) * rangeY;
+            const floatAngle =
+              Math.sin(time * s.floatSpeedX * 0.5 + s.phaseAngle) * Math.PI * 2;
+
+            const actualCx = floatX * (1 - easeP) + s.cx * easeP;
+            const actualCy = floatY * (1 - easeP) + s.cy * easeP;
+            const actualAngle = floatAngle * (1 - easeP);
+
+            ctx.save();
+            ctx.translate(actualCx, actualCy);
+            ctx.rotate(actualAngle);
+
+            const colorValue = Math.floor(107 - (107 - 17) * easeP);
+            ctx.strokeStyle = `rgb(${colorValue}, ${colorValue}, ${colorValue})`;
+            ctx.lineWidth = 5 + 3 * easeP;
+
+            ctx.beginPath();
+            ctx.moveTo(s.originalStart.x - s.cx, s.originalStart.y - s.cy);
+            ctx.lineTo(s.originalEnd.x - s.cx, s.originalEnd.y - s.cy);
+            ctx.stroke();
+            ctx.restore();
+          });
+
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", initAnimation);
+        window.addEventListener("click", initAnimation);
+        window.addEventListener("touchstart", initAnimation);
+
+        initAnimation();
+        draw();
+      };
+    </script>
+  </body>
+</html>
