@@ -36,6 +36,7 @@
             let time = 0;
             let currentOrder = -1;
             let startDelay = 20;
+            let isFinished = false;
 
             function createCircleStrokes(cx, cy, r) {
                 const parts = 8;
@@ -107,6 +108,7 @@
                 time = 0;
                 currentOrder = -1;
                 startDelay = 20;
+                isFinished = false;
             }
 
             function draw() {
@@ -121,6 +123,7 @@
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
 
+                let allFinished = true;
                 floatingStrokes.forEach(s => {
                     if (s.order === currentOrder) {
                         s.progress += 0.018; 
@@ -129,6 +132,7 @@
                             currentOrder++; 
                         }
                     }
+                    if (s.progress < 1) allFinished = false;
 
                     const p = s.progress;
                     const easeP = p * p * (3 - 2 * p); 
@@ -159,13 +163,20 @@
                     ctx.stroke();
                     ctx.restore();
                 });
-
+                
+                isFinished = allFinished;
                 requestAnimationFrame(draw);
             }
 
+            function handleInteraction() {
+                if (isFinished) {
+                    initAnimation();
+                }
+            }
+
             window.addEventListener('resize', initAnimation);
-            window.addEventListener('click', initAnimation);
-            window.addEventListener('touchstart', initAnimation);
+            window.addEventListener('click', handleInteraction);
+            window.addEventListener('touchstart', handleInteraction);
 
             initAnimation();
             draw();
